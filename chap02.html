@@ -1,0 +1,1033 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Erdos-Renyi Graphs &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Small World Graphs" href="chap03.html" />
+    <link rel="prev" title="1. Exploratory data analysis" href="chap01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap02.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Erdos-Renyi Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph">2.1. Directed graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graph">2.2. Undirected graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-graph">2.3. Complete graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.4. Random graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">2.5. Connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.6. Probability of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.7. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="erdos-renyi-graphs">
+<h1><span class="section-number">2. </span>Erdos-Renyi Graphs<a class="headerlink" href="#erdos-renyi-graphs" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+
+<span class="c1"># Set the random seed so the notebook </span>
+<span class="c1"># produces the same results every time.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># node colors for drawing networks</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1">#sns.palplot(colors)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="directed-graph">
+<h2><span class="section-number">2.1. </span>Directed graph<a class="headerlink" href="#directed-graph" title="Link to this heading">#</a></h2>
+<p>The first example is a directed graph that represents a social network with three nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s how we add edges between nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s how to draw the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong>  Add another node and a few more edges and draw the graph again.</p>
+</section>
+<section id="undirected-graph">
+<h2><span class="section-number">2.2. </span>Undirected graph<a class="headerlink" href="#undirected-graph" title="Link to this heading">#</a></h2>
+<p>The second example is an undirected graph that represents cities and the driving times between them.</p>
+<p><code class="docutils literal notranslate"><span class="pre">positions</span></code> is a dictionary that maps from each city to its coordinates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">positions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Albany</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">74</span><span class="p">,</span> <span class="mi">43</span><span class="p">),</span>
+                 <span class="n">Boston</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">71</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span>
+                 <span class="n">NYC</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">74</span><span class="p">,</span> <span class="mi">41</span><span class="p">),</span>
+                 <span class="n">Philly</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+
+<span class="n">positions</span><span class="p">[</span><span class="s1">&#39;Albany&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the keys in <code class="docutils literal notranslate"><span class="pre">pos</span></code> to add nodes to the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">drive_times</span></code> is a dictionary that maps from pairs of cities to the driving times between them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drive_times</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;Albany&#39;</span><span class="p">,</span> <span class="s1">&#39;Boston&#39;</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;Albany&#39;</span><span class="p">,</span> <span class="s1">&#39;NYC&#39;</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;Boston&#39;</span><span class="p">,</span> <span class="s1">&#39;NYC&#39;</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;NYC&#39;</span><span class="p">,</span> <span class="s1">&#39;Philly&#39;</span><span class="p">):</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the keys from <code class="docutils literal notranslate"><span class="pre">drive_times</span></code> to add edges to the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">drive_times</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can draw the graph using <code class="docutils literal notranslate"><span class="pre">positions</span></code> to indicate the positions of the nodes, and <code class="docutils literal notranslate"><span class="pre">drive_times</span></code> to label the edges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> 
+        <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+        <span class="n">node_shape</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> 
+        <span class="n">node_size</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> 
+                             <span class="n">edge_labels</span><span class="o">=</span><span class="n">drive_times</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong>  Add another city and at least one edge.</p>
+</section>
+<section id="complete-graph">
+<h2><span class="section-number">2.3. </span>Complete graph<a class="headerlink" href="#complete-graph" title="Link to this heading">#</a></h2>
+<p>To make a complete graph, we use a generator function that iterates through all pairs of nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_complete_graph</span></code> makes a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> with the given number of nodes and edges between all pairs of nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_complete_graph</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a complete graph with 10 nodes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">make_complete_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">complete</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what it looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">neighbors</span></code> method the neighbors for a given node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">complete</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Make and draw complete directed graph with 5 nodes.</p>
+</section>
+<section id="random-graphs">
+<h2><span class="section-number">2.4. </span>Random graphs<a class="headerlink" href="#random-graphs" title="Link to this heading">#</a></h2>
+<p>Next we’ll make a random graph where the probability of an edge between each pair of nodes is <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>The helper function <code class="docutils literal notranslate"><span class="pre">flip</span></code> returns True with probability <code class="docutils literal notranslate"><span class="pre">p</span></code> and False with probability <code class="docutils literal notranslate"><span class="pre">1-p</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pairs</span></code> is a generator function that enumerates all possible pairs of nodes and yields each one with probability <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">edge</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code> makes an ER graph where the probability of an edge between each pair of nodes is <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">p=0.3</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">random_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what it looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="connectivity">
+<h2><span class="section-number">2.5. </span>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">#</a></h2>
+<p>To check whether a graph is connected, we’ll start by finding all nodes that can be reached, starting with a given node:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">seen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the complete graph, starting from node 0, we can reach all nodes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the random graph we generated, we can also reach all nodes (but that’s not always true):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> to check whether a graph is connected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+    <span class="n">reachable</span> <span class="o">=</span> <span class="n">reachable_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">reachable</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, the complete graph is connected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_connected</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if we generate a random graph with a low value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, it’s not:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">random_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_connected</span><span class="p">(</span><span class="n">random_graph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> What do you think it means for a directed graph to be connected?  Write a function that checks whether a directed graph is connected.</p>
+</section>
+<section id="probability-of-connectivity">
+<h2><span class="section-number">2.6. </span>Probability of connectivity<a class="headerlink" href="#probability-of-connectivity" title="Link to this heading">#</a></h2>
+<p>Now let’s estimare the probability that a randomly-generated ER graph is connected.</p>
+<p>This function takes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code>, generates <code class="docutils literal notranslate"><span class="pre">iters</span></code> graphs, and returns the fraction of them that are connected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># version with a for loop</span>
+
+<span class="k">def</span> <span class="nf">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+        <span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_connected</span><span class="p">(</span><span class="n">random_graph</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span><span class="o">/</span><span class="n">iters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># version with a list comprehension</span>
+
+<span class="k">def</span> <span class="nf">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">tf</span> <span class="o">=</span> <span class="p">[</span><span class="n">is_connected</span><span class="p">(</span><span class="n">make_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">p=0.23</span></code>, the probability of being connected is about 33%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to Erdos and Renyi, the critical value of <code class="docutils literal notranslate"><span class="pre">p</span></code> for <code class="docutils literal notranslate"><span class="pre">n=10</span></code> is about 0.23.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pstar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+<span class="n">pstar</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So let’s plot the probability of connectivity for a range of values for <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I’ll estimate the probabilities with <code class="docutils literal notranslate"><span class="pre">iters=1000</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then plot them, adding a vertical line at the computed critical value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">pstar</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prob of edge (p)&#39;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob connected&#39;</span><span class="p">,</span>
+                 <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can run the same analysis for a few more values of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">pstar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">pstar</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prob of edge (p)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Prob connected&#39;</span><span class="p">,</span>
+         <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> 
+         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+         <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As <code class="docutils literal notranslate"><span class="pre">n</span></code> increases, the critical value gets smaller and the transition gets more abrupt.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">2.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> In Chapter 2 we analyzed the performance of <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> and classified it in <span class="math notranslate nohighlight">\(O(n + m)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes and <span class="math notranslate nohighlight">\(m\)</span> is the number of edges.  Continuing the
+analysis, what is the order of growth for <code class="docutils literal notranslate"><span class="pre">is_connected</span></code>?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def is_connected(G):
+    start = list(G)[0]
+    reachable = reachable_nodes(G, start)
+    return len(reachable) == len(G)
+</pre></div>
+</div>
+<p><strong>Exercise:</strong> In my implementation of <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code>, you might be bothered by the apparent inefficiency of adding <em>all</em> neighbors to the stack without checking whether they are already in <code class="docutils literal notranslate"><span class="pre">seen</span></code>.  Write a version of this function that checks the neighbors before adding them to the stack.  Does this “optimization” change the order of growth?  Does it make the function faster?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes_precheck</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="c1"># FILL THIS IN</span>
+    <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> len(reachable_nodes(complete, 0))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> len(reachable_nodes_precheck(complete, 0))
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> There are actually two kinds of ER graphs.  The one we generated in the chapter, <span class="math notranslate nohighlight">\(G(n, p)\)</span>, is characterized by two parameters, the number of nodes and the probability of an edge between nodes.</p>
+<p>An alternative definition, denoted <span class="math notranslate nohighlight">\(G(n, m)\)</span>, is also characterized by two parameters: the number of nodes, <span class="math notranslate nohighlight">\(n\)</span>, and the number of edges, <span class="math notranslate nohighlight">\(m\)</span>.  Under this definition, the number of edges is fixed, but their location is random.</p>
+<p>Repeat the experiments we did in this chapter using this alternative definition.  Here are a few suggestions for how to proceed:</p>
+<ol class="arabic simple">
+<li><p>Write a function called <code class="docutils literal notranslate"><span class="pre">m_pairs</span></code> that takes a list of nodes and the number of edges, <span class="math notranslate nohighlight">\(m\)</span>, and returns a random selection of <span class="math notranslate nohighlight">\(m\)</span> edges.  A simple way to do that is to generate a list of all possible edges and use <code class="docutils literal notranslate"><span class="pre">random.sample</span></code>.</p></li>
+<li><p>Write a function called <code class="docutils literal notranslate"><span class="pre">make_m_graph</span></code> that takes <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> and returns a random graph with <span class="math notranslate nohighlight">\(n\)</span> nodes and <span class="math notranslate nohighlight">\(m\)</span> edges.</p></li>
+<li><p>Make a version of <code class="docutils literal notranslate"><span class="pre">prob_connected</span></code> that uses <code class="docutils literal notranslate"><span class="pre">make_m_graph</span></code> instead of <code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code>.</p></li>
+<li><p>Compute the probability of connectivity for a range of values of <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
+</ol>
+<p>How do the results of this experiment compare to the results using the first type of ER graph?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_graph</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Exploratory data analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap03.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Small World Graphs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph">2.1. Directed graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graph">2.2. Undirected graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-graph">2.3. Complete graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.4. Random graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">2.5. Connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.6. Probability of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.7. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

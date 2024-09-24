@@ -1,0 +1,1426 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. Agent Based Models &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap09';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Flocks, Herds, and Traffic Jams" href="chap10.html" />
+    <link rel="prev" title="8. Self-organized criticality" href="chap08.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap09.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Agent Based Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schellings-model">9.1. Schelling’s model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sugarscape">9.2. Sugarscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sugarscape-with-finite-lifespans">9.3. Sugarscape with finite lifespans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migration-in-waves">9.4. Migration in waves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.5. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="agent-based-models">
+<h1><span class="section-number">9. </span>Agent Based Models<a class="headerlink" href="#agent-based-models" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/Cell2D.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</div>
+<section id="schellings-model">
+<h2><span class="section-number">9.1. </span>Schelling’s model<a class="headerlink" href="#schellings-model" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">locs_where</span></code> is a wrapper on <code class="docutils literal notranslate"><span class="pre">np.nonzero</span></code> that returns results as a list of tuples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">locs_where</span><span class="p">(</span><span class="n">condition</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find cells where a logical array is True.</span>
+<span class="sd">    </span>
+<span class="sd">    condition: logical array</span>
+<span class="sd">    </span>
+<span class="sd">    returns: list of location tuples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">condition</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s my implementation of Schelling’s model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+
+<span class="c1"># make a custom color map</span>
+<span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;muted&#39;</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">palette</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">correlate2d</span>
+<span class="kn">from</span> <span class="nn">Cell2D</span> <span class="kn">import</span> <span class="n">Cell2D</span><span class="p">,</span> <span class="n">draw_array</span>
+
+<span class="k">class</span> <span class="nc">Schelling</span><span class="p">(</span><span class="n">Cell2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a grid of Schelling agents.&quot;&quot;&quot;</span>
+    
+    <span class="n">options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">)</span>
+
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the attributes.</span>
+
+<span class="sd">        n: number of rows</span>
+<span class="sd">        p: threshold on the fraction of similar neighbors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="c1"># 0 is empty, 1 is red, 2 is blue</span>
+        <span class="n">choices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choices</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="n">probs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">count_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Surveys neighboring cells.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: tuple of</span>
+<span class="sd">            empty: True where cells are empty</span>
+<span class="sd">            frac_red: fraction of red neighbors around each cell</span>
+<span class="sd">            frac_blue: fraction of blue neighbors around each cell</span>
+<span class="sd">            frac_same: fraction of neighbors with the same color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span>
+        
+        <span class="n">empty</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">0</span>
+        <span class="n">red</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">1</span>
+        <span class="n">blue</span> <span class="o">=</span> <span class="n">a</span><span class="o">==</span><span class="mi">2</span>
+
+        <span class="c1"># count red neighbors, blue neighbors, and total</span>
+        <span class="n">num_red</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">num_blue</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">blue</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">num_neighbors</span> <span class="o">=</span> <span class="n">num_red</span> <span class="o">+</span> <span class="n">num_blue</span>
+
+        <span class="c1"># compute fraction of similar neighbors</span>
+        <span class="n">frac_red</span> <span class="o">=</span> <span class="n">num_red</span> <span class="o">/</span> <span class="n">num_neighbors</span>
+        <span class="n">frac_blue</span> <span class="o">=</span> <span class="n">num_blue</span> <span class="o">/</span> <span class="n">num_neighbors</span>
+        
+        <span class="c1"># no neighbors is considered the same as no similar neighbors </span>
+        <span class="c1"># (this is an arbitrary choice for a rare event)</span>
+        <span class="n">frac_red</span><span class="p">[</span><span class="n">num_neighbors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">frac_blue</span><span class="p">[</span><span class="n">num_neighbors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="c1"># for each cell, compute the fraction of neighbors with the same color</span>
+        <span class="n">frac_same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">frac_red</span><span class="p">,</span> <span class="n">frac_blue</span><span class="p">)</span>
+
+        <span class="c1"># for empty cells, frac_same is NaN</span>
+        <span class="n">frac_same</span><span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        
+        <span class="k">return</span> <span class="n">empty</span><span class="p">,</span> <span class="n">frac_red</span><span class="p">,</span> <span class="n">frac_blue</span><span class="p">,</span> <span class="n">frac_same</span>
+
+    <span class="k">def</span> <span class="nf">segregation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the average fraction of similar neighbors.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: fraction of similar neighbors, averaged over cells</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">frac_same</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_neighbors</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">frac_same</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes one time step.</span>
+<span class="sd">                </span>
+<span class="sd">        returns: fraction of similar neighbors, averaged over cells</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span>
+        <span class="n">empty</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">frac_same</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_neighbors</span><span class="p">()</span>
+        
+        <span class="c1"># find the unhappy cells (ignore NaN in frac_same)</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+            <span class="n">unhappy</span> <span class="o">=</span> <span class="n">frac_same</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
+        <span class="n">unhappy_locs</span> <span class="o">=</span> <span class="n">locs_where</span><span class="p">(</span><span class="n">unhappy</span><span class="p">)</span>
+        
+        <span class="c1"># find the empty cells</span>
+        <span class="n">empty_locs</span> <span class="o">=</span> <span class="n">locs_where</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+
+        <span class="c1"># shuffle the unhappy cells</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unhappy_locs</span><span class="p">):</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">unhappy_locs</span><span class="p">)</span>
+            
+        <span class="c1"># for each unhappy cell, choose a random destination</span>
+        <span class="n">num_empty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">unhappy_locs</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">num_empty</span><span class="p">)</span>
+            <span class="n">dest</span> <span class="o">=</span> <span class="n">empty_locs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+            <span class="c1"># move</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">empty_locs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">source</span>
+        
+            <span class="c1"># check that the number of empty cells is unchanged</span>
+            <span class="n">num_empty2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">num_empty</span> <span class="o">==</span> <span class="n">num_empty2</span>
+        
+        <span class="c1"># return the average fraction of similar neighbors</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">frac_same</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draws the cells.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">draw_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a small example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">Schelling</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">segregation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.48575487012987006
+</pre></div>
+</div>
+<img alt="_images/24161118718a58a525c84e22b61a39cfa4d884de0a14f26ab2ecca71b0e674fe.png" src="_images/24161118718a58a525c84e22b61a39cfa4d884de0a14f26ab2ecca71b0e674fe.png" />
+</div>
+</div>
+<p>And here’s an animation for a bigger example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">Schelling</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/013c22490fd50e0a236fe3f06a74b5afd33878ac9518d999d7c3410d3290fe55.png" src="_images/013c22490fd50e0a236fe3f06a74b5afd33878ac9518d999d7c3410d3290fe55.png" />
+</div>
+</div>
+<p>The degree of segregation increases quickly.</p>
+<p>The following figure shows the process after 2 and 10 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">three_frame</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="n">Schelling</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">three_frame</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap09-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap09-1
+</pre></div>
+</div>
+<img alt="_images/b257b2b3bb44ad96fbf5f186a66051570a85b51b1922ff96d3b040be1e06931e.png" src="_images/b257b2b3bb44ad96fbf5f186a66051570a85b51b1922ff96d3b040be1e06931e.png" />
+</div>
+</div>
+<p>And here’s how segregation in steady state relates to <code class="docutils literal notranslate"><span class="pre">p</span></code>, the threshold on the fraction of similar neighbors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">set_palette</span>
+<span class="n">set_palette</span><span class="p">(</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]:</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">Schelling</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">segs</span> <span class="o">=</span> <span class="p">[</span><span class="n">grid</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">segs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;p = </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">segs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">segs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+    
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time steps&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Segregation&#39;</span><span class="p">,</span>
+                <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap09-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5 0.8707797990077598 0.3707797990077598
+0.4 0.8181252110773387 0.4181252110773387
+0.3 0.7538847395404771 0.4538847395404771
+0.2 0.5729593164353953 0.3729593164353953
+Saving figure to file figs/chap09-2
+</pre></div>
+</div>
+<img alt="_images/92cdc122edf5293f8bdd92d4373d8bb796f8cf423e046230d69f38b6a78a6c42.png" src="_images/92cdc122edf5293f8bdd92d4373d8bb796f8cf423e046230d69f38b6a78a6c42.png" />
+</div>
+</div>
+<p>At <code class="docutils literal notranslate"><span class="pre">p=0.3</span></code>, there is a striking difference between the level that would make people happy, at only 30%, and the level they actually get, around 75%.</p>
+<p><strong>Exercise:</strong> Experiment with different starting conditions: for example, more or fewer empty cells, or unequal numbers of red and blue agents.</p>
+</section>
+<section id="sugarscape">
+<h2><span class="section-number">9.2. </span>Sugarscape<a class="headerlink" href="#sugarscape" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">make_locs</span></code> takes the dimensions of the grid and returns an array where each row is a coordinate in the grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_locs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes array where each row is an index in an `n` by `m` grid.</span>
+<span class="sd">    </span>
+<span class="sd">    n: int number of rows</span>
+<span class="sd">    m: int number of cols</span>
+<span class="sd">    </span>
+<span class="sd">    returns: NumPy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_locs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0],
+       [0, 1],
+       [0, 2],
+       [1, 0],
+       [1, 1],
+       [1, 2]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_visible_locs</span></code> takes the range of an agents vision and returns an array where each row is the coordinate of a visible cell.</p>
+<p>The cells are at increasing distances.  The cells at each distance are shuffled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_visible_locs</span><span class="p">(</span><span class="n">vision</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the kernel of visible cells.</span>
+<span class="sd">        </span>
+<span class="sd">    vision: int distance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">make_array</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates visible cells with increasing distance.&quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">d</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">]])</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span>
+                     
+    <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">vision</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">arrays</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_visible_locs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1],
+       [ 1,  0],
+       [ 0, -1],
+       [-1,  0],
+       [ 0, -2],
+       [-2,  0],
+       [ 0,  2],
+       [ 2,  0]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">distances_from</span></code> returns an array that contains the distance of each cell from the given coordinates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">distances_from</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes an array of distances.</span>
+<span class="sd">    </span>
+<span class="sd">    n: size of the array</span>
+<span class="sd">    i, j: coordinates to find distance from</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">indices</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">Y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">distances_from</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.82842712, 2.23606798, 2.        , 2.23606798, 2.82842712],
+       [2.23606798, 1.41421356, 1.        , 1.41421356, 2.23606798],
+       [2.        , 1.        , 0.        , 1.        , 2.        ],
+       [2.23606798, 1.41421356, 1.        , 1.41421356, 2.23606798],
+       [2.82842712, 2.23606798, 2.        , 2.23606798, 2.82842712]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>I use <code class="docutils literal notranslate"><span class="pre">np.digitize</span></code> to set the capacity in each cell according to the distance from the peak.  Here’s an example that shows how it works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 1, 1, 1, 1],
+       [1, 2, 2, 2, 1],
+       [1, 2, 3, 2, 1],
+       [1, 2, 2, 2, 1],
+       [1, 1, 1, 1, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s my implementation of Sugarscape:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sugarscape</span><span class="p">(</span><span class="n">Cell2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an Epstein-Axtell Sugarscape.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the attributes.</span>
+
+<span class="sd">        n: number of rows and columns</span>
+<span class="sd">        params: dictionary of parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        
+        <span class="c1"># track variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent_count_seq</span> <span class="o">=</span> <span class="p">[]</span>
+    
+        <span class="c1"># make the capacity array</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_capacity</span><span class="p">()</span>
+        
+        <span class="c1"># initially all cells are at capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        
+        <span class="c1"># make the agents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_agents</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">make_capacity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Makes the capacity array.&quot;&quot;&quot;</span>
+        
+        <span class="c1"># compute the distance of each cell from the peaks. </span>
+        <span class="n">dist1</span> <span class="o">=</span> <span class="n">distances_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">dist2</span> <span class="o">=</span> <span class="n">distances_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">dist1</span><span class="p">,</span> <span class="n">dist2</span><span class="p">)</span>
+        
+        <span class="c1"># cells in the capacity array are set according to dist from peak</span>
+        <span class="n">bins</span> <span class="o">=</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span>
+        
+    <span class="k">def</span> <span class="nf">make_agents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Makes the agents.&quot;&quot;&quot;</span>
+        
+        <span class="c1"># determine where the agents start and generate locations</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;starting_box&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">locs</span> <span class="o">=</span> <span class="n">make_locs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">locs</span><span class="p">)</span>
+
+        <span class="c1"># make the agents</span>
+        <span class="n">num_agents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_agents&#39;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">num_agents</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">locs</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">(</span><span class="n">locs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> 
+                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">)]</span>
+        
+        <span class="c1"># keep track of which cells are occupied</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds sugar to all cells and caps them by capacity.&quot;&quot;&quot;</span>
+        <span class="n">grow_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;grow_rate&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">+</span> <span class="n">grow_rate</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">look_and_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">vision</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finds the visible cell with the most sugar.</span>
+<span class="sd">        </span>
+<span class="sd">        center: tuple, coordinates of the center cell</span>
+<span class="sd">        vision: int, maximum visible distance</span>
+<span class="sd">        </span>
+<span class="sd">        returns: tuple, coordinates of best cell</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># find all visible cells</span>
+        <span class="n">locs</span> <span class="o">=</span> <span class="n">make_visible_locs</span><span class="p">(</span><span class="n">vision</span><span class="p">)</span>
+        <span class="n">locs</span> <span class="o">=</span> <span class="p">(</span><span class="n">locs</span> <span class="o">+</span> <span class="n">center</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        
+        <span class="c1"># convert rows of the array to tuples</span>
+        <span class="n">locs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locs</span><span class="p">]</span>
+        
+        <span class="c1"># select unoccupied cells</span>
+        <span class="n">empty_locs</span> <span class="o">=</span> <span class="p">[</span><span class="n">loc</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locs</span> <span class="k">if</span> <span class="n">loc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span><span class="p">]</span>
+        
+        <span class="c1"># if all visible cells are occupied, stay put</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">empty_locs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">center</span>
+        
+        <span class="c1"># look up the sugar level in each cell</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">empty_locs</span><span class="p">]</span>
+        
+        <span class="c1"># find the best one and return it</span>
+        <span class="c1"># (in case of tie, argmax returns the first, which</span>
+        <span class="c1"># is the closest)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">empty_locs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">harvest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes and returns the sugar from `loc`.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: tuple coordinates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sugar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">sugar</span>
+    
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes one time step.&quot;&quot;&quot;</span>
+        <span class="n">replace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="c1"># loop through the agents in random order</span>
+        <span class="n">random_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">random_order</span><span class="p">:</span>
+            
+            <span class="c1"># mark the current cell unoccupied</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+            
+            <span class="c1"># execute one step</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+            <span class="c1"># if the agent is dead, remove from the list</span>
+            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">is_starving</span><span class="p">()</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">is_old</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise mark its cell occupied</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+
+        <span class="c1"># update the time series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent_count_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">))</span>
+        
+        <span class="c1"># grow back some sugar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grow</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">add_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a new random agent.</span>
+<span class="sd">                </span>
+<span class="sd">        returns: new Agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_loc</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_agent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_agent</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_agent</span>
+    
+    <span class="k">def</span> <span class="nf">random_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose a random unoccupied cell.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: tuple coordinates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">loc</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">loc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupied</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">loc</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draws the cells.&quot;&quot;&quot;</span>
+        <span class="n">draw_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># draw the agents</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coords</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the coordinates of the agents.</span>
+<span class="sd">        </span>
+<span class="sd">        Transforms from (row, col) to (x, y).</span>
+<span class="sd">        </span>
+<span class="sd">        returns: tuple of sequences, (xs, ys)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span>
+        <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">+</span> <span class="mf">0.5</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">+</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s my implementation of the agents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a new agent at the given location.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: tuple coordinates</span>
+<span class="sd">        params: dictionary of parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># extract the parameters</span>
+        <span class="n">max_vision</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_vision&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">max_metabolism</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_metabolism&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">min_lifespan</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;min_lifespan&#39;</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="n">max_lifespan</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_lifespan&#39;</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="n">min_sugar</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;min_sugar&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">max_sugar</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_sugar&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+        
+        <span class="c1"># choose attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vision</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_vision</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metabolism</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_metabolism</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lifespan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_lifespan</span><span class="p">,</span> <span class="n">max_lifespan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sugar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_sugar</span><span class="p">,</span> <span class="n">max_sugar</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look around, move, and harvest.</span>
+<span class="sd">        </span>
+<span class="sd">        env: Sugarscape</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">look_and_move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vision</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sugar</span> <span class="o">+=</span> <span class="n">env</span><span class="o">.</span><span class="n">harvest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">metabolism</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">is_starving</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if sugar has gone negative.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sugar</span> <span class="o">&lt;</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">is_old</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if lifespan is exceeded.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lifespan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">n=50</span></code>, starting with 400 agents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3004fa1faef411f50bf0ffaaee8987ead46812210b5eb0059797fe1ea8ce02a1.png" src="_images/3004fa1faef411f50bf0ffaaee8987ead46812210b5eb0059797fe1ea8ce02a1.png" />
+</div>
+</div>
+<p>The distribution of vision is uniform from 1 to 6.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">vision</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Vision&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f88a4c569238a729a272bf3f684167b1bb963d37f34df472e85ac43e14735055.png" src="_images/f88a4c569238a729a272bf3f684167b1bb963d37f34df472e85ac43e14735055.png" />
+</div>
+</div>
+<p>The distribution of metabolism is uniform from 1 to 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">metabolism</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Metabolism&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e18350b480b68681cab06ced50eeb8a305ed90d4ca2f5c04e33c5953fe86f4c8.png" src="_images/e18350b480b68681cab06ced50eeb8a305ed90d4ca2f5c04e33c5953fe86f4c8.png" />
+</div>
+</div>
+<p>The distribution of initial endowment of sugar is uniform from 5 to 25.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">sugar</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Sugar&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ca86a4d1f9742446680daeb57de4e8c95ff41cb494703df764fa00d00022d9bb.png" src="_images/ca86a4d1f9742446680daeb57de4e8c95ff41cb494703df764fa00d00022d9bb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3e6c9b94813374a2e29010cdff37b28bf7f98e45d68cd0710e2f07d283aee426.png" src="_images/3e6c9b94813374a2e29010cdff37b28bf7f98e45d68cd0710e2f07d283aee426.png" />
+</div>
+</div>
+<p>Here’s what the animation looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2a12846c045c4058045301f4be6c7093edeb4a1f78a0e7c427653538efe1e597.png" src="_images/2a12846c045c4058045301f4be6c7093edeb4a1f78a0e7c427653538efe1e597.png" />
+</div>
+</div>
+<p>The number of agents levels off at the “carrying capacity”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>268
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">agent_count_seq</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time steps&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of Agents&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/316d8e40fe9cae261d37a5b215aef2a0c0ddf9f9503e23d844dd95b730a50a89.png" src="_images/316d8e40fe9cae261d37a5b215aef2a0c0ddf9f9503e23d844dd95b730a50a89.png" />
+</div>
+</div>
+<p>This figure shows the state of the system after 2 and 10 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">three_frame</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap09-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap09-3
+</pre></div>
+</div>
+<img alt="_images/83ebbf7680b9b4ee6844839c04ed5683d6f2dc93476f8762a377a1a6b62a0aec.png" src="_images/83ebbf7680b9b4ee6844839c04ed5683d6f2dc93476f8762a377a1a6b62a0aec.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Experiment with different numbers of agents.  Try increasing or decreasing their vision or metabolism, and see what effect it has on carrying capacity.</p>
+</section>
+<section id="sugarscape-with-finite-lifespans">
+<h2><span class="section-number">9.3. </span>Sugarscape with finite lifespans<a class="headerlink" href="#sugarscape-with-finite-lifespans" title="Link to this heading">#</a></h2>
+<p>Now we start with 250 agents, with lifetimes from 60 to 100, and replacement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> 
+                 <span class="n">num_agents</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+                 <span class="n">min_lifespan</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> 
+                 <span class="n">max_lifespan</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                 <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8aee70417478040063598070646da41e3bbba76c15a23504cf88143730746051.png" src="_images/8aee70417478040063598070646da41e3bbba76c15a23504cf88143730746051.png" />
+</div>
+</div>
+<p>After 100 time steps, the distribution of wealth is skewed to the right.  Most agents have very little sugar, but a few have a lot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">sugar</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Wealth&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ca9cc86cda93047b9914e9e642a76e9cac0652e33adcaa88b6a846c2aab300c5.png" src="_images/ca9cc86cda93047b9914e9e642a76e9cac0652e33adcaa88b6a846c2aab300c5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.78996198, 22.86265585, 40.75981206, 64.52552842])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Starting with the same parameters, I’ll run the model 500 steps, recording the distribution of wealth after each 100 steps:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+                 <span class="n">min_lifespan</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">max_lifespan</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                 <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">sugar</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cdf</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">sugar</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+    <span class="n">cdfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After about 200 steps, the distribution is stationary (doesn’t change over time).</p>
+<p>On a log scale, it is approximately normal, possibly with a truncated right tail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_cdfs</span><span class="p">(</span><span class="n">cdfs</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="n">cdfs</span><span class="p">:</span>
+        <span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        
+<span class="n">plot_cdfs</span><span class="p">(</span><span class="n">cdfs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plot_cdfs</span><span class="p">(</span><span class="n">cdfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Wealth&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plot_cdfs</span><span class="p">(</span><span class="n">cdfs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plot_cdfs</span><span class="p">(</span><span class="n">cdfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Wealth&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap09-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap09-4
+</pre></div>
+</div>
+<img alt="_images/7c5e7ef5568bef047adfa0f73cbfdfbf220208706c5f060639521976af3a9159.png" src="_images/7c5e7ef5568bef047adfa0f73cbfdfbf220208706c5f060639521976af3a9159.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Experiment with different starting conditions and agents with different vision, metabolism, and lifespan.  What effect do these changes have on the distribution of wealth?</p>
+</section>
+<section id="migration-in-waves">
+<h2><span class="section-number">9.4. </span>Migration in waves<a class="headerlink" href="#migration-in-waves" title="Link to this heading">#</a></h2>
+<p>If we start with all agents in the lower left, they propagate up and to the right in waves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> 
+                 <span class="n">num_agents</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
+                 <span class="n">starting_box</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> 
+                 <span class="n">max_vision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+<span class="n">env</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c46b4205ed6867c8902e89cc83ec235f713b2e65570a9f95b882c156c9eebd2.png" src="_images/7c46b4205ed6867c8902e89cc83ec235f713b2e65570a9f95b882c156c9eebd2.png" />
+</div>
+</div>
+<p>Here’s what it looks like after 6 and 12 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Sugarscape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">starting_box</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">max_vision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">three_frame</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap09-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap09-5
+</pre></div>
+</div>
+<img alt="_images/a1db7790c9c5d41232cb59b8764ad20545433430cad18400618964d065e22487.png" src="_images/a1db7790c9c5d41232cb59b8764ad20545433430cad18400618964d065e22487.png" />
+</div>
+</div>
+<p>This example is interesting because the waves move diagonally, unlike the agents, who can only move up or to the right.  They are similar in some ways to gliders and other Game of Life spaceships.</p>
+<p><strong>Exercise:</strong> Again, experiment with different starting conditions and see what effect they have on the wave behavior.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">9.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> Bill Bishop, author of <em>The Big Sort</em>, argues that
+American society is increasingly segregated by political
+opinion, as people choose to live among like-minded neighbors.</p>
+<p>The mechanism Bishop hypothesizes is not that people, like the agents
+in Schelling’s model, are more likely to move if they are
+isolated, but that when they move for any reason, they are
+likely to choose a neighborhood with people like themselves.</p>
+<p>Write a version of Schelling’s model to simulate
+this kind of behavior and see if it yields similar degrees of
+segregation.</p>
+<p>There are several ways you can model Bishop’s hypothesis.  In my
+implementation, a random selection of agents moves during each step.
+Each agent considers <code class="docutils literal notranslate"><span class="pre">k</span></code> randomly-chosen empty locations and
+chooses the one with the highest fraction of similar neighbors.
+How does the degree of segregation depend on <code class="docutils literal notranslate"><span class="pre">k</span></code>?</p>
+<p>You should be able to implement this model by inheriting from
+<code class="docutils literal notranslate"><span class="pre">Schelling</span></code> and overriding <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<p>And a test of the <code class="docutils literal notranslate"><span class="pre">step</span></code> method</p>
+<p><strong>Exercise:</strong> In the first version of Sugarscape, we never add agents, so once the population falls, it never recovers.  In the second version, we only replace agents when they die, so the population is constant.  Now let’s see what happens if we add some “population pressure”.</p>
+<p>Write a version of Sugarscape that adds a new agent at the end of every step.  Add code to compute the average vision and the average metabolism of the agents at the end of each step.  Run the model for a few hundred steps and plot the population over time, as well as the average vision and average metabolism.</p>
+<p>You should be able to implement this model by inheriting from
+<code class="docutils literal notranslate"><span class="pre">Sugarscape</span></code> and overriding <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap08.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Self-organized criticality</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Flocks, Herds, and Traffic Jams</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schellings-model">9.1. Schelling’s model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sugarscape">9.2. Sugarscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sugarscape-with-finite-lifespans">9.3. Sugarscape with finite lifespans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migration-in-waves">9.4. Migration in waves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.5. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

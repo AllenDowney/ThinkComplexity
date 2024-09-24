@@ -1,0 +1,1206 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Cellular automata &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap05';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Game of Life" href="chap06.html" />
+    <link rel="prev" title="4. Scale-Free Networks" href="chap04.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap05.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cellular automata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-dimensional-ca">5.1. Zero-dimensional CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-ca">5.2. One-dimensional CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.3. Cross correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-with-correlate">5.4. Update with correlate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.5. CA Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cell1d-object">5.6. The Cell1D object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cellular-automata">
+<h1><span class="section-number">5. </span>Cellular automata<a class="headerlink" href="#cellular-automata" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">savefig</span>
+<span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<section id="zero-dimensional-ca">
+<h2><span class="section-number">5.1. </span>Zero-dimensional CA<a class="headerlink" href="#zero-dimensional-ca" title="Link to this heading">#</a></h2>
+<p>Here’s a simple implementation of the 0-D CA I mentioned in the book, with one cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get the state of the cell in the next time step, we increment the current state mod 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Filling in the rest of the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 1. 0. 1. 0. 1. 0. 1. 0. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the behavior of this CA is simple: it blinks.</p>
+</section>
+<section id="one-dimensional-ca">
+<h2><span class="section-number">5.2. </span>One-dimensional CA<a class="headerlink" href="#one-dimensional-ca" title="Link to this heading">#</a></h2>
+<p>Just as we used a 1-D array to show the state of a single cell over time, we’ll use a 2-D array to show the state of a 1-D CA over time, with one column per cell and one row per timestep.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0 1 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To plot the array I use <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what it looks like after we initialize the first row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/42954ad9af5ed239298a29b7cf558999002a8ccad83d210af996cbff0aeb6fe9.png" src="_images/42954ad9af5ed239298a29b7cf558999002a8ccad83d210af996cbff0aeb6fe9.png" />
+</div>
+</div>
+<p>And here’s the function that fills in the next row.  The rule for this CA is to take the sum of a cell and its two neighbors mod 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute row i of a CA.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+        <span class="n">elts</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">elts</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the second row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6ab62208fc83c303c01cdf73f5e34ddfa8cd7890ac3e5a8275b9636874c200fd.png" src="_images/6ab62208fc83c303c01cdf73f5e34ddfa8cd7890ac3e5a8275b9636874c200fd.png" />
+</div>
+</div>
+<p>And here’s what it looks like with the rest of the cells filled in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="n">step</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="n">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+</div>
+</div>
+<p>For a simple set of rules, the behavior is more interesting than you might expect.</p>
+<p><strong>Exercise:</strong> Modify this code to increase the number of rows and columns and see what this CA does after more time steps.</p>
+</section>
+<section id="cross-correlation">
+<h2><span class="section-number">5.3. </span>Cross correlation<a class="headerlink" href="#cross-correlation" title="Link to this heading">#</a></h2>
+<p>We can update the CA more quickly using “cross correlation”.  The cross correlation of an array, <code class="docutils literal notranslate"><span class="pre">a</span></code>, with a window, <code class="docutils literal notranslate"><span class="pre">w</span></code>, is a new array, <code class="docutils literal notranslate"><span class="pre">c</span></code>, where element <code class="docutils literal notranslate"><span class="pre">k</span></code> is:</p>
+<p><span class="math notranslate nohighlight">\( c_k = \sum_{n=0}^{N-1} a_{n+k} \cdot w_n \)</span></p>
+<p>In Python, we can compute element <code class="docutils literal notranslate"><span class="pre">k</span></code> like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">c_k</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute element k of the cross correlation of a and w.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="n">N</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see how this works, I’ll create an array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5 6 7 8 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>And a window:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 1, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this window, each element of <code class="docutils literal notranslate"><span class="pre">c</span></code> is the sum of three neighbors in the array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_k</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_k</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function computes the elements of <code class="docutils literal notranslate"><span class="pre">c</span></code> for all values of <code class="docutils literal notranslate"><span class="pre">k</span></code> where the window can overlap with the array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the cross correlation of a and w.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_k</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="o">-</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 3  6  9 12 15 18 21 24]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This operation is useful in many domains, so libraries like NumPy usually provide an implementation.  Here’s the version from NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 3  6  9 12 15 18 21 24]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">mode='valid'</span></code>, the NumPy version does the same thing as mine: it only computes the elements of <code class="docutils literal notranslate"><span class="pre">c</span></code> where the window overlaps with the array.  A drawback of this mode is that the result is smaller than <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
+<p>And alternative is <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code>, which makes the result the same size as <code class="docutils literal notranslate"><span class="pre">array</span></code> by extending array with zeros on both sides.  Here’s the result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1  3  6  9 12 15 18 21 24 17]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Write a version of <code class="docutils literal notranslate"><span class="pre">correlate</span></code> that returns the same result as <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code> with <code class="docutils literal notranslate"><span class="pre">mode='same'.</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hint: use np.pad to add zeros at the beginning and end of `row`</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="update-with-correlate">
+<h2><span class="section-number">5.4. </span>Update with correlate<a class="headerlink" href="#update-with-correlate" title="Link to this heading">#</a></h2>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code> to update the array.  I’ll start again with an array that contains one column for each cell and one row for each time step, and I’ll initialize the first row with a single “on” cell in the middle:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0 1 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now here’s a version of <code class="docutils literal notranslate"><span class="pre">step</span></code> that uses <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute row i of a CA.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span> <span class="o">%</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the result is the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="n">step2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="n">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+</div>
+</div>
+</section>
+<section id="ca-tables">
+<h2><span class="section-number">5.5. </span>CA Tables<a class="headerlink" href="#ca-tables" title="Link to this heading">#</a></h2>
+<p>What we have so far is good enough for a CA that only depends on the total number of “on” cells, but for more general CAs, we need a table that maps from the configuration of the neighborhood to the future state of the center cell.</p>
+<p>The following function makes the table by interpreting the Rule number in binary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_table</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the table for a given CA rule.</span>
+<span class="sd">    </span>
+<span class="sd">    rule: int 0-255</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of 8 0s and 1s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rule</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rule</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unpackbits</span><span class="p">(</span><span class="n">rule</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what it looks like as an array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 1 0 1 0 0 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we correlate the row with the window <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>, it treats each neighborhood as a binary number between 000 and 111.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 1 0 0 0 0 0]
+[0 0 0 0 1 2 4 0 0 0 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can use the result from <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code> as an index into the table; the result is the next row of the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 1 1 1 0 0 0 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can wrap up that code in a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step3</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute row i of a CA.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And test it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="n">step3</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="n">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+</div>
+</div>
+<p>How did I know that Rule 150 is the same as the previous CA?  I wrote out the table and converted it to binary.</p>
+</section>
+<section id="the-cell1d-object">
+<h2><span class="section-number">5.6. </span>The Cell1D object<a class="headerlink" href="#the-cell1d-object" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Cell1D</span></code> encapsulates the code from the previous section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cell1D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a 1-D a cellular automaton&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the CA.</span>
+
+<span class="sd">        rule: integer</span>
+<span class="sd">        n: number of rows</span>
+<span class="sd">        m: number of columns</span>
+
+<span class="sd">        Attributes:</span>
+<span class="sd">        table:  rule dictionary that maps from triple to next state.</span>
+<span class="sd">        array:  the numpy array that contains the data.</span>
+<span class="sd">        next:   the index of the next empty row.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start_single</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Starts with one cell in the middle of the top row.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">start_random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start with random values in the top row.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">start_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start with values from a string of 1s and 0s.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Check string length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes the given number of time steps.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes one time step by computing the next row of the array.&quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draws the CA using pyplot.imshow.</span>
+
+<span class="sd">        start: index of the first column to be shown</span>
+<span class="sd">        end: index of the last column to be shown</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">[:,</span> <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+        
+        <span class="c1"># turn off axis tick marks</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function makes and draws a CA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes and draw a 1D CA with a given rule.</span>
+<span class="sd">    </span>
+<span class="sd">    rule: int rule number</span>
+<span class="sd">    n: number of rows</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ca</span> <span class="o">=</span> <span class="n">Cell1D</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">ca</span><span class="o">.</span><span class="n">start_single</span><span class="p">()</span>
+    <span class="n">ca</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ca</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example that runs a Rule 50 CA for 10 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-1
+</pre></div>
+</div>
+<img alt="_images/9d331302d1666c0285a50d6dd8e088eff251dff10961302e286fc8c197f91e47.png" src="_images/9d331302d1666c0285a50d6dd8e088eff251dff10961302e286fc8c197f91e47.png" />
+</div>
+</div>
+<p>Another example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-2
+</pre></div>
+</div>
+<img alt="_images/a4ed231dbe8c231ea0b4f68e4a3ea8c515d130f4f073976c50192f4f035cf7c1.png" src="_images/a4ed231dbe8c231ea0b4f68e4a3ea8c515d130f4f073976c50192f4f035cf7c1.png" />
+</div>
+</div>
+<p>And one more example showing recursive structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-3
+</pre></div>
+</div>
+<img alt="_images/12ad4a48cce96320a389333e4d1d437a3b64cf3e9c4198a52984352c1370dd5a.png" src="_images/12ad4a48cce96320a389333e4d1d437a3b64cf3e9c4198a52984352c1370dd5a.png" />
+</div>
+</div>
+<p>Rule 30 generates a sequence of bits that is indistinguishable from random:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-4
+</pre></div>
+</div>
+<img alt="_images/2b28e4cadb8d6098477dacd366704f616ea41da0b9ecca9ef104e11aa8958faa.png" src="_images/2b28e4cadb8d6098477dacd366704f616ea41da0b9ecca9ef104e11aa8958faa.png" />
+</div>
+</div>
+<p>And Rule 110 is Turing complete!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a longer run that has some spaceships.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">ca</span> <span class="o">=</span> <span class="n">Cell1D</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">start_random</span><span class="p">()</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h2><span class="section-number">5.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> This exercise asks you to experiment with Rule 110 and see how
+many spaceships you can find.</p>
+<ol class="arabic simple">
+<li><p>Read the <a class="reference external" href="https://en.wikipedia.org/wiki/Rule_110">Wikipedia page about Rule 110</a>, which describes its background pattern and spaceships.</p></li>
+<li><p>Create a Rule 110 CA with an initial condition that yields the
+stable background pattern.  Note that the CA class provides
+<code class="docutils literal notranslate"><span class="pre">start_string</span></code>, which allow you to initialize the state of
+the array using a string of <code class="docutils literal notranslate"><span class="pre">1</span></code>s and <code class="docutils literal notranslate"><span class="pre">0</span></code>s.</p></li>
+<li><p>Modify the initial condition by adding different patterns in the
+center of the row and see which ones yield spaceships.  You might
+want to enumerate all possible patterns of <span class="math notranslate nohighlight">\(n\)</span> bits, for some
+reasonable value of <span class="math notranslate nohighlight">\(n\)</span>.  For each spaceship, can you find the
+period and rate of translation?  What is the biggest spaceship you
+can find?</p></li>
+<li><p>What happens when spaceships collide?</p></li>
+</ol>
+<p><strong>Exercise:</strong> The goal of this exercise is to implement a Turing machine.</p>
+<ol class="arabic simple">
+<li><p>Read about Turing machines at <a class="reference external" href="http://en.wikipedia.org/wiki/Turing_machine">http://en.wikipedia.org/wiki/Turing_machine</a>.</p></li>
+<li><p>Write a class called <code class="docutils literal notranslate"><span class="pre">Turing</span></code> that implements a Turing machine.  For the action table, use the rules for a 3-state busy beaver.</p></li>
+<li><p>Write a <code class="docutils literal notranslate"><span class="pre">draw</span></code> method that plots the state of the tape and the position and state of the head.  For one example of what that might look like, see <a class="reference external" href="http://mathworld.wolfram.com/TuringMachine.html">http://mathworld.wolfram.com/TuringMachine.html</a>.</p></li>
+</ol>
+<p><strong>Exercise:</strong> This exercise asks you to implement and test several PRNGs.
+For testing, you will need to install
+<code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>, which you can download from
+<a class="reference external" href="https://www.phy.duke.edu/~rgb/General/dieharder.php">https://www.phy.duke.edu/~rgb/General/dieharder.php</a>, or it
+might be available as a package for your operating system.</p>
+<ol class="arabic simple">
+<li><p>Write a program that implements one of the linear congruential
+generators described at <a class="reference external" href="http://en.wikipedia.org/wiki/Linear_congruential_generator">http://en.wikipedia.org/wiki/Linear_congruential_generator</a>}.
+Test it using <code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>.</p></li>
+<li><p>Read the documentation of Python’s <code class="docutils literal notranslate"><span class="pre">random</span></code> module.
+What PRNG does it use?  Test it.</p></li>
+<li><p>Implement a Rule 30 CA with a few hundred cells,
+run it for as many time steps as you can in a reasonable amount
+of time, and output the center column as a sequence of bits.
+Test it.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap04.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Scale-Free Networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap06.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Game of Life</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-dimensional-ca">5.1. Zero-dimensional CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-ca">5.2. One-dimensional CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.3. Cross correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-with-correlate">5.4. Update with correlate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.5. CA Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cell1d-object">5.6. The Cell1D object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

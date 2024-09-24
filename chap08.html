@@ -1,0 +1,1224 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. Self-organized criticality &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap08';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Agent Based Models" href="chap09.html" />
+    <link rel="prev" title="7. Physical modeling" href="chap07.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap08.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Self-organized criticality</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">8.1. Sand pile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">8.2. Animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">8.3. Long tailed distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">8.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">8.5. Spectral density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.6. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="self-organized-criticality">
+<h1><span class="section-number">8. </span>Self-organized criticality<a class="headerlink" href="#self-organized-criticality" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/Cell1D.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/Cell2D.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sand-pile">
+<h2><span class="section-number">8.1. </span>Sand pile<a class="headerlink" href="#sand-pile" title="Link to this heading">#</a></h2>
+<p>Here’s an implementation of the sand pile model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">correlate2d</span>
+<span class="kn">from</span> <span class="nn">Cell2D</span> <span class="kn">import</span> <span class="n">Cell2D</span><span class="p">,</span> <span class="n">draw_array</span>
+
+<span class="k">class</span> <span class="nc">SandPile</span><span class="p">(</span><span class="n">Cell2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diffusion Cellular Automaton.&quot;&quot;&quot;</span>
+
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the attributes.</span>
+
+<span class="sd">        n: number of rows</span>
+<span class="sd">        m: number of columns</span>
+<span class="sd">        level: starting value for all cells</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> <span class="o">*</span> <span class="n">level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toppled_seq</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes one time step.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: number of cells that toppled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">toppling</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">&gt;</span> <span class="n">K</span>
+        <span class="n">num_toppled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">toppling</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toppled_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_toppled</span><span class="p">)</span>
+
+        <span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">toppling</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">+=</span> <span class="n">c</span>
+        <span class="k">return</span> <span class="n">num_toppled</span>
+    
+    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Increments a random cell.&quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs until equilibrium.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: duration, total number of topplings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">num_toppled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">num_toppled</span>
+            <span class="k">if</span> <span class="n">num_toppled</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">total</span>
+
+    <span class="k">def</span> <span class="nf">drop_and_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Drops a random grain and runs to equilibrium.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: duration, total_toppled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+        <span class="n">duration</span><span class="p">,</span> <span class="n">total_toppled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">duration</span><span class="p">,</span> <span class="n">total_toppled</span>
+    
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draws the cells.&quot;&quot;&quot;</span>
+        <span class="n">draw_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a small example starting with two cells ready to topple.  <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of rows, <code class="docutils literal notranslate"><span class="pre">m</span></code> is the number of columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile</span> <span class="o">=</span> <span class="n">SandPile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pile</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">pile</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0]
+ [0 4 0 4 0]
+ [0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To execute one step, first we find cells that are above the toppling threshold, <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">toppling</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">K</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">toppling</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0]
+ [0 1 0 1 0]
+ [0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we use <code class="docutils literal notranslate"><span class="pre">correlate2d</span></code> to make a copy of the update kernel around each toppling cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0  1  0]
+ [ 1 -4  1]
+ [ 0  1  0]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">correlate2d</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">toppling</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0  1  0  1  0]
+ [ 1 -4  2 -4  1]
+ [ 0  1  0  1  0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we add the result back into the array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+=</span> <span class="n">c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 0 1 0]
+ [1 0 2 0 1]
+ [0 1 0 1 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Any grains that topple off the edge disappear.</p>
+</section>
+<section id="animation">
+<h2><span class="section-number">8.2. </span>Animation<a class="headerlink" href="#animation" title="Link to this heading">#</a></h2>
+<p>Let’s look at a bigger pile, with <code class="docutils literal notranslate"><span class="pre">n=20</span></code>.  All cells are initialized to <code class="docutils literal notranslate"><span class="pre">level</span></code>, which is meant to be substantially bigger than <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile</span> <span class="o">=</span> <span class="n">SandPile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">run</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(332, 53336)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">run</span></code> function invokes <code class="docutils literal notranslate"><span class="pre">step</span></code> until no more cells topple and returns the number of time steps and the number of affected cells.</p>
+<p>Here’s what it looks like.  Starting with <code class="docutils literal notranslate"><span class="pre">level&gt;K</span></code> produces all kinds of interesting patterns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5b1c26d8c8fb14f8f1b045e56626c4c33c86b7a03fcede10c307964e24fb5208.png" src="_images/5b1c26d8c8fb14f8f1b045e56626c4c33c86b7a03fcede10c307964e24fb5208.png" />
+</div>
+</div>
+<p>Now let’s look at an animation, starting from this initialized pile.</p>
+<p>Each step of the animation drops a single grain at a random location and runs until no more cells topple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">pile</span><span class="o">.</span><span class="n">drop_and_run</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ab48b660879f86550dec7cd21f5482f10ee0175b65559f73ce1187d7733b8ae3.png" src="_images/ab48b660879f86550dec7cd21f5482f10ee0175b65559f73ce1187d7733b8ae3.png" />
+</div>
+</div>
+<p>After a while, the pile looks pretty random.</p>
+<p>Here’s a plot of the number of cells toppled after each <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">toppled_seq</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time Steps&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of toppled cells&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3b710d4fd9142f1c2a8ed8f9059db3351e8f763b9b28e0856803513ec18e2cc6.png" src="_images/3b710d4fd9142f1c2a8ed8f9059db3351e8f763b9b28e0856803513ec18e2cc6.png" />
+</div>
+</div>
+<p>The following figure shows the progression of the pile from ordered to apparently random.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">pile</span> <span class="o">=</span> <span class="n">SandPile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">run</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pile</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">pile</span><span class="o">.</span><span class="n">drop_and_run</span><span class="p">()</span>
+<span class="n">pile</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">pile</span><span class="o">.</span><span class="n">drop_and_run</span><span class="p">()</span>
+<span class="n">pile</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(332, 53336)
+Saving figure to file figs/chap08-1
+</pre></div>
+</div>
+<img alt="_images/2d6d69d60a3a88ad90482944f18805883ba75c2822ab902b3a50c8318704c9eb.png" src="_images/2d6d69d60a3a88ad90482944f18805883ba75c2822ab902b3a50c8318704c9eb.png" />
+</div>
+</div>
+</section>
+<section id="long-tailed-distributions">
+<h2><span class="section-number">8.3. </span>Long tailed distributions<a class="headerlink" href="#long-tailed-distributions" title="Link to this heading">#</a></h2>
+<p>If the sand pile is in a critical state, we expect quantities like the duration of an avalanche, <code class="docutils literal notranslate"><span class="pre">T</span></code>, and the number of cells affected, <code class="docutils literal notranslate"><span class="pre">S</span></code>, to have long-tailed distributions.</p>
+<p>Following Bak, Tang, and Wiesenseld, we start with a 50x50 array and plot the PMFs of <code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> on a log-log scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile2</span> <span class="o">=</span> <span class="n">SandPile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">pile2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">pile2</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f4062a9d943247eac929c4004c1f985559804858059e068ed08ee3f43d841907.png" src="_images/f4062a9d943247eac929c4004c1f985559804858059e068ed08ee3f43d841907.png" />
+</div>
+</div>
+<p>Now we run the pile for many time steps and keep track of the durations and number of cells affected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">iters</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="o">%</span><span class="k">time</span> res = [pile2.drop_and_run() for _ in range(iters)]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2min 11s, sys: 59 ms, total: 2min 11s
+Wall time: 2min 11s
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">np.transpose</span></code> to extract the results as two NumPy arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A large majority of drops have duration 1 and no toppled cells.  If we filter them out, we get a clearer picture of the rest of the distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">T</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">S</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> from the <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> module to compute PMFs of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Pmf</span>
+
+<span class="n">pmfT</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">pmfS</span> <span class="o">=</span> <span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distributions of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code> have many small values and a few very large ones.</p>
+<p>Here are the PMFs on linear axes (showing values up to 50).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">pmfT</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Avalanche duration&#39;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PMF&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">pmfS</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;S&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Avalanche size&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap08-2
+</pre></div>
+</div>
+<img alt="_images/7fc8683d70dcc88b21f0ef5a77b6c506a52c029503e48cbc8aa87c3529cb760c.png" src="_images/7fc8683d70dcc88b21f0ef5a77b6c506a52c029503e48cbc8aa87c3529cb760c.png" />
+</div>
+</div>
+<p>To see whether these distributions follow a power law, we plot the PMFs on a log-log scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">slope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">600</span><span class="p">]</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.3e-1</span><span class="p">,</span> <span class="mf">2.2e-4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+
+<span class="n">pmfT</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Avalanche duration&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PMF&#39;</span><span class="p">,</span>
+                 <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+                 <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+                 <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5000</span><span class="p">]</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.3e-1</span><span class="p">,</span> <span class="mf">2.3e-5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">slope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="n">pmfS</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;S&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Avalanche size&#39;</span><span class="p">,</span>
+                 <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5600</span><span class="p">],</span>
+                 <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+                 <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.1188474]
+[-1.01439469]
+Saving figure to file figs/chap08-3
+</pre></div>
+</div>
+<img alt="_images/428b217d88f4e6482c23349ff17a2f610e1639a292d778d550e71bd6eb147b65.png" src="_images/428b217d88f4e6482c23349ff17a2f610e1639a292d778d550e71bd6eb147b65.png" />
+</div>
+</div>
+<p>The gray lines have slopes near -1.  The distribution of avalanche duration is approximately straight between 1 and 100, but then drops off.  The distribution of size follows a power law more closely and over a greater range, but it also seems to drop off for values above a few hundred.</p>
+<p><strong>Exercise:</strong> Try running the model longer to see if you can get a less noisy plot of the distributions of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code>.</p>
+</section>
+<section id="fractals">
+<h2><span class="section-number">8.4. </span>Fractals<a class="headerlink" href="#fractals" title="Link to this heading">#</a></h2>
+<p>If the sand pile is in a critical state, we expect to see fractal geometry.</p>
+<p>To estimate the fractal dimension, I’ll start with a bigger pile and a higher initial level.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile3</span> <span class="o">=</span> <span class="n">SandPile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">131</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="o">%</span><span class="k">time</span> pile3.run()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.4 s, sys: 0 ns, total: 15.4 s
+Wall time: 15.4 s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(28379, 211320220)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial state sure looks like a fractal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pile3</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4d4f2f317ad1a92518bd60f56a5745cde2b633a0291419a5f41cc47e85a2175d.png" src="_images/4d4f2f317ad1a92518bd60f56a5745cde2b633a0291419a5f41cc47e85a2175d.png" />
+</div>
+</div>
+<p>Since it contains four different levels (0, 1, 2, and 3), we can extract 4 binary patterns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_four</span><span class="p">(</span><span class="n">pile</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">levels</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">draw_array</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">array</span><span class="o">==</span><span class="n">level</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what they look like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_four</span><span class="p">(</span><span class="n">pile3</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap08-4
+</pre></div>
+</div>
+<img alt="_images/42dc4e43e02d5d59de1c16ce7d4d2df68b9b377ee837202a0ed24727dc2a7afd.png" src="_images/42dc4e43e02d5d59de1c16ce7d4d2df68b9b377ee837202a0ed24727dc2a7afd.png" />
+</div>
+</div>
+<p>Now we can apply a box-counting algorithm to each level.</p>
+<p><code class="docutils literal notranslate"><span class="pre">count_cells</span></code> starts with a single cell in the middle, gradually increases the size of the box, and counts the number of cells in each box.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_cells</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Counts the number of cells in boxes with increasing size.</span>
+<span class="sd">    </span>
+<span class="sd">    a: NumPy array</span>
+<span class="sd">    </span>
+<span class="sd">    returns: list of (i, i**2, cell count) tuples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">top</span><span class="p">:</span><span class="n">top</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span><span class="n">left</span><span class="o">+</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">box_count</span></code> takes a pile and a level, extracts the cells that have the given level, calls <code class="docutils literal notranslate"><span class="pre">count_cells</span></code>, and estimates the fractal dimension.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">plot</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, it also generates a graph of cell count versus box size on a log-log scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
+
+<span class="k">def</span> <span class="nf">box_count</span><span class="p">(</span><span class="n">pile</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the fractal dimension by box counting.</span>
+<span class="sd">    </span>
+<span class="sd">    pile: SandPile</span>
+<span class="sd">    level: which level from the pile to count</span>
+<span class="sd">    plot: boolean, whether to generate a plot</span>
+<span class="sd">    </span>
+<span class="sd">    returns: estimated fractal dimension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">count_cells</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">array</span><span class="o">==</span><span class="n">level</span><span class="p">)</span>
+    <span class="n">steps</span><span class="p">,</span> <span class="n">steps2</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">res</span>
+    
+    <span class="c1"># select the range where we have a nonzero number of cells</span>
+    <span class="n">legit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">[</span><span class="n">legit</span><span class="p">]</span>
+    <span class="n">steps2</span> <span class="o">=</span> <span class="n">steps2</span><span class="p">[</span><span class="n">legit</span><span class="p">]</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="n">legit</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="c1"># only put labels on the left and bottom subplots</span>
+        <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Box Size&#39;</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Cell Count&#39;</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    
+        <span class="n">options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">steps2</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">cells</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;level=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">level</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="n">decorate</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+                         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span>
+                         <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="c1">#thinkplot.bigger_text()</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cells</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally <code class="docutils literal notranslate"><span class="pre">box_count_four</span></code> applies the box counting algorithm for each value in the sand pile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">box_count_four</span><span class="p">(</span><span class="n">pile</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies box counting to each level in the pile.</span>
+<span class="sd">    </span>
+<span class="sd">    pile: SandPile</span>
+<span class="sd">    levels: list of levels to check</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">levels</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">box_count</span><span class="p">(</span><span class="n">pile</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">dims</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dims</span> <span class="o">=</span> <span class="n">box_count_four</span><span class="p">(</span><span class="n">pile3</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap08-5
+</pre></div>
+</div>
+<img alt="_images/5f2a49418b950dd9855292fa612ba12dd143311d318363075e291c671309e3f7.png" src="_images/5f2a49418b950dd9855292fa612ba12dd143311d318363075e291c671309e3f7.png" />
+</div>
+</div>
+<p>The lines are reasonably straight, which indicates that we are running the algorithm over a valid range of box sizes.  Here are the estimated slopes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dims</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">  </span><span class="si">%0.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  1.871
+1  3.502
+2  1.781
+3  2.084
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fractal dimensions for levels 0, 1, and 2 seem to be non-integer, which indicates that the image is fractal.</p>
+<p>The fractal dimension for value 3 is indistinguishable from 2, but given the results for the other levels, the apparent curvature of the line, and the appearance of the pattern, it seems likely that it is also fractal.</p>
+<p><strong>Exercise:</strong>  Choose a different value of <code class="docutils literal notranslate"><span class="pre">n</span></code> and/or the initial <code class="docutils literal notranslate"><span class="pre">level</span></code> and run this analysis again.  Are the estimated fractal dimensions consistent?</p>
+</section>
+<section id="spectral-density">
+<h2><span class="section-number">8.5. </span>Spectral density<a class="headerlink" href="#spectral-density" title="Link to this heading">#</a></h2>
+<p>Suppose the sandpile made a little click each time a cell toppled.  What would it sound like?</p>
+<p><code class="docutils literal notranslate"><span class="pre">toppled_seq</span></code> contains the number of cells that toppled during each time step.  We can use Welch’s algorithm to estimate its <a class="reference external" href="https://en.wikipedia.org/wiki/Spectral_density">power spectral density</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signal</span> <span class="o">=</span> <span class="n">pile2</span><span class="o">.</span><span class="n">toppled_seq</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1429764
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">welch</span>
+
+<span class="n">nperseg</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">freqs</span><span class="p">,</span> <span class="n">powers</span> <span class="o">=</span> <span class="n">welch</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">nperseg</span><span class="o">=</span><span class="n">nperseg</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">nperseg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what it looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">nperseg</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mf">1.58</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.7e3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">powers</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span>
+         <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> 
+         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span> 
+         <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> 
+         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap08-6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap08-6
+</pre></div>
+</div>
+<img alt="_images/40734196731ed649d519f358a5294c8666efb4a58d189bf8899ed22e572be240.png" src="_images/40734196731ed649d519f358a5294c8666efb4a58d189bf8899ed22e572be240.png" />
+</div>
+</div>
+<p>The slope of the line is -1.58, which indicates that this spectrum is pink noise with parameter <span class="math notranslate nohighlight">\(\beta=1.58\)</span>.</p>
+<p><strong>Exercise:</strong>  Choose a different value of <code class="docutils literal notranslate"><span class="pre">nperseg</span></code> and run this analysis again.  What are the pros and cons of larger segment lengths?  Modify the code to run the model longer and see if you can get a less noisy estimate of the spectrum.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">8.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> To test whether the distributions of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code> are heavy-tailed, we plotted their <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> on a log-log scale, which is what Bak, Tang, and Wiesenfeld show in their paper.  But as we saw in Chapter 4, this visualization can obscure the shape of the distribution.  Using the same data, make a plot that shows the CDFs of <code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code>.  What can you say about the shape of these distributions?  Do they follow a power law?  Are they heavy tailed?</p>
+<p>You might find it helpful to plot the CDFs on a log-x scale and the complementary CDFs on a log-log scale.</p>
+<p><strong>Exercise:</strong> In Section 8.5 we showed that the initial equilibrium of the sand pile model produces fractal patterns.  But after we drop a large number of random grains, the patterns look more random.</p>
+<p>Starting with the example in Section 8.5, run the sand pile model for a while and then compute fractal dimensions for each of the 4 levels.  Is the sand pile model fractal in steady state?</p>
+<p><strong>Exercise:</strong> Another version of the sand pile model, called the “single source” model, starts from a different initial condition: instead of all cells at the same level, all cells are set to 0 except the center cell, which is set to a very large value.</p>
+<p>Write a function that creates a <code class="docutils literal notranslate"><span class="pre">SandPile</span></code> object, sets up the single source initial condition, and runs until the pile reaches equilibrium.  Does the results appear to be fractal?</p>
+<p>You can read more about this version of the sand pile model at <a class="reference external" href="http://math.cmu.edu/~wes/sandgallery.html">http://math.cmu.edu/~wes/sandgallery.html</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Physical modeling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap09.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Agent Based Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">8.1. Sand pile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">8.2. Animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">8.3. Long tailed distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">8.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">8.5. Spectral density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.6. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

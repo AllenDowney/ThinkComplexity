@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Small World Graphs &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap03';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Scale-Free Networks" href="chap04.html" />
+    <link rel="prev" title="2. Erdos-Renyi Graphs" href="chap02.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap03.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Small World Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-ring-lattice">3.1. Regular ring lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graph">3.2. WS graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.3. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-length">3.4. Path length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experiment">3.5. The experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.6. Breadth-first search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.7. Dijkstra’s algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.8. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="small-world-graphs">
+<h1><span class="section-number">3. </span>Small World Graphs<a class="headerlink" href="#small-world-graphs" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+
+<span class="c1"># Set the random seed so the notebook </span>
+<span class="c1"># produces the same results every time.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># node colors for drawing networks</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1">#sns.palplot(colors)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="regular-ring-lattice">
+<h2><span class="section-number">3.1. </span>Regular ring lattice<a class="headerlink" href="#regular-ring-lattice" title="Link to this heading">#</a></h2>
+<p>To make a ring lattice, I’ll start with a generator function that yields edges between each node and the next <code class="docutils literal notranslate"><span class="pre">halfk</span></code> neighbors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adjacent_edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">halfk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yields edges between each node and `halfk` neighbors.</span>
+<span class="sd">    </span>
+<span class="sd">    halfk: number of edges from each node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">halfk</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span>
+            <span class="k">yield</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can test it with 3 nodes and <code class="docutils literal notranslate"><span class="pre">halfk=1</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">adjacent_edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we use <code class="docutils literal notranslate"><span class="pre">adjacent_edges</span></code> to write <code class="docutils literal notranslate"><span class="pre">make_ring_lattice</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_ring_lattice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a ring lattice with `n` nodes and degree `k`.</span>
+<span class="sd">    </span>
+<span class="sd">    Note: this only works correctly if k is even.</span>
+<span class="sd">    </span>
+<span class="sd">    n: number of nodes</span>
+<span class="sd">    k: degree of each node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">adjacent_edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can test it out with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">k=4</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap03-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> To see how this function fails when <code class="docutils literal notranslate"><span class="pre">k</span></code> is odd, run it again with <code class="docutils literal notranslate"><span class="pre">k=3</span></code> or <code class="docutils literal notranslate"><span class="pre">k=5</span></code>.</p>
+<p>One of the exercises below asks you to explore regular graphs with odd values of <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+</section>
+<section id="ws-graph">
+<h2><span class="section-number">3.2. </span>WS graph<a class="headerlink" href="#ws-graph" title="Link to this heading">#</a></h2>
+<p>To make a WS graph, you start with a ring lattice and then rewire.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a Watts-Strogatz graph.</span>
+<span class="sd">    </span>
+<span class="sd">    n: number of nodes</span>
+<span class="sd">    k: degree of each node</span>
+<span class="sd">    p: probability of rewiring an edge</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">rewire</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ws</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To do the rewiring, we’ll need <code class="docutils literal notranslate"><span class="pre">flip</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True with probability `p`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the function that does the rewiring</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rewire</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rewires each edge with probability `p`.</span>
+<span class="sd">    </span>
+<span class="sd">    G: Graph</span>
+<span class="sd">    p: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill this in</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">p=0.2</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just checking that we have the same number of edges we started with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">lattice</span><span class="o">.</span><span class="n">edges</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ws</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now I’ll generate a plot that shows WS graphs for a few values of <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">ns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">ns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">ns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap03-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> What is the order of growth of <code class="docutils literal notranslate"><span class="pre">rewire</span></code>?</p>
+</section>
+<section id="clustering">
+<h2><span class="section-number">3.3. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
+<p>The following function computes the local clustering coefficient for a given node, <code class="docutils literal notranslate"><span class="pre">u</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">node_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes local clustering coefficient for `u`.</span>
+<span class="sd">    </span>
+<span class="sd">    G: Graph</span>
+<span class="sd">    u: node</span>
+<span class="sd">    </span>
+<span class="sd">    returns: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        
+    <span class="n">possible</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">exist</span> <span class="o">=</span> <span class="mi">0</span>    
+    <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">(</span><span class="n">neighbors</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+            <span class="n">exist</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">exist</span> <span class="o">/</span> <span class="n">possible</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates all pairs of nodes.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The network average clustering coefficient is just the mean of the local CCs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clustering_coefficient</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Average of the local clustering coefficients.</span>
+<span class="sd">    </span>
+<span class="sd">    G: Graph</span>
+<span class="sd">    </span>
+<span class="sd">    returns: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># FILL THIS IN</span>
+    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a ring lattice with <code class="docutils literal notranslate"><span class="pre">k=4</span></code>, the clustering coefficient for each node should be 0.5</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">node_clustering</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the network average should be 0.5</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clustering_coefficient</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Correct.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> clustering_coefficient(lattice)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Write a version of <code class="docutils literal notranslate"><span class="pre">node_clustering</span></code> that replaces the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop with a list comprehension.  Is it faster?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> clustering_coefficient(lattice)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> What is the order of growth of <code class="docutils literal notranslate"><span class="pre">clustering_coefficient</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code>, and <code class="docutils literal notranslate"><span class="pre">k</span></code>?</p>
+</section>
+<section id="path-length">
+<h2><span class="section-number">3.4. </span>Path length<a class="headerlink" href="#path-length" title="Link to this heading">#</a></h2>
+<p>The following function computes path lengths between all pairs of nodes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path_lengths</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="c1"># FILL THIS IN</span>
+    <span class="k">yield</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The characteristic path length is the mean path length for all pairs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">characteristic_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">path_lengths</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On a complete graph, the average path length should be 1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">characteristic_path_length</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, the mean is about 50</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">characteristic_path_length</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong>  What is the mean path length in a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">k=4</span></code>?</p>
+</section>
+<section id="the-experiment">
+<h2><span class="section-number">3.5. </span>The experiment<a class="headerlink" href="#the-experiment" title="Link to this heading">#</a></h2>
+<p>This function generates a WS graph with the given parameters and returns a pair of (mean path length, clustering coefficient):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_one_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a WS graph and computes its stats.</span>
+<span class="sd">    </span>
+<span class="sd">    n: number of nodes</span>
+<span class="sd">    k: degree of each node</span>
+<span class="sd">    p: probability of rewiring</span>
+<span class="sd">    </span>
+<span class="sd">    returns: tuple of (mean path length, clustering coefficient)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>    
+    <span class="n">mpl</span> <span class="o">=</span> <span class="n">characteristic_path_length</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
+    <span class="n">cc</span> <span class="o">=</span> <span class="n">clustering_coefficient</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mpl</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mpl</span><span class="p">,</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, it takes a few seconds on my computer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> run_one_graph(1000, 10, 0.01)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll run it with a range of values for <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function runs each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> several times and returns a dictionary that maps from each <code class="docutils literal notranslate"><span class="pre">p</span></code> to a list of (mpl, cc) pairs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes stats for WS graphs with a range of `p`.</span>
+<span class="sd">    </span>
+<span class="sd">    ps: sequence of `p` to try</span>
+<span class="sd">    n: number of nodes</span>
+<span class="sd">    k: degree of each node</span>
+<span class="sd">    iters: number of times to run for each `p`</span>
+<span class="sd">    </span>
+<span class="sd">    returns:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">run_one_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the raw results.  Warning: this takes a few minutes to run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> res = run_experiment(ps)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s get the results into a form that’s easy to plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And normalize them so they both start at 1.0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">/=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">C</span> <span class="o">/=</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the plot that replicates Watts and Strogatz’s Figure 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="s1">&#39;s-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;C(p) / C(0)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L(p) / L(0)&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Rewiring probability (p)&#39;</span><span class="p">,</span> <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Normalized clustering coefficient and path length&#39;</span><span class="p">,</span>
+         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mf">0.00009</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">])</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap03-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="breadth-first-search">
+<h2><span class="section-number">3.6. </span>Breadth-first search<a class="headerlink" href="#breadth-first-search" title="Link to this heading">#</a></h2>
+<p>Now let’s see how the shortest path algorithm works.  We’ll start with BFS, which is the basis for Dijkstra’s algorithm.</p>
+<p>Here’s our old friend, the ring lattice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s my implementation of BFS using a deque.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">reachable_nodes_bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finds reachable nodes by BFS.</span>
+<span class="sd">    </span>
+<span class="sd">    G: graph</span>
+<span class="sd">    start: node to start at</span>
+<span class="sd">    </span>
+<span class="sd">    returns: set of reachable nodes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">seen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes_bfs</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a version that’s a little faster, but maybe less readable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes_bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finds reachable nodes by BFS.</span>
+<span class="sd">    </span>
+<span class="sd">    G: graph</span>
+<span class="sd">    start: node to start at</span>
+<span class="sd">    </span>
+<span class="sd">    returns: set of reachable nodes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="o">-</span> <span class="n">seen</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">seen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It works, too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes_bfs</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dijkstras-algorithm">
+<h2><span class="section-number">3.7. </span>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h2>
+<p>Now we’re ready for Dijkstra’s algorithm, at least for graphs where all the edges have the same weight/length.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shortest_path_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finds shortest paths from `source` to all other nodes.</span>
+<span class="sd">    </span>
+<span class="sd">    G: graph</span>
+<span class="sd">    source: node to start at</span>
+<span class="sd">    </span>
+<span class="sd">    returns: make from node to path length</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">new_dist</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">node</span><span class="p">])</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+            <span class="n">dist</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_dist</span>
+        
+        <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we’ll test it on a ring lattice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s my implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">shortest_path_dijkstra</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">d1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s the result from NetworkX:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path_length</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">d2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>They are the same:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">==</span> <span class="n">d2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> In a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, which node is farthest from 0 and how far is it?  Use <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code> to check your answer.</p>
+<p>Note: the maximum distance between two nodes is the <strong>diameter</strong> of the graph.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">3.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> In a ring lattice, every node has the same number of neighbors.  The number of neighbors is called the <strong>degree</strong> of the node, and a graph where all nodes have the same degree is called a <strong>regular graph</strong>.</p>
+<p>All ring lattices are regular, but not all regular graphs are ring lattices.  In particular, if <code class="docutils literal notranslate"><span class="pre">k</span></code> is odd, we can’t construct a ring lattice, but we might be able to construct a regular graph.</p>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">make_regular_graph</span></code> that takes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">k</span></code> and returns a regular graph that contains <code class="docutils literal notranslate"><span class="pre">n</span></code> nodes, where every node has <code class="docutils literal notranslate"><span class="pre">k</span></code> neighbors.  If it’s not possible to make a regular graph with the given values of <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">k</span></code>, the function should raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s `adjacent_edges` again for comparison:</span>
+
+<span class="k">def</span> <span class="nf">adjacent_edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">halfk</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">halfk</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span>
+            <span class="k">yield</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> My implementation of <code class="docutils literal notranslate"><span class="pre">reachable_nodes_bfs</span></code> is efficient in the sense that it is in <span class="math notranslate nohighlight">\(O(n + m)\)</span>, but it incurs a lot of overhead adding nodes to the queue and removing them.  NetworkX provides a simple, fast implementation of BFS, available from <a class="reference external" href="https://github.com/networkx/networkx/blob/master/networkx/algorithms/components/connected.py">the NetworkX repository on GitHub</a>.</p>
+<p>Here is a version I modified to return a set of nodes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plain_bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fast BFS node generator&quot;&quot;&quot;</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">nextlevel</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">}</span>
+    <span class="k">while</span> <span class="n">nextlevel</span><span class="p">:</span>
+        <span class="n">thislevel</span> <span class="o">=</span> <span class="n">nextlevel</span>
+        <span class="n">nextlevel</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">thislevel</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">nextlevel</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">seen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compare this function to <code class="docutils literal notranslate"><span class="pre">reachable_nodes_bfs</span></code> and see which is faster.  Then see if you can modify this function to implement a faster version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code></p>
+<p><strong>Exercise:</strong> The following implementation of a BFS contains two performance errors.  What are
+they?  What is the actual order of growth for this algorithm?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Breadth-first search on a graph, starting at top_node.&quot;&quot;&quot;</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+        <span class="n">curr_node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># Dequeue</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">curr_node</span><span class="p">)</span>
+
+        <span class="c1"># Enqueue non-visited and non-enqueued children</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">curr_node</span><span class="p">]</span>
+                     <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">visited</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> In the book, I claimed that Dijkstra’s algorithm does not work unless it uses BFS.  Write a version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code> that uses DFS and test it on a few examples to see what goes wrong.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Erdos-Renyi Graphs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap04.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Scale-Free Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-ring-lattice">3.1. Regular ring lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graph">3.2. WS graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.3. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-length">3.4. Path length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experiment">3.5. The experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.6. Breadth-first search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.7. Dijkstra’s algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.8. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

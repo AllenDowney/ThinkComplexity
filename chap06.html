@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Game of Life &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap06';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Physical modeling" href="chap07.html" />
+    <link rel="prev" title="5. Cellular automata" href="chap05.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap06.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Game of Life</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-of-life-entities">6.1. Game of Life entities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methuselas">6.2. Methuselas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conways-conjecture">6.3. Conway’s conjecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-game-of-life">6.4. Implementing Game of Life</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#highlife">6.5. Highlife</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="game-of-life">
+<h1><span class="section-number">6. </span>Game of Life<a class="headerlink" href="#game-of-life" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">savefig</span>
+<span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<section id="game-of-life-entities">
+<h2><span class="section-number">6.1. </span>Game of Life entities<a class="headerlink" href="#game-of-life-entities" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/Cell2D.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">correlate2d</span>
+<span class="kn">from</span> <span class="nn">Cell2D</span> <span class="kn">import</span> <span class="n">Cell2D</span>
+
+<span class="k">class</span> <span class="nc">Life</span><span class="p">(</span><span class="n">Cell2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of Conway&#39;s Game of Life.&quot;&quot;&quot;</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">table</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes one time step.&quot;&quot;&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function creates a <code class="docutils literal notranslate"><span class="pre">Life</span></code> object and sets the initial condition using strings of <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> characters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_life</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="o">*</span><span class="n">strings</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a Life object.</span>
+<span class="sd">    </span>
+<span class="sd">    n, m: rows and columns of the Life array</span>
+<span class="sd">    row, col: upper left coordinate of the cells to be added</span>
+<span class="sd">    strings: list of strings of &#39;0&#39; and &#39;1&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">life</span> <span class="o">=</span> <span class="n">Life</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="n">life</span><span class="o">.</span><span class="n">add_cells</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="o">*</span><span class="n">strings</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">life</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A beehive is a stable entity, also called a “still life”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># beehive</span>
+<span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0110&#39;</span><span class="p">,</span> <span class="s1">&#39;1001&#39;</span><span class="p">,</span> <span class="s1">&#39;0110&#39;</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap06-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap06-1
+</pre></div>
+</div>
+<img alt="_images/88583774c248fe1c819b75093cb582f4e38bfd718f343b4732534bf11e030067.png" src="_images/88583774c248fe1c819b75093cb582f4e38bfd718f343b4732534bf11e030067.png" />
+</div>
+</div>
+<p>Here’s what it looks like after one step:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88583774c248fe1c819b75093cb582f4e38bfd718f343b4732534bf11e030067.png" src="_images/88583774c248fe1c819b75093cb582f4e38bfd718f343b4732534bf11e030067.png" />
+</div>
+</div>
+<p>A toad is an oscillator with period 2.  Here’s are its two configurations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># toad</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0111&#39;</span><span class="p">,</span> <span class="s1">&#39;1110&#39;</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap06-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap06-2
+</pre></div>
+</div>
+<img alt="_images/9adf88bd1e563b262a51b2639cb501f4a84a77f09b19c40762ec6c32bdea66e2.png" src="_images/9adf88bd1e563b262a51b2639cb501f4a84a77f09b19c40762ec6c32bdea66e2.png" />
+</div>
+</div>
+<p>Here’s what the toad looks like as an animation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0111&#39;</span><span class="p">,</span> <span class="s1">&#39;1110&#39;</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/577d51dfe20f17eee87239a5f6edda238ffe3901fca2eb51c2fccde000d0456c.png" src="_images/577d51dfe20f17eee87239a5f6edda238ffe3901fca2eb51c2fccde000d0456c.png" />
+</div>
+</div>
+<p>A glider is a spaceship that translates one unit down and to the right with period 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># glider</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">glider</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;010&#39;</span><span class="p">,</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;111&#39;</span><span class="p">]</span>
+<span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">glider</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">life</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap06-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap06-3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an animation showing glider movement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;010&#39;</span><span class="p">,</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;111&#39;</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9f3d00a52a8fa505ed9a0e90fec643a74034ed14ee52f1f127db5f0a9e6d2689.png" src="_images/9f3d00a52a8fa505ed9a0e90fec643a74034ed14ee52f1f127db5f0a9e6d2689.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> If you start GoL from a random configuration, it usually runs chaotically for a while and then settles into stable patterns that include blinkers, blocks, and beehives, ships, boats, and loaves.</p>
+<p>For a list of common “natually” occurring patterns, see Achim Flammenkamp, “<a class="reference external" href="http://wwwhomes.uni-bielefeld.de/achim/freq_top_life.html">Most seen natural occurring ash objects in Game of Life</a>”,</p>
+<p>Start GoL in a random state and run it until it stabilizes (try 1000 steps).
+What stable patterns can you identify?</p>
+<p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code>.</p>
+</section>
+<section id="methuselas">
+<h2><span class="section-number">6.2. </span>Methuselas<a class="headerlink" href="#methuselas" title="Link to this heading">#</a></h2>
+<p>Most initial conditions run for a short time and reach a steady state.  But some initial conditional run for a surprisingly long time; they are called <a class="reference external" href="https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)">Methuselahs</a>.</p>
+<p>The r-pentomino starts with only five live cells, but it runs for 1103 steps before stabilizing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># r pentomino</span>
+<span class="n">rpent</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;011&#39;</span><span class="p">,</span> <span class="s1">&#39;110&#39;</span><span class="p">,</span> <span class="s1">&#39;010&#39;</span><span class="p">]</span>
+<span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">rpent</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the start and finish configurations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># r pentomino</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="o">*</span><span class="n">rpent</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1103</span><span class="p">):</span>
+    <span class="n">life</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap06-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap06-4
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s the animation that shows the steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="o">*</span><span class="n">rpent</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74be04abbcb1a873e2aa928e1176d6bea4c79ae397fdd0eacbb4df5648b94a11.png" src="_images/74be04abbcb1a873e2aa928e1176d6bea4c79ae397fdd0eacbb4df5648b94a11.png" />
+</div>
+</div>
+</section>
+<section id="conways-conjecture">
+<h2><span class="section-number">6.3. </span>Conway’s conjecture<a class="headerlink" href="#conways-conjecture" title="Link to this heading">#</a></h2>
+<p>Most initial conditions run for a short time and reach a steady state.  Some, like the r-pentomino, run for a long time before they reach steady state.  Another example is <a class="reference external" href="https://web.archive.org/web/20081221152607/http://www.argentum.freeserve.co.uk/lex_r.htm#rabbits">rabbits</a>, which starts with only nine cells and runs 17331 steps before reaching steady state.</p>
+<p>Patterns that take a long time to reach steady state are called <a class="reference external" href="https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)">Methuselahs</a></p>
+<p>Patterns like these prompted Conway’s conjecture, which asks whether there are any initial conditions where the number of live cells is unbounded.</p>
+<p>Gosper’s glider gun was the first entity to be discovered that produces an unbounded number of live cells, which refutes Conway’s conjecture.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glider_gun</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;000000000000000000000000100000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000000000000000010100000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000000110000001100000000000011&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000001000100001100000000000011&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;110000000010000010001100000000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;110000000010001011000010100000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000010000010000000100000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000001000100000000000000000000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;000000000000110000000000000000000000&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the initial configuration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">glider_gun</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap06-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap06-5
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what it looks like running:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life</span> <span class="o">=</span> <span class="n">make_life</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="n">glider_gun</span><span class="p">)</span>
+<span class="n">life</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/193fcd31acc1659fb6c599bac90465cff4f24c87a5c65c7ec3aa934ea8598d18.png" src="_images/193fcd31acc1659fb6c599bac90465cff4f24c87a5c65c7ec3aa934ea8598d18.png" />
+</div>
+</div>
+<p>Another way to refute Conway’s conjecture is a <a class="reference external" href="https://en.wikipedia.org/wiki/Puffer_train">puffer train</a>.</p>
+</section>
+<section id="implementing-game-of-life">
+<h2><span class="section-number">6.4. </span>Implementing Game of Life<a class="headerlink" href="#implementing-game-of-life" title="Link to this heading">#</a></h2>
+<p>As an example, I’ll start with an array of random cells:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 0 0 1 1 0 0 1 1]
+ [1 1 1 1 1 1 0 1 1 0]
+ [0 0 1 0 0 0 0 1 1 1]
+ [0 1 1 0 1 1 0 1 1 1]
+ [0 0 1 1 0 1 0 0 1 0]
+ [1 0 0 1 0 1 1 1 1 1]
+ [1 1 1 0 1 1 0 0 1 1]
+ [0 1 1 1 1 0 0 0 0 1]
+ [1 0 0 0 1 1 0 1 0 1]
+ [0 1 1 1 1 0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following is a straightforward translation of the GoL rules using <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and array slicing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span>
+        <span class="k">if</span> <span class="n">state</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">2</span> <span class="ow">or</span> <span class="n">k</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 1 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 1 0 0 0]
+ [0 0 0 0 0 1 0 0 1 0]
+ [0 0 0 0 0 0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a smaller, faster version using cross correlation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">correlate2d</span>
+
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">a</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 1 0 0 0 1 1 1 1 1]
+ [1 0 0 0 0 1 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 1 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 1 0 0 1]
+ [1 0 0 0 0 1 0 0 1 0]
+ [0 1 1 1 1 1 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using a kernel that gives a weight of 10 to the center cell, we can simplify the logic a little.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="mi">12</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 1 0 0 0 1 1 1 1 1]
+ [1 0 0 0 0 1 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 1 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 1 0 0 1]
+ [1 0 0 0 0 1 0 0 1 0]
+ [0 1 1 1 1 1 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>More importantly, the second version of the kernel makes it possible to use a look up table to get the next state, which is faster and even more concise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 1 0 0 0 1 1 1 1 1]
+ [1 0 0 0 0 1 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 1 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 1 0 0 1]
+ [1 0 0 0 0 1 0 0 1 0]
+ [0 1 1 1 1 1 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Many Game of Life patterns are available in portable file formats.  For one source, see <a class="reference external" href="http://www.conwaylife.com/wiki/Main_Page">http://www.conwaylife.com/wiki/Main_Page</a>.</p>
+<p>Write a function to parse one of these formats and initialize the array.</p>
+</section>
+<section id="highlife">
+<h2><span class="section-number">6.5. </span>Highlife<a class="headerlink" href="#highlife" title="Link to this heading">#</a></h2>
+<p>One variation of GoL, called “Highlife”, has the
+same rules as GoL, plus one additional rule: a dead cell with 6
+neighbors comes to life.</p>
+<p>You can try out different rules by inheriting from <code class="docutils literal notranslate"><span class="pre">Life</span></code> and changing the lookup table.</p>
+<p><strong>Exercise:</strong> Modify the table below to add the new rule.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Starter code</span>
+
+<span class="k">class</span> <span class="nc">MyLife</span><span class="p">(</span><span class="n">Life</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of Life.&quot;&quot;&quot;</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">table</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One of the more interesting patterns in Highlife is the replicator, which has the following initial configuration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">replicator</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;00111&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;01001&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;10001&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;10010&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;11100&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make a <code class="docutils literal notranslate"><span class="pre">MyLife</span></code> object with <code class="docutils literal notranslate"><span class="pre">n=100</span></code> and use <code class="docutils literal notranslate"><span class="pre">add_cells</span></code> to put a replicator near the middle.</p>
+<p>Make an animation with about 200 frames and see how it behaves.</p>
+<p><strong>Exercise:</strong></p>
+<p>If you generalize the Turing machine to two dimensions, or
+add a read-write head to a 2-D CA, the result is a
+cellular automaton called a Turmite.  It is named after a
+termite because of the way the read-write head moves, but
+spelled wrong as an homage to Alan Turing.</p>
+<p>The most famous Turmite is Langton’s Ant, discovered by Chris Langton
+in 1986.  See <a class="reference external" href="http://en.wikipedia.org/wiki/Langton_ant">http://en.wikipedia.org/wiki/Langton_ant</a>.</p>
+<p>The ant is a read-write head with
+four states, which you can think of as facing north, south,
+east or west.  The cells have two states, black and white.</p>
+<p>The rules are simple.  During each time step, the ant checks the color
+of the cell it is on.  If black, the ant turns to the right,
+changes the cell to white, and moves forward one space.  If the cell
+is white, the ant turns left, changes the cell to black, and moves
+forward.</p>
+<p>Given a simple world, a simple set of rules, and only one moving part,
+you might expect to see simple behavior—but you should know
+better by now.  Starting with all white cells, Langton’s ant
+moves in a seemingly random pattern for more than 10 000 steps
+before it enters a cycle with a period of 104 steps.  After
+each cycle, the ant is translated diagonally, so it leaves
+a trail called the “highway”.</p>
+<p>Write an implementation of Langton’s Ant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">turmite</span> <span class="o">=</span> <span class="n">Turmite</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">turmite</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turmite</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">turmite</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And a larger version with 1000 steps</span>
+
+<span class="n">turmite</span> <span class="o">=</span> <span class="n">Turmite</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">turmite</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2ded808508289b7fb6a56c83e2a3442944c43231fc1123ef8cdcd4bdfebc09df.png" src="_images/2ded808508289b7fb6a56c83e2a3442944c43231fc1123ef8cdcd4bdfebc09df.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap05.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Cellular automata</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap07.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Physical modeling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-of-life-entities">6.1. Game of Life entities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methuselas">6.2. Methuselas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conways-conjecture">6.3. Conway’s conjecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-game-of-life">6.4. Implementing Game of Life</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#highlife">6.5. Highlife</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

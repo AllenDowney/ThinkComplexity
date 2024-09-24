@@ -1,0 +1,1505 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>11. Evolution &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap11';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. Evolution of cooperation" href="chap12.html" />
+    <link rel="prev" title="10. Flocks, Herds, and Traffic Jams" href="chap10.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap11.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Evolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">11.1. The Fitness landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">11.2. The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">11.3. The Simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">11.4. The distribution of fitness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">11.5. Instruments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">11.6. Differential survival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">11.7. Number of different agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">11.8. Mutation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">11.8.1. Changing landscape</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="evolution">
+<h1><span class="section-number">11. </span>Evolution<a class="headerlink" href="#evolution" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="c1"># make a directory for figures</span>
+<span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>figs
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-fitness-landscape">
+<h2><span class="section-number">11.1. </span>The Fitness landscape<a class="headerlink" href="#the-fitness-landscape" title="Link to this heading">#</a></h2>
+<p>A genotype is represented by a length-N array of 0s and 1.</p>
+<p>The fitness landscape maps from each location in N-D space to a random fitness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FitnessLandscape</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a fitness landscape.</span>
+<span class="sd">        </span>
+<span class="sd">        N: number of dimensions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_values</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">one_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zero_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">random_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose a random location.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluates the fitness of a location.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: array of N 0s and 1s</span>
+<span class="sd">        </span>
+<span class="sd">        returns: float fitness</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero_values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">loc2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_xor</span><span class="p">(</span><span class="n">loc1</span><span class="p">,</span> <span class="n">loc2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As an example, here’s a 3-D landscape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">fit_land</span><span class="o">.</span><span class="n">N</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">one_values</span></code> and <code class="docutils literal notranslate"><span class="pre">zero_values</span></code> contain the fitness contributions of having a 1 or 0 at each element of the location array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_land</span><span class="o">.</span><span class="n">one_values</span><span class="p">,</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">zero_values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.99933292, 0.69951037, 0.52363473]),
+ array([0.23217016, 0.16395673, 0.79125989]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fitness of a location is the mean of its fitness contributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">loc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1], dtype=int8)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">one_values</span><span class="p">,</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">zero_values</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.23217016, 0.16395673, 0.52363473]), 0.3065872063863382)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fitness</span></code> evaluates the fitness of a location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 1], dtype=int8), 0.3065872063863382)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">distance</span></code> computes the number of bit flips to get from one location to another.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc1</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">loc2</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">loc1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">loc2</span><span class="p">)</span>
+<span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">loc1</span><span class="p">,</span> <span class="n">loc2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 1]
+[0 0 1]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>It uses <code class="docutils literal notranslate"><span class="pre">np.logical_xor</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">logical_xor</span><span class="p">(</span><span class="n">loc1</span><span class="p">,</span> <span class="n">loc2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([False,  True, False])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-agents">
+<h2><span class="section-number">11.2. </span>The agents<a class="headerlink" href="#the-agents" title="Link to this heading">#</a></h2>
+<p>Here’s the class that represents agents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an agent in an NK model.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an agent at the given location.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: array of N 0s and 1s</span>
+<span class="sd">        fit_land: reference to an fit_land</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span> <span class="o">=</span> <span class="n">fit_land</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Agent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each agent has a location, a reference to a FitnessLandscape, and a fitness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 0, 1], dtype=int8), 0.5623081266423854)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-simulator">
+<h2><span class="section-number">11.3. </span>The Simulator<a class="headerlink" href="#the-simulator" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Simulator</span></code> class provides methods to run the simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Simulation</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the simulation:</span>
+<span class="sd">        </span>
+<span class="sd">        fit_land: fit_land</span>
+<span class="sd">        num_agents: int number of agents</span>
+<span class="sd">        agent_maker: function that makes agents</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span> <span class="o">=</span> <span class="n">fit_land</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instruments</span> <span class="o">=</span> <span class="p">[]</span>
+        
+    <span class="k">def</span> <span class="nf">add_instrument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds an instrument to the list.</span>
+<span class="sd">        </span>
+<span class="sd">        instrument: Instrument object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instrument</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot the results from the indicated instrument.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the given number of steps.</span>
+<span class="sd">        </span>
+<span class="sd">        num_steps: integer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># initialize any instruments before starting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_instruments</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate a time step and update the instruments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">fits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">()</span>
+        
+        <span class="c1"># see who dies</span>
+        <span class="n">index_dead</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">choose_dead</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
+        <span class="n">num_dead</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index_dead</span><span class="p">)</span>
+        
+        <span class="c1"># replace the dead with copies of the living</span>
+        <span class="n">replacements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">choose_replacements</span><span class="p">(</span><span class="n">num_dead</span><span class="p">,</span> <span class="n">fits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">index_dead</span><span class="p">]</span> <span class="o">=</span> <span class="n">replacements</span>
+
+        <span class="c1"># update any instruments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_instruments</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">update_instruments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instruments</span><span class="p">:</span>
+            <span class="n">instrument</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">get_locs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of agent locations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_fitnesses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an array of agent fitnesses.&quot;&quot;&quot;</span>
+        <span class="n">fits</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">choose_dead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose which agents die in the next timestep.</span>
+<span class="sd">        </span>
+<span class="sd">        ps: probability of survival for each agent</span>
+<span class="sd">        </span>
+<span class="sd">        returns: indices of the chosen ones</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">is_dead</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
+        <span class="n">index_dead</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">is_dead</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">index_dead</span>
+        
+    <span class="k">def</span> <span class="nf">choose_replacements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose which agents reproduce in the next timestep.</span>
+<span class="sd">        </span>
+<span class="sd">        n: number of choices</span>
+<span class="sd">        weights: array of weights</span>
+<span class="sd">        </span>
+<span class="sd">        returns: sequence of Agent objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">replacements</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">replacements</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use a few functions to create agents.  The first one starts with identical agents:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_identical_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an array of Agents.</span>
+<span class="sd">    </span>
+<span class="sd">    fit_land: FitnessLandscape</span>
+<span class="sd">    num_agents: integer</span>
+<span class="sd">    agent_maker: class used to make Agent</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of Agents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loc</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent_maker</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s another that starts with agents at random locations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_random_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an array of Agents.</span>
+<span class="sd">    </span>
+<span class="sd">    fit_land: FitnessLandscape</span>
+<span class="sd">    num_agents: integer</span>
+<span class="sd">    agent_maker: class used to make Agent</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of Agents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">locs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">)]</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent_maker</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this one puts one agent at every possible location:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">def</span> <span class="nf">make_all_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an array of Agents.</span>
+<span class="sd">    </span>
+<span class="sd">    fit_land: FitnessLandscape</span>
+<span class="sd">    agent_maker: class used to make Agent</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of Agents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">N</span>
+    <span class="n">locations</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent_maker</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_all_agents</span></code> uses <code class="docutils literal notranslate"><span class="pre">itertools.product</span></code>, which returns a generator that enumerates the Cartesian product of the set <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1}</span></code> with itself <code class="docutils literal notranslate"><span class="pre">N</span></code> times, which is a fancy way to say that it enumerates all sequences of <code class="docutils literal notranslate"><span class="pre">N</span></code> bits.  Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="n">make_all_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">Agent</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0, 0) 0.8119097925622043
+(0, 0, 1) 0.6525557691306517
+(0, 1, 0) 0.568525183682043
+(0, 1, 1) 0.40917116025049044
+(1, 0, 0) 0.6718529116129389
+(1, 0, 1) 0.5124988881813864
+(1, 1, 0) 0.4284683027327776
+(1, 1, 1) 0.269114279301225
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-distribution-of-fitness">
+<h2><span class="section-number">11.4. </span>The distribution of fitness<a class="headerlink" href="#the-distribution-of-fitness" title="Link to this heading">#</a></h2>
+<p>Let’s create a fitness landscape with an agent at each location and see what the distribution of fitness looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="n">make_all_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">Agent</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">plot_fitnesses</span></code> plots the CDF of fitness across the population.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="k">def</span> <span class="nf">plot_fitnesses</span><span class="p">(</span><span class="n">sim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the CDF of fitnesses.</span>
+<span class="sd">    </span>
+<span class="sd">    sim: Simulation object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fits</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">()</span>
+    <span class="n">cdf_fitness</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
+    <span class="n">cdf_fitness</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Initially the distribution is approximately Gaussian, because it’s the sum of 8 independent uniformly distributed variates.  See the Central Limit Theorem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fitnesses</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9eca1a3d453b953673bd014b034e71520d30445f8587c34febf067e1183660b1.png" src="_images/9eca1a3d453b953673bd014b034e71520d30445f8587c34febf067e1183660b1.png" />
+</div>
+</div>
+<p>After one time step, there’s not much change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">plot_fitnesses</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cea555e102c038f9b3d6b1f234f230683bcb58a0c70959b1c704a9fd3bf79b2b.png" src="_images/cea555e102c038f9b3d6b1f234f230683bcb58a0c70959b1c704a9fd3bf79b2b.png" />
+</div>
+</div>
+<p>After 100 time steps, we can see that the number of unique values has decreased.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plot_fitnesses</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f103c22bdffaa0820957620264e5059977ec16be5b46807a04b0a8ab909ea0d4.png" src="_images/f103c22bdffaa0820957620264e5059977ec16be5b46807a04b0a8ab909ea0d4.png" />
+</div>
+</div>
+</section>
+<section id="instruments">
+<h2><span class="section-number">11.5. </span>Instruments<a class="headerlink" href="#instruments" title="Link to this heading">#</a></h2>
+<p>To measure these changes over the course of the simulations, we’ll use Instrument objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Instrument</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes a metric at each timestep.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+        
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the current metric.</span>
+<span class="sd">        </span>
+<span class="sd">        Appends to self.metrics.</span>
+<span class="sd">        </span>
+<span class="sd">        sim: Simulation object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># child classes should implement this method</span>
+        <span class="k">pass</span>
+        
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MeanFitness</span></code> instrument computes the mean fitness after each time step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MeanFitness</span><span class="p">(</span><span class="n">Instrument</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes mean fitness at each timestep.&quot;&quot;&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean fitness&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s mean fitness as a function of (simulated) time for a single run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="n">make_all_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">Agent</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">)</span>
+<span class="n">instrument</span> <span class="o">=</span> <span class="n">MeanFitness</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">instrument</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean fitness&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/176888bd48cdf4803f168ad051e9a94e2caf142fa6d6b586baa90f2ec8faecde.png" src="_images/176888bd48cdf4803f168ad051e9a94e2caf142fa6d6b586baa90f2ec8faecde.png" />
+</div>
+</div>
+<p>We can get a better sense of average behavior, and variation around the average, but plotting multiple runs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">,</span> <span class="n">sim_maker</span><span class="p">,</span> <span class="n">instrument_maker</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs simulations and plots metrics.</span>
+<span class="sd">    </span>
+<span class="sd">    fit_land: FitnessLandscape</span>
+<span class="sd">    agent_maker: function that makes an array of Agents</span>
+<span class="sd">    sim_maker: function that makes a Simulation</span>
+<span class="sd">    instrument_maker: function that makes an instrument</span>
+<span class="sd">    plot_options: passed along to plot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plot_options</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="n">agent_maker</span><span class="p">(</span><span class="n">fit_land</span><span class="p">)</span>
+        <span class="n">sim</span> <span class="o">=</span> <span class="n">sim_maker</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">)</span>
+        <span class="n">instrument</span> <span class="o">=</span> <span class="n">instrument_maker</span><span class="p">()</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">instrument</span><span class="p">)</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_options</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">instrument</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">agent_maker1</span></code> puts one agent at each location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">agent_maker1</span><span class="p">(</span><span class="n">fit_land</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">make_all_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">Agent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With no differential survival or reproduction, we get a random walk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker1</span><span class="p">,</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">MeanFitness</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-1
+</pre></div>
+</div>
+<img alt="_images/d064a56ade7df2f8a063dda09638658810454a9c002d58985f768769dcedc22a.png" src="_images/d064a56ade7df2f8a063dda09638658810454a9c002d58985f768769dcedc22a.png" />
+</div>
+</div>
+</section>
+<section id="differential-survival">
+<h2><span class="section-number">11.6. </span>Differential survival<a class="headerlink" href="#differential-survival" title="Link to this heading">#</a></h2>
+<p>We can add differential survival by overriding <code class="docutils literal notranslate"><span class="pre">choose_dead</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimWithDiffSurvival</span><span class="p">(</span><span class="n">Simulation</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">choose_dead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose which agents die in the next timestep.</span>
+<span class="sd">        </span>
+<span class="sd">        ps: probability of survival for each agent</span>
+<span class="sd">        </span>
+<span class="sd">        returns: indices of the chosen ones</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">is_dead</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ps</span>
+        <span class="n">index_dead</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">is_dead</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">index_dead</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With differential survival, mean fitness increases and then levels off.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker1</span><span class="p">,</span> <span class="n">SimWithDiffSurvival</span><span class="p">,</span> <span class="n">MeanFitness</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-2
+</pre></div>
+</div>
+<img alt="_images/8391f1a075d5179fd090926ce19e8200769991f9c803a503aeab10587ca73247.png" src="_images/8391f1a075d5179fd090926ce19e8200769991f9c803a503aeab10587ca73247.png" />
+</div>
+</div>
+<p>We can add differential reproduction by overriding <code class="docutils literal notranslate"><span class="pre">choose_replacements</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimWithDiffReproduction</span><span class="p">(</span><span class="n">Simulation</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">choose_replacements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose which agents reproduce in the next timestep.</span>
+<span class="sd">        </span>
+<span class="sd">        n: number of choices</span>
+<span class="sd">        weights: array of weights</span>
+<span class="sd">        </span>
+<span class="sd">        returns: sequence of Agent objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">replacements</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">replacements</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With differential reproduction (but not survival), mean fitness increases and then levels off.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker1</span><span class="p">,</span> <span class="n">SimWithDiffReproduction</span><span class="p">,</span> <span class="n">MeanFitness</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4d30f3e06c3ff5d9d0569965b6436ad99c4c66ab5ddd587b43a4e52e21406831.png" src="_images/4d30f3e06c3ff5d9d0569965b6436ad99c4c66ab5ddd587b43a4e52e21406831.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> What if you have both?  Write a class called <code class="docutils literal notranslate"><span class="pre">SimWithBoth</span></code> that uses the new versions of <code class="docutils literal notranslate"><span class="pre">choose_dead</span></code> and <code class="docutils literal notranslate"><span class="pre">choose_replacements</span></code>.  Does mean fitness increase more quickly?</p>
+</section>
+<section id="number-of-different-agents">
+<h2><span class="section-number">11.7. </span>Number of different agents<a class="headerlink" href="#number-of-different-agents" title="Link to this heading">#</a></h2>
+<p>Without mutation, we have no way to add diversity.  The number of occupied locations goes down over time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OccupiedLocations</span></code> is an instrument that counts the number of occupied locations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OccupiedLocations</span><span class="p">(</span><span class="n">Instrument</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Occupied locations&#39;</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
+        <span class="n">uniq_agents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">get_locs</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uniq_agents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what that looks like with no differential survival or reproduction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker1</span><span class="p">,</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">OccupiedLocations</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/df6b0f1d6d7542fa2340dccdcc277959c17f39c391c5e2426ac086f30d82bf04.png" src="_images/df6b0f1d6d7542fa2340dccdcc277959c17f39c391c5e2426ac086f30d82bf04.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> What effect do differential survival and reproduction have on the number of occupied locations?</p>
+<p>The model we have so far might explain changes in existing populations, but it doesn’t explain increasing diversity or complexity.</p>
+</section>
+<section id="mutation">
+<h2><span class="section-number">11.8. </span>Mutation<a class="headerlink" href="#mutation" title="Link to this heading">#</a></h2>
+<p>Mutation is one way of increasing, or at least maintaining, diversity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Mutant</span></code> is a kind of agent that overrides <code class="docutils literal notranslate"><span class="pre">copy</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mutant</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prob_mutate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">prob_mutate</span><span class="p">:</span>
+            <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Mutant</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the location in the given direction.</span>
+<span class="sd">        </span>
+<span class="sd">        Result differs from the current location along the given axis.</span>
+<span class="sd">        </span>
+<span class="sd">        direction: int index from 0 to N-1</span>
+<span class="sd">        </span>
+<span class="sd">        returns: new array of N 0s and 1s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_loc</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">new_loc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To test it out, I’ll create an agent at a random location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">loc</span> <span class="o">=</span> <span class="n">fit_land</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Mutant</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">fit_land</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">loc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 1, 1, 1, 0, 0], dtype=int8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we make 20 copies, we expect about one mutant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">copy</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">loc</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+1
+0
+0
+0
+0
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">agent_maker2</span></code> makes identical agents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">agent_maker2</span><span class="p">(</span><span class="n">fit_land</span><span class="p">):</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="n">make_identical_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">Mutant</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">agents</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we start with identical mutants, we still see increasing fitness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker2</span><span class="p">,</span> <span class="n">SimWithBoth</span><span class="p">,</span> <span class="n">MeanFitness</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-3
+</pre></div>
+</div>
+<img alt="_images/3d9bb5395e4779e1185822c6997df5991132a2ed5fac1bb96dc76733bae59368.png" src="_images/3d9bb5395e4779e1185822c6997df5991132a2ed5fac1bb96dc76733bae59368.png" />
+</div>
+</div>
+<p>And now the number of occupied locations increases, reaching a steady state at about 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">plot_sims</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agent_maker2</span><span class="p">,</span> 
+                <span class="n">SimWithBoth</span><span class="p">,</span> <span class="n">OccupiedLocations</span><span class="p">,</span> 
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-4
+</pre></div>
+</div>
+<img alt="_images/9badf47655b9e822f8b84a71f9e1cdebd1223d53cfdd8b2fd69e6c69950d565a.png" src="_images/9badf47655b9e822f8b84a71f9e1cdebd1223d53cfdd8b2fd69e6c69950d565a.png" />
+</div>
+</div>
+<p>In steady state, many agents are at the optimal location, and others are usually just a few mutations away.  To quantify that, we can compute the mean distance between all pairs of agents.</p>
+<p>The distance between two agents is the number of bit flips to get from one location to another.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MeanDistance</span><span class="p">(</span><span class="n">Instrument</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes mean distance between pairs at each timestep.&quot;&quot;&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean distance&#39;</span>
+        
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">fit_land</span><span class="o">.</span><span class="n">N</span>
+        <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i1</span><span class="p">],</span> <span class="n">sim</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
+        
+        <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a1</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">a2</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">in</span> <span class="n">agents</span> <span class="k">if</span> <span class="n">a1</span> <span class="o">!=</span> <span class="n">a2</span><span class="p">]</span>
+        
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mean distance is initially 0, when all agents are identical.  It increases as the population migrates toward the optimal location, then settles into a steady state around 1.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="n">make_identical_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">Mutant</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">SimWithBoth</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">MeanDistance</span><span class="p">())</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean distance&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-5
+</pre></div>
+</div>
+<img alt="_images/76242698bfca13a459b48aaf3712f86dc165781a9d79b44788992a99fcbf1596.png" src="_images/76242698bfca13a459b48aaf3712f86dc165781a9d79b44788992a99fcbf1596.png" />
+</div>
+</div>
+<section id="changing-landscape">
+<h3><span class="section-number">11.8.1. </span>Changing landscape<a class="headerlink" href="#changing-landscape" title="Link to this heading">#</a></h3>
+<p>One cause of speciation is a change in the landscape.  Suppose a population in steady state in one landscape is transported to another landscape.  After a period of migration, it would settle around the new equilibrium point, with a small mean distance between agents.  The mean distance between the original agents and the migrants is generally much larger.</p>
+<p>The following simulation runs 500 steps on one landscape, then switches to a different landscape and resumes the simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">fit_land</span> <span class="o">=</span> <span class="n">FitnessLandscape</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="n">make_identical_agents</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">Mutant</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">SimWithBoth</span><span class="p">(</span><span class="n">fit_land</span><span class="p">,</span> <span class="n">agents</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">MeanFitness</span><span class="p">())</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">OccupiedLocations</span><span class="p">())</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_instrument</span><span class="p">(</span><span class="n">MeanDistance</span><span class="p">())</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">locs_before</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_locs</span><span class="p">()</span>
+<span class="n">fit_land</span><span class="o">.</span><span class="n">set_values</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">locs_after</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_locs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the switch to a new landscape, mean fitness drops briefly, then the population migrates to the new optimal location, which happens to be higher, in this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vline_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">**</span><span class="n">vline_options</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean fitness&#39;</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap11-6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-6
+</pre></div>
+</div>
+<img alt="_images/d933c02bf0325a0ea0ce9982a18c0557371ffd73d0aae316eb45ad26b62b6afa.png" src="_images/d933c02bf0325a0ea0ce9982a18c0557371ffd73d0aae316eb45ad26b62b6afa.png" />
+</div>
+</div>
+<p>The number of occupied locations (sometimes) increases while the population is migrating.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">**</span><span class="n">vline_options</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Occupied locations&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dddaeceeb130166b318cb6c275ceee56e67061d16709a3581eaf3766db4c9282.png" src="_images/dddaeceeb130166b318cb6c275ceee56e67061d16709a3581eaf3766db4c9282.png" />
+</div>
+</div>
+<p>And the mean distance (sometimes) increases until the population reaches the new steady state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">**</span><span class="n">vline_options</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean distance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8f7b46f2cc1b8a647f4df4bef7e4662410ba4100769d7e0648f002d778db85d0.png" src="_images/8f7b46f2cc1b8a647f4df4bef7e4662410ba4100769d7e0648f002d778db85d0.png" />
+</div>
+</div>
+<p>The mean distance between clusters is much bigger than the dispersion within clusters, so we can interpret the clusters as distinct species.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">loc1</span> <span class="ow">in</span> <span class="n">locs_before</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">loc2</span> <span class="ow">in</span> <span class="n">locs_after</span><span class="p">:</span>
+        <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">loc1</span><span class="p">,</span> <span class="n">loc2</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.3948
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> When we change the landscape, the number of occupied locations and the mean distance usually increase, but the effect is not always big enough to be obvious.  You might want to try out some different random seeds to see how general the effect is.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap10.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Flocks, Herds, and Traffic Jams</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap12.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Evolution of cooperation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">11.1. The Fitness landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">11.2. The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">11.3. The Simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">11.4. The distribution of fitness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">11.5. Instruments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">11.6. Differential survival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">11.7. Number of different agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">11.8. Mutation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">11.8.1. Changing landscape</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
