@@ -7,6 +7,8 @@ Copyright 2016 Allen Downey
 MIT License: http://opensource.org/licenses/MIT
 """
 
+from time import sleep
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -14,9 +16,7 @@ import matplotlib.pyplot as plt
 # https://stackoverflow.com/questions/24816237/ipython-notebook-clear-cell-output-in-code
 # https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.clear_output
 
-from time import sleep
 from IPython.display import clear_output
-
 from utils import underride
 
 
@@ -63,7 +63,7 @@ class Cell2D:
 
         plt.figure()
         try:
-            for i in range(frames - 1):
+            for _ in range(frames - 1):
                 self.draw()
                 plt.show()
                 if interval:

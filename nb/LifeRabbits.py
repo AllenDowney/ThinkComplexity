@@ -7,12 +7,10 @@ Copyright 2016 Allen Downey
 MIT License: http://opensource.org/licenses/MIT
 """
 
-from __future__ import print_function, division
-
 import sys
 import matplotlib.pyplot as plt
 
-from Life import Life, LifeViewer
+from Life import Life
 
 
 def main(script, *args):
@@ -27,8 +25,7 @@ def main(script, *args):
     m = 600
     life = Life(n, m)
     life.add_cells(n // 2, m // 2, *rabbits)
-    viewer = LifeViewer(life)
-    anim = viewer.animate(frames=100, interval=1)
+    life.animate(frames=100, interval=1)
     plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
     plt.show()
 

@@ -1,11 +1,6 @@
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-import matplotlib as mpl
-
-mpl.rcParams["lines.linewidth"] = 2.0
 
 
 def three_frame(world, n_seq, seed=17):
