@@ -91,7 +91,7 @@ def plot_timing_test(ns, ts, label="", color="blue", exp=1.0, scale="log"):
     exp: exponent (slope) for the fitted curve
     """
     tfit = fit(ns, ts, exp)
-    fit_label = "exp = %d" % exp
+    fit_label = f"{exp}"
     plt.plot(ns, tfit, label=fit_label, color="0.7", linestyle="dashed")
     plt.plot(ns, ts, "o-", label=label, color=color, alpha=0.7)
     plt.xlabel("Problem size (n)")
