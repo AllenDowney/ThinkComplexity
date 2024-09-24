@@ -25,4 +25,4 @@ format:
 	black --config pyproject.toml code
 
 tests:
-	cd soln; pytest --nbmake chap*.ipynb
+	cd soln; pytest --nbmake app*.ipynb chap*.ipynb
