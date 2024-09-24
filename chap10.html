@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. Flocks, Herds, and Traffic Jams &#8212; Think Complexity</title>
+    <title>10. Flocks, Herds, and Traffic Jams &#8212; Think Complexity</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap10';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="10. Evolution" href="chap11.html" />
-    <link rel="prev" title="8. Agent Based Models" href="chap09.html" />
+    <link rel="next" title="11. Evolution" href="chap11.html" />
+    <link rel="prev" title="9. Agent Based Models" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,19 +173,24 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">1. Erdos-Renyi Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">2. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">3. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">4. Cellular automata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">5. Game of Life</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">6. Physical modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">7. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">8. Agent Based Models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Flocks, Herds, and Traffic Jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">10. Evolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">11. Evolution of cooperation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -355,7 +360,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">9.1. Traffic jam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">10.1. Traffic jam</a></li>
 </ul>
             </nav>
         </div>
@@ -368,7 +373,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="flocks-herds-and-traffic-jams">
-<h1><span class="section-number">9. </span>Flocks, Herds, and Traffic Jams<a class="headerlink" href="#flocks-herds-and-traffic-jams" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Flocks, Herds, and Traffic Jams<a class="headerlink" href="#flocks-herds-and-traffic-jams" title="Link to this heading">#</a></h1>
 <p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
 <p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
 <div class="cell docutils container">
@@ -412,7 +417,7 @@ document.write(`
 </div>
 </div>
 <section id="traffic-jam">
-<h2><span class="section-number">9.1. </span>Traffic jam<a class="headerlink" href="#traffic-jam" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Traffic jam<a class="headerlink" href="#traffic-jam" title="Link to this heading">#</a></h2>
 <p>Here’s the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> class from Chapter 10.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -735,7 +740,7 @@ BetterDriver 1238.725
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Agent Based Models</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Agent Based Models</p>
       </div>
     </a>
     <a class="right-next"
@@ -743,7 +748,7 @@ BetterDriver 1238.725
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Evolution</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Evolution</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -763,7 +768,7 @@ BetterDriver 1238.725
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">9.1. Traffic jam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">10.1. Traffic jam</a></li>
 </ul>
   </nav></div>
 

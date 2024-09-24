@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap00';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Exploratory data analysis" href="chap01.html" />
-    <link rel="prev" title="Notebooks" href="index.html" />
+    <link rel="next" title="1. Complexity Science" href="chap01.html" />
+    <link rel="prev" title="Think Complexity" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,7 +169,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    Notebooks
+                    Think Complexity
                 </a>
             </li>
         </ul>
@@ -179,7 +179,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
@@ -196,6 +196,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 </ul>
 
     </div>
@@ -359,8 +360,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new">What’s New?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list-contributor-list-unnumbered">Contributor List {#contributor-list .unnumbered}</a></li>
 </ul>
             </nav>
         </div>
@@ -374,82 +377,222 @@ document.write(`
                   
   <section id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Link to this heading">#</a></h1>
-<p>From the earliest history of statistics, there have been two ideas about what statistics is. In one view, it is a branch of mathematics with the goal of establishing a theoretical foundation for probability and statistical inference.
-In another view, it is a set of tools and practices for working with data, answering questions, and making better decisions.
-Many introductory classes in statistics are based on the first view.
-This book is based on the second.</p>
-<p><em>Think Stats</em> is an introduction to practical methods for exploring and visualizing data, discovering relationships and trends, and communicating results.
-The organization of the book follows the process I use when I start working with a dataset:</p>
+<p>Complexity science is an interdisciplinary field — at the intersection
+of mathematics, computer science and natural science — that focuses on
+<strong>complex systems</strong>, which are systems with many interacting components.</p>
+<p>One of the core tools of complexity science is discrete models,
+including networks and graphs, cellular automatons, and agent-based
+simulations. These tools are useful in the natural and social sciences,
+and sometimes in arts and humanities.</p>
+<p>For an overview of complexity science, see
+<a class="reference external" href="https://thinkcomplex.com/complex">https://thinkcomplex.com/complex</a>.</p>
+<p>Why should you learn about complexity science? Here are a few reasons:</p>
 <ul class="simple">
-<li><p>Importing and cleaning: Whatever format the data is in, it usually takes some time and effort to read the data, clean and transform it, and check that everything made it through the translation process intact.</p></li>
-<li><p>Single variable explorations: I usually start by examining one variable at a time, finding out what the variables mean, looking at distributions of the values, and choosing appropriate summary statistics.</p></li>
-<li><p>Pair-wise explorations: To identify possible relationships between variables, I look at tables and scatter plots, and compute correlations and linear fits.</p></li>
-<li><p>Multivariate analysis: If there are apparent relationships between variables, I use multiple regression to add control variables and investigate more complex relationships.</p></li>
-<li><p>Estimation and hypothesis testing: When reporting statistical results, it is important to answer three questions: How big is the effect? How much variability should we expect if we run the same measurement again? Is it possible that the apparent effect is due to chance?</p></li>
-<li><p>Visualization: During exploration, visualization is an important tool for finding possible relationships and effects. Then if an apparent effect holds up to scrutiny, visualization is an effective way to communicate results.</p></li>
+<li><p>Complexity science is useful, especially for explaining why natural
+and social systems behave the way they do. Since Newton, math-based
+physics has focused on systems with small numbers of components and
+simple interactions. These models are effective for some
+applications, like celestial mechanics, and less useful for others,
+like economics. Complexity science provides a diverse and adaptable
+modeling toolkit.</p></li>
+<li><p>Many of the central results of complexity science are surprising; a
+recurring theme of this book is that simple models can produce
+complicated behavior, with the corollary that we can sometimes
+explain complicated behavior in the real world using simple models.</p></li>
+<li><p>As I explain in
+Chapter <a class="reference internal" href="#overview"><span class="xref myst">[overview]</span></a>{reference-type=“ref”
+reference=“overview”}, complexity science is at the center of a slow
+shift in the practice of science and a change in what we consider
+science to be.</p></li>
+<li><p>Studying complexity science provides an opportunity to learn about
+diverse physical and social systems, to develop and apply
+programming skills, and to think about fundamental questions in the
+philosophy of science.</p></li>
 </ul>
-<p>This book takes a computational approach, which has several advantages over mathematical approaches:</p>
-<ul class="simple">
-<li><p>I present most ideas using Python code, rather than mathematical notation. In general, Python code is more readable – also, because it is executable, run it and modify it to develop deeper understanding.</p></li>
-<li><p>Each chapter includes exercises readers can do to develop and solidify their learning. When you write programs, you express your understanding in code – while you are debugging the program, you are also checking your understanding.</p></li>
-<li><p>Some exercises involve experiments to test statistical behavior. For example, you can explore the Central Limit Theorem (CLT) by generating random samples and computing their sums. The resulting visualizations demonstrate why the CLT works and when it doesn’t.</p></li>
-<li><p>Some ideas that are hard to grasp mathematically are easy to understand by simulation. For example, we approximate p-values by running random simulations, which reinforces the meaning of hypothesis testing.</p></li>
-<li><p>Because the book is based on a general-purpose programming language (Python), readers can import data from almost any source. They are not limited to datasets that have been cleaned and formatted for a particular statistics tool.</p></li>
-</ul>
-<p>The book lends itself to a project-based approach.
-In my class, students work on a semester-long project that requires them to pose a statistical question, find a dataset that can address it, and apply each of the techniques they learn to their own data.
-To demonstrate my approach to statistical analysis, the book presents a case study that runs through all of the chapters.
-It uses data from two sources:</p>
-<ul class="simple">
-<li><p>The National Survey of Family Growth (NSFG), conducted by the U.S. Centers for Disease Control and Prevention (CDC) to gather “information on family life, marriage and divorce, pregnancy, infertility, use of contraception, and men’s and women’s health.” (See <a class="reference external" href="https://www.cdc.gov/nchs/nsfg/index.htm">https://www.cdc.gov/nchs/nsfg/index.htm</a>.)</p></li>
-<li><p>The Behavioral Risk Factor Surveillance System (BRFSS), conducted by the National Center for Chronic Disease Prevention and Health Promotion to “track health conditions and risk behaviors in the United States.” (See <a class="reference external" href="http://cdc.gov/BRFSS/">http://cdc.gov/BRFSS/</a>.)</p></li>
-</ul>
-<p>Other examples use data from the IRS, the U.S. Census, and the Boston Marathon.</p>
-<p>TODO: Inventory of data sources in the new edition.</p>
-<section id="whats-new">
-<h2>What’s New?<a class="headerlink" href="#whats-new" title="Link to this heading">#</a></h2>
-<p>For this third edition, I started by moving the book into Jupyter notebooks.
-This change has one immediate benefit – you can read the text, run the code, and work on the exercises all in one place.
-And the notebooks are designed to work on Google Colab, so you can get started without installing anything.</p>
-<p>The move to notebooks has another benefit – the code is more visible.
-In the first two editions, some of the code was in the book and some was in supporting files.
-In retrospect, it’s clear that splitting the material in this way was not ideal, and it made the code more complicated than it needed to be.
-In the third edition, I was able to simplify the code and make it more readable.</p>
-<p>Since the last edition was published, I’ve developed a library called <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> that provides objects that represent statistical distributions.
-This library is more mature now, so the updated code makes better use of it.</p>
-<p>The third edition covers the same topics, in almost the same order, but the text is substantially revised.
-Some of the examples are new; others are updated with new data.
-I’ve developed new exercises, revised some of the old ones, and removed a few.
-I think the updated exercises are better connected to the examples, and more interesting.</p>
-<p>Overall, I think these changes make <em>Think Stats</em> a better book.
-I hope you like it!</p>
+<p>By reading this book and working on the exercises you will have a chance
+to explore topics and ideas you might not encounter otherwise, practice
+programming in Python, and learn more about data structures and
+algorithms.</p>
+<p>Features of this book include:</p>
+<p>Technical details</p>
+<p>Most books about complexity science are written for a popular
+audience. They leave out technical details, which is frustrating for
+people who can handle them. This book presents the code, the math,
+and the explanations you need to understand how the models work.</p>
+<p>Further reading</p>
+<p>Throughout the book, I include pointers to further reading,
+including original papers (most of which are available
+electronically) and related articles from Wikipedia and other
+sources.</p>
+<p>Jupyter notebooks</p>
+<p>For each chapter I provide a Jupyter notebook that includes the code
+from the chapter, additional examples, and animations that let you
+see the models in action.</p>
+<p>Exercises and solutions</p>
+<p>At the end of each chapter I suggest exercises you might want to
+work on, with solutions.</p>
+<p>For most of the links in this book I use URL redirection. This mechanism
+has the drawback of hiding the link destination, but it makes the URLs
+shorter and less obtrusive. Also, and more importantly, it allows me to
+update the links without updating the book. If you find a broken link,
+please let me know and I will change the redirection.</p>
+<section id="who-is-this-book-for">
+<h2>Who is this book for?<a class="headerlink" href="#who-is-this-book-for" title="Link to this heading">#</a></h2>
+<p>The examples and supporting code for this book are in Python. You should
+know core Python and be familiar with its object-oriented features,
+specifically using and defining classes.</p>
+<p>If you are not already familiar with Python, you might want to start
+with <em>Think Python</em>, which is appropriate for people who have never
+programmed before. If you have programming experience in another
+language, there are many good Python books to choose from, as well as
+online resources.</p>
+<p>I use NumPy, SciPy, and NetworkX throughout the book. If you are
+familiar with these libraries already, that’s great, but I will also
+explain them when they appear.</p>
+<p>I assume that the reader knows some mathematics: I use logarithms in
+several places, and vectors in one example. But that’s about it.</p>
+</section>
+<section id="changes-from-the-first-edition">
+<h2>Changes from the first edition<a class="headerlink" href="#changes-from-the-first-edition" title="Link to this heading">#</a></h2>
+<p>For the second edition, I added two chapters, one on evolution, the
+other on the evolution of cooperation.</p>
+<p>In the first edition, each chapter presented background on a topic and
+suggested experiments the reader could run. For the second edition, I
+have done those experiments. Each chapter presents the implementation
+and results as a worked example, then suggests additional experiments
+for the reader.</p>
+<p>For the second edition, I replaced some of my own code with standard
+libraries like NumPy and NetworkX. The result is more concise and more
+efficient, and it gives readers a chance to learn these libraries.</p>
+<p>Also, the Jupyter notebooks are new. For every chapter there are two
+notebooks: one contains the code from the chapter, explanatory text, and
+exercises; the other contains solutions to the exercises.</p>
+<p>Finally, all supporting software has been updated to Python 3 (but most
+of it runs unmodified in Python 2).</p>
 </section>
 <section id="using-the-code">
 <h2>Using the code<a class="headerlink" href="#using-the-code" title="Link to this heading">#</a></h2>
-<p>The code and data used in this book are available from <a class="github reference external" href="https://github.com/AllenDowney/ThinkStats">AllenDowney/ThinkStats</a>, which is a Git repository on GitHub.
-Git is a version control system that helps to keep track of the files that make up a project.
-A collection of files under Git’s control is called a <strong>repository</strong>.
-GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.</p>
-<p>For each chapter in this book, the repository provides a Jupyter notebook, which is a document that contains the text, code, and the results of running the code.
-You can use these notebooks to run the code and work on the exercises.</p>
-<p>There are two ways you can run the notebooks.
-By far the easier one is to use Colab, which is a service provided by Google where you can run the notebooks in a web browser without installing anything on your computer.
-If you start from the <em>Think Stats</em> home page at <a class="reference external" href="https://allendowney.github.io/ThinkStats/">https://allendowney.github.io/ThinkStats/</a>, you will find links to the notebooks, including one that introduces Colab and Jupyter notebooks.</p>
-<p>TODO: Add the Jupyter intro notebook to the repo.</p>
-<p>If you don’t want to use Colab, you can download the notebooks and run them on your computer, but in that case you will have to install Python, Jupyter, and the libraries the book uses, including NumPy, SciPy, and StatsModels.
-If you have experience installing software, setting up an environment where you can run the notebooks is not difficult.
-But if you don’t have that experience, your first attempt can be challenging, and sometimes frustrating.
-In that case, it can be a barrier to getting the most out of this book.
-If you want to learn about exploratory data analysis in Python, you don’t want to spend your time and cognitive capacity on installing software!</p>
-<p>I strongly recommend that you run at least the first few chapters on Colab.
-Then, if you want to set up your own environment, you can do it without interrupting your progress in the book.
-And one last suggestion: if have any problems installing software, take advantage of tools like ChatGPT – they generally provide good guidance on these topics.</p>
-<p>I wrote this book assuming that the reader is familiar with core Python, including object-oriented features.
-If you are familiar with NumPy and Pandas, that will help, but it’s not necessary – I’ll explain what you need to know.
-I assume that the reader knows basic mathematics, including logarithms, for example, and summations.
-You don’t need to know linear algebra or calculus.
-There is one place where I mention derivatives and integrals, but if you are not familiar with those concepts, they are entirely optional.
-Finally, I don’t assume you know anything about statistics.</p>
+<p>All code used in this book is available from a Git repository on GitHub:
+<a class="reference external" href="https://thinkcomplex.com/repo">https://thinkcomplex.com/repo</a>. If you are not familiar with Git, it is
+a version control system that allows you to keep track of the files that
+make up a project. A collection of files under Git’s control is called a
+“repository”. GitHub is a hosting service that provides storage for Git
+repositories and a convenient web interface.</p>
+<p>The GitHub homepage for my repository provides several ways to work with
+the code:</p>
+<ul class="simple">
+<li><p>You can create a copy of my repository by pressing the Fork button
+in the upper right. If you don’t already have a GitHub account,
+you’ll need to create one. After forking, you’ll have your own
+repository on GitHub that you can use to keep track of code you
+write while working on this book. Then you can clone the repo, which
+means that you copy the files to your computer.</p></li>
+<li><p>Or you can clone my repository without forking; that is, you can
+make a copy of my repo on your computer. You don’t need a GitHub
+account to do this, but you won’t be able to write your changes back
+to GitHub.</p></li>
+<li><p>If you don’t want to use Git at all, you can download the files in a
+Zip file using the green button that says “Clone or download”.</p></li>
+</ul>
+<p>I developed this book using Anaconda from Continuum Analytics, which is
+a free Python distribution that includes all the packages you’ll need to
+run the code (and lots more). I found Anaconda easy to install. By
+default it does a user-level installation, not system-level, so you
+don’t need administrative privileges. And it supports both Python 2 and
+Python 3. You can download Anaconda from
+<a class="reference external" href="https://continuum.io/downloads">https://continuum.io/downloads</a>.</p>
+<p>The repository includes both Python scripts and Jupyter notebooks. If
+you have not used Jupyter before, you can read about it at
+<a class="reference external" href="https://jupyter.org">https://jupyter.org</a>.</p>
+<p>There are three ways you can work with the Jupyter notebooks:</p>
+<p>Run Jupyter on your computer</p>
+<p>If you installed Anaconda, you can install Jupyter by running the
+following command in a terminal or Command Window:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
+<span class="err">$</span> <span class="n">conda</span> <span class="n">install</span> <span class="n">jupyter</span>
+<span class="err">```</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="err">```</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before you launch Jupyter, you should <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the directory that
+contains the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
+<span class="err">$</span> <span class="n">cd</span> <span class="n">ThinkComplexity2</span><span class="o">/</span><span class="n">code</span>
+<span class="err">```</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then start the Jupyter server:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
+<span class="err">$</span> <span class="n">jupyter</span> <span class="n">notebook</span>
+<span class="err">```</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you start the server, it should launch your default web browser
+or create a new tab in an open browser window. Then you can open and
+run the notebooks.</p>
+<ul class="simple">
+<li><p>Run Jupyter on Colab</p></li>
+</ul>
+<p>TODO: Fill this in</p>
+<p>You can run the scripts and modify them to run your own code, but
+the virtual machine you run them in is temporary. If you leave it
+idle, the virtual machine disappears along with any changes you
+made.</p>
+<ul class="simple">
+<li><p>View notebooks on GitHub</p></li>
+</ul>
+<p>GitHub provides a view of the notebooks you can can use to read the
+notebooks and see the results I generated, but you won’t be able to
+modify or run the code.</p>
+<p>Good luck, and have fun!</p>
+</section>
+<section id="contributor-list-contributor-list-unnumbered">
+<h2>Contributor List {#contributor-list .unnumbered}<a class="headerlink" href="#contributor-list-contributor-list-unnumbered" title="Link to this heading">#</a></h2>
+<p>If you have a suggestion or correction, please send email to
+<code class="docutils literal notranslate"><span class="pre">downey&#64;allendowney.com</span></code>. If I make a change based on your feedback, I
+will add you to the contributor list (unless you ask to be omitted).</p>
+<p>Let me know what version of the book you are working with, and what
+format. If you include at least part of the sentence the error appears
+in, that makes it easy for me to search. Page and section numbers are
+fine, too, but not quite as easy to work with. Thanks!</p>
+<ul class="simple">
+<li><p>John Harley, Jeff Stanton, Colden Rouleau and Keerthik Omanakuttan
+are Computational Modeling students who pointed out typos.</p></li>
+<li><p>Jose Oscar Mur-Miranda found several typos.</p></li>
+<li><p>Phillip Loh, Corey Dolphin, Noam Rubin and Julian Ceipek found typos
+and made helpful suggestions.</p></li>
+<li><p>Sebastian Schöner sent two pages of corrections!</p></li>
+<li><p>Philipp Marek sent a number of corrections.</p></li>
+<li><p>Jason Woodard co-taught Complexity Science with me at Olin College,
+introduced me to NK models, and made many helpful suggestions and
+corrections.</p></li>
+<li><p>Davi Post sent several corrections and suggestions.</p></li>
+<li><p>Graham Taylor sent a pull request on GitHub that fixed many typos.</p></li>
+</ul>
+<p>I would especially like to thank the technical reviewers, Vincent Knight
+and Eric Ma, who made many helpful suggestions, and the copy editor,
+Charles Roumeliotis, who caught many errors and inconsistencies.</p>
+<p>Other people who reported errors include Richard Hollands, Muhammad
+Najmi bin Ahmad Zabidi, Alex Hantman, and Jonathan Harford.</p>
 </section>
 </section>
 
@@ -489,7 +632,7 @@ Finally, I don’t assume you know anything about statistics.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notebooks</p>
+        <p class="prev-next-title">Think Complexity</p>
       </div>
     </a>
     <a class="right-next"
@@ -497,7 +640,7 @@ Finally, I don’t assume you know anything about statistics.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Exploratory data analysis</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Complexity Science</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -517,8 +660,10 @@ Finally, I don’t assume you know anything about statistics.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new">What’s New?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list-contributor-list-unnumbered">Contributor List {#contributor-list .unnumbered}</a></li>
 </ul>
   </nav></div>
 
