@@ -51,33 +51,40 @@ class Cell2D:
         """Draws the array."""
         draw_array(self.array, **options)
 
-    def animate(self, frames, interval=None, step=None):
+    def animate(self, frames, interval=0.001, step=None):
         """Animate the automaton.
 
         frames: number of frames to draw
         interval: time between frames in seconds
-        iters: number of steps between frames
+        step: function to call between frames
         """
         if step is None:
             step = self.step
 
+        plt.ion()
         plt.figure()
         try:
             for _ in range(frames - 1):
                 self.draw()
-                plt.show()
-                if interval:
-                    sleep(interval)
+                plt.pause(interval)
                 step()
                 clear_output(wait=True)
             self.draw()
             plt.show()
         except KeyboardInterrupt:
             pass
+        finally:
+            plt.ioff()
 
 
 def draw_array(array, **options):
-    """Draws the cells."""
+    """Draws the cells.
+    
+    array: numpy array
+    options: passed to plt.imshow
+
+    returns: plt.imshow object
+    """
     n, m = array.shape
     options = underride(
         options,

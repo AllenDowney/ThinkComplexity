@@ -58,7 +58,7 @@ def main(script, *args):
     life.add_cells(n // 2 + 12, col, *lwss)
     life.add_cells(n // 2 + 26, col, *lwss)
     life.add_cells(n // 2 + 19, col, *bhep)
-    life.animate(frames=100)
+    life.animate(frames=1000)
     plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
     plt.show()
 
