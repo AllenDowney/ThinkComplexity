@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Self-organized criticality &#8212; Think Complexity</title>
+    <title>7. Self-organized criticality &#8212; Think Complexity</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap08';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Agent Based Models" href="chap09.html" />
-    <link rel="prev" title="7. Physical modeling" href="chap07.html" />
+    <link rel="next" title="8. Agent Based Models" href="chap09.html" />
+    <link rel="prev" title="6. Physical modeling" href="chap07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,33 +171,29 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    Notebooks
+                    Think Complexity
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">1. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">2. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">3. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">4. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">5. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">6. Physical modeling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">8. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">9. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">10. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">11. Evolution of cooperation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 </ul>
 
     </div>
@@ -361,12 +357,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">8.1. Sand pile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">8.2. Animation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">8.3. Long tailed distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">8.4. Fractals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">8.5. Spectral density</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.6. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">7.1. Sand pile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">7.2. Animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">7.3. Long tailed distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">7.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">7.5. Spectral density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.6. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -379,7 +375,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="self-organized-criticality">
-<h1><span class="section-number">8. </span>Self-organized criticality<a class="headerlink" href="#self-organized-criticality" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>Self-organized criticality<a class="headerlink" href="#self-organized-criticality" title="Link to this heading">#</a></h1>
 <p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
 <p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
 <div class="cell docutils container">
@@ -424,7 +420,7 @@ document.write(`
 </div>
 </div>
 <section id="sand-pile">
-<h2><span class="section-number">8.1. </span>Sand pile<a class="headerlink" href="#sand-pile" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.1. </span>Sand pile<a class="headerlink" href="#sand-pile" title="Link to this heading">#</a></h2>
 <p>Here’s an implementation of the sand pile model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,7 +585,7 @@ document.write(`
 <p>Any grains that topple off the edge disappear.</p>
 </section>
 <section id="animation">
-<h2><span class="section-number">8.2. </span>Animation<a class="headerlink" href="#animation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>Animation<a class="headerlink" href="#animation" title="Link to this heading">#</a></h2>
 <p>Let’s look at a bigger pile, with <code class="docutils literal notranslate"><span class="pre">n=20</span></code>.  All cells are initialized to <code class="docutils literal notranslate"><span class="pre">level</span></code>, which is meant to be substantially bigger than <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,7 +674,7 @@ Saving figure to file figs/chap08-1
 </div>
 </section>
 <section id="long-tailed-distributions">
-<h2><span class="section-number">8.3. </span>Long tailed distributions<a class="headerlink" href="#long-tailed-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Long tailed distributions<a class="headerlink" href="#long-tailed-distributions" title="Link to this heading">#</a></h2>
 <p>If the sand pile is in a critical state, we expect quantities like the duration of an avalanche, <code class="docutils literal notranslate"><span class="pre">T</span></code>, and the number of cells affected, <code class="docutils literal notranslate"><span class="pre">S</span></code>, to have long-tailed distributions.</p>
 <p>Following Bak, Tang, and Wiesenseld, we start with a 50x50 array and plot the PMFs of <code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> on a log-log scale.</p>
 <div class="cell docutils container">
@@ -830,7 +826,7 @@ Saving figure to file figs/chap08-3
 <p><strong>Exercise:</strong> Try running the model longer to see if you can get a less noisy plot of the distributions of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code>.</p>
 </section>
 <section id="fractals">
-<h2><span class="section-number">8.4. </span>Fractals<a class="headerlink" href="#fractals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>Fractals<a class="headerlink" href="#fractals" title="Link to this heading">#</a></h2>
 <p>If the sand pile is in a critical state, we expect to see fractal geometry.</p>
 <p>To estimate the fractal dimension, I’ll start with a bigger pile and a higher initial level.</p>
 <div class="cell docutils container">
@@ -1021,7 +1017,7 @@ Wall time: 15.4 s
 <p><strong>Exercise:</strong>  Choose a different value of <code class="docutils literal notranslate"><span class="pre">n</span></code> and/or the initial <code class="docutils literal notranslate"><span class="pre">level</span></code> and run this analysis again.  Are the estimated fractal dimensions consistent?</p>
 </section>
 <section id="spectral-density">
-<h2><span class="section-number">8.5. </span>Spectral density<a class="headerlink" href="#spectral-density" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.5. </span>Spectral density<a class="headerlink" href="#spectral-density" title="Link to this heading">#</a></h2>
 <p>Suppose the sandpile made a little click each time a cell toppled.  What would it sound like?</p>
 <p><code class="docutils literal notranslate"><span class="pre">toppled_seq</span></code> contains the number of cells that toppled during each time step.  We can use Welch’s algorithm to estimate its <a class="reference external" href="https://en.wikipedia.org/wiki/Spectral_density">power spectral density</a>.</p>
 <div class="cell docutils container">
@@ -1077,7 +1073,7 @@ Wall time: 15.4 s
 <p><strong>Exercise:</strong>  Choose a different value of <code class="docutils literal notranslate"><span class="pre">nperseg</span></code> and run this analysis again.  What are the pros and cons of larger segment lengths?  Modify the code to run the model longer and see if you can get a less noisy estimate of the spectrum.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">8.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> To test whether the distributions of <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code> are heavy-tailed, we plotted their <code class="docutils literal notranslate"><span class="pre">Pmf</span></code> on a log-log scale, which is what Bak, Tang, and Wiesenfeld show in their paper.  But as we saw in Chapter 4, this visualization can obscure the shape of the distribution.  Using the same data, make a plot that shows the CDFs of <code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code>.  What can you say about the shape of these distributions?  Do they follow a power law?  Are they heavy tailed?</p>
 <p>You might find it helpful to plot the CDFs on a log-x scale and the complementary CDFs on a log-log scale.</p>
 <p><strong>Exercise:</strong> In Section 8.5 we showed that the initial equilibrium of the sand pile model produces fractal patterns.  But after we drop a large number of random grains, the patterns look more random.</p>
@@ -1124,7 +1120,7 @@ Wall time: 15.4 s
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Physical modeling</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Physical modeling</p>
       </div>
     </a>
     <a class="right-next"
@@ -1132,7 +1128,7 @@ Wall time: 15.4 s
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Agent Based Models</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Agent Based Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1152,12 +1148,12 @@ Wall time: 15.4 s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">8.1. Sand pile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">8.2. Animation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">8.3. Long tailed distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">8.4. Fractals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">8.5. Spectral density</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">8.6. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sand-pile">7.1. Sand pile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">7.2. Animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-tailed-distributions">7.3. Long tailed distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">7.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-density">7.5. Spectral density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">7.6. Exercises</a></li>
 </ul>
   </nav></div>
 

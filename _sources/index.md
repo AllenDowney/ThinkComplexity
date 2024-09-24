@@ -1,10 +1,20 @@
-_Think Complexity_ is an introduction to complexity science
-using Python.  The premise of this book (and the other books in the _Think X_ series) is that if you know how to program, you can use that skill to learn other things.  
+# Think Complexity
 
-You can buy the second edition from [Bookshop.org](https://bookshop.org/a/98697/9781492040200) or [Amazon](https://amzn.to/3wPN0SJ).
+*Think Complexity* is an introduction to complexity science
+using Python.  Complexity Science is an interdisciplinary
+field — at the intersection of mathematics, computer science, and natural science — that focuses on discrete models of physical and
+social systems.
+
+Topics in this book include networks and graphs, cellular automatons, agent-based models and swarms, fractals, evolution, and self-organizing systems.
+
+[Here is the landing page for the second edition at Green Tea Press](https://greenteapress.com/wp/think-complexity-2e/).
+
+You can buy paper and electronic versions from [Bookshop.org](https://bookshop.org/a/98697/9781492040200) or [Amazon](https://amzn.to/3wPN0SJ).
+
+This book is available under a Creative Commons license, which means that you are free to copy, distribute, and modify it, as long as you attribute the source and don't use it for commercial purposes.
 
 
-### Notebooks
+**Notebooks**
 
 For each chapter, there is a Jupyter notebook in this repository that contains the code from the chapter, exercises, and (optionally) exercise solutions.
 
@@ -46,7 +56,7 @@ Or you can use the links below to run the notebooks on Colab.
 [Run the notebook with solutions](https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap12.ipynb)
 
 
-### Tutorial
+**Tutorial**
 
 I offer a half-day tutorial based on material from _Think Complexity_.
 [Information about the tutorial is here](https://allendowney.github.io/ComplexityScience/).

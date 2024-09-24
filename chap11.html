@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. Evolution &#8212; Think Complexity</title>
+    <title>10. Evolution &#8212; Think Complexity</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap11';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="12. Evolution of cooperation" href="chap12.html" />
-    <link rel="prev" title="10. Flocks, Herds, and Traffic Jams" href="chap10.html" />
+    <link rel="next" title="11. Evolution of cooperation" href="chap12.html" />
+    <link rel="prev" title="9. Flocks, Herds, and Traffic Jams" href="chap10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,33 +169,29 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    Notebooks
+                    Think Complexity
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Evolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">1. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">2. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">3. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">4. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">5. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">6. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">7. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">8. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">9. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">11. Evolution of cooperation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 </ul>
 
     </div>
@@ -359,15 +355,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">11.1. The Fitness landscape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">11.2. The agents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">11.3. The Simulator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">11.4. The distribution of fitness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">11.5. Instruments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">11.6. Differential survival</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">11.7. Number of different agents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">11.8. Mutation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">11.8.1. Changing landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">10.1. The Fitness landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">10.2. The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">10.3. The Simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">10.4. The distribution of fitness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">10.5. Instruments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">10.6. Differential survival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">10.7. Number of different agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">10.8. Mutation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">10.8.1. Changing landscape</a></li>
 </ul>
 </li>
 </ul>
@@ -382,7 +378,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="evolution">
-<h1><span class="section-number">11. </span>Evolution<a class="headerlink" href="#evolution" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Evolution<a class="headerlink" href="#evolution" title="Link to this heading">#</a></h1>
 <p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
 <p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
 <div class="cell docutils container">
@@ -425,7 +421,7 @@ document.write(`
 </div>
 </div>
 <section id="the-fitness-landscape">
-<h2><span class="section-number">11.1. </span>The Fitness landscape<a class="headerlink" href="#the-fitness-landscape" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>The Fitness landscape<a class="headerlink" href="#the-fitness-landscape" title="Link to this heading">#</a></h2>
 <p>A genotype is represented by a length-N array of 0s and 1.</p>
 <p>The fitness landscape maps from each location in N-D space to a random fitness.</p>
 <div class="cell docutils container">
@@ -568,7 +564,7 @@ document.write(`
 </div>
 </section>
 <section id="the-agents">
-<h2><span class="section-number">11.2. </span>The agents<a class="headerlink" href="#the-agents" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>The agents<a class="headerlink" href="#the-agents" title="Link to this heading">#</a></h2>
 <p>Here’s the class that represents agents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -608,7 +604,7 @@ document.write(`
 </div>
 </section>
 <section id="the-simulator">
-<h2><span class="section-number">11.3. </span>The Simulator<a class="headerlink" href="#the-simulator" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>The Simulator<a class="headerlink" href="#the-simulator" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Simulator</span></code> class provides methods to run the simulations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -789,7 +785,7 @@ document.write(`
 </div>
 </section>
 <section id="the-distribution-of-fitness">
-<h2><span class="section-number">11.4. </span>The distribution of fitness<a class="headerlink" href="#the-distribution-of-fitness" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>The distribution of fitness<a class="headerlink" href="#the-distribution-of-fitness" title="Link to this heading">#</a></h2>
 <p>Let’s create a fitness landscape with an agent at each location and see what the distribution of fitness looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -871,7 +867,7 @@ document.write(`
 </div>
 </section>
 <section id="instruments">
-<h2><span class="section-number">11.5. </span>Instruments<a class="headerlink" href="#instruments" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>Instruments<a class="headerlink" href="#instruments" title="Link to this heading">#</a></h2>
 <p>To measure these changes over the course of the simulations, we’ll use Instrument objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -989,7 +985,7 @@ document.write(`
 </div>
 </section>
 <section id="differential-survival">
-<h2><span class="section-number">11.6. </span>Differential survival<a class="headerlink" href="#differential-survival" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>Differential survival<a class="headerlink" href="#differential-survival" title="Link to this heading">#</a></h2>
 <p>We can add differential survival by overriding <code class="docutils literal notranslate"><span class="pre">choose_dead</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1064,7 +1060,7 @@ document.write(`
 <p><strong>Exercise:</strong> What if you have both?  Write a class called <code class="docutils literal notranslate"><span class="pre">SimWithBoth</span></code> that uses the new versions of <code class="docutils literal notranslate"><span class="pre">choose_dead</span></code> and <code class="docutils literal notranslate"><span class="pre">choose_replacements</span></code>.  Does mean fitness increase more quickly?</p>
 </section>
 <section id="number-of-different-agents">
-<h2><span class="section-number">11.7. </span>Number of different agents<a class="headerlink" href="#number-of-different-agents" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Number of different agents<a class="headerlink" href="#number-of-different-agents" title="Link to this heading">#</a></h2>
 <p>Without mutation, we have no way to add diversity.  The number of occupied locations goes down over time.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OccupiedLocations</span></code> is an instrument that counts the number of occupied locations.</p>
 <div class="cell docutils container">
@@ -1096,7 +1092,7 @@ document.write(`
 <p>The model we have so far might explain changes in existing populations, but it doesn’t explain increasing diversity or complexity.</p>
 </section>
 <section id="mutation">
-<h2><span class="section-number">11.8. </span>Mutation<a class="headerlink" href="#mutation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.8. </span>Mutation<a class="headerlink" href="#mutation" title="Link to this heading">#</a></h2>
 <p>Mutation is one way of increasing, or at least maintaining, diversity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Mutant</span></code> is a kind of agent that overrides <code class="docutils literal notranslate"><span class="pre">copy</span></code>:</p>
 <div class="cell docutils container">
@@ -1270,7 +1266,7 @@ document.write(`
 </div>
 </div>
 <section id="changing-landscape">
-<h3><span class="section-number">11.8.1. </span>Changing landscape<a class="headerlink" href="#changing-landscape" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.8.1. </span>Changing landscape<a class="headerlink" href="#changing-landscape" title="Link to this heading">#</a></h3>
 <p>One cause of speciation is a change in the landscape.  Suppose a population in steady state in one landscape is transported to another landscape.  After a period of migration, it would settle around the new equilibrium point, with a small mean distance between agents.  The mean distance between the original agents and the migrants is generally much larger.</p>
 <p>The following simulation runs 500 steps on one landscape, then switches to a different landscape and resumes the simulation.</p>
 <div class="cell docutils container">
@@ -1400,7 +1396,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Flocks, Herds, and Traffic Jams</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Flocks, Herds, and Traffic Jams</p>
       </div>
     </a>
     <a class="right-next"
@@ -1408,7 +1404,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Evolution of cooperation</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Evolution of cooperation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1428,15 +1424,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">11.1. The Fitness landscape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">11.2. The agents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">11.3. The Simulator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">11.4. The distribution of fitness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">11.5. Instruments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">11.6. Differential survival</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">11.7. Number of different agents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">11.8. Mutation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">11.8.1. Changing landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fitness-landscape">10.1. The Fitness landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">10.2. The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">10.3. The Simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-distribution-of-fitness">10.4. The distribution of fitness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruments">10.5. Instruments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-survival">10.6. Differential survival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-different-agents">10.7. Number of different agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutation">10.8. Mutation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">10.8.1. Changing landscape</a></li>
 </ul>
 </li>
 </ul>

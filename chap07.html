@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Physical modeling &#8212; Think Complexity</title>
+    <title>6. Physical modeling &#8212; Think Complexity</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap07';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8. Self-organized criticality" href="chap08.html" />
-    <link rel="prev" title="6. Game of Life" href="chap06.html" />
+    <link rel="next" title="7. Self-organized criticality" href="chap08.html" />
+    <link rel="prev" title="5. Game of Life" href="chap06.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,33 +171,29 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="index.html">
-                    Notebooks
+                    Think Complexity
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Physical modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">1. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">2. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">3. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">4. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">5. Game of Life</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">7. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">8. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">9. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">10. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">11. Evolution of cooperation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 </ul>
 
     </div>
@@ -361,11 +357,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion">7.1. Diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-diffusion">7.2. Reaction-Diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percolation">7.3. Percolation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">7.4. Fractals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals-in-percolation-models">7.5. Fractals in percolation models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion">6.1. Diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-diffusion">6.2. Reaction-Diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percolation">6.3. Percolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">6.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals-in-percolation-models">6.5. Fractals in percolation models</a></li>
 </ul>
             </nav>
         </div>
@@ -378,7 +374,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="physical-modeling">
-<h1><span class="section-number">7. </span>Physical modeling<a class="headerlink" href="#physical-modeling" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Physical modeling<a class="headerlink" href="#physical-modeling" title="Link to this heading">#</a></h1>
 <p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
 <p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
 <div class="cell docutils container">
@@ -423,7 +419,7 @@ document.write(`
 </div>
 </div>
 <section id="diffusion">
-<h2><span class="section-number">7.1. </span>Diffusion<a class="headerlink" href="#diffusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Diffusion<a class="headerlink" href="#diffusion" title="Link to this heading">#</a></h2>
 <p>Before we get to a Reaction-Diffusion model, we’ll start with simple diffusion.</p>
 <p>The kernel computes the difference between each cell and the sum of its neighbors.</p>
 <p>At each time step, we compute this difference, multiply by a constant, and add it back in to the array.</p>
@@ -516,7 +512,7 @@ document.write(`
 </div>
 </section>
 <section id="reaction-diffusion">
-<h2><span class="section-number">7.2. </span>Reaction-Diffusion<a class="headerlink" href="#reaction-diffusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Reaction-Diffusion<a class="headerlink" href="#reaction-diffusion" title="Link to this heading">#</a></h2>
 <p>Now we’ll add a second material and let them interact.</p>
 <p>The following function helps with setting up the initial conditions.</p>
 <div class="cell docutils container">
@@ -687,7 +683,7 @@ document.write(`
 </div>
 </section>
 <section id="percolation">
-<h2><span class="section-number">7.3. </span>Percolation<a class="headerlink" href="#percolation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Percolation<a class="headerlink" href="#percolation" title="Link to this heading">#</a></h2>
 <p>In the percolation model, each cell is porous with probability <code class="docutils literal notranslate"><span class="pre">p</span></code>.  We start with a row of wet cells at the top.  During each time step, a cell becomes wet if it is porous and at least one neighbor is wet (using a 4-cell neighborhood).  For each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> we compute the probability that water reaches the bottom row.</p>
 <p>Porous cells have state <code class="docutils literal notranslate"><span class="pre">1</span></code> and wet cells have state <code class="docutils literal notranslate"><span class="pre">5</span></code>, so if a cell has a wet neighbor, the sum of the neighbors will be <code class="docutils literal notranslate"><span class="pre">5</span></code> or more.</p>
 <div class="cell docutils container">
@@ -978,7 +974,7 @@ Wall time: 34.3 s
 </div>
 </section>
 <section id="fractals">
-<h2><span class="section-number">7.4. </span>Fractals<a class="headerlink" href="#fractals" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Fractals<a class="headerlink" href="#fractals" title="Link to this heading">#</a></h2>
 <p>Near the critical point, the cluster of wet cells forms a fractal.  We can see that visually in these examples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1238,7 +1234,7 @@ Saving figure to file figs/chap07-8
 </div>
 </section>
 <section id="fractals-in-percolation-models">
-<h2><span class="section-number">7.5. </span>Fractals in percolation models<a class="headerlink" href="#fractals-in-percolation-models" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.5. </span>Fractals in percolation models<a class="headerlink" href="#fractals-in-percolation-models" title="Link to this heading">#</a></h2>
 <p>We can measure the fractal dimension of a percolation model by measuring how the number of wet cells scales as we increase the size of a bounding box.</p>
 <p>The following function takes a sequence of sizes and the proportion of porous cells, <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
 <p>It run the percolation model with each of the sizes and checks whether it percolates from top to bottom.
@@ -1442,7 +1438,7 @@ What is its fractal dimension?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Game of Life</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Game of Life</p>
       </div>
     </a>
     <a class="right-next"
@@ -1450,7 +1446,7 @@ What is its fractal dimension?</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Self-organized criticality</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Self-organized criticality</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1470,11 +1466,11 @@ What is its fractal dimension?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion">7.1. Diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-diffusion">7.2. Reaction-Diffusion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percolation">7.3. Percolation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">7.4. Fractals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals-in-percolation-models">7.5. Fractals in percolation models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion">6.1. Diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-diffusion">6.2. Reaction-Diffusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percolation">6.3. Percolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals">6.4. Fractals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractals-in-percolation-models">6.5. Fractals in percolation models</a></li>
 </ul>
   </nav></div>
 
