@@ -1,0 +1,964 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quiz 5 &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'quiz05';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/quiz05.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Quiz 5</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-constitution-of-knowledge">The Constitution of Knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-1">Experiment 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-2">Experiment 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-3">Experiment 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-4">Experiment 4</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="quiz-5">
+<h1>Quiz 5<a class="headerlink" href="#quiz-5" title="Link to this heading">#</a></h1>
+<p>BEFORE YOU START THIS QUIZ:</p>
+<ol class="arabic simple">
+<li><p>Click on “Copy to Drive” to make a copy of the quiz</p></li>
+<li><p>Click on “Share”,</p></li>
+<li><p>Click on “Change” and select “Anyone with this link can edit”</p></li>
+<li><p>Click “Copy link” and</p></li>
+<li><p>Paste the link into <a class="reference external" href="https://canvas.olin.edu/courses/315/assignments/5149">this Canvas assignment</a>.</p></li>
+</ol>
+<p>Copyright 2021 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-constitution-of-knowledge">
+<h2>The Constitution of Knowledge<a class="headerlink" href="#the-constitution-of-knowledge" title="Link to this heading">#</a></h2>
+<p>This question is inspired by Jonathan Rauch’s book <em>The Constitution of Knowledge</em>, which talks about ways science works as a social enterprise.
+Reading it, I thought of an agent-based model we could use to study the dynamics of knowledge creation and dissemination.</p>
+<p>In the model, an agent represents a scientist with a belief about whether a hypothesis is true.
+Beliefs are represented in the form of probabilities, so one scientist might say there is a 25% chance the hypothesis is true; another might say there is a 75% chance.</p>
+<p>In my implementation, these probabilities are stored and computed using
+log-odds rather than probabilities.
+Log-odds and probabilities are equivalent in the sense that if you are given either, you can compute the other.
+To convert from log-odds to probabilities, we can use the <code class="docutils literal notranslate"><span class="pre">expit</span></code> function.</p>
+<p>As an example, suppose there are five people with different beliefs, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beliefs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can convert their beliefs to probabilities like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">expit</span>
+
+<span class="n">probs</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+<span class="n">probs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.11920292, 0.26894142, 0.5       , 0.73105858, 0.88079708])
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the log-odds scale, the value <code class="docutils literal notranslate"><span class="pre">-2</span></code> corresponds to a probability around 12%, which represents the belief that the hypothesis is probably false.
+The value <code class="docutils literal notranslate"><span class="pre">2</span></code> corresponds to probability 88%, which is probably true.</p>
+<p>The log-odds scale makes it easy to update beliefs in light of new evidence.
+For example, suppose someone does an experiment that provides evidence in favor of the hypothesis with a log-odds ratio of <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p>
+<p>In light of this evidence, the scientists can update their beliefs by adding <code class="docutils literal notranslate"><span class="pre">0.5</span></code> to their prior beliefs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_beliefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span>
+<span class="n">new_beliefs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.5, -0.5,  0.5,  1.5,  2.5])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we can use <code class="docutils literal notranslate"><span class="pre">expit</span></code> to compute the corresponding probabilities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_probs</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">new_beliefs</span><span class="p">)</span>
+<span class="n">new_probs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.18242552, 0.37754067, 0.62245933, 0.81757448, 0.92414182])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Having seen the new evidence, all of the the scientists are more confident that the hypothesis is true (although some still believe it is likely to be false).</p>
+</section>
+<section id="agents">
+<h2>Agents<a class="headerlink" href="#agents" title="Link to this heading">#</a></h2>
+<p>I’ll use the following class to represent the scientists.
+Each scientist starts with a baseline belief, which is a random value from a normal distribution with mean <code class="docutils literal notranslate"><span class="pre">0</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>In addition, each scientist has a dictionary of evidence where each item is</p>
+<ul class="simple">
+<li><p>An integer that uniquely identifies a piece of evidence, which maps to</p></li>
+<li><p>A floating-point number that quantifies the strength of the evidence as a log-odds ratio.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evidence</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">belief</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evidence</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evidence</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evidence</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">evidence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">belief</span></code> method computes the agent’s degree of belief in a hypothesis, which is the sum of their baseline belief and the total of all evidence they have seen.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update</span></code> method updates an agent’s belief by adding entries to their <code class="docutils literal notranslate"><span class="pre">evidence</span></code> dictionary.
+Because the keys in a dictionary are unique, a scientist who sees the same evidence twice will only add it to their dictionary once.</p>
+<p>To show how this works, I’ll make 100 agents with random baseline beliefs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can extract their total beliefs like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beliefs</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">belief</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the agents haven’t seen any evidence yet, the distribution of belief is normal with mean <code class="docutils literal notranslate"><span class="pre">0</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Belief (log-odds)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b97bada63abacb7862febdec8f9aa60644e54f714ad2bc89d2c3674c47b2168c.png" src="_images/b97bada63abacb7862febdec8f9aa60644e54f714ad2bc89d2c3674c47b2168c.png" />
+</div>
+</div>
+<p>We can convert the beliefs to probabilities like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what the distribution looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+<span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Belief (probability)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0213ef8acb1bfc7393f3c807e1b3d4b60179027e1816a090335771bc82d2613e.png" src="_images/0213ef8acb1bfc7393f3c807e1b3d4b60179027e1816a090335771bc82d2613e.png" />
+</div>
+</div>
+<p>The mean of this distribution is initially near 50%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5038731825472533
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experiment-1">
+<h2>Experiment 1<a class="headerlink" href="#experiment-1" title="Link to this heading">#</a></h2>
+<p>Now let’s see what happens if the scientists run experiments and gather evidence.</p>
+<p>The following function simulates a world where the hypothesis is true and every experiment yields evidence in favor of the hypothesis, with a log-odds ratio of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> (which is one decibel).</p>
+<p>During each time step, one randomly-chosen agent does an experiment and uses the result to update their belief.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation1</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I’ll use the following function to plot the distribution of probabilities before and after the simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
+    <span class="n">beliefs</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">belief</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+    <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Belief (probability)&#39;</span><span class="p">,</span>
+             <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what the results look like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)]</span>
+
+<span class="n">mean_before</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">run_simulation1</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">mean_after</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+
+<span class="n">mean_before</span><span class="p">,</span> <span class="n">mean_after</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.10235374073439502, -0.0023537407343950305)
+</pre></div>
+</div>
+<img alt="_images/711974b73652c3962ab7282fdf0449a81afb8e1fbee62526a65da9159975f12f.png" src="_images/711974b73652c3962ab7282fdf0449a81afb8e1fbee62526a65da9159975f12f.png" />
+</div>
+</div>
+<p>As you might expect, the experimental results shift the distributions to the right and increase the “center of mass”, represented by the mean belief in log-odds.</p>
+<p>In this simulation, the scientists don’t share information, so beliefs don’t change very fast.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">velocity</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean_after</span> <span class="o">-</span> <span class="n">mean_before</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_steps</span>
+<span class="n">velocity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001
+</pre></div>
+</div>
+</div>
+</div>
+<p>The average change in belief is only 0.001 bels per time step.</p>
+</section>
+<section id="experiment-2">
+<h2>Experiment 2<a class="headerlink" href="#experiment-2" title="Link to this heading">#</a></h2>
+<p>The previous experiment simulates a world where scientists work in isolation and do not share the evidence they discover with anyone.
+At the opposite extreme, suppose everyone broadcasts the results of their experiments and everyone else updates their beliefs accordingly.</p>
+<p>The following function simulates this behavior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation2</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what the results look like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)]</span>
+
+<span class="n">mean_before</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">run_simulation2</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">mean_after</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+
+<span class="n">mean_before</span><span class="p">,</span> <span class="n">mean_after</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.059053906573010656, 10.059053906572991)
+</pre></div>
+</div>
+<img alt="_images/5f53e8fe9063a385296d1316c7613066084b2ad38ec06a3296c34595d2ed8d1f.png" src="_images/5f53e8fe9063a385296d1316c7613066084b2ad38ec06a3296c34595d2ed8d1f.png" />
+</div>
+</div>
+<p>In this utopia of scientific discourse, even the most skeptical scientist is quickly convinced that the hypothesis is likely to be true.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">velocity</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean_after</span> <span class="o">-</span> <span class="n">mean_before</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_steps</span>
+<span class="n">velocity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09999999999999981
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the average velocity is 0.1 bels per timestep, which is the rate at which new evidence enters the system.</p>
+</section>
+<section id="experiment-3">
+<h2>Experiment 3<a class="headerlink" href="#experiment-3" title="Link to this heading">#</a></h2>
+<p>Of course, there are many ways the real world does not live up to this ideal.</p>
+<ul class="simple">
+<li><p>For example, not every experiment is perfect; due to error and randomness, we expect variation in the strength of evidence and some possibility of finding evidence against the hypothesis, even if it is true.</p></li>
+<li><p>The ways we have for sharing evidence are not perfect; not every scientist reads every paper.</p></li>
+<li><p>And scientists themselves are not perfect; they are subject to the same biases and systematic errors as any other human.</p></li>
+</ul>
+<p>To get us started, I will explore the effect of the first phenomenon, imperfect experiments, and you will have a chance to explore one or more of the others.</p>
+<p>The following function simulates a world where the evidence we get from an experiment follows a normal distribution with mean 0.1 and standard deviation 0.1 (which means that it is sometimes negative).</p>
+<p>As in the previous simulation, all results are broadcast to all scientists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation3</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">stddev</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what the results look like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)]</span>
+
+<span class="n">mean_before</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">run_simulation3</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+<span class="n">mean_after</span> <span class="o">=</span> <span class="n">plot_prob_dist</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+
+<span class="n">mean_before</span><span class="p">,</span> <span class="n">mean_after</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.00675761354618579, 10.727807387174472)
+</pre></div>
+</div>
+<img alt="_images/18383544379fe6f62accf5bf4c5fbb75f5188e75551d28c094297d4875d5adbe.png" src="_images/18383544379fe6f62accf5bf4c5fbb75f5188e75551d28c094297d4875d5adbe.png" />
+</div>
+</div>
+<p>In this version of the model, average velocity varies from one run to the next, but it is usually close to 0.1 bels per timestep.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">velocity</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean_after</span> <span class="o">-</span> <span class="n">mean_before</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_steps</span>
+<span class="n">velocity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10721049773628286
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how it depends on the variability of evidence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stddev_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">stddev_array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_belief</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">agent</span><span class="o">.</span><span class="n">belief</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">velocities</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">stddev</span> <span class="ow">in</span> <span class="n">stddev_array</span><span class="p">:</span>
+    <span class="n">mean_before</span> <span class="o">=</span> <span class="n">mean_belief</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">Agent</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)]</span>
+    <span class="n">run_simulation3</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">stddev</span><span class="p">)</span>
+    <span class="n">mean_after</span> <span class="o">=</span> <span class="n">mean_belief</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+    <span class="n">velocity</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean_after</span> <span class="o">-</span> <span class="n">mean_before</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_steps</span>
+    <span class="n">velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">velocity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stddev_array</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Standard deviation of evidence&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Velocity of knowledge&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5e3c7954217315e0c360fa8bf2abfaf75b53a0df97d1a4b8e55ac301cd3b0067.png" src="_images/5e3c7954217315e0c360fa8bf2abfaf75b53a0df97d1a4b8e55ac301cd3b0067.png" />
+</div>
+</div>
+<p>The standard deviation of evidence does not increase or decrease the velocity of knowledge, but it makes progress more variable from one run to the next, with the possibility of going in the wrong direction, at least for a while.</p>
+</section>
+<section id="experiment-4">
+<h2>Experiment 4<a class="headerlink" href="#experiment-4" title="Link to this heading">#</a></h2>
+<p>Run an experiment that adds a feature to this model and tests its effect on the velocity of knowledge.</p>
+<ul class="simple">
+<li><p>To model imperfections in the dissemination of knowledge, you could arrange the agents in space, or on a network, where they only share knowledge with neighbors.</p></li>
+<li><p>To model imperfections in human behavior, you could model a phenomenon like confirmation bias, which is the tendency to accept new evidence only if it is consistent with your current beliefs. Or the possibility of counting the same piece of evidence more than once if you hear it from more than one source.</p></li>
+</ul>
+<p>Whatever feature you add, you should:</p>
+<ol class="arabic simple">
+<li><p>Explain what behavior or structure in the real world the feature is meant to represent.</p></li>
+<li><p>Explain your implementation, that is, what changes you made in the code to add the feature,</p></li>
+<li><p>Run the experiment and compare the velocity of knowledge with and without the new feature.</p></li>
+</ol>
+<p>If possible, you should also:</p>
+<ol class="arabic simple" start="4">
+<li><p>Define a parameter that quantifies the strength or severity of the new feature (like standard deviation in Experiment 3),</p></li>
+<li><p>Run the experiment with a range of values for that parameter, and</p></li>
+<li><p>Plot the velocity of knowledge as a function of the parameter.</p></li>
+</ol>
+<p>Finally, you should interpret the results in the context of the original question: what does your experiment tell us about the “Constitution of Knowledge”; that is, how does our ability to learn about the world depend on the behavior of scientists and how they share evidence?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-constitution-of-knowledge">The Constitution of Knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-1">Experiment 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-2">Experiment 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-3">Experiment 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-4">Experiment 4</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

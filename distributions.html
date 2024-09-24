@@ -1,0 +1,3414 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Where Do Distributions Come From? &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'distributions';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/distributions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Where Do Distributions Come From?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution">The Normal Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lognormal-distributions">Lognormal Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-lognormal-distributions-come-from">Where Do Lognormal Distributions Come From?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-file-sizes">Distribution of File Sizes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-wealth">Distribution of Wealth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mandelbrots-hypothesis">Mandelbrot’s Hypothesis</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="where-do-distributions-come-from">
+<h1>Where Do Distributions Come From?<a class="headerlink" href="#where-do-distributions-come-from" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">empiricaldist</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>empiricaldist
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+    
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-normal-distribution">
+<h2>The Normal Distribution<a class="headerlink" href="#the-normal-distribution" title="Link to this heading">#</a></h2>
+<p>The normal distribution, also known as the Gaussian distribution, is a good model for many of the distributions we see in natural and engineered systems.</p>
+<p>For example, the distribution of birthweights is approximately Gaussian. Here’s data from the National Survey of Family Growth we can use to test this claim.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ElementsOfDataScience/raw/master/data/nsfg.hdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded nsfg.hdf
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">nsfg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;nsfg.hdf&#39;</span><span class="p">,</span> <span class="s1">&#39;nsfg&#39;</span><span class="p">)</span>
+<span class="n">nsfg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CASEID</th>
+      <th>OUTCOME</th>
+      <th>BIRTHWGT_LB1</th>
+      <th>BIRTHWGT_OZ1</th>
+      <th>PRGLNGTH</th>
+      <th>NBRNALIV</th>
+      <th>AGECON</th>
+      <th>AGEPREG</th>
+      <th>BIRTHORD</th>
+      <th>HPAGELB</th>
+      <th>WGT2015_2017</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>70627</td>
+      <td>1</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>40</td>
+      <td>1.0</td>
+      <td>28</td>
+      <td>29.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>19877.457610</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>70627</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>32</td>
+      <td>32.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>19877.457610</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>70627</td>
+      <td>1</td>
+      <td>9.0</td>
+      <td>2.0</td>
+      <td>39</td>
+      <td>1.0</td>
+      <td>33</td>
+      <td>33.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>19877.457610</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>70628</td>
+      <td>1</td>
+      <td>6.0</td>
+      <td>9.0</td>
+      <td>39</td>
+      <td>1.0</td>
+      <td>17</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>4221.017695</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>70628</td>
+      <td>1</td>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>39</td>
+      <td>1.0</td>
+      <td>19</td>
+      <td>20.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>4221.017695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Birthweight is encoded in two variables, which we have to clean and then combine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsfg</span><span class="p">[</span><span class="s1">&#39;BIRTHWGT_LB1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">98</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsfg</span><span class="p">[</span><span class="s1">&#39;BIRTHWGT_OZ1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">98</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birthweight</span> <span class="o">=</span> <span class="n">nsfg</span><span class="p">[</span><span class="s1">&#39;BIRTHWGT_LB1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">nsfg</span><span class="p">[</span><span class="s1">&#39;BIRTHWGT_OZ1&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">16</span>
+<span class="n">birthweight</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    6540.000000
+mean        7.180218
+std         1.377160
+min         0.500000
+25%         6.437500
+50%         7.250000
+75%         8.000000
+max        14.187500
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>One way to visualize the distribution of birthweights is a KDE plot, which uses kernel density estimation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">birthweight</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Birthweight (lb)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6e9921c5238542d1f8a5ad15ad823cb9affa555759755822d9ce89de691d129e.png" src="_images/6e9921c5238542d1f8a5ad15ad823cb9affa555759755822d9ce89de691d129e.png" />
+</div>
+</div>
+<p>The vertical axis is density, which is a relative likelihood for each weight.</p>
+<p>We can see that this distribution is approximately bell-shaped, which is the characteristic shape of the Gaussian distribution.</p>
+<p>But it is not easy to tell, by looking at a KDE plot, whether the Gaussian distribution is a good model for the data.
+A better option is to plot the CDF of the data and compare it to the CDF of a Gaussian distribution with the same mean and standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">plot_normal_cdf</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal model&#39;</span><span class="p">)</span>
+
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">cdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">birthweight</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NSFG data&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Birthweight (lb)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1b988fccc8040be366e2434f7fdb46c4932361a2c00293e839740c884727c2fd.png" src="_images/1b988fccc8040be366e2434f7fdb46c4932361a2c00293e839740c884727c2fd.png" />
+</div>
+</div>
+<p>The CDF of a Gaussian distribution has a recognizable sigmoid shape. And by comparing it with the data, we can see where the model fits well and where it deviates.</p>
+<p>If you think the Gaussian model is a good choice for a particular dataset, one way to check is a <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_probability_plot">normal probability plot</a>, which plots the observed data against randomly-generated data from a Gaussian distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_probability_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">fit_color</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a normal probability plot with a fitted line.</span>
+
+<span class="sd">    sample: sequence of numbers</span>
+<span class="sd">    fit_color: color string for the fitted line</span>
+<span class="sd">    options: passed along to Plot</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">fit_color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">birthweight</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Birthweight (lb)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6efbaf93998bcdc21a6ff0ffd4181dac0ed0673c61657aa80b8f30d612f11e29.png" src="_images/6efbaf93998bcdc21a6ff0ffd4181dac0ed0673c61657aa80b8f30d612f11e29.png" />
+</div>
+</div>
+<p>The advantage of a normal probability plot is that it shows deviations from the normal model more clearly, especially in the tails.</p>
+<p>The drawback is that it might show deviations <em>too</em> clearly – a model that’s good enough for practical purposes might look pretty bad on a normal probability plot.</p>
+<p><strong>Exercise:</strong> One reason the distribution of birthweight deviated from the Gaussian model is that it includes some very light babies that were born pre-term, which is commonly defined to mean prior to the 36th week of pregnancy.</p>
+<p>The following code selects the birthweights of babies who were born full term. Run this code, and then go back to run the visualizations in this section. Is the distribution of birthweights for full-term babies closer to a Gaussian model?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_term</span> <span class="o">=</span> <span class="n">nsfg</span><span class="p">[</span><span class="s1">&#39;PRGLNGTH&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">36</span>
+<span class="n">birthweight</span> <span class="o">=</span> <span class="n">birthweight</span><span class="p">[</span><span class="n">full_term</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="central-limit-theorem">
+<h2>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
+<p>One reason the Gaussian distribution is a good model for so many think we see in the real world is the Central Limit Theorem, which says:</p>
+<blockquote>
+<div><p>If you add up independent values from a distribution with finite mean and variance, the sum converges on a normal distribution.</p>
+</div></blockquote>
+<p>To demonstrate, the following function generates samples with difference sizes from an exponential distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_expo_samples</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from an exponential distribution.</span>
+
+<span class="sd">    beta: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: map from sample size to sample</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+                  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function generates normal probability plots for samples with various sizes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes normal probability plots for samples.</span>
+
+<span class="sd">    samples: map from sample size to sample</span>
+<span class="sd">    label: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    
+    <span class="n">plot</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">plot</span><span class="p">)</span>
+        <span class="n">plot</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+        <span class="n">decorate</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;n=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span>
+                 <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">yticks</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+                 <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following plot shows how the sum of exponential variates converges to normal as sample size increases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_expo_samples</span><span class="p">()</span>
+<span class="n">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Sum of expo values&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c5a8ddae42205a693ac416a325c0d1cda073afdaa6707bcdb173937ccd0667c.png" src="_images/7c5a8ddae42205a693ac416a325c0d1cda073afdaa6707bcdb173937ccd0667c.png" />
+</div>
+</div>
+<p>The exponential distribution is not very heavy tailed, so the number of addends doesn’t have to be very big before the sum is well modeled by a Gaussian distribution.</p>
+<p>The lognormal distribution has higher variance, so it requires a larger sample size before it converges to normal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_lognormal_samples</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a lognormal distribution.</span>
+
+<span class="sd">    mu: parmeter</span>
+<span class="sd">    sigma: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+                  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_lognormal_samples</span><span class="p">()</span>
+<span class="n">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;sum of lognormal values&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/012e176d5d132385ada1d68d33483a08b8cdeab4adbc5ff1ff085863ddcc407d.png" src="_images/012e176d5d132385ada1d68d33483a08b8cdeab4adbc5ff1ff085863ddcc407d.png" />
+</div>
+</div>
+<p>The Pareto distribution has infinite variance, and sometimes infinite mean, depending on the parameters.  It violates the requirements of the CLT and does not generally converge to normal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_pareto_samples</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a Pareto distribution.</span>
+
+<span class="sd">    alpha: parameter</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+                  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_pareto_samples</span><span class="p">()</span>
+<span class="n">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;sum of Pareto values&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7921e460aaa0e046f482451abf0fe40623a053c33b9df48d507522b3efeb3a64.png" src="_images/7921e460aaa0e046f482451abf0fe40623a053c33b9df48d507522b3efeb3a64.png" />
+</div>
+</div>
+<p>If the random variates are correlated, that also violates the CLT, so the sums don’t generally converge.</p>
+<p>To generate correlated values, we generate correlated normal values and then transform to whatever distribution we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_correlated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a sequence of correlated values from a standard normal dist.</span>
+<span class="sd">    </span>
+<span class="sd">    rho: coefficient of correlation</span>
+<span class="sd">    n: length of sequence</span>
+
+<span class="sd">    returns: iterator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">x</span>
+
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">rho</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="k">def</span> <span class="nf">generate_expo_correlated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a sequence of correlated values from </span>
+<span class="sd">    an exponential dist.</span>
+
+<span class="sd">    rho: coefficient of correlation</span>
+<span class="sd">    n: length of sequence</span>
+
+<span class="sd">    returns: NumPy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">generate_correlated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">uniform</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">expo</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">uniform</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_correlated_samples</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates samples from a correlated exponential distribution.</span>
+
+<span class="sd">    rho: correlation</span>
+<span class="sd">    iters: number of samples to generate for each size</span>
+
+<span class="sd">    returns: list of samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">generate_expo_correlated</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+                  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">)]</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span>
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">make_correlated_samples</span><span class="p">()</span>
+<span class="n">normal_plot_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> 
+                    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Sum of correlated exponential values&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9d3dd34e5438bd1cbbcd013bf8d711d80db73f1735e390681a1bb74614c0b045.png" src="_images/9d3dd34e5438bd1cbbcd013bf8d711d80db73f1735e390681a1bb74614c0b045.png" />
+</div>
+</div>
+</section>
+<section id="lognormal-distributions">
+<h2>Lognormal Distributions<a class="headerlink" href="#lognormal-distributions" title="Link to this heading">#</a></h2>
+<p>The following cells download and read data from the <a class="reference external" href="https://www.cdc.gov/brfss/index.html">Behavior Risk Factor Surveilance System</a> (BRFSS).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ElementsOfDataScience/raw/master/data/brfss.hdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">brfss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;brfss.hdf&#39;</span><span class="p">,</span> <span class="s1">&#39;brfss&#39;</span><span class="p">)</span>
+<span class="n">brfss</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SEQNO</th>
+      <th>HTM4</th>
+      <th>WTKG3</th>
+      <th>_SEX</th>
+      <th>_AGEG5YR</th>
+      <th>_VEGESU1</th>
+      <th>_INCOMG</th>
+      <th>_LLCPWT</th>
+      <th>AGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019000001</td>
+      <td>157.0</td>
+      <td>69.85</td>
+      <td>2</td>
+      <td>13.0</td>
+      <td>114.0</td>
+      <td>2</td>
+      <td>135.304080</td>
+      <td>82.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019000002</td>
+      <td>163.0</td>
+      <td>48.99</td>
+      <td>2</td>
+      <td>11.0</td>
+      <td>121.0</td>
+      <td>3</td>
+      <td>1454.882220</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019000003</td>
+      <td>165.0</td>
+      <td>86.18</td>
+      <td>2</td>
+      <td>10.0</td>
+      <td>164.0</td>
+      <td>5</td>
+      <td>215.576852</td>
+      <td>67.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019000004</td>
+      <td>165.0</td>
+      <td>55.34</td>
+      <td>2</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>261.282838</td>
+      <td>82.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019000005</td>
+      <td>152.0</td>
+      <td>49.90</td>
+      <td>2</td>
+      <td>13.0</td>
+      <td>178.0</td>
+      <td>9</td>
+      <td>535.270103</td>
+      <td>82.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>One of the columns contains self-reports weights in kilograms for a representative sample of adult residents in the United States.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weight</span> <span class="o">=</span> <span class="n">brfss</span><span class="p">[</span><span class="s1">&#39;WTKG3&#39;</span><span class="p">]</span>
+<span class="n">weight</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    388520.000000
+mean         82.170295
+std          21.025989
+min          22.680000
+25%          68.040000
+50%          79.380000
+75%          92.990000
+max         281.230000
+Name: WTKG3, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distributions are different for men and women, so I’ll partition them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">brfss</span><span class="p">[</span><span class="s1">&#39;_SEX&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">female</span> <span class="o">=</span> <span class="n">brfss</span><span class="p">[</span><span class="s1">&#39;_SEX&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="n">weight_male</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">male</span><span class="p">,</span> <span class="s1">&#39;WTKG3&#39;</span><span class="p">]</span>
+<span class="n">weight_female</span> <span class="o">=</span> <span class="n">brfss</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">female</span><span class="p">,</span> <span class="s1">&#39;WTKG3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">weight_male</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">weight_male</span><span class="p">)</span>
+<span class="n">weight_female</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">weight_female</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see whether adult weights are well modeled by a Gaussian distribution, we’ll compare CDFs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">weight_male</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Male&#39;</span><span class="p">)</span>
+<span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">weight_female</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Male&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Adult weight (kg)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/236c2c7082afe5cf2624059fa7fabe33285b5f853074009a93c118b3d12286b3.png" src="_images/236c2c7082afe5cf2624059fa7fabe33285b5f853074009a93c118b3d12286b3.png" />
+</div>
+</div>
+<p>And make a normal probability plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">weight_male</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Adult weight (kg)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8ce58c42088a78cecd768197f20cbc6fb49f795646b66de28df030d8a473ccc6.png" src="_images/8ce58c42088a78cecd768197f20cbc6fb49f795646b66de28df030d8a473ccc6.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> If we think a distribution might be lognormal, one way to check is to compute the log of the values and test whether they fit a normal distribution.</p>
+<p>Compute the log of adult weight for men and women and run the tests in this section with the transformed values.</p>
+</section>
+<section id="where-do-lognormal-distributions-come-from">
+<h2>Where Do Lognormal Distributions Come From?<a class="headerlink" href="#where-do-lognormal-distributions-come-from" title="Link to this heading">#</a></h2>
+<p>It seems that the distribution of adult weights is approximately lognormal. One possible explanation is that the weight a person gains each year is proportional to their current weight. In that case, adult weight is the product of a large number of multiplicative factors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">w0</span> <span class="n">f1</span> <span class="n">f2</span> <span class="o">...</span> <span class="n">fn</span>  
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">w</span></code> is adult weight, <code class="docutils literal notranslate"><span class="pre">w0</span></code> is birth weight, and <code class="docutils literal notranslate"><span class="pre">fi</span></code> is the weight gain factor for year <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<p>The log of a product is the sum of the logs of the factors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">logw</span> <span class="o">=</span> <span class="n">log</span> <span class="n">w0</span> <span class="o">+</span> <span class="n">log</span> <span class="n">f1</span> <span class="o">+</span> <span class="n">log</span> <span class="n">f2</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">log</span> <span class="n">fn</span> 
+</pre></div>
+</div>
+<p>So by the Central Limit Theorem, the distribution of <code class="docutils literal notranslate"><span class="pre">logw</span></code> is approximately normal for large <code class="docutils literal notranslate"><span class="pre">n</span></code>, which implies that the distribution of <code class="docutils literal notranslate"><span class="pre">w</span></code> is lognormal.</p>
+<p>To model this phenomenon, choose a distribution for <code class="docutils literal notranslate"><span class="pre">f</span></code> that seems reasonable, then generate a sample of adult weights by choosing a random value from the distribution of birth weights, choosing a sequence of factors from the distribution of <code class="docutils literal notranslate"><span class="pre">f</span></code>, and computing the product. What value of <code class="docutils literal notranslate"><span class="pre">n</span></code> is needed to converge to a lognormal distribution?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.01</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">percent_gain</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">percent_gain</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Percent gain&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/690f68d60c403af566b13da0927e62cb85d3a72131a3c17bd220f17d194ede26.png" src="_images/690f68d60c403af566b13da0927e62cb85d3a72131a3c17bd220f17d194ede26.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_life</span><span class="p">():</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">rel_gains</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">320</span><span class="p">)</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">*</span> <span class="n">rel_gains</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">weight</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">simulate_life</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)])</span>
+<span class="n">sim_weights</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72.50540907896162
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">sim_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sim_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">sim_weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated weights (kg)&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Adult weight&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/320242d985438539c3cafdf71f6443c411e592557aa3395c0eed8c1f82114f5c.png" src="_images/320242d985438539c3cafdf71f6443c411e592557aa3395c0eed8c1f82114f5c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">sim_weights</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Simulated weights (kg)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d1cdca6dcc142aa6003e4a774c38bc211924c2f4ea784c5b65f330f6a3b66710.png" src="_images/d1cdca6dcc142aa6003e4a774c38bc211924c2f4ea784c5b65f330f6a3b66710.png" />
+</div>
+</div>
+</section>
+<section id="distribution-of-file-sizes">
+<h2>Distribution of File Sizes<a class="headerlink" href="#distribution-of-file-sizes" title="Link to this heading">#</a></h2>
+<p>The following command walks the entire file system (or at least the parts we have permission to read) and collects the sizes of the files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>find<span class="w"> </span>/<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%s\n&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>file_sizes
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/proc/tty/driver’: Permission denied
+find: ‘/proc/1/task/1/fd’: Permission denied
+find: ‘/proc/1/task/1/fdinfo’: Permission denied
+find: ‘/proc/1/task/1/ns’: Permission denied
+find: ‘/proc/1/fd’: Permission denied
+find: ‘/proc/1/map_files’: Permission denied
+find: ‘/proc/1/fdinfo’: Permission denied
+find: ‘/proc/1/ns’: Permission denied
+find: ‘/proc/2/task/2/fd’: Permission denied
+find: ‘/proc/2/task/2/fdinfo’: Permission denied
+find: ‘/proc/2/task/2/ns’: Permission denied
+find: ‘/proc/2/fd’: Permission denied
+find: ‘/proc/2/map_files’: Permission denied
+find: ‘/proc/2/fdinfo’: Permission denied
+find: ‘/proc/2/ns’: Permission denied
+find: ‘/proc/3/task/3/fd’: Permission denied
+find: ‘/proc/3/task/3/fdinfo’: Permission denied
+find: ‘/proc/3/task/3/ns’: Permission denied
+find: ‘/proc/3/fd’: Permission denied
+find: ‘/proc/3/map_files’: Permission denied
+find: ‘/proc/3/fdinfo’: Permission denied
+find: ‘/proc/3/ns’: Permission denied
+find: ‘/proc/4/task/4/fd’: Permission denied
+find: ‘/proc/4/task/4/fdinfo’: Permission denied
+find: ‘/proc/4/task/4/ns’: Permission denied
+find: ‘/proc/4/fd’: Permission denied
+find: ‘/proc/4/map_files’: Permission denied
+find: ‘/proc/4/fdinfo’: Permission denied
+find: ‘/proc/4/ns’: Permission denied
+find: ‘/proc/6/task/6/fd’: Permission denied
+find: ‘/proc/6/task/6/fdinfo’: Permission denied
+find: ‘/proc/6/task/6/ns’: Permission denied
+find: ‘/proc/6/fd’: Permission denied
+find: ‘/proc/6/map_files’: Permission denied
+find: ‘/proc/6/fdinfo’: Permission denied
+find: ‘/proc/6/ns’: Permission denied
+find: ‘/proc/9/task/9/fd’: Permission denied
+find: ‘/proc/9/task/9/fdinfo’: Permission denied
+find: ‘/proc/9/task/9/ns’: Permission denied
+find: ‘/proc/9/fd’: Permission denied
+find: ‘/proc/9/map_files’: Permission denied
+find: ‘/proc/9/fdinfo’: Permission denied
+find: ‘/proc/9/ns’: Permission denied
+find: ‘/proc/10/task/10/fd’: Permission denied
+find: ‘/proc/10/task/10/fdinfo’: Permission denied
+find: ‘/proc/10/task/10/ns’: Permission denied
+find: ‘/proc/10/fd’: Permission denied
+find: ‘/proc/10/map_files’: Permission denied
+find: ‘/proc/10/fdinfo’: Permission denied
+find: ‘/proc/10/ns’: Permission denied
+find: ‘/proc/11/task/11/fd’: Permission denied
+find: ‘/proc/11/task/11/fdinfo’: Permission denied
+find: ‘/proc/11/task/11/ns’: Permission denied
+find: ‘/proc/11/fd’: Permission denied
+find: ‘/proc/11/map_files’: Permission denied
+find: ‘/proc/11/fdinfo’: Permission denied
+find: ‘/proc/11/ns’: Permission denied
+find: ‘/proc/12/task/12/fd’: Permission denied
+find: ‘/proc/12/task/12/fdinfo’: Permission denied
+find: ‘/proc/12/task/12/ns’: Permission denied
+find: ‘/proc/12/fd’: Permission denied
+find: ‘/proc/12/map_files’: Permission denied
+find: ‘/proc/12/fdinfo’: Permission denied
+find: ‘/proc/12/ns’: Permission denied
+find: ‘/proc/13/task/13/fd’: Permission denied
+find: ‘/proc/13/task/13/fdinfo’: Permission denied
+find: ‘/proc/13/task/13/ns’: Permission denied
+find: ‘/proc/13/fd’: Permission denied
+find: ‘/proc/13/map_files’: Permission denied
+find: ‘/proc/13/fdinfo’: Permission denied
+find: ‘/proc/13/ns’: Permission denied
+find: ‘/proc/14/task/14/fd’: Permission denied
+find: ‘/proc/14/task/14/fdinfo’: Permission denied
+find: ‘/proc/14/task/14/ns’: Permission denied
+find: ‘/proc/14/fd’: Permission denied
+find: ‘/proc/14/map_files’: Permission denied
+find: ‘/proc/14/fdinfo’: Permission denied
+find: ‘/proc/14/ns’: Permission denied
+find: ‘/proc/15/task/15/fd’: Permission denied
+find: ‘/proc/15/task/15/fdinfo’: Permission denied
+find: ‘/proc/15/task/15/ns’: Permission denied
+find: ‘/proc/15/fd’: Permission denied
+find: ‘/proc/15/map_files’: Permission denied
+find: ‘/proc/15/fdinfo’: Permission denied
+find: ‘/proc/15/ns’: Permission denied
+find: ‘/proc/16/task/16/fd’: Permission denied
+find: ‘/proc/16/task/16/fdinfo’: Permission denied
+find: ‘/proc/16/task/16/ns’: Permission denied
+find: ‘/proc/16/fd’: Permission denied
+find: ‘/proc/16/map_files’: Permission denied
+find: ‘/proc/16/fdinfo’: Permission denied
+find: ‘/proc/16/ns’: Permission denied
+find: ‘/proc/17/task/17/fd’: Permission denied
+find: ‘/proc/17/task/17/fdinfo’: Permission denied
+find: ‘/proc/17/task/17/ns’: Permission denied
+find: ‘/proc/17/fd’: Permission denied
+find: ‘/proc/17/map_files’: Permission denied
+find: ‘/proc/17/fdinfo’: Permission denied
+find: ‘/proc/17/ns’: Permission denied
+find: ‘/proc/18/task/18/fd’: Permission denied
+find: ‘/proc/18/task/18/fdinfo’: Permission denied
+find: ‘/proc/18/task/18/ns’: Permission denied
+find: ‘/proc/18/fd’: Permission denied
+find: ‘/proc/18/map_files’: Permission denied
+find: ‘/proc/18/fdinfo’: Permission denied
+find: ‘/proc/18/ns’: Permission denied
+find: ‘/proc/20/task/20/fd’: Permission denied
+find: ‘/proc/20/task/20/fdinfo’: Permission denied
+find: ‘/proc/20/task/20/ns’: Permission denied
+find: ‘/proc/20/fd’: Permission denied
+find: ‘/proc/20/map_files’: Permission denied
+find: ‘/proc/20/fdinfo’: Permission denied
+find: ‘/proc/20/ns’: Permission denied
+find: ‘/proc/21/task/21/fd’: Permission denied
+find: ‘/proc/21/task/21/fdinfo’: Permission denied
+find: ‘/proc/21/task/21/ns’: Permission denied
+find: ‘/proc/21/fd’: Permission denied
+find: ‘/proc/21/map_files’: Permission denied
+find: ‘/proc/21/fdinfo’: Permission denied
+find: ‘/proc/21/ns’: Permission denied
+find: ‘/proc/22/task/22/fd’: Permission denied
+find: ‘/proc/22/task/22/fdinfo’: Permission denied
+find: ‘/proc/22/task/22/ns’: Permission denied
+find: ‘/proc/22/fd’: Permission denied
+find: ‘/proc/22/map_files’: Permission denied
+find: ‘/proc/22/fdinfo’: Permission denied
+find: ‘/proc/22/ns’: Permission denied
+find: ‘/proc/23/task/23/fd’: Permission denied
+find: ‘/proc/23/task/23/fdinfo’: Permission denied
+find: ‘/proc/23/task/23/ns’: Permission denied
+find: ‘/proc/23/fd’: Permission denied
+find: ‘/proc/23/map_files’: Permission denied
+find: ‘/proc/23/fdinfo’: Permission denied
+find: ‘/proc/23/ns’: Permission denied
+find: ‘/proc/24/task/24/fd’: Permission denied
+find: ‘/proc/24/task/24/fdinfo’: Permission denied
+find: ‘/proc/24/task/24/ns’: Permission denied
+find: ‘/proc/24/fd’: Permission denied
+find: ‘/proc/24/map_files’: Permission denied
+find: ‘/proc/24/fdinfo’: Permission denied
+find: ‘/proc/24/ns’: Permission denied
+find: ‘/proc/26/task/26/fd’: Permission denied
+find: ‘/proc/26/task/26/fdinfo’: Permission denied
+find: ‘/proc/26/task/26/ns’: Permission denied
+find: ‘/proc/26/fd’: Permission denied
+find: ‘/proc/26/map_files’: Permission denied
+find: ‘/proc/26/fdinfo’: Permission denied
+find: ‘/proc/26/ns’: Permission denied
+find: ‘/proc/27/task/27/fd’: Permission denied
+find: ‘/proc/27/task/27/fdinfo’: Permission denied
+find: ‘/proc/27/task/27/ns’: Permission denied
+find: ‘/proc/27/fd’: Permission denied
+find: ‘/proc/27/map_files’: Permission denied
+find: ‘/proc/27/fdinfo’: Permission denied
+find: ‘/proc/27/ns’: Permission denied
+find: ‘/proc/28/task/28/fd’: Permission denied
+find: ‘/proc/28/task/28/fdinfo’: Permission denied
+find: ‘/proc/28/task/28/ns’: Permission denied
+find: ‘/proc/28/fd’: Permission denied
+find: ‘/proc/28/map_files’: Permission denied
+find: ‘/proc/28/fdinfo’: Permission denied
+find: ‘/proc/28/ns’: Permission denied
+find: ‘/proc/29/task/29/fd’: Permission denied
+find: ‘/proc/29/task/29/fdinfo’: Permission denied
+find: ‘/proc/29/task/29/ns’: Permission denied
+find: ‘/proc/29/fd’: Permission denied
+find: ‘/proc/29/map_files’: Permission denied
+find: ‘/proc/29/fdinfo’: Permission denied
+find: ‘/proc/29/ns’: Permission denied
+find: ‘/proc/30/task/30/fd’: Permission denied
+find: ‘/proc/30/task/30/fdinfo’: Permission denied
+find: ‘/proc/30/task/30/ns’: Permission denied
+find: ‘/proc/30/fd’: Permission denied
+find: ‘/proc/30/map_files’: Permission denied
+find: ‘/proc/30/fdinfo’: Permission denied
+find: ‘/proc/30/ns’: Permission denied
+find: ‘/proc/32/task/32/fd’: Permission denied
+find: ‘/proc/32/task/32/fdinfo’: Permission denied
+find: ‘/proc/32/task/32/ns’: Permission denied
+find: ‘/proc/32/fd’: Permission denied
+find: ‘/proc/32/map_files’: Permission denied
+find: ‘/proc/32/fdinfo’: Permission denied
+find: ‘/proc/32/ns’: Permission denied
+find: ‘/proc/33/task/33/fd’: Permission denied
+find: ‘/proc/33/task/33/fdinfo’: Permission denied
+find: ‘/proc/33/task/33/ns’: Permission denied
+find: ‘/proc/33/fd’: Permission denied
+find: ‘/proc/33/map_files’: Permission denied
+find: ‘/proc/33/fdinfo’: Permission denied
+find: ‘/proc/33/ns’: Permission denied
+find: ‘/proc/34/task/34/fd’: Permission denied
+find: ‘/proc/34/task/34/fdinfo’: Permission denied
+find: ‘/proc/34/task/34/ns’: Permission denied
+find: ‘/proc/34/fd’: Permission denied
+find: ‘/proc/34/map_files’: Permission denied
+find: ‘/proc/34/fdinfo’: Permission denied
+find: ‘/proc/34/ns’: Permission denied
+find: ‘/proc/35/task/35/fd’: Permission denied
+find: ‘/proc/35/task/35/fdinfo’: Permission denied
+find: ‘/proc/35/task/35/ns’: Permission denied
+find: ‘/proc/35/fd’: Permission denied
+find: ‘/proc/35/map_files’: Permission denied
+find: ‘/proc/35/fdinfo’: Permission denied
+find: ‘/proc/35/ns’: Permission denied
+find: ‘/proc/36/task/36/fd’: Permission denied
+find: ‘/proc/36/task/36/fdinfo’: Permission denied
+find: ‘/proc/36/task/36/ns’: Permission denied
+find: ‘/proc/36/fd’: Permission denied
+find: ‘/proc/36/map_files’: Permission denied
+find: ‘/proc/36/fdinfo’: Permission denied
+find: ‘/proc/36/ns’: Permission denied
+find: ‘/proc/38/task/38/fd’: Permission denied
+find: ‘/proc/38/task/38/fdinfo’: Permission denied
+find: ‘/proc/38/task/38/ns’: Permission denied
+find: ‘/proc/38/fd’: Permission denied
+find: ‘/proc/38/map_files’: Permission denied
+find: ‘/proc/38/fdinfo’: Permission denied
+find: ‘/proc/38/ns’: Permission denied
+find: ‘/proc/39/task/39/fd’: Permission denied
+find: ‘/proc/39/task/39/fdinfo’: Permission denied
+find: ‘/proc/39/task/39/ns’: Permission denied
+find: ‘/proc/39/fd’: Permission denied
+find: ‘/proc/39/map_files’: Permission denied
+find: ‘/proc/39/fdinfo’: Permission denied
+find: ‘/proc/39/ns’: Permission denied
+find: ‘/proc/40/task/40/fd’: Permission denied
+find: ‘/proc/40/task/40/fdinfo’: Permission denied
+find: ‘/proc/40/task/40/ns’: Permission denied
+find: ‘/proc/40/fd’: Permission denied
+find: ‘/proc/40/map_files’: Permission denied
+find: ‘/proc/40/fdinfo’: Permission denied
+find: ‘/proc/40/ns’: Permission denied
+find: ‘/proc/41/task/41/fd’: Permission denied
+find: ‘/proc/41/task/41/fdinfo’: Permission denied
+find: ‘/proc/41/task/41/ns’: Permission denied
+find: ‘/proc/41/fd’: Permission denied
+find: ‘/proc/41/map_files’: Permission denied
+find: ‘/proc/41/fdinfo’: Permission denied
+find: ‘/proc/41/ns’: Permission denied
+find: ‘/proc/42/task/42/fd’: Permission denied
+find: ‘/proc/42/task/42/fdinfo’: Permission denied
+find: ‘/proc/42/task/42/ns’: Permission denied
+find: ‘/proc/42/fd’: Permission denied
+find: ‘/proc/42/map_files’: Permission denied
+find: ‘/proc/42/fdinfo’: Permission denied
+find: ‘/proc/42/ns’: Permission denied
+find: ‘/proc/44/task/44/fd’: Permission denied
+find: ‘/proc/44/task/44/fdinfo’: Permission denied
+find: ‘/proc/44/task/44/ns’: Permission denied
+find: ‘/proc/44/fd’: Permission denied
+find: ‘/proc/44/map_files’: Permission denied
+find: ‘/proc/44/fdinfo’: Permission denied
+find: ‘/proc/44/ns’: Permission denied
+find: ‘/proc/45/task/45/fd’: Permission denied
+find: ‘/proc/45/task/45/fdinfo’: Permission denied
+find: ‘/proc/45/task/45/ns’: Permission denied
+find: ‘/proc/45/fd’: Permission denied
+find: ‘/proc/45/map_files’: Permission denied
+find: ‘/proc/45/fdinfo’: Permission denied
+find: ‘/proc/45/ns’: Permission denied
+find: ‘/proc/46/task/46/fd’: Permission denied
+find: ‘/proc/46/task/46/fdinfo’: Permission denied
+find: ‘/proc/46/task/46/ns’: Permission denied
+find: ‘/proc/46/fd’: Permission denied
+find: ‘/proc/46/map_files’: Permission denied
+find: ‘/proc/46/fdinfo’: Permission denied
+find: ‘/proc/46/ns’: Permission denied
+find: ‘/proc/47/task/47/fd’: Permission denied
+find: ‘/proc/47/task/47/fdinfo’: Permission denied
+find: ‘/proc/47/task/47/ns’: Permission denied
+find: ‘/proc/47/fd’: Permission denied
+find: ‘/proc/47/map_files’: Permission denied
+find: ‘/proc/47/fdinfo’: Permission denied
+find: ‘/proc/47/ns’: Permission denied
+find: ‘/proc/48/task/48/fd’: Permission denied
+find: ‘/proc/48/task/48/fdinfo’: Permission denied
+find: ‘/proc/48/task/48/ns’: Permission denied
+find: ‘/proc/48/fd’: Permission denied
+find: ‘/proc/48/map_files’: Permission denied
+find: ‘/proc/48/fdinfo’: Permission denied
+find: ‘/proc/48/ns’: Permission denied
+find: ‘/proc/50/task/50/fd’: Permission denied
+find: ‘/proc/50/task/50/fdinfo’: Permission denied
+find: ‘/proc/50/task/50/ns’: Permission denied
+find: ‘/proc/50/fd’: Permission denied
+find: ‘/proc/50/map_files’: Permission denied
+find: ‘/proc/50/fdinfo’: Permission denied
+find: ‘/proc/50/ns’: Permission denied
+find: ‘/proc/51/task/51/fd’: Permission denied
+find: ‘/proc/51/task/51/fdinfo’: Permission denied
+find: ‘/proc/51/task/51/ns’: Permission denied
+find: ‘/proc/51/fd’: Permission denied
+find: ‘/proc/51/map_files’: Permission denied
+find: ‘/proc/51/fdinfo’: Permission denied
+find: ‘/proc/51/ns’: Permission denied
+find: ‘/proc/52/task/52/fd’: Permission denied
+find: ‘/proc/52/task/52/fdinfo’: Permission denied
+find: ‘/proc/52/task/52/ns’: Permission denied
+find: ‘/proc/52/fd’: Permission denied
+find: ‘/proc/52/map_files’: Permission denied
+find: ‘/proc/52/fdinfo’: Permission denied
+find: ‘/proc/52/ns’: Permission denied
+find: ‘/proc/53/task/53/fd’: Permission denied
+find: ‘/proc/53/task/53/fdinfo’: Permission denied
+find: ‘/proc/53/task/53/ns’: Permission denied
+find: ‘/proc/53/fd’: Permission denied
+find: ‘/proc/53/map_files’: Permission denied
+find: ‘/proc/53/fdinfo’: Permission denied
+find: ‘/proc/53/ns’: Permission denied
+find: ‘/proc/54/task/54/fd’: Permission denied
+find: ‘/proc/54/task/54/fdinfo’: Permission denied
+find: ‘/proc/54/task/54/ns’: Permission denied
+find: ‘/proc/54/fd’: Permission denied
+find: ‘/proc/54/map_files’: Permission denied
+find: ‘/proc/54/fdinfo’: Permission denied
+find: ‘/proc/54/ns’: Permission denied
+find: ‘/proc/56/task/56/fd’: Permission denied
+find: ‘/proc/56/task/56/fdinfo’: Permission denied
+find: ‘/proc/56/task/56/ns’: Permission denied
+find: ‘/proc/56/fd’: Permission denied
+find: ‘/proc/56/map_files’: Permission denied
+find: ‘/proc/56/fdinfo’: Permission denied
+find: ‘/proc/56/ns’: Permission denied
+find: ‘/proc/57/task/57/fd’: Permission denied
+find: ‘/proc/57/task/57/fdinfo’: Permission denied
+find: ‘/proc/57/task/57/ns’: Permission denied
+find: ‘/proc/57/fd’: Permission denied
+find: ‘/proc/57/map_files’: Permission denied
+find: ‘/proc/57/fdinfo’: Permission denied
+find: ‘/proc/57/ns’: Permission denied
+find: ‘/proc/58/task/58/fd’: Permission denied
+find: ‘/proc/58/task/58/fdinfo’: Permission denied
+find: ‘/proc/58/task/58/ns’: Permission denied
+find: ‘/proc/58/fd’: Permission denied
+find: ‘/proc/58/map_files’: Permission denied
+find: ‘/proc/58/fdinfo’: Permission denied
+find: ‘/proc/58/ns’: Permission denied
+find: ‘/proc/59/task/59/fd’: Permission denied
+find: ‘/proc/59/task/59/fdinfo’: Permission denied
+find: ‘/proc/59/task/59/ns’: Permission denied
+find: ‘/proc/59/fd’: Permission denied
+find: ‘/proc/59/map_files’: Permission denied
+find: ‘/proc/59/fdinfo’: Permission denied
+find: ‘/proc/59/ns’: Permission denied
+find: ‘/proc/60/task/60/fd’: Permission denied
+find: ‘/proc/60/task/60/fdinfo’: Permission denied
+find: ‘/proc/60/task/60/ns’: Permission denied
+find: ‘/proc/60/fd’: Permission denied
+find: ‘/proc/60/map_files’: Permission denied
+find: ‘/proc/60/fdinfo’: Permission denied
+find: ‘/proc/60/ns’: Permission denied
+find: ‘/proc/62/task/62/fd’: Permission denied
+find: ‘/proc/62/task/62/fdinfo’: Permission denied
+find: ‘/proc/62/task/62/ns’: Permission denied
+find: ‘/proc/62/fd’: Permission denied
+find: ‘/proc/62/map_files’: Permission denied
+find: ‘/proc/62/fdinfo’: Permission denied
+find: ‘/proc/62/ns’: Permission denied
+find: ‘/proc/63/task/63/fd’: Permission denied
+find: ‘/proc/63/task/63/fdinfo’: Permission denied
+find: ‘/proc/63/task/63/ns’: Permission denied
+find: ‘/proc/63/fd’: Permission denied
+find: ‘/proc/63/map_files’: Permission denied
+find: ‘/proc/63/fdinfo’: Permission denied
+find: ‘/proc/63/ns’: Permission denied
+find: ‘/proc/64/task/64/fd’: Permission denied
+find: ‘/proc/64/task/64/fdinfo’: Permission denied
+find: ‘/proc/64/task/64/ns’: Permission denied
+find: ‘/proc/64/fd’: Permission denied
+find: ‘/proc/64/map_files’: Permission denied
+find: ‘/proc/64/fdinfo’: Permission denied
+find: ‘/proc/64/ns’: Permission denied
+find: ‘/proc/65/task/65/fd’: Permission denied
+find: ‘/proc/65/task/65/fdinfo’: Permission denied
+find: ‘/proc/65/task/65/ns’: Permission denied
+find: ‘/proc/65/fd’: Permission denied
+find: ‘/proc/65/map_files’: Permission denied
+find: ‘/proc/65/fdinfo’: Permission denied
+find: ‘/proc/65/ns’: Permission denied
+find: ‘/proc/66/task/66/fd’: Permission denied
+find: ‘/proc/66/task/66/fdinfo’: Permission denied
+find: ‘/proc/66/task/66/ns’: Permission denied
+find: ‘/proc/66/fd’: Permission denied
+find: ‘/proc/66/map_files’: Permission denied
+find: ‘/proc/66/fdinfo’: Permission denied
+find: ‘/proc/66/ns’: Permission denied
+find: ‘/proc/68/task/68/fd’: Permission denied
+find: ‘/proc/68/task/68/fdinfo’: Permission denied
+find: ‘/proc/68/task/68/ns’: Permission denied
+find: ‘/proc/68/fd’: Permission denied
+find: ‘/proc/68/map_files’: Permission denied
+find: ‘/proc/68/fdinfo’: Permission denied
+find: ‘/proc/68/ns’: Permission denied
+find: ‘/proc/69/task/69/fd’: Permission denied
+find: ‘/proc/69/task/69/fdinfo’: Permission denied
+find: ‘/proc/69/task/69/ns’: Permission denied
+find: ‘/proc/69/fd’: Permission denied
+find: ‘/proc/69/map_files’: Permission denied
+find: ‘/proc/69/fdinfo’: Permission denied
+find: ‘/proc/69/ns’: Permission denied
+find: ‘/proc/70/task/70/fd’: Permission denied
+find: ‘/proc/70/task/70/fdinfo’: Permission denied
+find: ‘/proc/70/task/70/ns’: Permission denied
+find: ‘/proc/70/fd’: Permission denied
+find: ‘/proc/70/map_files’: Permission denied
+find: ‘/proc/70/fdinfo’: Permission denied
+find: ‘/proc/70/ns’: Permission denied
+find: ‘/proc/71/task/71/fd’: Permission denied
+find: ‘/proc/71/task/71/fdinfo’: Permission denied
+find: ‘/proc/71/task/71/ns’: Permission denied
+find: ‘/proc/71/fd’: Permission denied
+find: ‘/proc/71/map_files’: Permission denied
+find: ‘/proc/71/fdinfo’: Permission denied
+find: ‘/proc/71/ns’: Permission denied
+find: ‘/proc/72/task/72/fd’: Permission denied
+find: ‘/proc/72/task/72/fdinfo’: Permission denied
+find: ‘/proc/72/task/72/ns’: Permission denied
+find: ‘/proc/72/fd’: Permission denied
+find: ‘/proc/72/map_files’: Permission denied
+find: ‘/proc/72/fdinfo’: Permission denied
+find: ‘/proc/72/ns’: Permission denied
+find: ‘/proc/74/task/74/fd’: Permission denied
+find: ‘/proc/74/task/74/fdinfo’: Permission denied
+find: ‘/proc/74/task/74/ns’: Permission denied
+find: ‘/proc/74/fd’: Permission denied
+find: ‘/proc/74/map_files’: Permission denied
+find: ‘/proc/74/fdinfo’: Permission denied
+find: ‘/proc/74/ns’: Permission denied
+find: ‘/proc/75/task/75/fd’: Permission denied
+find: ‘/proc/75/task/75/fdinfo’: Permission denied
+find: ‘/proc/75/task/75/ns’: Permission denied
+find: ‘/proc/75/fd’: Permission denied
+find: ‘/proc/75/map_files’: Permission denied
+find: ‘/proc/75/fdinfo’: Permission denied
+find: ‘/proc/75/ns’: Permission denied
+find: ‘/proc/76/task/76/fd’: Permission denied
+find: ‘/proc/76/task/76/fdinfo’: Permission denied
+find: ‘/proc/76/task/76/ns’: Permission denied
+find: ‘/proc/76/fd’: Permission denied
+find: ‘/proc/76/map_files’: Permission denied
+find: ‘/proc/76/fdinfo’: Permission denied
+find: ‘/proc/76/ns’: Permission denied
+find: ‘/proc/77/task/77/fd’: Permission denied
+find: ‘/proc/77/task/77/fdinfo’: Permission denied
+find: ‘/proc/77/task/77/ns’: Permission denied
+find: ‘/proc/77/fd’: Permission denied
+find: ‘/proc/77/map_files’: Permission denied
+find: ‘/proc/77/fdinfo’: Permission denied
+find: ‘/proc/77/ns’: Permission denied
+find: ‘/proc/78/task/78/fd’: Permission denied
+find: ‘/proc/78/task/78/fdinfo’: Permission denied
+find: ‘/proc/78/task/78/ns’: Permission denied
+find: ‘/proc/78/fd’: Permission denied
+find: ‘/proc/78/map_files’: Permission denied
+find: ‘/proc/78/fdinfo’: Permission denied
+find: ‘/proc/78/ns’: Permission denied
+find: ‘/proc/80/task/80/fd’: Permission denied
+find: ‘/proc/80/task/80/fdinfo’: Permission denied
+find: ‘/proc/80/task/80/ns’: Permission denied
+find: ‘/proc/80/fd’: Permission denied
+find: ‘/proc/80/map_files’: Permission denied
+find: ‘/proc/80/fdinfo’: Permission denied
+find: ‘/proc/80/ns’: Permission denied
+find: ‘/proc/81/task/81/fd’: Permission denied
+find: ‘/proc/81/task/81/fdinfo’: Permission denied
+find: ‘/proc/81/task/81/ns’: Permission denied
+find: ‘/proc/81/fd’: Permission denied
+find: ‘/proc/81/map_files’: Permission denied
+find: ‘/proc/81/fdinfo’: Permission denied
+find: ‘/proc/81/ns’: Permission denied
+find: ‘/proc/82/task/82/fd’: Permission denied
+find: ‘/proc/82/task/82/fdinfo’: Permission denied
+find: ‘/proc/82/task/82/ns’: Permission denied
+find: ‘/proc/82/fd’: Permission denied
+find: ‘/proc/82/map_files’: Permission denied
+find: ‘/proc/82/fdinfo’: Permission denied
+find: ‘/proc/82/ns’: Permission denied
+find: ‘/proc/83/task/83/fd’: Permission denied
+find: ‘/proc/83/task/83/fdinfo’: Permission denied
+find: ‘/proc/83/task/83/ns’: Permission denied
+find: ‘/proc/83/fd’: Permission denied
+find: ‘/proc/83/map_files’: Permission denied
+find: ‘/proc/83/fdinfo’: Permission denied
+find: ‘/proc/83/ns’: Permission denied
+find: ‘/proc/84/task/84/fd’: Permission denied
+find: ‘/proc/84/task/84/fdinfo’: Permission denied
+find: ‘/proc/84/task/84/ns’: Permission denied
+find: ‘/proc/84/fd’: Permission denied
+find: ‘/proc/84/map_files’: Permission denied
+find: ‘/proc/84/fdinfo’: Permission denied
+find: ‘/proc/84/ns’: Permission denied
+find: ‘/proc/86/task/86/fd’: Permission denied
+find: ‘/proc/86/task/86/fdinfo’: Permission denied
+find: ‘/proc/86/task/86/ns’: Permission denied
+find: ‘/proc/86/fd’: Permission denied
+find: ‘/proc/86/map_files’: Permission denied
+find: ‘/proc/86/fdinfo’: Permission denied
+find: ‘/proc/86/ns’: Permission denied
+find: ‘/proc/87/task/87/fd’: Permission denied
+find: ‘/proc/87/task/87/fdinfo’: Permission denied
+find: ‘/proc/87/task/87/ns’: Permission denied
+find: ‘/proc/87/fd’: Permission denied
+find: ‘/proc/87/map_files’: Permission denied
+find: ‘/proc/87/fdinfo’: Permission denied
+find: ‘/proc/87/ns’: Permission denied
+find: ‘/proc/88/task/88/fd’: Permission denied
+find: ‘/proc/88/task/88/fdinfo’: Permission denied
+find: ‘/proc/88/task/88/ns’: Permission denied
+find: ‘/proc/88/fd’: Permission denied
+find: ‘/proc/88/map_files’: Permission denied
+find: ‘/proc/88/fdinfo’: Permission denied
+find: ‘/proc/88/ns’: Permission denied
+find: ‘/proc/89/task/89/fd’: Permission denied
+find: ‘/proc/89/task/89/fdinfo’: Permission denied
+find: ‘/proc/89/task/89/ns’: Permission denied
+find: ‘/proc/89/fd’: Permission denied
+find: ‘/proc/89/map_files’: Permission denied
+find: ‘/proc/89/fdinfo’: Permission denied
+find: ‘/proc/89/ns’: Permission denied
+find: ‘/proc/90/task/90/fd’: Permission denied
+find: ‘/proc/90/task/90/fdinfo’: Permission denied
+find: ‘/proc/90/task/90/ns’: Permission denied
+find: ‘/proc/90/fd’: Permission denied
+find: ‘/proc/90/map_files’: Permission denied
+find: ‘/proc/90/fdinfo’: Permission denied
+find: ‘/proc/90/ns’: Permission denied
+find: ‘/proc/91/task/91/fd’: Permission denied
+find: ‘/proc/91/task/91/fdinfo’: Permission denied
+find: ‘/proc/91/task/91/ns’: Permission denied
+find: ‘/proc/91/fd’: Permission denied
+find: ‘/proc/91/map_files’: Permission denied
+find: ‘/proc/91/fdinfo’: Permission denied
+find: ‘/proc/91/ns’: Permission denied
+find: ‘/proc/139/task/139/fd’: Permission denied
+find: ‘/proc/139/task/139/fdinfo’: Permission denied
+find: ‘/proc/139/task/139/ns’: Permission denied
+find: ‘/proc/139/fd’: Permission denied
+find: ‘/proc/139/map_files’: Permission denied
+find: ‘/proc/139/fdinfo’: Permission denied
+find: ‘/proc/139/ns’: Permission denied
+find: ‘/proc/140/task/140/fd’: Permission denied
+find: ‘/proc/140/task/140/fdinfo’: Permission denied
+find: ‘/proc/140/task/140/ns’: Permission denied
+find: ‘/proc/140/fd’: Permission denied
+find: ‘/proc/140/map_files’: Permission denied
+find: ‘/proc/140/fdinfo’: Permission denied
+find: ‘/proc/140/ns’: Permission denied
+find: ‘/proc/141/task/141/fd’: Permission denied
+find: ‘/proc/141/task/141/fdinfo’: Permission denied
+find: ‘/proc/141/task/141/ns’: Permission denied
+find: ‘/proc/141/fd’: Permission denied
+find: ‘/proc/141/map_files’: Permission denied
+find: ‘/proc/141/fdinfo’: Permission denied
+find: ‘/proc/141/ns’: Permission denied
+find: ‘/proc/144/task/144/fd’: Permission denied
+find: ‘/proc/144/task/144/fdinfo’: Permission denied
+find: ‘/proc/144/task/144/ns’: Permission denied
+find: ‘/proc/144/fd’: Permission denied
+find: ‘/proc/144/map_files’: Permission denied
+find: ‘/proc/144/fdinfo’: Permission denied
+find: ‘/proc/144/ns’: Permission denied
+find: ‘/proc/145/task/145/fd’: Permission denied
+find: ‘/proc/145/task/145/fdinfo’: Permission denied
+find: ‘/proc/145/task/145/ns’: Permission denied
+find: ‘/proc/145/fd’: Permission denied
+find: ‘/proc/145/map_files’: Permission denied
+find: ‘/proc/145/fdinfo’: Permission denied
+find: ‘/proc/145/ns’: Permission denied
+find: ‘/proc/146/task/146/fd’: Permission denied
+find: ‘/proc/146/task/146/fdinfo’: Permission denied
+find: ‘/proc/146/task/146/ns’: Permission denied
+find: ‘/proc/146/fd’: Permission denied
+find: ‘/proc/146/map_files’: Permission denied
+find: ‘/proc/146/fdinfo’: Permission denied
+find: ‘/proc/146/ns’: Permission denied
+find: ‘/proc/147/task/147/fd’: Permission denied
+find: ‘/proc/147/task/147/fdinfo’: Permission denied
+find: ‘/proc/147/task/147/ns’: Permission denied
+find: ‘/proc/147/fd’: Permission denied
+find: ‘/proc/147/map_files’: Permission denied
+find: ‘/proc/147/fdinfo’: Permission denied
+find: ‘/proc/147/ns’: Permission denied
+find: ‘/proc/148/task/148/fd’: Permission denied
+find: ‘/proc/148/task/148/fdinfo’: Permission denied
+find: ‘/proc/148/task/148/ns’: Permission denied
+find: ‘/proc/148/fd’: Permission denied
+find: ‘/proc/148/map_files’: Permission denied
+find: ‘/proc/148/fdinfo’: Permission denied
+find: ‘/proc/148/ns’: Permission denied
+find: ‘/proc/149/task/149/fd’: Permission denied
+find: ‘/proc/149/task/149/fdinfo’: Permission denied
+find: ‘/proc/149/task/149/ns’: Permission denied
+find: ‘/proc/149/fd’: Permission denied
+find: ‘/proc/149/map_files’: Permission denied
+find: ‘/proc/149/fdinfo’: Permission denied
+find: ‘/proc/149/ns’: Permission denied
+find: ‘/proc/151/task/151/fd’: Permission denied
+find: ‘/proc/151/task/151/fdinfo’: Permission denied
+find: ‘/proc/151/task/151/ns’: Permission denied
+find: ‘/proc/151/fd’: Permission denied
+find: ‘/proc/151/map_files’: Permission denied
+find: ‘/proc/151/fdinfo’: Permission denied
+find: ‘/proc/151/ns’: Permission denied
+find: ‘/proc/152/task/152/fd’: Permission denied
+find: ‘/proc/152/task/152/fdinfo’: Permission denied
+find: ‘/proc/152/task/152/ns’: Permission denied
+find: ‘/proc/152/fd’: Permission denied
+find: ‘/proc/152/map_files’: Permission denied
+find: ‘/proc/152/fdinfo’: Permission denied
+find: ‘/proc/152/ns’: Permission denied
+find: ‘/proc/154/task/154/fd’: Permission denied
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/proc/154/task/154/fdinfo’: Permission denied
+find: ‘/proc/154/task/154/ns’: Permission denied
+find: ‘/proc/154/fd’: Permission denied
+find: ‘/proc/154/map_files’: Permission denied
+find: ‘/proc/154/fdinfo’: Permission denied
+find: ‘/proc/154/ns’: Permission denied
+find: ‘/proc/155/task/155/fd’: Permission denied
+find: ‘/proc/155/task/155/fdinfo’: Permission denied
+find: ‘/proc/155/task/155/ns’: Permission denied
+find: ‘/proc/155/fd’: Permission denied
+find: ‘/proc/155/map_files’: Permission denied
+find: ‘/proc/155/fdinfo’: Permission denied
+find: ‘/proc/155/ns’: Permission denied
+find: ‘/proc/156/task/156/fd’: Permission denied
+find: ‘/proc/156/task/156/fdinfo’: Permission denied
+find: ‘/proc/156/task/156/ns’: Permission denied
+find: ‘/proc/156/fd’: Permission denied
+find: ‘/proc/156/map_files’: Permission denied
+find: ‘/proc/156/fdinfo’: Permission denied
+find: ‘/proc/156/ns’: Permission denied
+find: ‘/proc/165/task/165/fd’: Permission denied
+find: ‘/proc/165/task/165/fdinfo’: Permission denied
+find: ‘/proc/165/task/165/ns’: Permission denied
+find: ‘/proc/165/fd’: Permission denied
+find: ‘/proc/165/map_files’: Permission denied
+find: ‘/proc/165/fdinfo’: Permission denied
+find: ‘/proc/165/ns’: Permission denied
+find: ‘/proc/169/task/169/fd’: Permission denied
+find: ‘/proc/169/task/169/fdinfo’: Permission denied
+find: ‘/proc/169/task/169/ns’: Permission denied
+find: ‘/proc/169/fd’: Permission denied
+find: ‘/proc/169/map_files’: Permission denied
+find: ‘/proc/169/fdinfo’: Permission denied
+find: ‘/proc/169/ns’: Permission denied
+find: ‘/proc/174/task/174/fd’: Permission denied
+find: ‘/proc/174/task/174/fdinfo’: Permission denied
+find: ‘/proc/174/task/174/ns’: Permission denied
+find: ‘/proc/174/fd’: Permission denied
+find: ‘/proc/174/map_files’: Permission denied
+find: ‘/proc/174/fdinfo’: Permission denied
+find: ‘/proc/174/ns’: Permission denied
+find: ‘/proc/183/task/183/fd’: Permission denied
+find: ‘/proc/183/task/183/fdinfo’: Permission denied
+find: ‘/proc/183/task/183/ns’: Permission denied
+find: ‘/proc/183/fd’: Permission denied
+find: ‘/proc/183/map_files’: Permission denied
+find: ‘/proc/183/fdinfo’: Permission denied
+find: ‘/proc/183/ns’: Permission denied
+find: ‘/proc/186/task/186/fd’: Permission denied
+find: ‘/proc/186/task/186/fdinfo’: Permission denied
+find: ‘/proc/186/task/186/ns’: Permission denied
+find: ‘/proc/186/fd’: Permission denied
+find: ‘/proc/186/map_files’: Permission denied
+find: ‘/proc/186/fdinfo’: Permission denied
+find: ‘/proc/186/ns’: Permission denied
+find: ‘/proc/201/task/201/fd’: Permission denied
+find: ‘/proc/201/task/201/fdinfo’: Permission denied
+find: ‘/proc/201/task/201/ns’: Permission denied
+find: ‘/proc/201/fd’: Permission denied
+find: ‘/proc/201/map_files’: Permission denied
+find: ‘/proc/201/fdinfo’: Permission denied
+find: ‘/proc/201/ns’: Permission denied
+find: ‘/proc/266/task/266/fd’: Permission denied
+find: ‘/proc/266/task/266/fdinfo’: Permission denied
+find: ‘/proc/266/task/266/ns’: Permission denied
+find: ‘/proc/266/fd’: Permission denied
+find: ‘/proc/266/map_files’: Permission denied
+find: ‘/proc/266/fdinfo’: Permission denied
+find: ‘/proc/266/ns’: Permission denied
+find: ‘/proc/267/task/267/fd’: Permission denied
+find: ‘/proc/267/task/267/fdinfo’: Permission denied
+find: ‘/proc/267/task/267/ns’: Permission denied
+find: ‘/proc/267/fd’: Permission denied
+find: ‘/proc/267/map_files’: Permission denied
+find: ‘/proc/267/fdinfo’: Permission denied
+find: ‘/proc/267/ns’: Permission denied
+find: ‘/proc/268/task/268/fd’: Permission denied
+find: ‘/proc/268/task/268/fdinfo’: Permission denied
+find: ‘/proc/268/task/268/ns’: Permission denied
+find: ‘/proc/268/fd’: Permission denied
+find: ‘/proc/268/map_files’: Permission denied
+find: ‘/proc/268/fdinfo’: Permission denied
+find: ‘/proc/268/ns’: Permission denied
+find: ‘/proc/269/task/269/fd’: Permission denied
+find: ‘/proc/269/task/269/fdinfo’: Permission denied
+find: ‘/proc/269/task/269/ns’: Permission denied
+find: ‘/proc/269/fd’: Permission denied
+find: ‘/proc/269/map_files’: Permission denied
+find: ‘/proc/269/fdinfo’: Permission denied
+find: ‘/proc/269/ns’: Permission denied
+find: ‘/proc/270/task/270/fd’: Permission denied
+find: ‘/proc/270/task/270/fdinfo’: Permission denied
+find: ‘/proc/270/task/270/ns’: Permission denied
+find: ‘/proc/270/fd’: Permission denied
+find: ‘/proc/270/map_files’: Permission denied
+find: ‘/proc/270/fdinfo’: Permission denied
+find: ‘/proc/270/ns’: Permission denied
+find: ‘/proc/271/task/271/fd’: Permission denied
+find: ‘/proc/271/task/271/fdinfo’: Permission denied
+find: ‘/proc/271/task/271/ns’: Permission denied
+find: ‘/proc/271/fd’: Permission denied
+find: ‘/proc/271/map_files’: Permission denied
+find: ‘/proc/271/fdinfo’: Permission denied
+find: ‘/proc/271/ns’: Permission denied
+find: ‘/proc/293/task/293/fd’: Permission denied
+find: ‘/proc/293/task/293/fdinfo’: Permission denied
+find: ‘/proc/293/task/293/ns’: Permission denied
+find: ‘/proc/293/fd’: Permission denied
+find: ‘/proc/293/map_files’: Permission denied
+find: ‘/proc/293/fdinfo’: Permission denied
+find: ‘/proc/293/ns’: Permission denied
+find: ‘/proc/294/task/294/fd’: Permission denied
+find: ‘/proc/294/task/294/fdinfo’: Permission denied
+find: ‘/proc/294/task/294/ns’: Permission denied
+find: ‘/proc/294/fd’: Permission denied
+find: ‘/proc/294/map_files’: Permission denied
+find: ‘/proc/294/fdinfo’: Permission denied
+find: ‘/proc/294/ns’: Permission denied
+find: ‘/proc/317/task/317/fd’: Permission denied
+find: ‘/proc/317/task/317/fdinfo’: Permission denied
+find: ‘/proc/317/task/317/ns’: Permission denied
+find: ‘/proc/317/fd’: Permission denied
+find: ‘/proc/317/map_files’: Permission denied
+find: ‘/proc/317/fdinfo’: Permission denied
+find: ‘/proc/317/ns’: Permission denied
+find: ‘/proc/324/task/324/fd’: Permission denied
+find: ‘/proc/324/task/324/fdinfo’: Permission denied
+find: ‘/proc/324/task/324/ns’: Permission denied
+find: ‘/proc/324/fd’: Permission denied
+find: ‘/proc/324/map_files’: Permission denied
+find: ‘/proc/324/fdinfo’: Permission denied
+find: ‘/proc/324/ns’: Permission denied
+find: ‘/proc/354/task/354/fd’: Permission denied
+find: ‘/proc/354/task/354/fdinfo’: Permission denied
+find: ‘/proc/354/task/354/ns’: Permission denied
+find: ‘/proc/354/fd’: Permission denied
+find: ‘/proc/354/map_files’: Permission denied
+find: ‘/proc/354/fdinfo’: Permission denied
+find: ‘/proc/354/ns’: Permission denied
+find: ‘/proc/356/task/356/fd’: Permission denied
+find: ‘/proc/356/task/356/fdinfo’: Permission denied
+find: ‘/proc/356/task/356/ns’: Permission denied
+find: ‘/proc/356/fd’: Permission denied
+find: ‘/proc/356/map_files’: Permission denied
+find: ‘/proc/356/fdinfo’: Permission denied
+find: ‘/proc/356/ns’: Permission denied
+find: ‘/proc/357/task/357/fd’: Permission denied
+find: ‘/proc/357/task/357/fdinfo’: Permission denied
+find: ‘/proc/357/task/357/ns’: Permission denied
+find: ‘/proc/357/fd’: Permission denied
+find: ‘/proc/357/map_files’: Permission denied
+find: ‘/proc/357/fdinfo’: Permission denied
+find: ‘/proc/357/ns’: Permission denied
+find: ‘/proc/403/task/403/fd’: Permission denied
+find: ‘/proc/403/task/403/fdinfo’: Permission denied
+find: ‘/proc/403/task/403/ns’: Permission denied
+find: ‘/proc/403/fd’: Permission denied
+find: ‘/proc/403/map_files’: Permission denied
+find: ‘/proc/403/fdinfo’: Permission denied
+find: ‘/proc/403/ns’: Permission denied
+find: ‘/proc/430/task/430/fd’: Permission denied
+find: ‘/proc/430/task/430/fdinfo’: Permission denied
+find: ‘/proc/430/task/430/ns’: Permission denied
+find: ‘/proc/430/fd’: Permission denied
+find: ‘/proc/430/map_files’: Permission denied
+find: ‘/proc/430/fdinfo’: Permission denied
+find: ‘/proc/430/ns’: Permission denied
+find: ‘/proc/431/task/431/fd’: Permission denied
+find: ‘/proc/431/task/431/fdinfo’: Permission denied
+find: ‘/proc/431/task/431/ns’: Permission denied
+find: ‘/proc/431/fd’: Permission denied
+find: ‘/proc/431/map_files’: Permission denied
+find: ‘/proc/431/fdinfo’: Permission denied
+find: ‘/proc/431/ns’: Permission denied
+find: ‘/proc/435/task/435/fd’: Permission denied
+find: ‘/proc/435/task/435/fdinfo’: Permission denied
+find: ‘/proc/435/task/435/ns’: Permission denied
+find: ‘/proc/435/fd’: Permission denied
+find: ‘/proc/435/map_files’: Permission denied
+find: ‘/proc/435/fdinfo’: Permission denied
+find: ‘/proc/435/ns’: Permission denied
+find: ‘/proc/453/task/453/fd’: Permission denied
+find: ‘/proc/453/task/453/fdinfo’: Permission denied
+find: ‘/proc/453/task/453/ns’: Permission denied
+find: ‘/proc/453/fd’: Permission denied
+find: ‘/proc/453/map_files’: Permission denied
+find: ‘/proc/453/fdinfo’: Permission denied
+find: ‘/proc/453/ns’: Permission denied
+find: ‘/proc/472/task/472/fd’: Permission denied
+find: ‘/proc/472/task/472/fdinfo’: Permission denied
+find: ‘/proc/472/task/472/ns’: Permission denied
+find: ‘/proc/472/fd’: Permission denied
+find: ‘/proc/472/map_files’: Permission denied
+find: ‘/proc/472/fdinfo’: Permission denied
+find: ‘/proc/472/ns’: Permission denied
+find: ‘/proc/496/task/496/fd’: Permission denied
+find: ‘/proc/496/task/496/fdinfo’: Permission denied
+find: ‘/proc/496/task/496/ns’: Permission denied
+find: ‘/proc/496/fd’: Permission denied
+find: ‘/proc/496/map_files’: Permission denied
+find: ‘/proc/496/fdinfo’: Permission denied
+find: ‘/proc/496/ns’: Permission denied
+find: ‘/proc/508/task/508/fd’: Permission denied
+find: ‘/proc/508/task/508/fdinfo’: Permission denied
+find: ‘/proc/508/task/508/ns’: Permission denied
+find: ‘/proc/508/fd’: Permission denied
+find: ‘/proc/508/map_files’: Permission denied
+find: ‘/proc/508/fdinfo’: Permission denied
+find: ‘/proc/508/ns’: Permission denied
+find: ‘/proc/579/task/579/fd’: Permission denied
+find: ‘/proc/579/task/579/fdinfo’: Permission denied
+find: ‘/proc/579/task/579/ns’: Permission denied
+find: ‘/proc/579/fd’: Permission denied
+find: ‘/proc/579/map_files’: Permission denied
+find: ‘/proc/579/fdinfo’: Permission denied
+find: ‘/proc/579/ns’: Permission denied
+find: ‘/proc/580/task/580/fd’: Permission denied
+find: ‘/proc/580/task/580/fdinfo’: Permission denied
+find: ‘/proc/580/task/580/ns’: Permission denied
+find: ‘/proc/580/fd’: Permission denied
+find: ‘/proc/580/map_files’: Permission denied
+find: ‘/proc/580/fdinfo’: Permission denied
+find: ‘/proc/580/ns’: Permission denied
+find: ‘/proc/634/task/634/fd’: Permission denied
+find: ‘/proc/634/task/634/fdinfo’: Permission denied
+find: ‘/proc/634/task/634/ns’: Permission denied
+find: ‘/proc/634/fd’: Permission denied
+find: ‘/proc/634/map_files’: Permission denied
+find: ‘/proc/634/fdinfo’: Permission denied
+find: ‘/proc/634/ns’: Permission denied
+find: ‘/proc/643/task/643/fd’: Permission denied
+find: ‘/proc/643/task/643/fdinfo’: Permission denied
+find: ‘/proc/643/task/643/ns’: Permission denied
+find: ‘/proc/643/task/652/fd’: Permission denied
+find: ‘/proc/643/task/652/fdinfo’: Permission denied
+find: ‘/proc/643/task/652/ns’: Permission denied
+find: ‘/proc/643/task/836/fd’: Permission denied
+find: ‘/proc/643/task/836/fdinfo’: Permission denied
+find: ‘/proc/643/task/836/ns’: Permission denied
+find: ‘/proc/643/fd’: Permission denied
+find: ‘/proc/643/map_files’: Permission denied
+find: ‘/proc/643/fdinfo’: Permission denied
+find: ‘/proc/643/ns’: Permission denied
+find: ‘/proc/646/task/646/fd’: Permission denied
+find: ‘/proc/646/task/646/fdinfo’: Permission denied
+find: ‘/proc/646/task/646/ns’: Permission denied
+find: ‘/proc/646/fd’: Permission denied
+find: ‘/proc/646/map_files’: Permission denied
+find: ‘/proc/646/fdinfo’: Permission denied
+find: ‘/proc/646/ns’: Permission denied
+find: ‘/proc/685/task/685/fd’: Permission denied
+find: ‘/proc/685/task/685/fdinfo’: Permission denied
+find: ‘/proc/685/task/685/ns’: Permission denied
+find: ‘/proc/685/fd’: Permission denied
+find: ‘/proc/685/map_files’: Permission denied
+find: ‘/proc/685/fdinfo’: Permission denied
+find: ‘/proc/685/ns’: Permission denied
+find: ‘/proc/686/task/686/fd’: Permission denied
+find: ‘/proc/686/task/686/fdinfo’: Permission denied
+find: ‘/proc/686/task/686/ns’: Permission denied
+find: ‘/proc/686/fd’: Permission denied
+find: ‘/proc/686/map_files’: Permission denied
+find: ‘/proc/686/fdinfo’: Permission denied
+find: ‘/proc/686/ns’: Permission denied
+find: ‘/proc/687/task/687/fd’: Permission denied
+find: ‘/proc/687/task/687/fdinfo’: Permission denied
+find: ‘/proc/687/task/687/ns’: Permission denied
+find: ‘/proc/687/fd’: Permission denied
+find: ‘/proc/687/map_files’: Permission denied
+find: ‘/proc/687/fdinfo’: Permission denied
+find: ‘/proc/687/ns’: Permission denied
+find: ‘/proc/688/task/688/fd’: Permission denied
+find: ‘/proc/688/task/688/fdinfo’: Permission denied
+find: ‘/proc/688/task/688/ns’: Permission denied
+find: ‘/proc/688/fd’: Permission denied
+find: ‘/proc/688/map_files’: Permission denied
+find: ‘/proc/688/fdinfo’: Permission denied
+find: ‘/proc/688/ns’: Permission denied
+find: ‘/proc/689/task/689/fd’: Permission denied
+find: ‘/proc/689/task/689/fdinfo’: Permission denied
+find: ‘/proc/689/task/689/ns’: Permission denied
+find: ‘/proc/689/fd’: Permission denied
+find: ‘/proc/689/map_files’: Permission denied
+find: ‘/proc/689/fdinfo’: Permission denied
+find: ‘/proc/689/ns’: Permission denied
+find: ‘/proc/690/task/690/fd’: Permission denied
+find: ‘/proc/690/task/690/fdinfo’: Permission denied
+find: ‘/proc/690/task/690/ns’: Permission denied
+find: ‘/proc/690/fd’: Permission denied
+find: ‘/proc/690/map_files’: Permission denied
+find: ‘/proc/690/fdinfo’: Permission denied
+find: ‘/proc/690/ns’: Permission denied
+find: ‘/proc/691/task/691/fd’: Permission denied
+find: ‘/proc/691/task/691/fdinfo’: Permission denied
+find: ‘/proc/691/task/691/ns’: Permission denied
+find: ‘/proc/691/fd’: Permission denied
+find: ‘/proc/691/map_files’: Permission denied
+find: ‘/proc/691/fdinfo’: Permission denied
+find: ‘/proc/691/ns’: Permission denied
+find: ‘/proc/692/task/692/fd’: Permission denied
+find: ‘/proc/692/task/692/fdinfo’: Permission denied
+find: ‘/proc/692/task/692/ns’: Permission denied
+find: ‘/proc/692/fd’: Permission denied
+find: ‘/proc/692/map_files’: Permission denied
+find: ‘/proc/692/fdinfo’: Permission denied
+find: ‘/proc/692/ns’: Permission denied
+find: ‘/proc/693/task/693/fd’: Permission denied
+find: ‘/proc/693/task/693/fdinfo’: Permission denied
+find: ‘/proc/693/task/693/ns’: Permission denied
+find: ‘/proc/693/fd’: Permission denied
+find: ‘/proc/693/map_files’: Permission denied
+find: ‘/proc/693/fdinfo’: Permission denied
+find: ‘/proc/693/ns’: Permission denied
+find: ‘/proc/694/task/694/fd’: Permission denied
+find: ‘/proc/694/task/694/fdinfo’: Permission denied
+find: ‘/proc/694/task/694/ns’: Permission denied
+find: ‘/proc/694/fd’: Permission denied
+find: ‘/proc/694/map_files’: Permission denied
+find: ‘/proc/694/fdinfo’: Permission denied
+find: ‘/proc/694/ns’: Permission denied
+find: ‘/proc/695/task/695/fd’: Permission denied
+find: ‘/proc/695/task/695/fdinfo’: Permission denied
+find: ‘/proc/695/task/695/ns’: Permission denied
+find: ‘/proc/695/fd’: Permission denied
+find: ‘/proc/695/map_files’: Permission denied
+find: ‘/proc/695/fdinfo’: Permission denied
+find: ‘/proc/695/ns’: Permission denied
+find: ‘/proc/696/task/696/fd’: Permission denied
+find: ‘/proc/696/task/696/fdinfo’: Permission denied
+find: ‘/proc/696/task/696/ns’: Permission denied
+find: ‘/proc/696/fd’: Permission denied
+find: ‘/proc/696/map_files’: Permission denied
+find: ‘/proc/696/fdinfo’: Permission denied
+find: ‘/proc/696/ns’: Permission denied
+find: ‘/proc/697/task/697/fd’: Permission denied
+find: ‘/proc/697/task/697/fdinfo’: Permission denied
+find: ‘/proc/697/task/697/ns’: Permission denied
+find: ‘/proc/697/fd’: Permission denied
+find: ‘/proc/697/map_files’: Permission denied
+find: ‘/proc/697/fdinfo’: Permission denied
+find: ‘/proc/697/ns’: Permission denied
+find: ‘/proc/698/task/698/fd’: Permission denied
+find: ‘/proc/698/task/698/fdinfo’: Permission denied
+find: ‘/proc/698/task/698/ns’: Permission denied
+find: ‘/proc/698/fd’: Permission denied
+find: ‘/proc/698/map_files’: Permission denied
+find: ‘/proc/698/fdinfo’: Permission denied
+find: ‘/proc/698/ns’: Permission denied
+find: ‘/proc/700/task/700/fd’: Permission denied
+find: ‘/proc/700/task/700/fdinfo’: Permission denied
+find: ‘/proc/700/task/700/ns’: Permission denied
+find: ‘/proc/700/fd’: Permission denied
+find: ‘/proc/700/map_files’: Permission denied
+find: ‘/proc/700/fdinfo’: Permission denied
+find: ‘/proc/700/ns’: Permission denied
+find: ‘/proc/701/task/701/fd’: Permission denied
+find: ‘/proc/701/task/701/fdinfo’: Permission denied
+find: ‘/proc/701/task/701/ns’: Permission denied
+find: ‘/proc/701/fd’: Permission denied
+find: ‘/proc/701/map_files’: Permission denied
+find: ‘/proc/701/fdinfo’: Permission denied
+find: ‘/proc/701/ns’: Permission denied
+find: ‘/proc/703/task/703/fd’: Permission denied
+find: ‘/proc/703/task/703/fdinfo’: Permission denied
+find: ‘/proc/703/task/703/ns’: Permission denied
+find: ‘/proc/703/fd’: Permission denied
+find: ‘/proc/703/map_files’: Permission denied
+find: ‘/proc/703/fdinfo’: Permission denied
+find: ‘/proc/703/ns’: Permission denied
+find: ‘/proc/705/task/705/fd’: Permission denied
+find: ‘/proc/705/task/705/fdinfo’: Permission denied
+find: ‘/proc/705/task/705/ns’: Permission denied
+find: ‘/proc/705/task/771/fd’: Permission denied
+find: ‘/proc/705/task/771/fdinfo’: Permission denied
+find: ‘/proc/705/task/771/ns’: Permission denied
+find: ‘/proc/705/task/838/fd’: Permission denied
+find: ‘/proc/705/task/838/fdinfo’: Permission denied
+find: ‘/proc/705/task/838/ns’: Permission denied
+find: ‘/proc/705/fd’: Permission denied
+find: ‘/proc/705/map_files’: Permission denied
+find: ‘/proc/705/fdinfo’: Permission denied
+find: ‘/proc/705/ns’: Permission denied
+find: ‘/proc/714/task/714/fd’: Permission denied
+find: ‘/proc/714/task/714/fdinfo’: Permission denied
+find: ‘/proc/714/task/714/ns’: Permission denied
+find: ‘/proc/714/task/736/fd’: Permission denied
+find: ‘/proc/714/task/736/fdinfo’: Permission denied
+find: ‘/proc/714/task/736/ns’: Permission denied
+find: ‘/proc/714/fd’: Permission denied
+find: ‘/proc/714/map_files’: Permission denied
+find: ‘/proc/714/fdinfo’: Permission denied
+find: ‘/proc/714/ns’: Permission denied
+find: ‘/proc/717/task/717/fd’: Permission denied
+find: ‘/proc/717/task/717/fdinfo’: Permission denied
+find: ‘/proc/717/task/717/ns’: Permission denied
+find: ‘/proc/717/fd’: Permission denied
+find: ‘/proc/717/map_files’: Permission denied
+find: ‘/proc/717/fdinfo’: Permission denied
+find: ‘/proc/717/ns’: Permission denied
+find: ‘/proc/719/task/719/fd’: Permission denied
+find: ‘/proc/719/task/719/fdinfo’: Permission denied
+find: ‘/proc/719/task/719/ns’: Permission denied
+find: ‘/proc/719/task/750/fd’: Permission denied
+find: ‘/proc/719/task/750/fdinfo’: Permission denied
+find: ‘/proc/719/task/750/ns’: Permission denied
+find: ‘/proc/719/task/835/fd’: Permission denied
+find: ‘/proc/719/task/835/fdinfo’: Permission denied
+find: ‘/proc/719/task/835/ns’: Permission denied
+find: ‘/proc/719/fd’: Permission denied
+find: ‘/proc/719/map_files’: Permission denied
+find: ‘/proc/719/fdinfo’: Permission denied
+find: ‘/proc/719/ns’: Permission denied
+find: ‘/proc/724/task/724/fd’: Permission denied
+find: ‘/proc/724/task/724/fdinfo’: Permission denied
+find: ‘/proc/724/task/724/ns’: Permission denied
+find: ‘/proc/724/task/756/fd’: Permission denied
+find: ‘/proc/724/task/756/fdinfo’: Permission denied
+find: ‘/proc/724/task/756/ns’: Permission denied
+find: ‘/proc/724/task/757/fd’: Permission denied
+find: ‘/proc/724/task/757/fdinfo’: Permission denied
+find: ‘/proc/724/task/757/ns’: Permission denied
+find: ‘/proc/724/task/759/fd’: Permission denied
+find: ‘/proc/724/task/759/fdinfo’: Permission denied
+find: ‘/proc/724/task/759/ns’: Permission denied
+find: ‘/proc/724/fd’: Permission denied
+find: ‘/proc/724/map_files’: Permission denied
+find: ‘/proc/724/fdinfo’: Permission denied
+find: ‘/proc/724/ns’: Permission denied
+find: ‘/proc/730/task/730/fd’: Permission denied
+find: ‘/proc/730/task/730/fdinfo’: Permission denied
+find: ‘/proc/730/task/730/ns’: Permission denied
+find: ‘/proc/730/fd’: Permission denied
+find: ‘/proc/730/map_files’: Permission denied
+find: ‘/proc/730/fdinfo’: Permission denied
+find: ‘/proc/730/ns’: Permission denied
+find: ‘/proc/732/task/732/fd’: Permission denied
+find: ‘/proc/732/task/732/fdinfo’: Permission denied
+find: ‘/proc/732/task/732/ns’: Permission denied
+find: ‘/proc/732/task/884/fd’: Permission denied
+find: ‘/proc/732/task/884/fdinfo’: Permission denied
+find: ‘/proc/732/task/884/ns’: Permission denied
+find: ‘/proc/732/fd’: Permission denied
+find: ‘/proc/732/map_files’: Permission denied
+find: ‘/proc/732/fdinfo’: Permission denied
+find: ‘/proc/732/ns’: Permission denied
+find: ‘/proc/738/task/738/fd’: Permission denied
+find: ‘/proc/738/task/738/fdinfo’: Permission denied
+find: ‘/proc/738/task/738/ns’: Permission denied
+find: ‘/proc/738/task/765/fd’: Permission denied
+find: ‘/proc/738/task/765/fdinfo’: Permission denied
+find: ‘/proc/738/task/765/ns’: Permission denied
+find: ‘/proc/738/task/837/fd’: Permission denied
+find: ‘/proc/738/task/837/fdinfo’: Permission denied
+find: ‘/proc/738/task/837/ns’: Permission denied
+find: ‘/proc/738/task/857/fd’: Permission denied
+find: ‘/proc/738/task/857/fdinfo’: Permission denied
+find: ‘/proc/738/task/857/ns’: Permission denied
+find: ‘/proc/738/task/899/fd’: Permission denied
+find: ‘/proc/738/task/899/fdinfo’: Permission denied
+find: ‘/proc/738/task/899/ns’: Permission denied
+find: ‘/proc/738/fd’: Permission denied
+find: ‘/proc/738/map_files’: Permission denied
+find: ‘/proc/738/fdinfo’: Permission denied
+find: ‘/proc/738/ns’: Permission denied
+find: ‘/proc/740/task/740/fd’: Permission denied
+find: ‘/proc/740/task/740/fdinfo’: Permission denied
+find: ‘/proc/740/task/740/ns’: Permission denied
+find: ‘/proc/740/fd’: Permission denied
+find: ‘/proc/740/map_files’: Permission denied
+find: ‘/proc/740/fdinfo’: Permission denied
+find: ‘/proc/740/ns’: Permission denied
+find: ‘/proc/749/task/749/fd’: Permission denied
+find: ‘/proc/749/task/749/fdinfo’: Permission denied
+find: ‘/proc/749/task/749/ns’: Permission denied
+find: ‘/proc/749/fd’: Permission denied
+find: ‘/proc/749/map_files’: Permission denied
+find: ‘/proc/749/fdinfo’: Permission denied
+find: ‘/proc/749/ns’: Permission denied
+find: ‘/proc/815/task/815/fd’: Permission denied
+find: ‘/proc/815/task/815/fdinfo’: Permission denied
+find: ‘/proc/815/task/815/ns’: Permission denied
+find: ‘/proc/815/fd’: Permission denied
+find: ‘/proc/815/map_files’: Permission denied
+find: ‘/proc/815/fdinfo’: Permission denied
+find: ‘/proc/815/ns’: Permission denied
+find: ‘/proc/816/task/816/fd’: Permission denied
+find: ‘/proc/816/task/816/fdinfo’: Permission denied
+find: ‘/proc/816/task/816/ns’: Permission denied
+find: ‘/proc/816/fd’: Permission denied
+find: ‘/proc/816/map_files’: Permission denied
+find: ‘/proc/816/fdinfo’: Permission denied
+find: ‘/proc/816/ns’: Permission denied
+find: ‘/proc/832/task/832/fd’: Permission denied
+find: ‘/proc/832/task/832/fdinfo’: Permission denied
+find: ‘/proc/832/task/832/ns’: Permission denied
+find: ‘/proc/832/fd’: Permission denied
+find: ‘/proc/832/map_files’: Permission denied
+find: ‘/proc/832/fdinfo’: Permission denied
+find: ‘/proc/832/ns’: Permission denied
+find: ‘/proc/839/task/839/fd’: Permission denied
+find: ‘/proc/839/task/839/fdinfo’: Permission denied
+find: ‘/proc/839/task/839/ns’: Permission denied
+find: ‘/proc/839/fd’: Permission denied
+find: ‘/proc/839/map_files’: Permission denied
+find: ‘/proc/839/fdinfo’: Permission denied
+find: ‘/proc/839/ns’: Permission denied
+find: ‘/proc/840/task/840/fd’: Permission denied
+find: ‘/proc/840/task/840/fdinfo’: Permission denied
+find: ‘/proc/840/task/840/ns’: Permission denied
+find: ‘/proc/840/task/854/fd’: Permission denied
+find: ‘/proc/840/task/854/fdinfo’: Permission denied
+find: ‘/proc/840/task/854/ns’: Permission denied
+find: ‘/proc/840/task/856/fd’: Permission denied
+find: ‘/proc/840/task/856/fdinfo’: Permission denied
+find: ‘/proc/840/task/856/ns’: Permission denied
+find: ‘/proc/840/fd’: Permission denied
+find: ‘/proc/840/map_files’: Permission denied
+find: ‘/proc/840/fdinfo’: Permission denied
+find: ‘/proc/840/ns’: Permission denied
+find: ‘/proc/845/task/845/fd’: Permission denied
+find: ‘/proc/845/task/845/fdinfo’: Permission denied
+find: ‘/proc/845/task/845/ns’: Permission denied
+find: ‘/proc/845/fd’: Permission denied
+find: ‘/proc/845/map_files’: Permission denied
+find: ‘/proc/845/fdinfo’: Permission denied
+find: ‘/proc/845/ns’: Permission denied
+find: ‘/proc/850/task/850/fd’: Permission denied
+find: ‘/proc/850/task/850/fdinfo’: Permission denied
+find: ‘/proc/850/task/850/ns’: Permission denied
+find: ‘/proc/850/task/860/fd’: Permission denied
+find: ‘/proc/850/task/860/fdinfo’: Permission denied
+find: ‘/proc/850/task/860/ns’: Permission denied
+find: ‘/proc/850/task/877/fd’: Permission denied
+find: ‘/proc/850/task/877/fdinfo’: Permission denied
+find: ‘/proc/850/task/877/ns’: Permission denied
+find: ‘/proc/850/fd’: Permission denied
+find: ‘/proc/850/map_files’: Permission denied
+find: ‘/proc/850/fdinfo’: Permission denied
+find: ‘/proc/850/ns’: Permission denied
+find: ‘/proc/851/task/851/fd’: Permission denied
+find: ‘/proc/851/task/851/fdinfo’: Permission denied
+find: ‘/proc/851/task/851/ns’: Permission denied
+find: ‘/proc/851/task/863/fd’: Permission denied
+find: ‘/proc/851/task/863/fdinfo’: Permission denied
+find: ‘/proc/851/task/863/ns’: Permission denied
+find: ‘/proc/851/task/873/fd’: Permission denied
+find: ‘/proc/851/task/873/fdinfo’: Permission denied
+find: ‘/proc/851/task/873/ns’: Permission denied
+find: ‘/proc/851/fd’: Permission denied
+find: ‘/proc/851/map_files’: Permission denied
+find: ‘/proc/851/fdinfo’: Permission denied
+find: ‘/proc/851/ns’: Permission denied
+find: ‘/proc/931/task/931/fd’: Permission denied
+find: ‘/proc/931/task/931/fdinfo’: Permission denied
+find: ‘/proc/931/task/931/ns’: Permission denied
+find: ‘/proc/931/fd’: Permission denied
+find: ‘/proc/931/map_files’: Permission denied
+find: ‘/proc/931/fdinfo’: Permission denied
+find: ‘/proc/931/ns’: Permission denied
+find: ‘/proc/932/task/932/fd’: Permission denied
+find: ‘/proc/932/task/932/fdinfo’: Permission denied
+find: ‘/proc/932/task/932/ns’: Permission denied
+find: ‘/proc/932/fd’: Permission denied
+find: ‘/proc/932/map_files’: Permission denied
+find: ‘/proc/932/fdinfo’: Permission denied
+find: ‘/proc/932/ns’: Permission denied
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/proc/953/task/953/fd’: Permission denied
+find: ‘/proc/953/task/953/fdinfo’: Permission denied
+find: ‘/proc/953/task/953/ns’: Permission denied
+find: ‘/proc/953/task/954/fd’: Permission denied
+find: ‘/proc/953/task/954/fdinfo’: Permission denied
+find: ‘/proc/953/task/954/ns’: Permission denied
+find: ‘/proc/953/task/956/fd’: Permission denied
+find: ‘/proc/953/task/956/fdinfo’: Permission denied
+find: ‘/proc/953/task/956/ns’: Permission denied
+find: ‘/proc/953/fd’: Permission denied
+find: ‘/proc/953/map_files’: Permission denied
+find: ‘/proc/953/fdinfo’: Permission denied
+find: ‘/proc/953/ns’: Permission denied
+find: ‘/proc/961/task/961/fd’: Permission denied
+find: ‘/proc/961/task/961/fdinfo’: Permission denied
+find: ‘/proc/961/task/961/ns’: Permission denied
+find: ‘/proc/961/task/1018/fd’: Permission denied
+find: ‘/proc/961/task/1018/fdinfo’: Permission denied
+find: ‘/proc/961/task/1018/ns’: Permission denied
+find: ‘/proc/961/task/1019/fd’: Permission denied
+find: ‘/proc/961/task/1019/fdinfo’: Permission denied
+find: ‘/proc/961/task/1019/ns’: Permission denied
+find: ‘/proc/961/task/1020/fd’: Permission denied
+find: ‘/proc/961/task/1020/fdinfo’: Permission denied
+find: ‘/proc/961/task/1020/ns’: Permission denied
+find: ‘/proc/961/task/1021/fd’: Permission denied
+find: ‘/proc/961/task/1021/fdinfo’: Permission denied
+find: ‘/proc/961/task/1021/ns’: Permission denied
+find: ‘/proc/961/task/1022/fd’: Permission denied
+find: ‘/proc/961/task/1022/fdinfo’: Permission denied
+find: ‘/proc/961/task/1022/ns’: Permission denied
+find: ‘/proc/961/task/1023/fd’: Permission denied
+find: ‘/proc/961/task/1023/fdinfo’: Permission denied
+find: ‘/proc/961/task/1023/ns’: Permission denied
+find: ‘/proc/961/task/1024/fd’: Permission denied
+find: ‘/proc/961/task/1024/fdinfo’: Permission denied
+find: ‘/proc/961/task/1024/ns’: Permission denied
+find: ‘/proc/961/task/1025/fd’: Permission denied
+find: ‘/proc/961/task/1025/fdinfo’: Permission denied
+find: ‘/proc/961/task/1025/ns’: Permission denied
+find: ‘/proc/961/task/1028/fd’: Permission denied
+find: ‘/proc/961/task/1028/fdinfo’: Permission denied
+find: ‘/proc/961/task/1028/ns’: Permission denied
+find: ‘/proc/961/fd’: Permission denied
+find: ‘/proc/961/map_files’: Permission denied
+find: ‘/proc/961/fdinfo’: Permission denied
+find: ‘/proc/961/ns’: Permission denied
+find: ‘/proc/963/task/963/fd’: Permission denied
+find: ‘/proc/963/task/963/fdinfo’: Permission denied
+find: ‘/proc/963/task/963/ns’: Permission denied
+find: ‘/proc/963/fd’: Permission denied
+find: ‘/proc/963/map_files’: Permission denied
+find: ‘/proc/963/fdinfo’: Permission denied
+find: ‘/proc/963/ns’: Permission denied
+find: ‘/proc/964/task/964/fd’: Permission denied
+find: ‘/proc/964/task/964/fdinfo’: Permission denied
+find: ‘/proc/964/task/964/ns’: Permission denied
+find: ‘/proc/964/fd’: Permission denied
+find: ‘/proc/964/map_files’: Permission denied
+find: ‘/proc/964/fdinfo’: Permission denied
+find: ‘/proc/964/ns’: Permission denied
+find: ‘/proc/988/task/988/fd’: Permission denied
+find: ‘/proc/988/task/988/fdinfo’: Permission denied
+find: ‘/proc/988/task/988/ns’: Permission denied
+find: ‘/proc/988/fd’: Permission denied
+find: ‘/proc/988/map_files’: Permission denied
+find: ‘/proc/988/fdinfo’: Permission denied
+find: ‘/proc/988/ns’: Permission denied
+find: ‘/proc/989/task/989/fd’: Permission denied
+find: ‘/proc/989/task/989/fdinfo’: Permission denied
+find: ‘/proc/989/task/989/ns’: Permission denied
+find: ‘/proc/989/fd’: Permission denied
+find: ‘/proc/989/map_files’: Permission denied
+find: ‘/proc/989/fdinfo’: Permission denied
+find: ‘/proc/989/ns’: Permission denied
+find: ‘/proc/1002/task/1002/fd’: Permission denied
+find: ‘/proc/1002/task/1002/fdinfo’: Permission denied
+find: ‘/proc/1002/task/1002/ns’: Permission denied
+find: ‘/proc/1002/fd’: Permission denied
+find: ‘/proc/1002/map_files’: Permission denied
+find: ‘/proc/1002/fdinfo’: Permission denied
+find: ‘/proc/1002/ns’: Permission denied
+find: ‘/proc/1003/task/1003/fd’: Permission denied
+find: ‘/proc/1003/task/1003/fdinfo’: Permission denied
+find: ‘/proc/1003/task/1003/ns’: Permission denied
+find: ‘/proc/1003/fd’: Permission denied
+find: ‘/proc/1003/map_files’: Permission denied
+find: ‘/proc/1003/fdinfo’: Permission denied
+find: ‘/proc/1003/ns’: Permission denied
+find: ‘/proc/1004/task/1004/fd’: Permission denied
+find: ‘/proc/1004/task/1004/fdinfo’: Permission denied
+find: ‘/proc/1004/task/1004/ns’: Permission denied
+find: ‘/proc/1004/fd’: Permission denied
+find: ‘/proc/1004/map_files’: Permission denied
+find: ‘/proc/1004/fdinfo’: Permission denied
+find: ‘/proc/1004/ns’: Permission denied
+find: ‘/proc/1016/task/1016/fd’: Permission denied
+find: ‘/proc/1016/task/1016/fdinfo’: Permission denied
+find: ‘/proc/1016/task/1016/ns’: Permission denied
+find: ‘/proc/1016/fd’: Permission denied
+find: ‘/proc/1016/map_files’: Permission denied
+find: ‘/proc/1016/fdinfo’: Permission denied
+find: ‘/proc/1016/ns’: Permission denied
+find: ‘/proc/1156/task/1156/fd’: Permission denied
+find: ‘/proc/1156/task/1156/fdinfo’: Permission denied
+find: ‘/proc/1156/task/1156/ns’: Permission denied
+find: ‘/proc/1156/task/1157/fd’: Permission denied
+find: ‘/proc/1156/task/1157/fdinfo’: Permission denied
+find: ‘/proc/1156/task/1157/ns’: Permission denied
+find: ‘/proc/1156/task/1158/fd’: Permission denied
+find: ‘/proc/1156/task/1158/fdinfo’: Permission denied
+find: ‘/proc/1156/task/1158/ns’: Permission denied
+find: ‘/proc/1156/fd’: Permission denied
+find: ‘/proc/1156/map_files’: Permission denied
+find: ‘/proc/1156/fdinfo’: Permission denied
+find: ‘/proc/1156/ns’: Permission denied
+find: ‘/proc/1196/task/1196/fd’: Permission denied
+find: ‘/proc/1196/task/1196/fdinfo’: Permission denied
+find: ‘/proc/1196/task/1196/ns’: Permission denied
+find: ‘/proc/1196/task/1200/fd’: Permission denied
+find: ‘/proc/1196/task/1200/fdinfo’: Permission denied
+find: ‘/proc/1196/task/1200/ns’: Permission denied
+find: ‘/proc/1196/task/1201/fd’: Permission denied
+find: ‘/proc/1196/task/1201/fdinfo’: Permission denied
+find: ‘/proc/1196/task/1201/ns’: Permission denied
+find: ‘/proc/1196/fd’: Permission denied
+find: ‘/proc/1196/map_files’: Permission denied
+find: ‘/proc/1196/fdinfo’: Permission denied
+find: ‘/proc/1196/ns’: Permission denied
+find: ‘/proc/1222/task/1222/fd’: Permission denied
+find: ‘/proc/1222/task/1222/fdinfo’: Permission denied
+find: ‘/proc/1222/task/1222/ns’: Permission denied
+find: ‘/proc/1222/fd’: Permission denied
+find: ‘/proc/1222/map_files’: Permission denied
+find: ‘/proc/1222/fdinfo’: Permission denied
+find: ‘/proc/1222/ns’: Permission denied
+find: ‘/proc/1223/task/1223/fd’: Permission denied
+find: ‘/proc/1223/task/1223/fdinfo’: Permission denied
+find: ‘/proc/1223/task/1223/ns’: Permission denied
+find: ‘/proc/1223/task/1233/fd’: Permission denied
+find: ‘/proc/1223/task/1233/fdinfo’: Permission denied
+find: ‘/proc/1223/task/1233/ns’: Permission denied
+find: ‘/proc/1223/task/1234/fd’: Permission denied
+find: ‘/proc/1223/task/1234/fdinfo’: Permission denied
+find: ‘/proc/1223/task/1234/ns’: Permission denied
+find: ‘/proc/1223/fd’: Permission denied
+find: ‘/proc/1223/map_files’: Permission denied
+find: ‘/proc/1223/fdinfo’: Permission denied
+find: ‘/proc/1223/ns’: Permission denied
+find: ‘/proc/1252/task/1252/fd’: Permission denied
+find: ‘/proc/1252/task/1252/fdinfo’: Permission denied
+find: ‘/proc/1252/task/1252/ns’: Permission denied
+find: ‘/proc/1252/fd’: Permission denied
+find: ‘/proc/1252/map_files’: Permission denied
+find: ‘/proc/1252/fdinfo’: Permission denied
+find: ‘/proc/1252/ns’: Permission denied
+find: ‘/proc/1268/task/1268/fd’: Permission denied
+find: ‘/proc/1268/task/1268/fdinfo’: Permission denied
+find: ‘/proc/1268/task/1268/ns’: Permission denied
+find: ‘/proc/1268/task/1269/fd’: Permission denied
+find: ‘/proc/1268/task/1269/fdinfo’: Permission denied
+find: ‘/proc/1268/task/1269/ns’: Permission denied
+find: ‘/proc/1268/task/1270/fd’: Permission denied
+find: ‘/proc/1268/task/1270/fdinfo’: Permission denied
+find: ‘/proc/1268/task/1270/ns’: Permission denied
+find: ‘/proc/1268/task/1464/fd’: Permission denied
+find: ‘/proc/1268/task/1464/fdinfo’: Permission denied
+find: ‘/proc/1268/task/1464/ns’: Permission denied
+find: ‘/proc/1268/fd’: Permission denied
+find: ‘/proc/1268/map_files’: Permission denied
+find: ‘/proc/1268/fdinfo’: Permission denied
+find: ‘/proc/1268/ns’: Permission denied
+find: ‘/proc/1354/task/1354/fd’: Permission denied
+find: ‘/proc/1354/task/1354/fdinfo’: Permission denied
+find: ‘/proc/1354/task/1354/ns’: Permission denied
+find: ‘/proc/1354/fd’: Permission denied
+find: ‘/proc/1354/map_files’: Permission denied
+find: ‘/proc/1354/fdinfo’: Permission denied
+find: ‘/proc/1354/ns’: Permission denied
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/proc/1477/task/1477/fd’: Permission denied
+find: ‘/proc/1477/task/1477/fdinfo’: Permission denied
+find: ‘/proc/1477/task/1477/ns’: Permission denied
+find: ‘/proc/1477/task/1481/fd’: Permission denied
+find: ‘/proc/1477/task/1481/fdinfo’: Permission denied
+find: ‘/proc/1477/task/1481/ns’: Permission denied
+find: ‘/proc/1477/task/1483/fd’: Permission denied
+find: ‘/proc/1477/task/1483/fdinfo’: Permission denied
+find: ‘/proc/1477/task/1483/ns’: Permission denied
+find: ‘/proc/1477/fd’: Permission denied
+find: ‘/proc/1477/map_files’: Permission denied
+find: ‘/proc/1477/fdinfo’: Permission denied
+find: ‘/proc/1477/ns’: Permission denied
+find: ‘/proc/2076/task/2076/fd’: Permission denied
+find: ‘/proc/2076/task/2076/fdinfo’: Permission denied
+find: ‘/proc/2076/task/2076/ns’: Permission denied
+find: ‘/proc/2076/task/2076/net’: Invalid argument
+find: ‘/proc/2076/fd’: Permission denied
+find: ‘/proc/2076/map_files’: Permission denied
+find: ‘/proc/2076/fdinfo’: Permission denied
+find: ‘/proc/2076/ns’: Permission denied
+find: ‘/proc/2076/net’: Invalid argument
+find: ‘/proc/10108/task/10108/fd’: Permission denied
+find: ‘/proc/10108/task/10108/fdinfo’: Permission denied
+find: ‘/proc/10108/task/10108/ns’: Permission denied
+find: ‘/proc/10108/task/10110/fd’: Permission denied
+find: ‘/proc/10108/task/10110/fdinfo’: Permission denied
+find: ‘/proc/10108/task/10110/ns’: Permission denied
+find: ‘/proc/10108/task/10111/fd’: Permission denied
+find: ‘/proc/10108/task/10111/fdinfo’: Permission denied
+find: ‘/proc/10108/task/10111/ns’: Permission denied
+find: ‘/proc/10108/task/10112/fd’: Permission denied
+find: ‘/proc/10108/task/10112/fdinfo’: Permission denied
+find: ‘/proc/10108/task/10112/ns’: Permission denied
+find: ‘/proc/10108/task/10113/fd’: Permission denied
+find: ‘/proc/10108/task/10113/fdinfo’: Permission denied
+find: ‘/proc/10108/task/10113/ns’: Permission denied
+find: ‘/proc/10108/fd’: Permission denied
+find: ‘/proc/10108/map_files’: Permission denied
+find: ‘/proc/10108/fdinfo’: Permission denied
+find: ‘/proc/10108/ns’: Permission denied
+find: ‘/proc/14006/task/14006/fd’: Permission denied
+find: ‘/proc/14006/task/14006/fdinfo’: Permission denied
+find: ‘/proc/14006/task/14006/ns’: Permission denied
+find: ‘/proc/14006/fd’: Permission denied
+find: ‘/proc/14006/map_files’: Permission denied
+find: ‘/proc/14006/fdinfo’: Permission denied
+find: ‘/proc/14006/ns’: Permission denied
+find: ‘/proc/14078/task/14078/fd’: Permission denied
+find: ‘/proc/14078/task/14078/fdinfo’: Permission denied
+find: ‘/proc/14078/task/14078/ns’: Permission denied
+find: ‘/proc/14078/fd’: Permission denied
+find: ‘/proc/14078/map_files’: Permission denied
+find: ‘/proc/14078/fdinfo’: Permission denied
+find: ‘/proc/14078/ns’: Permission denied
+find: ‘/proc/34301/task/34301/fd’: Permission denied
+find: ‘/proc/34301/task/34301/fdinfo’: Permission denied
+find: ‘/proc/34301/task/34301/ns’: Permission denied
+find: ‘/proc/34301/task/34303/fd’: Permission denied
+find: ‘/proc/34301/task/34303/fdinfo’: Permission denied
+find: ‘/proc/34301/task/34303/ns’: Permission denied
+find: ‘/proc/34301/fd’: Permission denied
+find: ‘/proc/34301/map_files’: Permission denied
+find: ‘/proc/34301/fdinfo’: Permission denied
+find: ‘/proc/34301/ns’: Permission denied
+find: ‘/proc/34386/task/34386/fd’: Permission denied
+find: ‘/proc/34386/task/34386/fdinfo’: Permission denied
+find: ‘/proc/34386/task/34386/ns’: Permission denied
+find: ‘/proc/34386/fd’: Permission denied
+find: ‘/proc/34386/map_files’: Permission denied
+find: ‘/proc/34386/fdinfo’: Permission denied
+find: ‘/proc/34386/ns’: Permission denied
+find: ‘/proc/91190/task/91190/fd’: Permission denied
+find: ‘/proc/91190/task/91190/fdinfo’: Permission denied
+find: ‘/proc/91190/task/91190/ns’: Permission denied
+find: ‘/proc/91190/fd’: Permission denied
+find: ‘/proc/91190/map_files’: Permission denied
+find: ‘/proc/91190/fdinfo’: Permission denied
+find: ‘/proc/91190/ns’: Permission denied
+find: ‘/proc/91995/task/91995/fd’: Permission denied
+find: ‘/proc/91995/task/91995/fdinfo’: Permission denied
+find: ‘/proc/91995/task/91995/ns’: Permission denied
+find: ‘/proc/91995/fd’: Permission denied
+find: ‘/proc/91995/map_files’: Permission denied
+find: ‘/proc/91995/fdinfo’: Permission denied
+find: ‘/proc/91995/ns’: Permission denied
+find: ‘/proc/91996/task/91996/fd’: Permission denied
+find: ‘/proc/91996/task/91996/fdinfo’: Permission denied
+find: ‘/proc/91996/task/91996/ns’: Permission denied
+find: ‘/proc/91996/task/92633/fd’: Permission denied
+find: ‘/proc/91996/task/92633/fdinfo’: Permission denied
+find: ‘/proc/91996/task/92633/ns’: Permission denied
+find: ‘/proc/91996/task/92634/fd’: Permission denied
+find: ‘/proc/91996/task/92634/fdinfo’: Permission denied
+find: ‘/proc/91996/task/92634/ns’: Permission denied
+find: ‘/proc/91996/fd’: Permission denied
+find: ‘/proc/91996/map_files’: Permission denied
+find: ‘/proc/91996/fdinfo’: Permission denied
+find: ‘/proc/91996/ns’: Permission denied
+find: ‘/proc/98022/task/98022/fd’: Permission denied
+find: ‘/proc/98022/task/98022/fdinfo’: Permission denied
+find: ‘/proc/98022/task/98022/ns’: Permission denied
+find: ‘/proc/98022/fd’: Permission denied
+find: ‘/proc/98022/map_files’: Permission denied
+find: ‘/proc/98022/fdinfo’: Permission denied
+find: ‘/proc/98022/ns’: Permission denied
+find: ‘/proc/102608/task/102608/fd’: Permission denied
+find: ‘/proc/102608/task/102608/fdinfo’: Permission denied
+find: ‘/proc/102608/task/102608/ns’: Permission denied
+find: ‘/proc/102608/fd’: Permission denied
+find: ‘/proc/102608/map_files’: Permission denied
+find: ‘/proc/102608/fdinfo’: Permission denied
+find: ‘/proc/102608/ns’: Permission denied
+find: ‘/proc/102832/task/102832/fd’: Permission denied
+find: ‘/proc/102832/task/102832/fdinfo’: Permission denied
+find: ‘/proc/102832/task/102832/ns’: Permission denied
+find: ‘/proc/102832/fd’: Permission denied
+find: ‘/proc/102832/map_files’: Permission denied
+find: ‘/proc/102832/fdinfo’: Permission denied
+find: ‘/proc/102832/ns’: Permission denied
+find: ‘/proc/103498/task/103498/fd’: Permission denied
+find: ‘/proc/103498/task/103498/fdinfo’: Permission denied
+find: ‘/proc/103498/task/103498/ns’: Permission denied
+find: ‘/proc/103498/fd’: Permission denied
+find: ‘/proc/103498/map_files’: Permission denied
+find: ‘/proc/103498/fdinfo’: Permission denied
+find: ‘/proc/103498/ns’: Permission denied
+find: ‘/proc/103841/task/103841/fd’: Permission denied
+find: ‘/proc/103841/task/103841/fdinfo’: Permission denied
+find: ‘/proc/103841/task/103841/ns’: Permission denied
+find: ‘/proc/103841/fd’: Permission denied
+find: ‘/proc/103841/map_files’: Permission denied
+find: ‘/proc/103841/fdinfo’: Permission denied
+find: ‘/proc/103841/ns’: Permission denied
+find: ‘/proc/104720/task/104720/fd’: Permission denied
+find: ‘/proc/104720/task/104720/fdinfo’: Permission denied
+find: ‘/proc/104720/task/104720/ns’: Permission denied
+find: ‘/proc/104720/fd’: Permission denied
+find: ‘/proc/104720/map_files’: Permission denied
+find: ‘/proc/104720/fdinfo’: Permission denied
+find: ‘/proc/104720/ns’: Permission denied
+find: ‘/proc/104763/task/104763/fd’: Permission denied
+find: ‘/proc/104763/task/104763/fdinfo’: Permission denied
+find: ‘/proc/104763/task/104763/ns’: Permission denied
+find: ‘/proc/104763/fd’: Permission denied
+find: ‘/proc/104763/map_files’: Permission denied
+find: ‘/proc/104763/fdinfo’: Permission denied
+find: ‘/proc/104763/ns’: Permission denied
+find: ‘/proc/104800/task/104800/fd’: Permission denied
+find: ‘/proc/104800/task/104800/fdinfo’: Permission denied
+find: ‘/proc/104800/task/104800/ns’: Permission denied
+find: ‘/proc/104800/fd’: Permission denied
+find: ‘/proc/104800/map_files’: Permission denied
+find: ‘/proc/104800/fdinfo’: Permission denied
+find: ‘/proc/104800/ns’: Permission denied
+find: ‘/proc/104821/task/104821/fd’: Permission denied
+find: ‘/proc/104821/task/104821/fdinfo’: Permission denied
+find: ‘/proc/104821/task/104821/ns’: Permission denied
+find: ‘/proc/104821/fd’: Permission denied
+find: ‘/proc/104821/map_files’: Permission denied
+find: ‘/proc/104821/fdinfo’: Permission denied
+find: ‘/proc/104821/ns’: Permission denied
+find: ‘/proc/104911/task/104911/fd’: Permission denied
+find: ‘/proc/104911/task/104911/fdinfo’: Permission denied
+find: ‘/proc/104911/task/104911/ns’: Permission denied
+find: ‘/proc/104911/fd’: Permission denied
+find: ‘/proc/104911/map_files’: Permission denied
+find: ‘/proc/104911/fdinfo’: Permission denied
+find: ‘/proc/104911/ns’: Permission denied
+find: ‘/proc/105243/task/105243/fd’: Permission denied
+find: ‘/proc/105243/task/105243/fdinfo’: Permission denied
+find: ‘/proc/105243/task/105243/ns’: Permission denied
+find: ‘/proc/105243/fd’: Permission denied
+find: ‘/proc/105243/map_files’: Permission denied
+find: ‘/proc/105243/fdinfo’: Permission denied
+find: ‘/proc/105243/ns’: Permission denied
+find: ‘/proc/105307/task/105307/fd’: Permission denied
+find: ‘/proc/105307/task/105307/fdinfo’: Permission denied
+find: ‘/proc/105307/task/105307/ns’: Permission denied
+find: ‘/proc/105307/fd’: Permission denied
+find: ‘/proc/105307/map_files’: Permission denied
+find: ‘/proc/105307/fdinfo’: Permission denied
+find: ‘/proc/105307/ns’: Permission denied
+find: ‘/proc/105310/task/105310/fd’: Permission denied
+find: ‘/proc/105310/task/105310/fdinfo’: Permission denied
+find: ‘/proc/105310/task/105310/ns’: Permission denied
+find: ‘/proc/105310/fd’: Permission denied
+find: ‘/proc/105310/map_files’: Permission denied
+find: ‘/proc/105310/fdinfo’: Permission denied
+find: ‘/proc/105310/ns’: Permission denied
+find: ‘/proc/105329/task/105329/fd’: Permission denied
+find: ‘/proc/105329/task/105329/fdinfo’: Permission denied
+find: ‘/proc/105329/task/105329/ns’: Permission denied
+find: ‘/proc/105329/fd’: Permission denied
+find: ‘/proc/105329/map_files’: Permission denied
+find: ‘/proc/105329/fdinfo’: Permission denied
+find: ‘/proc/105329/ns’: Permission denied
+find: ‘/proc/105356/task/105356/fd’: Permission denied
+find: ‘/proc/105356/task/105356/fdinfo’: Permission denied
+find: ‘/proc/105356/task/105356/ns’: Permission denied
+find: ‘/proc/105356/fd’: Permission denied
+find: ‘/proc/105356/map_files’: Permission denied
+find: ‘/proc/105356/fdinfo’: Permission denied
+find: ‘/proc/105356/ns’: Permission denied
+find: ‘/proc/105373/task/105373/fd’: Permission denied
+find: ‘/proc/105373/task/105373/fdinfo’: Permission denied
+find: ‘/proc/105373/task/105373/ns’: Permission denied
+find: ‘/proc/105373/fd’: Permission denied
+find: ‘/proc/105373/map_files’: Permission denied
+find: ‘/proc/105373/fdinfo’: Permission denied
+find: ‘/proc/105373/ns’: Permission denied
+find: ‘/proc/105448/task/105448/fd’: Permission denied
+find: ‘/proc/105448/task/105448/fdinfo’: Permission denied
+find: ‘/proc/105448/task/105448/ns’: Permission denied
+find: ‘/proc/105448/fd’: Permission denied
+find: ‘/proc/105448/map_files’: Permission denied
+find: ‘/proc/105448/fdinfo’: Permission denied
+find: ‘/proc/105448/ns’: Permission denied
+find: ‘/proc/105482/task/105482/fd’: Permission denied
+find: ‘/proc/105482/task/105482/fdinfo’: Permission denied
+find: ‘/proc/105482/task/105482/ns’: Permission denied
+find: ‘/proc/105482/fd’: Permission denied
+find: ‘/proc/105482/map_files’: Permission denied
+find: ‘/proc/105482/fdinfo’: Permission denied
+find: ‘/proc/105482/ns’: Permission denied
+find: ‘/proc/105490/task/105490/fd’: Permission denied
+find: ‘/proc/105490/task/105490/fdinfo’: Permission denied
+find: ‘/proc/105490/task/105490/ns’: Permission denied
+find: ‘/proc/105490/fd’: Permission denied
+find: ‘/proc/105490/map_files’: Permission denied
+find: ‘/proc/105490/fdinfo’: Permission denied
+find: ‘/proc/105490/ns’: Permission denied
+find: ‘/proc/105503/task/105503/fd’: Permission denied
+find: ‘/proc/105503/task/105503/fdinfo’: Permission denied
+find: ‘/proc/105503/task/105503/ns’: Permission denied
+find: ‘/proc/105503/fd’: Permission denied
+find: ‘/proc/105503/map_files’: Permission denied
+find: ‘/proc/105503/fdinfo’: Permission denied
+find: ‘/proc/105503/ns’: Permission denied
+find: ‘/proc/105528/task/105528/fd’: Permission denied
+find: ‘/proc/105528/task/105528/fdinfo’: Permission denied
+find: ‘/proc/105528/task/105528/ns’: Permission denied
+find: ‘/proc/105528/fd’: Permission denied
+find: ‘/proc/105528/map_files’: Permission denied
+find: ‘/proc/105528/fdinfo’: Permission denied
+find: ‘/proc/105528/ns’: Permission denied
+find: ‘/proc/105549/task/105549/fd’: Permission denied
+find: ‘/proc/105549/task/105549/fdinfo’: Permission denied
+find: ‘/proc/105549/task/105549/ns’: Permission denied
+find: ‘/proc/105549/fd’: Permission denied
+find: ‘/proc/105549/map_files’: Permission denied
+find: ‘/proc/105549/fdinfo’: Permission denied
+find: ‘/proc/105549/ns’: Permission denied
+find: ‘/proc/105638/task/105638/fd’: Permission denied
+find: ‘/proc/105638/task/105638/fdinfo’: Permission denied
+find: ‘/proc/105638/task/105638/ns’: Permission denied
+find: ‘/proc/105638/fd’: Permission denied
+find: ‘/proc/105638/map_files’: Permission denied
+find: ‘/proc/105638/fdinfo’: Permission denied
+find: ‘/proc/105638/ns’: Permission denied
+find: ‘/proc/105641/task/105641/fd’: Permission denied
+find: ‘/proc/105641/task/105641/fdinfo’: Permission denied
+find: ‘/proc/105641/task/105641/ns’: Permission denied
+find: ‘/proc/105641/fd’: Permission denied
+find: ‘/proc/105641/map_files’: Permission denied
+find: ‘/proc/105641/fdinfo’: Permission denied
+find: ‘/proc/105641/ns’: Permission denied
+find: ‘/proc/105653/task/105653/fd’: Permission denied
+find: ‘/proc/105653/task/105653/fdinfo’: Permission denied
+find: ‘/proc/105653/task/105653/ns’: Permission denied
+find: ‘/proc/105653/fd’: Permission denied
+find: ‘/proc/105653/map_files’: Permission denied
+find: ‘/proc/105653/fdinfo’: Permission denied
+find: ‘/proc/105653/ns’: Permission denied
+find: ‘/proc/105683/task/105683/fd’: Permission denied
+find: ‘/proc/105683/task/105683/fdinfo’: Permission denied
+find: ‘/proc/105683/task/105683/ns’: Permission denied
+find: ‘/proc/105683/fd’: Permission denied
+find: ‘/proc/105683/map_files’: Permission denied
+find: ‘/proc/105683/fdinfo’: Permission denied
+find: ‘/proc/105683/ns’: Permission denied
+find: ‘/proc/105689/task/105689/fd’: Permission denied
+find: ‘/proc/105689/task/105689/fdinfo’: Permission denied
+find: ‘/proc/105689/task/105689/ns’: Permission denied
+find: ‘/proc/105689/fd’: Permission denied
+find: ‘/proc/105689/map_files’: Permission denied
+find: ‘/proc/105689/fdinfo’: Permission denied
+find: ‘/proc/105689/ns’: Permission denied
+find: ‘/proc/105710/task/105710/fd’: Permission denied
+find: ‘/proc/105710/task/105710/fdinfo’: Permission denied
+find: ‘/proc/105710/task/105710/ns’: Permission denied
+find: ‘/proc/105710/fd’: Permission denied
+find: ‘/proc/105710/map_files’: Permission denied
+find: ‘/proc/105710/fdinfo’: Permission denied
+find: ‘/proc/105710/ns’: Permission denied
+find: ‘/proc/105758/task/105758/fd’: Permission denied
+find: ‘/proc/105758/task/105758/fdinfo’: Permission denied
+find: ‘/proc/105758/task/105758/ns’: Permission denied
+find: ‘/proc/105758/fd’: Permission denied
+find: ‘/proc/105758/map_files’: Permission denied
+find: ‘/proc/105758/fdinfo’: Permission denied
+find: ‘/proc/105758/ns’: Permission denied
+find: ‘/proc/105761/task/105761/fd’: Permission denied
+find: ‘/proc/105761/task/105761/fdinfo’: Permission denied
+find: ‘/proc/105761/task/105761/ns’: Permission denied
+find: ‘/proc/105761/fd’: Permission denied
+find: ‘/proc/105761/map_files’: Permission denied
+find: ‘/proc/105761/fdinfo’: Permission denied
+find: ‘/proc/105761/ns’: Permission denied
+find: ‘/proc/105763/task/105763/fd’: Permission denied
+find: ‘/proc/105763/task/105763/fdinfo’: Permission denied
+find: ‘/proc/105763/task/105763/ns’: Permission denied
+find: ‘/proc/105763/fd’: Permission denied
+find: ‘/proc/105763/map_files’: Permission denied
+find: ‘/proc/105763/fdinfo’: Permission denied
+find: ‘/proc/105763/ns’: Permission denied
+find: ‘/proc/105771/task/105771/fdinfo/6’: No such file or directory
+find: ‘/proc/105771/fdinfo/5’: No such file or directory
+find: ‘/boot/efi’: Permission denied
+find: ‘/sys/kernel/tracing’: Permission denied
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/sys/kernel/debug’: Permission denied
+find: ‘/sys/fs/pstore’: Permission denied
+find: ‘/sys/fs/bpf’: Permission denied
+find: ‘/root’: Permission denied
+find: ‘/lost+found’: Permission denied
+find: ‘/etc/cups/ssl’: Permission denied
+find: ‘/etc/polkit-1/localauthority’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+find: ‘/run/wpa_supplicant’: Permission denied
+find: File system loop detected; ‘/run/timeshift/backup’ is part of the same file system loop as ‘/’.
+find: ‘/run/lightdm’: Permission denied
+find: ‘/run/udisks2’: Permission denied
+find: ‘/run/cups/certs’: Permission denied
+find: ‘/run/user/1000/inaccessible’: Permission denied
+find: ‘/run/sudo’: Permission denied
+find: ‘/run/speech-dispatcher’: Permission denied
+find: ‘/run/openvpn-server’: Permission denied
+find: ‘/run/openvpn-client’: Permission denied
+find: ‘/run/cryptsetup’: Permission denied
+find: ‘/run/lvm’: Permission denied
+find: ‘/run/systemd/resolve/netif’: Permission denied
+find: ‘/run/systemd/unit-root’: Permission denied
+find: ‘/run/systemd/inaccessible’: Permission denied
+find: ‘/run/lock/lvm’: Permission denied
+find: ‘/run/initramfs’: Permission denied
+find: ‘/var/log/private’: Permission denied
+find: ‘/var/log/speech-dispatcher’: Permission denied
+find: ‘/var/cache/apparmor/26b63962.0’: Permission denied
+find: ‘/var/cache/apt/archives/partial’: Permission denied
+find: ‘/var/cache/cups’: Permission denied
+find: ‘/var/cache/private’: Permission denied
+find: ‘/var/cache/lightdm/dmrc’: Permission denied
+find: ‘/var/cache/ldconfig’: Permission denied
+find: ‘/var/spool/cups’: Permission denied
+find: ‘/var/spool/rsyslog’: Permission denied
+find: ‘/var/spool/cron/crontabs’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-bolt.service-3WRzYg’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-colord.service-XbxT5g’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ModemManager.service-hyR1Ui’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-upower.service-Tfck9i’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-fwupd.service-HYvnwj’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ntp.service-dRKhmh’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-logind.service-ubQzCg’: Permission denied
+find: ‘/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-resolved.service-sXNTjf’: Permission denied
+find: ‘/var/lib/fwupd/gnupg’: Permission denied
+find: ‘/var/lib/apt/lists/partial’: Permission denied
+find: ‘/var/lib/polkit-1’: Permission denied
+find: ‘/var/lib/AccountsService/users’: Permission denied
+find: ‘/var/lib/colord/.cache’: Permission denied
+find: ‘/var/lib/lightdm-data/lightdm’: Permission denied
+find: ‘/var/lib/udisks2’: Permission denied
+find: ‘/var/lib/bluetooth/BC:17:B8:71:A5:97’: Permission denied
+find: ‘/var/lib/private’: Permission denied
+find: ‘/var/lib/lightdm’: Permission denied
+find: ‘/var/lib/NetworkManager’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ntp.service-20fDij’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-upower.service-Ws0ZIf’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-bolt.service-sKBKWh’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-logind.service-gewUch’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ModemManager.service-HkbBvh’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-fwupd.service-cvqUof’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-resolved.service-eJzGUg’: Permission denied
+find: ‘/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-colord.service-JhDmCg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/boot/efi’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/root’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/etc/cups/ssl’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/etc/polkit-1/localauthority’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/etc/ssl/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/log/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/log/speech-dispatcher’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/cache/apparmor/26b63962.0’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/cache/cups’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/cache/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/cache/lightdm/dmrc’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/cache/ldconfig’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/spool/cups’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/spool/rsyslog’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/spool/cron/crontabs’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-bolt.service-3WRzYg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-colord.service-XbxT5g’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ModemManager.service-hyR1Ui’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-upower.service-Tfck9i’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-fwupd.service-HYvnwj’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ntp.service-dRKhmh’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-logind.service-ubQzCg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-resolved.service-sXNTjf’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/fwupd/gnupg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/apt/lists/partial’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/polkit-1’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/AccountsService/users’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/colord/.cache’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/lightdm-data/lightdm’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/udisks2’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/bluetooth/BC:17:B8:71:A5:97’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/lightdm’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-18_11-00-01/localhost/var/lib/NetworkManager’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/boot/efi’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/root’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/etc/cups/ssl’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/etc/polkit-1/localauthority’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/etc/ssl/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/log/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/log/speech-dispatcher’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/cache/apparmor/26b63962.0’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/cache/cups’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/cache/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/cache/lightdm/dmrc’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/cache/ldconfig’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/spool/cups’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/spool/rsyslog’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/spool/cron/crontabs’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-bolt.service-3WRzYg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-colord.service-XbxT5g’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ModemManager.service-hyR1Ui’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-upower.service-Tfck9i’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-fwupd.service-HYvnwj’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-ntp.service-dRKhmh’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-logind.service-ubQzCg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/tmp/systemd-private-a563612312e84b3aa07a52e7381ca906-systemd-resolved.service-sXNTjf’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/fwupd/gnupg’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/apt/lists/partial’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/polkit-1’: Permission denied
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/AccountsService/users’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/colord/.cache’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/lightdm-data/lightdm’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/udisks2’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/bluetooth/BC:17:B8:71:A5:97’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/private’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/lightdm’: Permission denied
+find: ‘/timeshift/snapshots/2021-10-17_11-00-01/localhost/var/lib/NetworkManager’: Permission denied
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the first few lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>file_sizes
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2147483648
+2980472
+98680
+30896
+35336
+76112
+30480
+96192
+776672
+26
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s how we can read them into a Pandas <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;file_sizes&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;File size&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5556267, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_sizes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;File size&#39;</span><span class="p">]</span>
+<span class="n">file_sizes</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    5.556267e+06
+mean     2.538621e+07
+std      5.970603e+10
+min      0.000000e+00
+25%      5.870000e+02
+50%      2.441000e+03
+75%      8.447000e+03
+max      1.407375e+14
+Name: File size, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see whether they might be lognormal, I’ll compute their logarithms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_sizes</span><span class="p">[</span><span class="n">file_sizes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="c1">#file_sizes[file_sizes &gt; 1e13] = np.nan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_file_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">file_sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what the CDF of the transformed sizes looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">log_file_sizes</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Log file size (log B)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f916a59ab3c2f79b3fec1d0bddf095726554a9bc541e084c8545e9185388af1.png" src="_images/3f916a59ab3c2f79b3fec1d0bddf095726554a9bc541e084c8545e9185388af1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">log_file_sizes</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Log file sizes (log B)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/03a72938bcb76ee7b4f9e80675b449175d86da3470542971f9c72b10f1be1b55.png" src="_images/03a72938bcb76ee7b4f9e80675b449175d86da3470542971f9c72b10f1be1b55.png" />
+</div>
+</div>
+<p>Why do we think the distribution of file sizes might be lognormal?
+<a class="reference external" href="https://github.com/AllenDowney/ThinkComplexity2/raw/master/papers/downey01structural.pdf">Here’s my answer</a>.</p>
+<p>Or maybe it follows a power law?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">file_sizes</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cdf</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+         <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/064007dd1a8f9c4041bd97c4814b8ede2472adf567815f7059bbb3a8bfb730eb.png" src="_images/064007dd1a8f9c4041bd97c4814b8ede2472adf567815f7059bbb3a8bfb730eb.png" />
+</div>
+</div>
+</section>
+<section id="distribution-of-wealth">
+<h2>Distribution of Wealth<a class="headerlink" href="#distribution-of-wealth" title="Link to this heading">#</a></h2>
+<p>A model like this is one of many possible explanations for the heavy-tailed distribution of wealth.</p>
+<p>Suppose everyone saves \<span class="math notranslate nohighlight">\(2000 a year for 50 years. 
+With no return on investment, they would have \\\)</span>100,000.</p>
+<p>But suppose they make 5% annually, on average, with variability from year to year. Let’s see what the distribution of wealth looks like when they “retire”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_wealth</span><span class="p">():</span>
+    <span class="n">savings</span> <span class="o">=</span> <span class="mi">2000</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">savings</span>
+    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_wealth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">simulate_wealth</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)])</span>
+<span class="n">sim_wealth</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>416056.3866990387
+</pre></div>
+</div>
+</div>
+</div>
+<p>On average, they have more than \$400,000, which means that most of their wealth came from return on investment, not savings.</p>
+<p>Now let’s see what the distributions looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_sim_wealth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">sim_wealth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">log_sim_wealth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total wealth&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Simulated wealth&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e91c2880596a5456994d647fb7975b58bdcc5fbaf0520551624e56950d26ba93.png" src="_images/e91c2880596a5456994d647fb7975b58bdcc5fbaf0520551624e56950d26ba93.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_probability_plot</span><span class="p">(</span><span class="n">log_sim_wealth</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Random Gaussian values&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Simulated weights (kg)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08e7aaa9bff6de029994f4b8f46a09d60dc8e47b39e3b9457686d52b5338f37a.png" src="_images/08e7aaa9bff6de029994f4b8f46a09d60dc8e47b39e3b9457686d52b5338f37a.png" />
+</div>
+</div>
+<p>Although this example generates a lognormal distribution, the mechanism here – variation in return on investment – is not the only source of variation in wealth. And it’s probably not the biggest. We’ll come back to this topic in Chapter 9.</p>
+</section>
+<section id="mandelbrots-hypothesis">
+<h2>Mandelbrot’s Hypothesis<a class="headerlink" href="#mandelbrots-hypothesis" title="Link to this heading">#</a></h2>
+<p>From Chapter 8 of <a class="reference external" href="https://greenteapress.com/complexity2/html/thinkcomplexity2009.html#sec83">Think Complexity</a>:</p>
+<blockquote>
+<div><p>In <em>The Fractal Geometry of Nature</em>, Benoit Mandelbrot proposes what he calls a “heretical” explanation for the prevalence of heavy-tailed distributions in natural systems. It may not be, as Bak suggests, that many systems can generate this behavior in isolation. Instead there may be only a few, but interactions between systems might cause the behavior to propagate.</p>
+<p>To support this argument, Mandelbrot points out:</p>
+<ul class="simple">
+<li><p>The distribution of observed data is often “the joint effect of a fixed underlying true distribution and a highly variable filter”.</p></li>
+<li><p>Heavy-tailed distributions are robust to filtering; that is, “a wide variety of filters leave their asymptotic behavior unchanged”.</p></li>
+</ul>
+</div></blockquote>
+<p>This argument is pretty abstract, since it does not specify what “joint effect” or “variable filter” are meant to correspond to in the world.</p>
+<p>But one kind of filter he might have had in mind is convolution, which is the operation that computes the distribution of a sum.
+Continuing the wealth example, suppose wealth is the sum of several factors and only one of them is heavy tailed.</p>
+<p>What does it look like if we add a Pareto distribution and a Gaussian distribution with the same mean and standard deviation?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">sample1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sample1</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample1</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">mean</span><span class="p">,</span> <span class="n">std</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2265.8159231522914, 44889.928265885916)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">sample2</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample2</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2616.0165803687096, 44091.389841931275)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">sample1</span> <span class="o">+</span> <span class="n">sample2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_normal_cdf</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total wealth&#39;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Simulated wealth&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/924a785e167d78947d1b3fb109e02582f3f4eac868ba0014f371cf18a529588e.png" src="_images/924a785e167d78947d1b3fb109e02582f3f4eac868ba0014f371cf18a529588e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf1</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample1</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cdf1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto&#39;</span><span class="p">)</span>
+
+<span class="n">cdf2</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sample2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cdf2</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">)</span>
+
+<span class="n">cdf_total</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cdf_total</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a56fafaf8d3e67fd7fa22200ec4a7e39e5b8114acfab1a04a36caf0f4528bbad.png" src="_images/a56fafaf8d3e67fd7fa22200ec4a7e39e5b8114acfab1a04a36caf0f4528bbad.png" />
+</div>
+</div>
+<p>One of the challenges of working with the Pareto distribution is that the results are highly variable, even with large sample sizes. So you might want to run this example a few times, maybe with some larger values of <code class="docutils literal notranslate"><span class="pre">size</span></code>.</p>
+<p>What can we say about the tail behavior of <code class="docutils literal notranslate"><span class="pre">total</span></code>?</p>
+<p>And what does this imply about Mandelbrot’s explanation?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution">The Normal Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lognormal-distributions">Lognormal Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-lognormal-distributions-come-from">Where Do Lognormal Distributions Come From?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-file-sizes">Distribution of File Sizes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-wealth">Distribution of Wealth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mandelbrots-hypothesis">Mandelbrot’s Hypothesis</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

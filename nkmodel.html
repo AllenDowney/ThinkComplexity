@@ -1,0 +1,1738 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>NK models of evolution &#8212; Think Complexity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nkmodel';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Complexity</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Exploratory data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="appA.html">Analysis of Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mergesort.html">Merge Sort</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AllenDowney/ThinkComplexity/tree/v3" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/nkmodel.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NK models of evolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nk-landscape">The NK landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">The simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutral-networks">Neutral networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-and-analyzing-neutral-networks">Detecting and analyzing neutral networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your turn!</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="nk-models-of-evolution">
+<h1>NK models of evolution<a class="headerlink" href="#nk-models-of-evolution" title="Link to this heading">#</a></h1>
+<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
+<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span><span class="p">,</span> <span class="n">randint</span><span class="p">,</span> <span class="n">permutation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-nk-landscape">
+<h2>The NK landscape<a class="headerlink" href="#the-nk-landscape" title="Link to this heading">#</a></h2>
+<p>Here’s an implementation of an NK landscape.</p>
+<p>A location in the landscape is represented by a NumPy array of N 0s and 1s.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">NKLandscape</span></code> is an array of indices into a location, which is an efficient way to select the overlapping slices.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cache</span></code> attribute is a dictionary that maps from <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">slice)</span></code> to a fitness, where <code class="docutils literal notranslate"><span class="pre">i</span></code> indicates which of the <code class="docutils literal notranslate"><span class="pre">N</span></code> functions we want to evaluate and <code class="docutils literal notranslate"><span class="pre">slice</span></code> is the parameters of the function.</p>
+<p>The first time we see a particular <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">slice)</span></code> pair, we generate a random fitness value.  The we store it in the <code class="docutils literal notranslate"><span class="pre">cache</span></code> in case we need it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NKLandscape</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a landscape.</span>
+<span class="sd">        </span>
+<span class="sd">        N: number of attributes</span>
+<span class="sd">        K: number of interactions</span>
+<span class="sd">        </span>
+<span class="sd">        index is a NumPy array that specifies the interactions between</span>
+<span class="sd">        attributes. (The K+1 entries in each row identify the attributes</span>
+<span class="sd">        that contribute to the fitness of the row attribute.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        
+        <span class="c1"># compute the powers of 2 up to K, used in lookup()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">powers</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># compute the index, used in fitness()</span>
+        <span class="n">iseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+        <span class="n">jseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">iseq</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">jseq</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span> <span class="o">%</span> <span class="n">N</span>
+
+    <span class="k">def</span> <span class="nf">random_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose a random location.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look up `row` in function `i`.</span>
+<span class="sd">        </span>
+<span class="sd">        i: int from 0 to N-1</span>
+<span class="sd">        row: array of K+1 0s and 1s</span>
+<span class="sd">        </span>
+<span class="sd">        returns: f_i(row)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="c1">#key = i, np.sum(self.powers * row)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rand</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluates the fitness of a location.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: array of N 0s and 1s</span>
+<span class="sd">        </span>
+<span class="sd">        returns: float fitness</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a small example.  The index shows how the traits are linked.  Trait 0 is linked to traits 1 and 2.  Trait 1 is linked to traits 2 and 3, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nkland</span> <span class="o">=</span> <span class="n">NKLandscape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">nkland</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 2],
+       [1, 2, 3],
+       [2, 3, 4],
+       [3, 4, 0],
+       [4, 0, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example that evaluates the fitness at a random location:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="n">nkland</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">loc</span><span class="p">,</span> <span class="n">nkland</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 0, 0, 1, 0], dtype=uint8), 0.4904142234444729)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what the landscape cache looks like after one evaluation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nkland</span><span class="o">.</span><span class="n">cache</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(0, (1, 0, 0)): 0.48155558741679805,
+ (1, (0, 0, 1)): 0.23508743195706916,
+ (2, (0, 1, 0)): 0.6345751531337791,
+ (3, (1, 0, 1)): 0.4564666149858203,
+ (4, (0, 1, 0)): 0.644386329728898}
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we evaluate the same location again, we should get the same value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span><span class="p">,</span> <span class="n">nkland</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 0, 0, 1, 0], dtype=uint8), 0.4904142234444729)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And if we evaluate a different location, we should get a different value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="n">nkland</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">loc</span><span class="p">,</span> <span class="n">nkland</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 1, 1, 1], dtype=uint8), 0.5073392530721319)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-agents">
+<h2>The agents<a class="headerlink" href="#the-agents" title="Link to this heading">#</a></h2>
+<p>Here’s a parent class, <code class="docutils literal notranslate"><span class="pre">NKAgent</span></code>, that contains code used by all agents:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NKAgent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an agent in an NK model.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">landscape</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an agent at the given location.</span>
+<span class="sd">        </span>
+<span class="sd">        loc: array of N 0s and 1s</span>
+<span class="sd">        landscape: reference to an NKLandscape</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landscape</span> <span class="o">=</span> <span class="n">landscape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">landscape</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">landscape</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moves</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+        
+    <span class="k">def</span> <span class="nf">mutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the location in the given direction.</span>
+<span class="sd">        </span>
+<span class="sd">        Result differs from the current location along the given axis.</span>
+<span class="sd">        </span>
+<span class="sd">        direction: int index from 0 to N-1</span>
+<span class="sd">        </span>
+<span class="sd">        returns: new array of N 0s and 1s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_loc</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">new_loc</span>
+    
+    <span class="k">def</span> <span class="nf">generate_mutations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates all possible mutations from current location, in random order.</span>
+<span class="sd">        </span>
+<span class="sd">        yields: new array of N 0s and 1s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">landscape</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">new_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">new_loc</span>
+
+    <span class="k">def</span> <span class="nf">consider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Moves if the fitness at `new_loc` is greater than or equal to current fitness.</span>
+<span class="sd">        </span>
+<span class="sd">        new_loc: array of N 0s and 1s</span>
+<span class="sd">        </span>
+<span class="sd">        return: True if the agent moved</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_fitness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">landscape</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">new_loc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_fitness</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">new_loc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">new_fitness</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">moves</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Child classes should override this method.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example using the NKAgent parent class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">NKAgent</span><span class="p">(</span><span class="n">nkland</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 0, 0, 0], dtype=uint8), 0.6987123236707627)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can choose a random direction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">direction</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">nkland</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">new_loc</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">mutation</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+<span class="n">new_loc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 0, 0], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And consider moving.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">consider</span><span class="p">(</span><span class="n">new_loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 0, 0, 0], dtype=uint8), 0.6987123236707627)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following loop considers every direction, in random order, and accepts the first acceptable move.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">permutation</span><span class="p">(</span><span class="n">nkland</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">new_loc</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">mutation</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">consider</span><span class="p">(</span><span class="n">new_loc</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 0 0 1] 0.7085697533925048
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can encapsulate that strategy, called the “fitter” strategy, in a class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NKAgentFitter</span><span class="p">(</span><span class="n">NKAgent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Consider all mutations in order and choose the first improvement.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="k">for</span> <span class="n">new_loc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_mutations</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">consider</span><span class="p">(</span><span class="n">new_loc</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">NKAgentFitter</span><span class="p">(</span><span class="n">nkland</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 1, 1, 0], dtype=uint8), 0.5367841712426762)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">fitness</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 1, 1, 1], dtype=uint8), 0.5839734632901294)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Implement the other strategies described by Vidgen and Padget in <a class="reference external" href="http://jasss.soc.surrey.ac.uk/12/4/8.html">Sendero</a>.</p>
+<p>Write a class definition called <code class="docutils literal notranslate"><span class="pre">NKAgentMutant</span></code> that implements the one-mutant neighbor strategy and a class definition called <code class="docutils literal notranslate"><span class="pre">NKAgentGreedy</span></code> that implements the greedy strategy.  Instantiate one of each and invoke their step methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution goes here</span>
+
+<span class="k">class</span> <span class="nc">NKAgentMutant</span><span class="p">(</span><span class="n">NKAgent</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose a mutation at random and consider it.&quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">))</span>
+        <span class="n">new_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutation</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">consider</span><span class="p">(</span><span class="n">new_loc</span><span class="p">)</span>
+            
+<span class="k">class</span> <span class="nc">NKAgentGreedy</span><span class="p">(</span><span class="n">NKAgent</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Consider all mutations and choose the best.&quot;&quot;&quot;</span>
+        <span class="n">fits</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">landscape</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">new_loc</span><span class="p">),</span> <span class="n">rand</span><span class="p">(),</span> <span class="n">new_loc</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">new_loc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_mutations</span><span class="p">()]</span>
+        <span class="n">fitness</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">new_loc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">consider</span><span class="p">(</span><span class="n">new_loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-simulator">
+<h2>The simulator<a class="headerlink" href="#the-simulator" title="Link to this heading">#</a></h2>
+<p>Here’s a class that runs simulations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NKSimulation</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">landscape</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the simulation:</span>
+<span class="sd">        </span>
+<span class="sd">        landscape: NKLandscape</span>
+<span class="sd">        num_agents: int number of agents</span>
+<span class="sd">        agent_maker: function that makes agents</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landscape</span> <span class="o">=</span> <span class="n">landscape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent_maker</span><span class="p">(</span><span class="n">landscape</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">)]</span>
+        
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run step on each agent.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: list of boolean, whether each agent moves</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+        
+    <span class="k">def</span> <span class="nf">get_fitnesses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of agent fitnesses.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of agent locations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">loc</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">get_peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the set of unique locations.</span>
+<span class="sd">        </span>
+<span class="sd">        If all agents have run until they reach a local peak,</span>
+<span class="sd">        the result is a subset of the peaks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">locs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_locations</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">locs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_peak_heights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the set of unique heights.</span>
+<span class="sd">        </span>
+<span class="sd">        If all agents have run until they reach a local peak,</span>
+<span class="sd">        the result is heights of a subset of the peaks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">get_path_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of moves for each agent.</span>
+<span class="sd">        </span>
+<span class="sd">        If all agents have run until they reach a local peak,</span>
+<span class="sd">        the result is the sequence of path lengths.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">moves</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s an example with small values of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.  Initially the distribution of fitness is centered around 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">empiricaldist</span> <span class="kn">import</span> <span class="n">Cdf</span>
+
+<span class="n">nkl</span> <span class="o">=</span> <span class="n">NKLandscape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">nksim</span> <span class="o">=</span> <span class="n">NKSimulation</span><span class="p">(</span><span class="n">nkl</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NKAgentFitter</span><span class="p">)</span>
+<span class="n">cdf_fitness</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+<span class="n">cdf_fitness</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+
+<span class="n">cdf_fitness</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5454407626734291
+</pre></div>
+</div>
+<img alt="_images/5b3350be1d65684345d1e455b618475a6db47f4782936510d6bff1865f34a932.png" src="_images/5b3350be1d65684345d1e455b618475a6db47f4782936510d6bff1865f34a932.png" />
+</div>
+</div>
+<p>Here’s how the distribution of fitness evolves after each step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nksim</span> <span class="o">=</span> <span class="n">NKSimulation</span><span class="p">(</span><span class="n">nkl</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NKAgentFitter</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">cdf_fitness</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+    <span class="n">cdf_fitness</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">nksim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a9fc05abc1d6ea2c7c67eb207c270002746420d06f07dd889b4892567905bed3.png" src="_images/a9fc05abc1d6ea2c7c67eb207c270002746420d06f07dd889b4892567905bed3.png" />
+</div>
+</div>
+<p>After every agent has found a peak, we can plot the distribution of fitness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_fitness</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+<span class="n">cdf_fitness</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f77475fdfa8f75e12369b90b167c222378aa4b31f471bf7ffa056c71fbab2c5b.png" src="_images/f77475fdfa8f75e12369b90b167c222378aa4b31f471bf7ffa056c71fbab2c5b.png" />
+</div>
+</div>
+<p>The number of unique locations is a lower bound on the number of peaks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peaks</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">get_peaks</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can look at the heights of the peaks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">get_peak_heights</span><span class="p">()</span>
+<span class="n">heights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0.6088509922292161,
+ 0.6096492375537159,
+ 0.616987504137732,
+ 0.6875939853137221,
+ 0.7070176615819334}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the distribution of path lengths.  A few agents are born on a peak.  The longest path is probably 5 or fewer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_moves</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_path_lengths</span><span class="p">())</span>
+<span class="n">cdf_moves</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8d098ce94cf3cea2a269e99b2f7857799e3cf1d7e111c1d6db64fbbd7350898d.png" src="_images/8d098ce94cf3cea2a269e99b2f7857799e3cf1d7e111c1d6db64fbbd7350898d.png" />
+</div>
+</div>
+<p>This function encapsulates the steps for running a simulation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">agent_maker</span><span class="o">=</span><span class="n">NKAgentFitter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a simulation and run until all agents find a peak.</span>
+<span class="sd">    </span>
+<span class="sd">    N: int number of traits</span>
+<span class="sd">    K: int number of interactions</span>
+<span class="sd">    num_agents: int number of agents</span>
+<span class="sd">    agent_maker: function that creates agents</span>
+<span class="sd">    </span>
+<span class="sd">    returns NKSimulation object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nkl</span> <span class="o">=</span> <span class="n">NKLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">nksim</span> <span class="o">=</span> <span class="n">NKSimulation</span><span class="p">(</span><span class="n">nkl</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">nksim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the same small example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nksim</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function takes a completed simulation and summarizes the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">nksim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summarizes simulation results.</span>
+<span class="sd">    </span>
+<span class="sd">    nksim: NKSimulation object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cdf_fitness</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+    <span class="n">peaks</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">get_peaks</span><span class="p">()</span>
+    <span class="n">heights</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">get_peak_heights</span><span class="p">()</span>
+    <span class="n">cdf_moves</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_path_lengths</span><span class="p">())</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean fitness: &quot;</span><span class="p">,</span> <span class="n">cdf_fitness</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean path length: &quot;</span><span class="p">,</span> <span class="n">cdf_moves</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of peaks:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">peaks</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">cdf_fitness</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitness&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">cdf_moves</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Path Length&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here are the results with small values of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span><span class="n">nksim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean fitness:  0.6099149878270318
+Mean path length:  2.1100000000000003
+Number of peaks: 3
+</pre></div>
+</div>
+<img alt="_images/772cac59998c01df3d315060fb8524f40459cfcfb4c4f22a5f2a602197fa28ba.png" src="_images/772cac59998c01df3d315060fb8524f40459cfcfb4c4f22a5f2a602197fa28ba.png" />
+</div>
+</div>
+<p>Here’s a simulation run with larger <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> nksim = run_simulation(N=40, K=20)
+<span class="n">plot_results</span><span class="p">(</span><span class="n">nksim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.29 s, sys: 56.3 ms, total: 2.35 s
+Wall time: 2.31 s
+Mean fitness:  0.651428598950771
+Mean path length:  6.140000000000001
+Number of peaks: 100
+</pre></div>
+</div>
+<img alt="_images/8d7befaeef13bff8904cbd06dff245bda6458e646de6ec65a335c8e580a2c420.png" src="_images/8d7befaeef13bff8904cbd06dff245bda6458e646de6ec65a335c8e580a2c420.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Starting with <code class="docutils literal notranslate"><span class="pre">N=5</span></code> and <code class="docutils literal notranslate"><span class="pre">K=3</span></code>, run simulations with increasing values of <code class="docutils literal notranslate"><span class="pre">N</span></code>, keeping <code class="docutils literal notranslate"><span class="pre">K</span></code> constant, and plot the number of peaks and mean path length as a function of <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+    <span class="n">nksim</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">num_peaks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_peaks</span><span class="p">())</span>
+    <span class="n">mean_path</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_path_lengths</span><span class="p">())</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">num_peaks</span><span class="p">,</span> <span class="n">mean_path</span><span class="p">))</span>
+    
+<span class="n">peaks</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">peaks</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of peaks&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b4867db84a317597bec15a126b8dd5727ddad31879a47deedef0ee50638a6c1c.png" src="_images/b4867db84a317597bec15a126b8dd5727ddad31879a47deedef0ee50638a6c1c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean path length&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7aa3649f0c9218e72308368510bef98e8bd0a7f08bf3f051d5e7adbc0e5fe8f8.png" src="_images/7aa3649f0c9218e72308368510bef98e8bd0a7f08bf3f051d5e7adbc0e5fe8f8.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Starting with <code class="docutils literal notranslate"><span class="pre">N=20</span></code> and <code class="docutils literal notranslate"><span class="pre">K=0</span></code>, run simulations with increasing values of <code class="docutils literal notranslate"><span class="pre">K</span></code>, keeping <code class="docutils literal notranslate"><span class="pre">N</span></code> constant, and plot the number of peaks and mean path length as a function of <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">ks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="n">nksim</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">num_peaks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_peaks</span><span class="p">())</span>
+    <span class="n">mean_path</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_path_lengths</span><span class="p">())</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">num_peaks</span><span class="p">,</span> <span class="n">mean_path</span><span class="p">))</span>
+    
+<span class="n">peaks</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">peaks</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Mean path length&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6bdb572fc06472807e0bcf1186ae2afb6442698335fc98ccd04c0358c4df7596.png" src="_images/6bdb572fc06472807e0bcf1186ae2afb6442698335fc98ccd04c0358c4df7596.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of peaks&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f94c92857b0aab646b79e74362eeeaf955d0182e2f317fc8421139bab2d9518c.png" src="_images/f94c92857b0aab646b79e74362eeeaf955d0182e2f317fc8421139bab2d9518c.png" />
+</div>
+</div>
+</section>
+<section id="neutral-networks">
+<h2>Neutral networks<a class="headerlink" href="#neutral-networks" title="Link to this heading">#</a></h2>
+<p>Consider the extension of the NK model proposed by Newman and Engelhardt (1998), in which fitness values are quantized rather than continuous. Below is a subclass of NKLandscape that implements this extension, which is sometimes called the NKq model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NKqLandscape</span><span class="p">(</span><span class="n">NKLandscape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a landscape with quantized fitness values.</span>
+<span class="sd">        </span>
+<span class="sd">        N: number of attributes</span>
+<span class="sd">        K: number of interactions</span>
+<span class="sd">        A: number of alleles per attribute</span>
+<span class="sd">        F: number of quantized fitness values</span>
+<span class="sd">        </span>
+<span class="sd">        index is a NumPy array that specifies the interactions between</span>
+<span class="sd">        attributes. (The K+1 entries in each row identify the attributes</span>
+<span class="sd">        that contribute to the fitness of the row attribute.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">NKLandscape</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="n">F</span>
+    
+    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look up `row` in function `i`.</span>
+<span class="sd">        </span>
+<span class="sd">        i: int from 0 to N-1</span>
+<span class="sd">        row: array of K+1 0s and 1s</span>
+<span class="sd">        </span>
+<span class="sd">        returns: f_i(row)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nkqland</span> <span class="o">=</span> <span class="n">NKqLandscape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="n">nkqland</span><span class="o">.</span><span class="n">random_loc</span><span class="p">()</span>
+<span class="n">loc</span><span class="p">,</span> <span class="n">nkqland</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 0, 1, 0], dtype=uint8), 0.2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nkqland</span><span class="o">.</span><span class="n">cache</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(0, (0, 1, 0)): 0.0,
+ (1, (1, 0, 1)): 0.0,
+ (2, (0, 1, 0)): 0.0,
+ (3, (1, 0, 0)): 0.0,
+ (4, (0, 0, 1)): 1.0}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The NKq model gives rise to “neutral networks”. A neutral network is “a set of sequences [locations] that all possess the same fitness and that are connected together via … point mutations” (p. 1335). Newman and Engelhardt (hereafter NE) discover some striking properties of these networks, which, they suggest, greatly improve the performance of single-mutation evolutionary search on rugged fitness landscapes. In the exercises below, we ask you to replicate and interpret some of their results.</p>
+<section id="detecting-and-analyzing-neutral-networks">
+<h3>Detecting and analyzing neutral networks<a class="headerlink" href="#detecting-and-analyzing-neutral-networks" title="Link to this heading">#</a></h3>
+<p>To get you started, here’s a class that might help.  It keeps track of a collection of nodes that are at the same fitness level.  It figures out which nodes are one-bit neighbors and creates edges between them.  Then it uses NetworkX to find all connected components.</p>
+<p>The tricky part of this implementation is that it converts each location from an array of 0s and 1s to an integer; it uses these integers as nodes in the graph, and it uses bitwise operations on these integers to check for neighbor relationships.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="k">class</span> <span class="nc">GraphOfLoc</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a graph of locations.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+        
+        <span class="c1"># precompute the powers of 2, used in add()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">powers</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a location to a graph.</span>
+<span class="sd">        </span>
+<span class="sd">        new_loc: location in the form of an int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">locint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">powers</span> <span class="o">*</span> <span class="n">new_loc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">locint</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">):</span>
+            <span class="c1"># put the other locs into an array</span>
+            <span class="n">other_locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">()))</span>
+            
+            <span class="c1"># compute the indices of the neighbors</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">locint</span> <span class="o">^</span> <span class="n">other_locs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">powers</span><span class="p">)</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">other_locs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            
+            <span class="c1"># add edges from the new loc to all neighbors</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="n">locint</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">])</span>
+        
+    <span class="k">def</span> <span class="nf">components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connected components of the graph.</span>
+<span class="sd">        </span>
+<span class="sd">        returns: iterator of sets of nodes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">component_sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">component</span><span class="p">)</span> <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">()]</span>
+        
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a small example that shows how it works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">GraphOfLoc</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(NodeView((0,)), EdgeView([]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we add another node that is a neighbor of the first, we get an edge between them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(NodeView((0, 1)), EdgeView([(0, 1)]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s another node that is also a neighbor of the first (but not of the second).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(NodeView((0, 1, 2)), EdgeView([(0, 1), (0, 2)]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s a node that’s not connected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="n">graph</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(NodeView((0, 1, 2, 24)), EdgeView([(0, 1), (0, 2)]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we print the sizes of the connected components, we get one set of 3 nodes and 1 unconnected node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">component</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s find all connected components for all fitness levels in a quantized landscape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">nkqland</span> <span class="o">=</span> <span class="n">NKqLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_locs</span></code> makes an array that contains the binary representation of all locations in a landscape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_locs</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes an array of binary numbers from 0..2**N-1.</span>
+<span class="sd">    </span>
+<span class="sd">    returns: array of 1s and 0s with 2**N rows and N cols</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># array of numbers</span>
+    <span class="n">locints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">)</span>
+    
+    <span class="c1"># array of 1s and 0s</span>
+    <span class="n">locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">locints</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    
+    <span class="c1"># fill in the rows</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">locs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">locints</span> <span class="o">%</span> <span class="mi">2</span>
+        <span class="n">locints</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+    
+    <span class="c1"># flip and transpose</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">locs</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">N=10</span></code>, there are <code class="docutils literal notranslate"><span class="pre">2**N</span> <span class="pre">=</span> <span class="pre">1024</span></code> locations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">locs</span> <span class="o">=</span> <span class="n">make_locs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">locs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">collect_graph</span></code> enumerates the locations in the landscape, computes the fitness of each, and makes a dictionary that maps from each fitness level to a <code class="docutils literal notranslate"><span class="pre">GraphOfLoc</span></code> that contains the locations at that fitness level.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="k">def</span> <span class="nf">collect_graphs</span><span class="p">(</span><span class="n">nkqland</span><span class="p">):</span>
+    <span class="n">locs</span> <span class="o">=</span> <span class="n">make_locs</span><span class="p">(</span><span class="n">nkqland</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">GraphOfLoc</span><span class="p">(</span><span class="n">nkqland</span><span class="o">.</span><span class="n">N</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locs</span><span class="p">:</span>
+        <span class="n">fitness</span> <span class="o">=</span> <span class="n">nkqland</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">fitness</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> d = collect_graphs(nkqland)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 240 ms, sys: 83 µs, total: 240 ms
+Wall time: 275 ms
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can summarize the results by printing the fitness levels and the sizes of the connected components at each level.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize_graphs</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">fitness</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">component_sizes</span><span class="p">()</span>
+        <span class="n">sizes</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fitness</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_graphs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0 [2]
+0.1 [4, 2, 2, 1, 1]
+0.2 [6, 5, 4, 3, 2, 2, 2, 1, 1, 1, 1, 1]
+0.3 [74, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+0.4 [168, 2, 2, 1, 1, 1, 1, 1, 1, 1]
+0.5 [179, 7, 6, 4, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+0.6 [177, 5, 5, 4, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+0.7 [164, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1]
+0.8 [24, 15, 5, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+0.9 [5, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1]
+1.0 [4, 1, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is a function that extracts the sizes of the components. (Recall that in the language of the NE paper, each component in this graph is a neutral network.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_component_sizes</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the sizes of the components.</span>
+<span class="sd">    </span>
+<span class="sd">    returns: list of int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">fitness</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">component_sizes</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here is a function that computes the fraction of locations (or sequences, in NE’s terminology) that reside in “common” networks, where a common network is one that is larger than average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob_common</span><span class="p">(</span><span class="n">sizes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the fraction of sequences in common neutral networks.</span>
+<span class="sd">    </span>
+<span class="sd">    sizes: list of component sizes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
+    <span class="n">common</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">size</span> <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sizes</span> <span class="k">if</span> <span class="n">size</span><span class="o">&gt;</span><span class="n">mean</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">common</span> <span class="o">/</span> <span class="n">total</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, here is a function that runs a neutral network experiment. It takes values for <code class="docutils literal notranslate"><span class="pre">N</span></code>, <code class="docutils literal notranslate"><span class="pre">K</span></code>, and <code class="docutils literal notranslate"><span class="pre">F</span></code> (leaving the default value of <code class="docutils literal notranslate"><span class="pre">A</span></code>=2), creates an appropriate NKq landscape, instantiates a bunch of agents (by default, 100 agents that use the “fitter” strategy), and lets them walk the landscape.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_experiment</span></code> function returns three things: a Cdf of neutral network sizes, the fraction of locations that reside in common networks, and the maximum fitness achieved by the agents. You may find these things remarkably useful in the exercises below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_agents</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">agent_maker</span><span class="o">=</span><span class="n">NKAgentFitter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs an experiment with the given parameters and return summaries.</span>
+<span class="sd">    </span>
+<span class="sd">    N: number of attributes</span>
+<span class="sd">    K: number of interactions</span>
+<span class="sd">    F: number of weights</span>
+<span class="sd">    num_agents: int number of agents</span>
+<span class="sd">    agent_maker: function that makes agents</span>
+<span class="sd">    </span>
+<span class="sd">    returns: Cdf of component (neutral network) sizes,</span>
+<span class="sd">             float fraction of locations in a common network,</span>
+<span class="sd">             float maximum fitness acheived by the agents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nkqland</span> <span class="o">=</span> <span class="n">NKqLandscape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>
+    
+    <span class="n">d</span> <span class="o">=</span> <span class="n">collect_graphs</span><span class="p">(</span><span class="n">nkqland</span><span class="p">)</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="n">all_component_sizes</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">Cdf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">prob_common</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
+    
+    <span class="n">nksim</span> <span class="o">=</span> <span class="n">NKSimulation</span><span class="p">(</span><span class="n">nkqland</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">agent_maker</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">nksim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="n">max_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nksim</span><span class="o">.</span><span class="n">get_fitnesses</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">pc</span><span class="p">,</span> <span class="n">max_fit</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="your-turn">
+<h3>Your turn!<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h3>
+<p><strong>Exercise:</strong> Run experiments for a single value of <code class="docutils literal notranslate"><span class="pre">N</span></code> (e.g., 14) and several values of <code class="docutils literal notranslate"><span class="pre">K</span></code> (e.g., 1, 2 and 5). Plot the distribution of neutral network sizes. Compare your results with Figure 1 in the NE paper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">cdf</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cdf</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;K=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
+        
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Network size (number of locations)&#39;</span><span class="p">,</span>
+         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;CCDF&#39;</span><span class="p">,</span>
+         <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+         <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+5
+</pre></div>
+</div>
+<img alt="_images/183035aedd801b09eea8eeca9bb7eced175c56bea7814b34b5e3b152453ce9f4.png" src="_images/183035aedd801b09eea8eeca9bb7eced175c56bea7814b34b5e3b152453ce9f4.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Run experiments for a range of <code class="docutils literal notranslate"><span class="pre">N</span></code> values (e.g., 8 to 16) and several values of <code class="docutils literal notranslate"><span class="pre">K</span></code> (e.g., 2, 4 and 6). For each value of <code class="docutils literal notranslate"><span class="pre">K</span></code>, plot the fraction of locations that reside in common neutral networks. Compare your results with Figure 2 in the NE paper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">pc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">pc</span><span class="p">))</span>
+    <span class="n">ns</span><span class="p">,</span> <span class="n">pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">pcs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;K=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
+        
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Fraction of sequences on common clusters&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8 2 0.84765625
+9 2 0.736328125
+10 2 0.7783203125
+11 2 0.8115234375
+12 2 0.82080078125
+13 2 0.7567138671875
+14 2 0.80462646484375
+15 2 0.7796630859375
+8 4 0.75390625
+9 4 0.83203125
+10 4 0.83203125
+11 4 0.82763671875
+12 4 0.890380859375
+13 4 0.9178466796875
+14 4 0.87677001953125
+15 4 0.9351806640625
+8 6 0.62890625
+9 6 0.7421875
+10 6 0.7724609375
+11 6 0.787109375
+12 6 0.857421875
+13 6 0.885498046875
+14 6 0.90118408203125
+15 6 0.927825927734375
+</pre></div>
+</div>
+<img alt="_images/030213860ab0c969fb3d4a459bb15a17ce405e1532cf96557cf73c8f53cc92a6.png" src="_images/030213860ab0c969fb3d4a459bb15a17ce405e1532cf96557cf73c8f53cc92a6.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Run experiments for a single pair of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code> values (e.g., 14 and 4) and a range of <code class="docutils literal notranslate"><span class="pre">F</span></code> values (e.g., 2 to 16). Plot the maximum fitness achieved as a function of <code class="docutils literal notranslate"><span class="pre">F</span></code>. Compare your results with Figure 3 in the NE paper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">F</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">):</span>
+    <span class="n">cdf</span><span class="p">,</span> <span class="n">pc</span><span class="p">,</span> <span class="n">max_fit</span><span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">max_fit</span><span class="p">)</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">F</span><span class="p">,</span> <span class="n">max_fit</span><span class="p">))</span>
+    
+<span class="n">fs</span><span class="p">,</span> <span class="n">max_fits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">max_fits</span><span class="p">)</span>
+<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;number of weights, F&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;max fitness&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 1.0
+3 0.8928571428571429
+4 0.9047619047619048
+5 0.8392857142857143
+6 0.8142857142857143
+7 0.8214285714285714
+8 0.7551020408163265
+9 0.8214285714285714
+10 0.761904761904762
+11 0.8
+12 0.7987012987012986
+13 0.8035714285714286
+14 0.8021978021978022
+15 0.8163265306122449
+16 0.8142857142857143
+</pre></div>
+</div>
+<img alt="_images/2b25e43a9b5935f3192908a0427c50220d9583179513317df6e826008ceec182.png" src="_images/2b25e43a9b5935f3192908a0427c50220d9583179513317df6e826008ceec182.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Putting these findings together, explain in your own words how neutrality helps an evolving population reach a higher level of fitness. How might you be able to harness this phenomenon in designing engineered artifacts and systems?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nk-landscape">The NK landscape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-agents">The agents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simulator">The simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutral-networks">Neutral networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-and-analyzing-neutral-networks">Detecting and analyzing neutral networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your turn!</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
