@@ -385,9 +385,7 @@ document.write(`
 <p>Copyright 2017 Allen Downey, <a class="reference external" href="https://opensource.org/licenses/MIT">MIT License</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
@@ -449,7 +447,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07999999999999985
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05999999999999961
 </pre></div>
 </div>
 </div>
@@ -457,10 +455,12 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">run_timing_test</span></code> takes a function, runs it with a range of problem sizes, and returns two lists: problem sizes and times.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_timing_test</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_timing_test</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests the given function with a range of values for n.</span>
 <span class="sd">    </span>
 <span class="sd">    func: function object</span>
+<span class="sd">    max_time: longest time to run (seconds)</span>
+<span class="sd">    max_n: maximum value of n</span>
 
 <span class="sd">    returns: list of ns and a list of run times.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -468,6 +468,9 @@ document.write(`
     <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">28</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span>
+        <span class="k">if</span> <span class="n">max_n</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">max_n</span><span class="p">:</span>
+            <span class="k">break</span>
+            
         <span class="n">t</span> <span class="o">=</span> <span class="n">time_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -493,17 +496,18 @@ document.write(`
 2048 0.0
 4096 0.0
 8192 0.0
-16384 0.010000000000000009
+16384 0.0
 32768 0.0
-65536 0.010000000000000009
+65536 0.00999999999999801
 131072 0.0
-262144 0.020000000000000018
-524288 0.040000000000000036
-1048576 0.07000000000000006
-2097152 0.1599999999999997
-4194304 0.29000000000000004
-8388608 0.5900000000000003
-16777216 1.1099999999999999
+262144 0.030000000000001137
+524288 0.020000000000003126
+1048576 0.05999999999999872
+2097152 0.08999999999999986
+4194304 0.23000000000000043
+8388608 0.41999999999999815
+16777216 0.870000000000001
+33554432 1.75
 </pre></div>
 </div>
 </div>
@@ -572,7 +576,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8975419930f55dc71746b552977fa52353749b285ec6f919d09b10db5e9f9fe4.png" src="_images/8975419930f55dc71746b552977fa52353749b285ec6f919d09b10db5e9f9fe4.png" />
+<img alt="_images/5fbe29a8348047f6915123fca3fb52f3378b796f19c3288dca98d830c20d56ca.png" src="_images/5fbe29a8348047f6915123fca3fb52f3378b796f19c3288dca98d830c20d56ca.png" />
 </div>
 </div>
 <p>For small values of <code class="docutils literal notranslate"><span class="pre">n</span></code>, the runtime is so short that we’re probably not getting an accurate measurement of just the operation we’re interested in.  But as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases, runtime seems to converge to a line with slope 1.</p>
@@ -599,15 +603,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
 2048 0.0
-4096 0.009999999999999787
-8192 0.009999999999999787
-16384 0.040000000000000036
-32768 0.1299999999999999
-65536 0.6299999999999999
-131072 2.7600000000000007
+4096 0.0
+8192 0.010000000000001563
+16384 0.030000000000001137
+32768 0.0799999999999983
+65536 0.41000000000000014
+131072 1.7600000000000016
 </pre></div>
 </div>
-<img alt="_images/3f06f91680be639d03657eb77abd5c8e992569db7eace4eb503e3306bcd78059.png" src="_images/3f06f91680be639d03657eb77abd5c8e992569db7eace4eb503e3306bcd78059.png" />
+<img alt="_images/4058f3bbc1789c8547ebb207351e35689adf648f1a672b0f6824b17cc6b63e65.png" src="_images/4058f3bbc1789c8547ebb207351e35689adf648f1a672b0f6824b17cc6b63e65.png" />
 </div>
 </div>
 <p>That doesn’t look very good.  The runtimes increase more steeply than the line with slope 1.  Let’s try slope 2.</p>
@@ -618,7 +622,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f073fe2494963955c1c324f17e0c454142a916fe691167207f92d40c5880ec00.png" src="_images/f073fe2494963955c1c324f17e0c454142a916fe691167207f92d40c5880ec00.png" />
+<img alt="_images/808f05acef9d848795146820dc4c138d91b0feb96f7d0eb119ff4fff5f1869d0.png" src="_images/808f05acef9d848795146820dc4c138d91b0feb96f7d0eb119ff4fff5f1869d0.png" />
 </div>
 </div>
 <p>The last few points converge on the line with slope 2, which suggests that <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code> is quadratic.</p>
@@ -644,20 +648,21 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
 2048 0.0
 4096 0.0
-8192 0.0
+8192 0.00999999999999801
 16384 0.0
-32768 0.009999999999999787
-65536 0.009999999999999787
-131072 0.030000000000001137
-262144 0.03999999999999915
-524288 0.08000000000000185
-1048576 0.16000000000000014
-2097152 0.3099999999999987
-4194304 0.6699999999999999
-8388608 1.2800000000000011
+32768 0.00999999999999801
+65536 0.020000000000003126
+131072 0.00999999999999801
+262144 0.020000000000003126
+524288 0.04999999999999716
+1048576 0.10000000000000142
+2097152 0.17999999999999972
+4194304 0.389999999999997
+8388608 0.7700000000000031
+16777216 1.4999999999999964
 </pre></div>
 </div>
-<img alt="_images/6674d3fe3a80f80d36b6b6f3da6baa8aae6d58ed6bc012b53020350146256359.png" src="_images/6674d3fe3a80f80d36b6b6f3da6baa8aae6d58ed6bc012b53020350146256359.png" />
+<img alt="_images/0cdc4e6929a8efb09694e49eee1c761558a6a9dd6873e29c9b857cbc9ff2e8c9.png" src="_images/0cdc4e6929a8efb09694e49eee1c761558a6a9dd6873e29c9b857cbc9ff2e8c9.png" />
 </div>
 </div>
 </section>
@@ -679,22 +684,22 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
 2048 0.0
-4096 0.009999999999999787
+4096 0.0
 8192 0.0
 16384 0.0
-32768 0.0
-65536 0.009999999999999787
-131072 0.009999999999999787
-262144 0.019999999999999574
-524288 0.040000000000000924
-1048576 0.08000000000000007
-2097152 0.16999999999999993
-4194304 0.34999999999999964
-8388608 0.75
-16777216 1.549999999999999
+32768 0.00999999999999801
+65536 0.0
+131072 0.010000000000005116
+262144 0.01999999999999602
+524288 0.03999999999999915
+1048576 0.09000000000000341
+2097152 0.17999999999999972
+4194304 0.36999999999999744
+8388608 0.7800000000000011
+16777216 1.6099999999999994
 </pre></div>
 </div>
-<img alt="_images/a02f44f16488b8129f8d2ee83414ad5c4fd50afb59143371333e979a1a0549dc.png" src="_images/a02f44f16488b8129f8d2ee83414ad5c4fd50afb59143371333e979a1a0549dc.png" />
+<img alt="_images/7fdd9ff3cfc956c67fa1e13a66d4a6456f1b8458ff5694ad10bff08e6363a7bd.png" src="_images/7fdd9ff3cfc956c67fa1e13a66d4a6456f1b8458ff5694ad10bff08e6363a7bd.png" />
 </div>
 </div>
 <p>It sure looks like sorting is linear, so that’s surprising.  But remember that <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">n</span></code> changes much more slowly than <code class="docutils literal notranslate"><span class="pre">n</span></code>.  Over a wide range of values, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">log</span> <span class="pre">n</span></code> can be hard to distinguish from an algorithm with linear growth.  As <code class="docutils literal notranslate"><span class="pre">n</span></code> gets bigger, we would expect this curve to be steeper than slope 1.  But often, for practical problem sizes, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">log</span> <span class="pre">n</span></code> is as good as linear.</p>
@@ -705,7 +710,7 @@ document.write(`
 <p>To make it work, I create the sorted list ahead of time and use the parameter <code class="docutils literal notranslate"><span class="pre">hi</span></code> to specify which part of the list to search.  Also, I have to run each search 100,000 times so it takes long enough to measure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">16777216</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">24</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
 <span class="kn">from</span> <span class="nn">bisect</span> <span class="kn">import</span> <span class="n">bisect</span>
@@ -715,19 +720,30 @@ document.write(`
         <span class="n">index</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> 
     <span class="k">return</span> <span class="n">index</span>
 
-<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">search_sorted_list</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">search_sorted_list</span><span class="p">,</span> <span class="n">max_n</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">24</span><span class="p">)</span>
 <span class="n">plot_timing_test</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;search_sorted_list&#39;</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.16999999999999815
-2048 0.19000000000000128
-4096 0.1999999999999993
-8192 0.21000000000000085
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.07000000000000028
+2048 0.06999999999999318
+4096 0.07000000000000028
+8192 0.0800000000000054
+16384 0.0799999999999983
+32768 0.0899999999999963
+65536 0.09000000000000341
+131072 0.10000000000000142
+262144 0.10000000000000142
+524288 0.10999999999999943
+1048576 0.10999999999999943
+2097152 0.12999999999999545
+4194304 0.14000000000000057
+8388608 0.14000000000000057
+16777216 0.14000000000000057
 </pre></div>
 </div>
-<img alt="_images/61cd17eb5c9ab302793ef180c80ff46acf26c378bf2960df69113d91e119ab52.png" src="_images/61cd17eb5c9ab302793ef180c80ff46acf26c378bf2960df69113d91e119ab52.png" />
+<img alt="_images/bcaa12238df41617292eeb9ee980f619c1be21f4c062e1bc004c681cfb3b6614.png" src="_images/bcaa12238df41617292eeb9ee980f619c1be21f4c062e1bc004c681cfb3b6614.png" />
 </div>
 </div>
 <p>It looks like the runtime increases slowly as <code class="docutils literal notranslate"><span class="pre">n</span></code> increases, but it’s definitely not linear.  To see if it’s constant time, we can compare it to the line with slope 0.</p>
@@ -738,7 +754,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/06e5b9f175651ba31e28405dad9d490402fa9aa60d66b138a9910bd2cc4b5339.png" src="_images/06e5b9f175651ba31e28405dad9d490402fa9aa60d66b138a9910bd2cc4b5339.png" />
+<img alt="_images/52e41b5912e1a601482d19affb928874379f8fa4debc4ce103a658675cb43987.png" src="_images/52e41b5912e1a601482d19affb928874379f8fa4debc4ce103a658675cb43987.png" />
 </div>
 </div>
 <p>Nope, looks like it’s not constant time, either.  We can’t really conclude that it’s <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">n</span></code> based on this curve alone, but the results are certainly consistent with that theory.</p>
@@ -766,20 +782,20 @@ document.write(`
 2048 0.0
 4096 0.0
 8192 0.0
-16384 0.010000000000001563
+16384 0.010000000000005116
 32768 0.0
-65536 0.00999999999999801
-131072 0.010000000000001563
-262144 0.019999999999999574
-524288 0.05000000000000071
-1048576 0.13000000000000256
-2097152 0.2099999999999973
-4194304 0.4299999999999997
-8388608 0.7699999999999996
-16777216 1.6000000000000014
+65536 0.0
+131072 0.00999999999999801
+262144 0.01999999999999602
+524288 0.03999999999999915
+1048576 0.0800000000000054
+2097152 0.1799999999999926
+4194304 0.3400000000000105
+8388608 0.6799999999999926
+16777216 1.3699999999999974
 </pre></div>
 </div>
-<img alt="_images/8dcbbec82ef4c2e99577105b950be89ed12158c06c1d7b6aa4bae769efca197b.png" src="_images/8dcbbec82ef4c2e99577105b950be89ed12158c06c1d7b6aa4bae769efca197b.png" />
+<img alt="_images/3de5b041b7da0013c624c2aafc7937e62224c9eb5fddc589f74aac7b25232b78.png" src="_images/3de5b041b7da0013c624c2aafc7937e62224c9eb5fddc589f74aac7b25232b78.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -804,20 +820,20 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
 2048 0.0
 4096 0.0
-8192 0.010000000000001563
-16384 0.0
+8192 0.0
+16384 0.00999999999999801
 32768 0.0
-65536 0.019999999999999574
-131072 0.019999999999999574
-262144 0.05999999999999872
+65536 0.00999999999999801
+131072 0.00999999999999801
+262144 0.030000000000001137
 524288 0.07000000000000028
-1048576 0.16999999999999815
-2097152 0.33999999999999986
-4194304 0.6799999999999997
-8388608 1.3500000000000014
+1048576 0.13000000000000256
+2097152 0.28999999999999915
+4194304 0.5700000000000003
+8388608 1.1400000000000006
 </pre></div>
 </div>
-<img alt="_images/73c168cb230abbb4544e137969e3c2fff802bbc236c750868b6daf62d77f81f7.png" src="_images/73c168cb230abbb4544e137969e3c2fff802bbc236c750868b6daf62d77f81f7.png" />
+<img alt="_images/f293e3c0e969249a1cd577c22ea140e779ad30385f1b901353d84e18c0ae914c.png" src="_images/f293e3c0e969249a1cd577c22ea140e779ad30385f1b901353d84e18c0ae914c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -931,22 +947,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.010000000000005116
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
 2048 0.0
-4096 0.0
+4096 0.00999999999999801
 8192 0.0
-16384 0.00999999999999801
+16384 0.0
 32768 0.00999999999999801
-65536 0.00999999999999801
-131072 0.030000000000001137
-262144 0.060000000000002274
-524288 0.14000000000000057
-1048576 0.25
-2097152 0.5599999999999987
-4194304 1.0800000000000018
+65536 0.010000000000005116
+131072 0.02999999999999403
+262144 0.05000000000000426
+524288 0.09999999999999432
+1048576 0.20000000000000284
+2097152 0.4100000000000037
+4194304 0.8099999999999952
+8388608 1.6000000000000014
 </pre></div>
 </div>
-<img alt="_images/18d01530ddefcb7fb4a2fef6fa84e2eda9aa5232e52a69a8fedf4d7d9a72e5cf.png" src="_images/18d01530ddefcb7fb4a2fef6fa84e2eda9aa5232e52a69a8fedf4d7d9a72e5cf.png" />
+<img alt="_images/80585a9917afea7195caebb48dc509757582535347ccd4e6bd9487c8e44d7030.png" src="_images/80585a9917afea7195caebb48dc509757582535347ccd4e6bd9487c8e44d7030.png" />
 </div>
 </div>
 <p>Adding <code class="docutils literal notranslate"><span class="pre">n</span></code> elements is linear, so each add is constant time.  How about lookup?</p>
@@ -967,13 +984,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.020000000000003126
-2048 0.06999999999999673
-4096 0.25
-8192 1.0400000000000027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.00999999999999801
+2048 0.05000000000000426
+4096 0.3200000000000003
+8192 0.9199999999999946
+16384 3.6500000000000057
 </pre></div>
 </div>
-<img alt="_images/e873b1b5e44a573be39f91d1876f97f1a6867f562b8fc403f2a98fee4ad8b166.png" src="_images/e873b1b5e44a573be39f91d1876f97f1a6867f562b8fc403f2a98fee4ad8b166.png" />
+<img alt="_images/4e49ac39953432527183ac769fdc569e45d96ab8590c161e941ef6e22d802585.png" src="_images/4e49ac39953432527183ac769fdc569e45d96ab8590c161e941ef6e22d802585.png" />
 </div>
 </div>
 <p>Looking up <code class="docutils literal notranslate"><span class="pre">n</span></code> elements is <span class="math notranslate nohighlight">\(O(n^2)\)</span> (notice that <code class="docutils literal notranslate"><span class="pre">exp=2</span></code>).  So each lookup is linear.</p>
@@ -1065,16 +1083,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.010000000000001563
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.010000000000005116
+2048 0.0
 4096 0.00999999999999801
-8192 0.030000000000001137
-16384 0.08999999999999986
-32768 0.3000000000000007
-65536 1.1700000000000017
+8192 0.01999999999999602
+16384 0.0800000000000054
+32768 0.25
+65536 0.9899999999999949
+131072 4.700000000000003
 </pre></div>
 </div>
-<img alt="_images/0432d8cdb97c063a321c68be2e3a098465fed0b84dff11d71179f0ece55d229e.png" src="_images/0432d8cdb97c063a321c68be2e3a098465fed0b84dff11d71179f0ece55d229e.png" />
+<img alt="_images/18c7bea8001d93ed360a5d26448189c02751245a9d13880c6611dd2fac8d8144.png" src="_images/18c7bea8001d93ed360a5d26448189c02751245a9d13880c6611dd2fac8d8144.png" />
 </div>
 </div>
 <p>The order of growth is hard to characterize.  It looks steeper than the line with slope 1.  Let’s try slope 2.</p>
@@ -1085,7 +1104,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/20b5c0eae1f165b224e6bbd5c859bb1c5daa5569b2d9f6574719920a216dcdee.png" src="_images/20b5c0eae1f165b224e6bbd5c859bb1c5daa5569b2d9f6574719920a216dcdee.png" />
+<img alt="_images/281481d5e13ace633ac8454bb377b47957a80f62d4a2cfdff3bec09a318dfc4c.png" src="_images/281481d5e13ace633ac8454bb377b47957a80f62d4a2cfdff3bec09a318dfc4c.png" />
 </div>
 </div>
 <p>It might be converging to the line with slope 2, but it’s hard to say anything conclusive without running larger problem sizes.</p>
@@ -1192,17 +1211,17 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.010000000000005116
-4096 0.0799999999999983
-8192 0.030000000000001137
-16384 0.11999999999999744
-32768 0.19000000000000483
-65536 0.4399999999999977
-131072 0.8599999999999994
-262144 1.5999999999999943
+2048 0.09000000000000341
+4096 0.009999999999990905
+8192 0.01999999999999602
+16384 0.1700000000000017
+32768 0.21999999999999886
+65536 0.5600000000000023
+131072 0.8499999999999943
+262144 1.75
 </pre></div>
 </div>
-<img alt="_images/522aa362385e2da37ac93db689bc4776682ff39184a2beff8977d065046a8868.png" src="_images/522aa362385e2da37ac93db689bc4776682ff39184a2beff8977d065046a8868.png" />
+<img alt="_images/f80ea5c231d1a05239b66bef542a070e4b0ad5c82e01d80b99d16fe90472f588.png" src="_images/f80ea5c231d1a05239b66bef542a070e4b0ad5c82e01d80b99d16fe90472f588.png" />
 </div>
 </div>
 </section>
