@@ -45,7 +45,10 @@ def functions(nb):
     for kind, src in cells(nb):
         if kind != 'code':
             continue
-        lines = [l for l in src.splitlines() if not l.lstrip().startswith('!')]
+        # shell escapes become pass, so a block like except: !pip install
+        # still parses
+        lines = [l[:len(l) - len(l.lstrip())] + 'pass' if l.lstrip().startswith('!') else l
+                 for l in src.splitlines()]
         target = None
         if lines and lines[0].startswith('%%add_method_to'):
             target = lines[0].split()[1]
