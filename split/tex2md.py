@@ -45,6 +45,10 @@ def figure(match):
 
 def preprocess(tex):
     tex = re.sub(r'\\index' + BRACES + r'\n?', '', tex)
+    # macros defined partway through book.tex: \V and \E for the number of
+    # nodes and edges
+    tex = re.sub(r'\\V(?![A-Za-z])', 'n', tex)
+    tex = re.sub(r'\\E(?![A-Za-z])', 'm', tex)
     # LaTeX quotes: ``like this'' (or ``like this" in places)
     tex = tex.replace("``", '"').replace("''", '"')
     tex = re.sub(r'\\py\{([^}]*)\}',
