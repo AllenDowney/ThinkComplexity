@@ -24,8 +24,21 @@ lint:
 format:
 	black --config pyproject.toml code
 
+# soln/ holds the canonical copies of the modules; nb/ holds copies, which are
+# what the notebooks download from GitHub, so they have to be real files.
+SHARED = $(notdir $(wildcard soln/*.py))
+
+sync-shared:
+	for f in $(SHARED); do cp soln/$$f nb/$$f; done
+
+# Fails if a copy in nb/ is out of date.
+check-shared:
+	@for f in $(SHARED); do \
+		cmp -s soln/$$f nb/$$f || { echo "nb/$$f is out of date: run make sync-shared"; exit 1; }; \
+	done
+
 # Student notebooks are not tested: their exercise cells are blank, so they
 # stop at the first cell that calls a function the reader is meant to write.
 # One pytest run; nbmake runs each notebook in its own directory.
-tests:
+tests: check-shared
 	pytest --nbmake --durations=10 soln/*.ipynb

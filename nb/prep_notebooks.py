@@ -29,6 +29,10 @@ for filename in sorted(filenames):
         if 'outputs' in cell:
             cell['outputs'] = []
 
+        # point the Colab link at the student copy
+        cell['source'] = cell['source'].replace(
+            'ThinkComplexity/blob/v3/soln/', 'ThinkComplexity/blob/v3/nb/')
+
         # remove solutions
         if cell['source'].startswith(text):
             cell['source'] = replacement
