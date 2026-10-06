@@ -21,9 +21,12 @@ git commit -m "Updating code and notebooks"
 
 # build the zip file
 cd ../..; zip -r ThinkComplexity.zip \
-    ThinkComplexity/nb/app*.ipynb \
-    ThinkComplexity/nb/chap*.ipynb \
-    ThinkComplexity/nb/*.py
+ThinkComplexity/Makefile \
+ThinkComplexity/requirements.txt \
+ThinkComplexity/environment.yml \
+ThinkComplexity/nb/app*.ipynb \
+ThinkComplexity/nb/chap*.ipynb \
+ThinkComplexity/nb/*.py
 
 # add and commit it
 mv ThinkComplexity.zip ThinkComplexity

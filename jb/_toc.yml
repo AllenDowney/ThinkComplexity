@@ -1,0 +1,34 @@
+format: jb-book
+root: index
+parts:
+- caption: Front Matter
+  chapters:
+  - file: chap00
+- caption: Chapters
+  numbered: True
+  chapters:
+    - file: chap01
+    - file: chap02
+    - file: chap03
+    - file: chap04
+    - file: chap05
+    - file: chap06
+    - file: chap07
+    - file: chap08
+    - file: chap09
+    - file: chap10
+    - file: chap11
+    - file: chap12
+- caption: Quizzes
+  chapters:
+    - file: quiz01
+    - file: quiz02
+    - file: quiz03
+    - file: quiz04
+    - file: quiz05
+    - file: quiz06
+- caption: Examples
+  chapters:
+    - file: appA
+    - file: mergesort
+    - file: fft
