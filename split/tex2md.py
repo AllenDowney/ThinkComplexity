@@ -50,6 +50,8 @@ def preprocess(tex):
     tex = re.sub(r'\\newcommand\{\\[VE]\}\{[nm]\}\n?', '', tex)
     tex = re.sub(r'\\V(?![A-Za-z])', 'n', tex)
     tex = re.sub(r'\\E(?![A-Za-z])', 'm', tex)
+    # \myrightarrow~ separates paired terms in Chapter 1's lists
+    tex = re.sub(r'\\myrightarrow~?', '→ ', tex)
     # pandoc can't parse a tabular inside \centerline{...}
     tex = re.sub(r'\\centerline\{\s*(\\begin\{tabular\}.*?\\end\{tabular\})\s*\}', r'\1',
                  tex, flags=re.S)
@@ -85,5 +87,46 @@ def to_markdown(tex):
     return md
 
 
+def deflists_to_bold(md):
+    """Turns pandoc definition lists into "**Term:** definition" paragraphs.
+
+    Jupyter doesn't render definition lists; this form reads the same in
+    Jupyter, Colab and the book's site.
+    """
+    lines = md.split('\n')
+    out = []
+    i = 0
+    while i < len(lines):
+        # a term is a nonblank line followed by a blank line and a ":   " line
+        if (lines[i].strip() and i + 2 < len(lines) and not lines[i + 1].strip()
+                and lines[i + 2].startswith(':   ') or
+                lines[i].strip() and i + 2 < len(lines) and not lines[i + 1].strip()
+                and lines[i + 2].rstrip() == ':'):
+            term = lines[i].strip()
+            if not term.endswith(':'):
+                term += ':'
+            first = lines[i + 2][4:] if lines[i + 2].startswith(':   ') else ''
+            if first.strip():
+                out.append(f'**{term}** {first}'.rstrip())
+            else:
+                # a term with no definition is just a list item
+                out.append('-   ' + term.rstrip(':'))
+            i += 3
+            # continuation lines are indented by 4 spaces (or blank)
+            while i < len(lines) and (lines[i].startswith('    ') or not lines[i].strip()):
+                if not lines[i].strip():
+                    # stop at a blank line followed by an unindented line
+                    if i + 1 < len(lines) and not lines[i + 1].startswith('    '):
+                        break
+                    out.append('')
+                else:
+                    out.append(lines[i][4:])
+                i += 1
+        else:
+            out.append(lines[i])
+            i += 1
+    return '\n'.join(out)
+
+
 if __name__ == '__main__':
-    print(to_markdown(preprocess(chapter_source(int(sys.argv[1])))))
+    print(deflists_to_bold(to_markdown(preprocess(chapter_source(int(sys.argv[1]))))))
