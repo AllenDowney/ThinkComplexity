@@ -2,7 +2,7 @@ import nbformat as nbf
 from glob import glob
 
 # Collect a list of all notebooks in the content folder
-filenames = glob("chap*.ipynb")
+filenames = glob("chap*.ipynb") + glob("app*.ipynb")
 
 text = '# Solution'
 replacement = '# Solution goes here'
