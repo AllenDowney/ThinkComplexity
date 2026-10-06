@@ -5,3 +5,4 @@ seaborn
 scipy
 jupyter
 networkx
+empiricaldist

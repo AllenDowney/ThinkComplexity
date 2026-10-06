@@ -9,3 +9,6 @@ dependencies:
   - scipy
   - jupyter
   - networkx
+  - pip
+  - pip:
+    - empiricaldist

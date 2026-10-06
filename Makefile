@@ -1,5 +1,5 @@
 PROJECT_NAME = ThinkComplexity
-PYTHON_VERSION = 3.10
+PYTHON_VERSION = 3.13
 PYTHON_INTERPRETER = python
 
 create_environment:
@@ -24,5 +24,8 @@ lint:
 format:
 	black --config pyproject.toml code
 
+# Student notebooks are not tested: their exercise cells are blank, so they
+# stop at the first cell that calls a function the reader is meant to write.
+# One pytest run; nbmake runs each notebook in its own directory.
 tests:
-	cd soln; pytest --nbmake app*.ipynb chap*.ipynb
+	pytest --nbmake --durations=10 soln/*.ipynb
