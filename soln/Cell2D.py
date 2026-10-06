@@ -61,6 +61,9 @@ class Cell2D:
         if step is None:
             step = self.step
 
+        # restore the interactive state afterward; turning it off
+        # stops the inline backend from showing later figures
+        was_interactive = plt.isinteractive()
         plt.ion()
         plt.figure()
         try:
@@ -74,7 +77,8 @@ class Cell2D:
         except KeyboardInterrupt:
             pass
         finally:
-            plt.ioff()
+            if not was_interactive:
+                plt.ioff()
 
 
 def draw_array(array, **options):
