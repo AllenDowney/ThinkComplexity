@@ -61,9 +61,11 @@ class Cell2D:
         if step is None:
             step = self.step
 
-        # restore the interactive state afterward; turning it off
-        # stops the inline backend from showing later figures
+        # restore the interactive state afterward, except in the inline
+        # backend, which only shows figures in interactive mode (and turns
+        # it on only after the first figure, which might be this one)
         was_interactive = plt.isinteractive()
+        inline = "inline" in plt.get_backend()
         plt.ion()
         plt.figure()
         try:
@@ -77,7 +79,7 @@ class Cell2D:
         except KeyboardInterrupt:
             pass
         finally:
-            if not was_interactive:
+            if not (was_interactive or inline):
                 plt.ioff()
 
 
