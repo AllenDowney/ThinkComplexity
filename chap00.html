@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -180,15 +180,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -371,7 +371,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list-contributor-list-unnumbered">Contributor List {#contributor-list .unnumbered}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>
             </nav>
         </div>
@@ -383,224 +383,90 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="preface">
+  <p>The second edition of <em>Think Complexity</em> is available from <a class="reference external" href="https://bookshop.org/a/98697/9781492040200">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/3wPN0SJ">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<section id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Link to this heading">#</a></h1>
-<p>Complexity science is an interdisciplinary field — at the intersection
-of mathematics, computer science and natural science — that focuses on
-<strong>complex systems</strong>, which are systems with many interacting components.</p>
-<p>One of the core tools of complexity science is discrete models,
-including networks and graphs, cellular automatons, and agent-based
-simulations. These tools are useful in the natural and social sciences,
-and sometimes in arts and humanities.</p>
-<p>For an overview of complexity science, see
-<a class="reference external" href="https://thinkcomplex.com/complex">https://thinkcomplex.com/complex</a>.</p>
+<p>Complexity science is an interdisciplinary field — at the intersection of mathematics, computer science and natural science — that focuses on <strong>complex systems</strong>, which are systems with many interacting components.</p>
+<p>One of the core tools of complexity science is discrete models, including networks and graphs, cellular automatons, and agent-based simulations. These tools are useful in the natural and social sciences, and sometimes in arts and humanities.</p>
+<p>For an overview of complexity science, see <a class="reference external" href="https://thinkcomplex.com/complex">https://thinkcomplex.com/complex</a>.</p>
 <p>Why should you learn about complexity science? Here are a few reasons:</p>
 <ul class="simple">
-<li><p>Complexity science is useful, especially for explaining why natural
-and social systems behave the way they do. Since Newton, math-based
-physics has focused on systems with small numbers of components and
-simple interactions. These models are effective for some
-applications, like celestial mechanics, and less useful for others,
-like economics. Complexity science provides a diverse and adaptable
-modeling toolkit.</p></li>
-<li><p>Many of the central results of complexity science are surprising; a
-recurring theme of this book is that simple models can produce
-complicated behavior, with the corollary that we can sometimes
-explain complicated behavior in the real world using simple models.</p></li>
-<li><p>As I explain in
-Chapter <a class="reference internal" href="#overview"><span class="xref myst">[overview]</span></a>{reference-type=“ref”
-reference=“overview”}, complexity science is at the center of a slow
-shift in the practice of science and a change in what we consider
-science to be.</p></li>
-<li><p>Studying complexity science provides an opportunity to learn about
-diverse physical and social systems, to develop and apply
-programming skills, and to think about fundamental questions in the
-philosophy of science.</p></li>
+<li><p>Complexity science is useful, especially for explaining why natural and social systems behave the way they do. Since Newton, math-based physics has focused on systems with small numbers of components and simple interactions. These models are effective for some applications, like celestial mechanics, and less useful for others, like economics. Complexity science provides a diverse and adaptable modeling toolkit.</p></li>
+<li><p>Many of the central results of complexity science are surprising; a recurring theme of this book is that simple models can produce complicated behavior, with the corollary that we can sometimes explain complicated behavior in the real world using simple models.</p></li>
+<li><p>As I explain in Chapter 1, complexity science is at the center of a slow shift in the practice of science and a change in what we consider science to be.</p></li>
+<li><p>Studying complexity science provides an opportunity to learn about diverse physical and social systems, to develop and apply programming skills, and to think about fundamental questions in the philosophy of science.</p></li>
 </ul>
-<p>By reading this book and working on the exercises you will have a chance
-to explore topics and ideas you might not encounter otherwise, practice
-programming in Python, and learn more about data structures and
-algorithms.</p>
+<p>By reading this book and working on the exercises you will have a chance to explore topics and ideas you might not encounter otherwise, practice programming in Python, and learn more about data structures and algorithms.</p>
 <p>Features of this book include:</p>
-<p>Technical details</p>
-<p>Most books about complexity science are written for a popular
-audience. They leave out technical details, which is frustrating for
-people who can handle them. This book presents the code, the math,
-and the explanations you need to understand how the models work.</p>
-<p>Further reading</p>
-<p>Throughout the book, I include pointers to further reading,
-including original papers (most of which are available
-electronically) and related articles from Wikipedia and other
-sources.</p>
-<p>Jupyter notebooks</p>
-<p>For each chapter I provide a Jupyter notebook that includes the code
-from the chapter, additional examples, and animations that let you
-see the models in action.</p>
-<p>Exercises and solutions</p>
-<p>At the end of each chapter I suggest exercises you might want to
-work on, with solutions.</p>
-<p>For most of the links in this book I use URL redirection. This mechanism
-has the drawback of hiding the link destination, but it makes the URLs
-shorter and less obtrusive. Also, and more importantly, it allows me to
-update the links without updating the book. If you find a broken link,
-please let me know and I will change the redirection.</p>
+<p><strong>Technical details:</strong> Most books about complexity science are written for a popular audience. They leave out technical details, which is frustrating for people who can handle them. This book presents the code, the math, and the explanations you need to understand how the models work.</p>
+<p><strong>Further reading:</strong> Throughout the book, I include pointers to further reading, including original papers (most of which are available electronically) and related articles from Wikipedia and other sources.</p>
+<p><strong>Jupyter notebooks:</strong> Each chapter is a Jupyter notebook that contains the text, the code, and the results, along with additional examples and animations that let you see the models in action. You can read the chapters online, or run them on Colab or on your computer.</p>
+<p><strong>Exercises and solutions:</strong> At the end of each chapter I suggest exercises you might want to work on, with solutions.</p>
+<p>For most of the links in this book I use URL redirection. This mechanism has the drawback of hiding the link destination, but it makes the URLs shorter and less obtrusive. Also, and more importantly, it allows me to update the links without updating the book. If you find a broken link, please let me know and I will change the redirection.</p>
 <section id="who-is-this-book-for">
 <h2>Who is this book for?<a class="headerlink" href="#who-is-this-book-for" title="Link to this heading">#</a></h2>
-<p>The examples and supporting code for this book are in Python. You should
-know core Python and be familiar with its object-oriented features,
-specifically using and defining classes.</p>
-<p>If you are not already familiar with Python, you might want to start
-with <em>Think Python</em>, which is appropriate for people who have never
-programmed before. If you have programming experience in another
-language, there are many good Python books to choose from, as well as
-online resources.</p>
-<p>I use NumPy, SciPy, and NetworkX throughout the book. If you are
-familiar with these libraries already, that’s great, but I will also
-explain them when they appear.</p>
-<p>I assume that the reader knows some mathematics: I use logarithms in
-several places, and vectors in one example. But that’s about it.</p>
+<p>The examples and supporting code for this book are in Python. You should know core Python and be familiar with its object-oriented features, specifically using and defining classes.</p>
+<p>If you are not already familiar with Python, you might want to start with <em>Think Python</em>, which is appropriate for people who have never programmed before. If you have programming experience in another language, there are many good Python books to choose from, as well as online resources.</p>
+<p>I use NumPy, SciPy, and NetworkX throughout the book. If you are familiar with these libraries already, that’s great, but I will also explain them when they appear.</p>
+<p>I assume that the reader knows some mathematics: I use logarithms in several places, and vectors in one example. But that’s about it.</p>
 </section>
 <section id="changes-from-the-first-edition">
 <h2>Changes from the first edition<a class="headerlink" href="#changes-from-the-first-edition" title="Link to this heading">#</a></h2>
-<p>For the second edition, I added two chapters, one on evolution, the
-other on the evolution of cooperation.</p>
-<p>In the first edition, each chapter presented background on a topic and
-suggested experiments the reader could run. For the second edition, I
-have done those experiments. Each chapter presents the implementation
-and results as a worked example, then suggests additional experiments
-for the reader.</p>
-<p>For the second edition, I replaced some of my own code with standard
-libraries like NumPy and NetworkX. The result is more concise and more
-efficient, and it gives readers a chance to learn these libraries.</p>
-<p>Also, the Jupyter notebooks are new. For every chapter there are two
-notebooks: one contains the code from the chapter, explanatory text, and
-exercises; the other contains solutions to the exercises.</p>
-<p>Finally, all supporting software has been updated to Python 3 (but most
-of it runs unmodified in Python 2).</p>
+<p>For the second edition, I added two chapters, one on evolution, the other on the evolution of cooperation.</p>
+<p>In the first edition, each chapter presented background on a topic and suggested experiments the reader could run. For the second edition, I have done those experiments. Each chapter presents the implementation and results as a worked example, then suggests additional experiments for the reader.</p>
+<p>For the second edition, I replaced some of my own code with standard libraries like NumPy and NetworkX. The result is more concise and more efficient, and it gives readers a chance to learn these libraries.</p>
+<p>Also, the Jupyter notebooks are new.</p>
+<p>Finally, all supporting software has been updated to Python 3.</p>
+<p>In this online version, the notebooks are the chapters: each one contains the text of the chapter along with the code that produces its results. There are two versions of each notebook, one with solutions to the exercises and one with the solutions left out. The code has also been updated to work with current versions of the libraries, and it uses <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> to represent distributions, where the printed book uses <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> and <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>.</p>
 </section>
 <section id="using-the-code">
 <h2>Using the code<a class="headerlink" href="#using-the-code" title="Link to this heading">#</a></h2>
-<p>All code used in this book is available from a Git repository on GitHub:
-<a class="reference external" href="https://thinkcomplex.com/repo">https://thinkcomplex.com/repo</a>. If you are not familiar with Git, it is
-a version control system that allows you to keep track of the files that
-make up a project. A collection of files under Git’s control is called a
-“repository”. GitHub is a hosting service that provides storage for Git
-repositories and a convenient web interface.</p>
-<p>The GitHub homepage for my repository provides several ways to work with
-the code:</p>
+<p>All code used in this book is available from a Git repository on GitHub: <a class="github reference external" href="https://github.com/AllenDowney/ThinkComplexity">AllenDowney/ThinkComplexity</a>. If you are not familiar with Git, it is a version control system that allows you to keep track of the files that make up a project. A collection of files under Git’s control is called a “repository”. GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.</p>
+<p>The GitHub homepage for my repository provides several ways to work with the code:</p>
 <ul class="simple">
-<li><p>You can create a copy of my repository by pressing the Fork button
-in the upper right. If you don’t already have a GitHub account,
-you’ll need to create one. After forking, you’ll have your own
-repository on GitHub that you can use to keep track of code you
-write while working on this book. Then you can clone the repo, which
-means that you copy the files to your computer.</p></li>
-<li><p>Or you can clone my repository without forking; that is, you can
-make a copy of my repo on your computer. You don’t need a GitHub
-account to do this, but you won’t be able to write your changes back
-to GitHub.</p></li>
-<li><p>If you don’t want to use Git at all, you can download the files in a
-Zip file using the green button that says “Clone or download”.</p></li>
+<li><p>You can create a copy of my repository by pressing the Fork button in the upper right. If you don’t already have a GitHub account, you’ll need to create one. After forking, you’ll have your own repository on GitHub that you can use to keep track of code you write while working on this book. Then you can clone the repo, which means that you copy the files to your computer.</p></li>
+<li><p>Or you can clone my repository without forking; that is, you can make a copy of my repo on your computer. You don’t need a GitHub account to do this, but you won’t be able to write your changes back to GitHub.</p></li>
+<li><p>If you don’t want to use Git at all, you can download the files in a Zip file using the green button that says “Code”.</p></li>
 </ul>
-<p>I developed this book using Anaconda from Continuum Analytics, which is
-a free Python distribution that includes all the packages you’ll need to
-run the code (and lots more). I found Anaconda easy to install. By
-default it does a user-level installation, not system-level, so you
-don’t need administrative privileges. And it supports both Python 2 and
-Python 3. You can download Anaconda from
-<a class="reference external" href="https://continuum.io/downloads">https://continuum.io/downloads</a>.</p>
-<p>The repository includes both Python scripts and Jupyter notebooks. If
-you have not used Jupyter before, you can read about it at
-<a class="reference external" href="https://jupyter.org">https://jupyter.org</a>.</p>
-<p>There are three ways you can work with the Jupyter notebooks:</p>
-<p>Run Jupyter on your computer</p>
-<p>If you installed Anaconda, you can install Jupyter by running the
-following command in a terminal or Command Window:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
-<span class="err">$</span> <span class="n">conda</span> <span class="n">install</span> <span class="n">jupyter</span>
-<span class="err">```</span>
+<p>Each chapter of this book is a Jupyter notebook that contains the text, the code, and the results. If you have not used Jupyter before, you can read about it at <a class="reference external" href="https://jupyter.org">https://jupyter.org</a>. There are three ways you can work with the notebooks:</p>
+<p><strong>Run the notebooks on Colab:</strong> Colab is a service that runs Jupyter notebooks in your browser, with nothing to install. At the top of each chapter there is a link that opens the notebook on Colab. You can run the code and modify it, but the virtual machine you run it in is temporary. If you leave it idle, the virtual machine disappears along with any changes you made, unless you save a copy in your Google Drive.</p>
+<p><strong>Run Jupyter on your computer:</strong> Clone or download the repository, then install the packages the notebooks use. If you use Anaconda or Miniconda, you can create an environment with everything you need by running the following commands in a terminal, in the directory that contains the repository:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ conda env create -f environment.yml
+$ conda activate ThinkComplexity
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="err">```</span>
-    <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<p>Or, if you use pip:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.txt
 </pre></div>
 </div>
-</div>
-</div>
-<p>Before you launch Jupyter, you should <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the directory that
-contains the code:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
-<span class="err">$</span> <span class="n">cd</span> <span class="n">ThinkComplexity2</span><span class="o">/</span><span class="n">code</span>
-<span class="err">```</span>
+<p>Then <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the directory that contains the notebooks — <code class="docutils literal notranslate"><span class="pre">soln</span></code> has the notebooks with solutions to the exercises, and <code class="docutils literal notranslate"><span class="pre">nb</span></code> has the same notebooks with the solutions left out — and start the Jupyter server:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ jupyter notebook
 </pre></div>
 </div>
-</div>
-</div>
-<p>And then start the Jupyter server:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">```</span>
-<span class="err">$</span> <span class="n">jupyter</span> <span class="n">notebook</span>
-<span class="err">```</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>When you start the server, it should launch your default web browser
-or create a new tab in an open browser window. Then you can open and
-run the notebooks.</p>
-<ul class="simple">
-<li><p>Run Jupyter on Colab</p></li>
-</ul>
-<p>TODO: Fill this in</p>
-<p>You can run the scripts and modify them to run your own code, but
-the virtual machine you run them in is temporary. If you leave it
-idle, the virtual machine disappears along with any changes you
-made.</p>
-<ul class="simple">
-<li><p>View notebooks on GitHub</p></li>
-</ul>
-<p>GitHub provides a view of the notebooks you can can use to read the
-notebooks and see the results I generated, but you won’t be able to
-modify or run the code.</p>
+<p>When you start the server, it should launch your default web browser or create a new tab in an open browser window. Then you can open and run the notebooks.</p>
+<p><strong>View notebooks on GitHub:</strong> GitHub provides a view of the notebooks you can use to read the notebooks and see the results I generated, but you won’t be able to modify or run the code.</p>
 <p>Good luck, and have fun!</p>
 </section>
-<section id="contributor-list-contributor-list-unnumbered">
-<h2>Contributor List {#contributor-list .unnumbered}<a class="headerlink" href="#contributor-list-contributor-list-unnumbered" title="Link to this heading">#</a></h2>
-<p>If you have a suggestion or correction, please send email to
-<code class="docutils literal notranslate"><span class="pre">downey&#64;allendowney.com</span></code>. If I make a change based on your feedback, I
-will add you to the contributor list (unless you ask to be omitted).</p>
-<p>Let me know what version of the book you are working with, and what
-format. If you include at least part of the sentence the error appears
-in, that makes it easy for me to search. Page and section numbers are
-fine, too, but not quite as easy to work with. Thanks!</p>
+<section id="contributor-list">
+<h2>Contributor List<a class="headerlink" href="#contributor-list" title="Link to this heading">#</a></h2>
+<p>If you have a suggestion or correction, please send email to <code class="docutils literal notranslate"><span class="pre">downey&#64;allendowney.com</span></code>. If I make a change based on your feedback, I will add you to the contributor list (unless you ask to be omitted).</p>
+<p>Let me know what version of the book you are working with, and what format. If you include at least part of the sentence the error appears in, that makes it easy for me to search. Page and section numbers are fine, too, but not quite as easy to work with. Thanks!</p>
 <ul class="simple">
-<li><p>John Harley, Jeff Stanton, Colden Rouleau and Keerthik Omanakuttan
-are Computational Modeling students who pointed out typos.</p></li>
+<li><p>John Harley, Jeff Stanton, Colden Rouleau and Keerthik Omanakuttan are Computational Modeling students who pointed out typos.</p></li>
 <li><p>Jose Oscar Mur-Miranda found several typos.</p></li>
-<li><p>Phillip Loh, Corey Dolphin, Noam Rubin and Julian Ceipek found typos
-and made helpful suggestions.</p></li>
+<li><p>Phillip Loh, Corey Dolphin, Noam Rubin and Julian Ceipek found typos and made helpful suggestions.</p></li>
 <li><p>Sebastian Schöner sent two pages of corrections!</p></li>
 <li><p>Philipp Marek sent a number of corrections.</p></li>
-<li><p>Jason Woodard co-taught Complexity Science with me at Olin College,
-introduced me to NK models, and made many helpful suggestions and
-corrections.</p></li>
+<li><p>Jason Woodard co-taught Complexity Science with me at Olin College, introduced me to NK models, and made many helpful suggestions and corrections.</p></li>
 <li><p>Davi Post sent several corrections and suggestions.</p></li>
 <li><p>Graham Taylor sent a pull request on GitHub that fixed many typos.</p></li>
 </ul>
-<p>I would especially like to thank the technical reviewers, Vincent Knight
-and Eric Ma, who made many helpful suggestions, and the copy editor,
-Charles Roumeliotis, who caught many errors and inconsistencies.</p>
-<p>Other people who reported errors include Richard Hollands, Muhammad
-Najmi bin Ahmad Zabidi, Alex Hantman, and Jonathan Harford.</p>
+<p>I would especially like to thank the technical reviewers, Vincent Knight and Eric Ma, who made many helpful suggestions, and the copy editor, Charles Roumeliotis, who caught many errors and inconsistencies.</p>
+<p>Other people who reported errors include Richard Hollands, Muhammad Najmi bin Ahmad Zabidi, Alex Hantman, and Jonathan Harford.</p>
+<p><a class="reference external" href="https://greenteapress.com/wp/think-complexity-2e/">Think Complexity, 2nd Edition</a></p>
+<p>Copyright 2016 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -671,7 +537,7 @@ Najmi bin Ahmad Zabidi, Alex Hantman, and Jonathan Harford.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list-contributor-list-unnumbered">Contributor List {#contributor-list .unnumbered}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>
   </nav></div>
 

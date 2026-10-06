@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Cellular automata &#8212; Think Complexity</title>
+    <title>5. Cellular Automatons &#8212; Think Complexity</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Game of Life" href="chap06.html" />
-    <link rel="prev" title="4. Scale-Free Networks" href="chap04.html" />
+    <link rel="prev" title="4. Scale-free networks" href="chap04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,15 +182,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -360,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Cellular automata</h1>
+    <h1>Cellular Automatons</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,13 +370,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-dimensional-ca">5.1. Zero-dimensional CA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-ca">5.2. One-dimensional CA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.3. Cross correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-with-correlate">5.4. Update with correlate</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.5. CA Tables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cell1d-object">5.6. The Cell1D object</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-ca">5.1. A simple CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wolframs-experiment">5.2. Wolfram’s experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-cas">5.3. Classifying CAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">5.4. Randomness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinism">5.5. Determinism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spaceships">5.6. Spaceships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universality">5.7. Universality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#falsifiability">5.8. Falsifiability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-a-model-of">5.9. What is this a model of?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-cas">5.10. Implementing CAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.11. Cross-correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.12. CA tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.13. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -388,10 +394,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="cellular-automata">
-<h1><span class="section-number">5. </span>Cellular automata<a class="headerlink" href="#cellular-automata" title="Link to this heading">#</a></h1>
-<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
-<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+  <p>The second edition of <em>Think Complexity</em> is available from <a class="reference external" href="https://bookshop.org/a/98697/9781492040200">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/3wPN0SJ">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<section id="cellular-automatons">
+<h1><span class="section-number">5. </span>Cellular Automatons<a class="headerlink" href="#cellular-automatons" title="Link to this heading">#</a></h1>
+<p>A <strong>cellular automaton</strong> (CA) is a model of a world with very simple physics. “Cellular” means that the world is divided into discrete chunks, called cells. An “automaton” is a machine that performs computations — it could be a real machine, but more often the “machine” is a mathematical abstraction or a computer simulation.</p>
+<p>This chapter presents experiments Stephen Wolfram performed in the 1980s, showing that some cellular automatons display surprisingly complicated behavior, including the ability to perform arbitrary computations.</p>
+<p>I discuss implications of these results, and at the end of the chapter I suggest methods for implementing CAs efficiently in Python.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap05.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -416,7 +425,8 @@ document.write(`
         <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
     
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/Cell1D.py&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -431,9 +441,22 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="zero-dimensional-ca">
-<h2><span class="section-number">5.1. </span>Zero-dimensional CA<a class="headerlink" href="#zero-dimensional-ca" title="Link to this heading">#</a></h2>
-<p>Here’s a simple implementation of the 0-D CA I mentioned in the book, with one cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cell1D.py contains the implementation we develop at the end of</span>
+<span class="c1"># the chapter; we use it to draw the figures before then.</span>
+<span class="kn">from</span> <span class="nn">Cell1D</span> <span class="kn">import</span> <span class="n">Cell1D</span><span class="p">,</span> <span class="n">draw_ca</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-simple-ca">
+<h2><span class="section-number">5.1. </span>A simple CA<a class="headerlink" href="#a-simple-ca" title="Link to this heading">#</a></h2>
+<p>Cellular automatons (you might also see the plural “automata”) are governed by rules that determine how the state of the cells changes over time.</p>
+<p>As a trivial example, consider a cellular automaton (CA) with a single cell. The state of the cell during time step <span class="math notranslate nohighlight">\(i\)</span> is an integer, <span class="math notranslate nohighlight">\(x_i\)</span>. As an initial condition, suppose <span class="math notranslate nohighlight">\(x_0 = 0\)</span>.</p>
+<p>Now all we need is a rule. Arbitrarily, I’ll pick <span class="math notranslate nohighlight">\(x_{i+1} = x_{i} + 1\)</span>, which says that during each time step, the state of the CA gets incremented by 1. So this CA performs a simple calculation: it counts.</p>
+<p>But this CA is atypical; normally the number of possible states is finite. As an example, suppose a cell can only have one of two states, 0 or 1. For a 2-state CA, we could write a rule like <span class="math notranslate nohighlight">\(x_{i+1} = (x_{i} + 1) \% 2\)</span>, where <span class="math notranslate nohighlight">\(\%\)</span> is the remainder (or modulus) operator.</p>
+<p>Here’s a simple implementation of this CA, with one cell; the array holds its state during each time step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -457,7 +480,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.0)
 </pre></div>
 </div>
 </div>
@@ -478,11 +501,227 @@ document.write(`
 </div>
 </div>
 </div>
-<p>So the behavior of this CA is simple: it blinks.</p>
+<p>The behavior of this CA is simple: it blinks. That is, the state of the cell switches between 0 and 1 during each time step.</p>
+<p>Most CAs are <strong>deterministic</strong>, which means that rules do not have any random elements; given the same initial state, they always produce the same result. But some CAs are nondeterministic; we will see examples later.</p>
+<p>The CA in this section has only one cell, so we can think of it as zero-dimensional. In the rest of this chapter, we explore one-dimensional (1-D) CAs; in the next chapter we explore two-dimensional CAs.</p>
 </section>
-<section id="one-dimensional-ca">
-<h2><span class="section-number">5.2. </span>One-dimensional CA<a class="headerlink" href="#one-dimensional-ca" title="Link to this heading">#</a></h2>
-<p>Just as we used a 1-D array to show the state of a single cell over time, we’ll use a 2-D array to show the state of a 1-D CA over time, with one column per cell and one row per timestep.</p>
+<section id="wolframs-experiment">
+<h2><span class="section-number">5.2. </span>Wolfram’s experiment<a class="headerlink" href="#wolframs-experiment" title="Link to this heading">#</a></h2>
+<p>In the early 1980s Stephen Wolfram published a series of papers presenting a systematic study of 1-D CAs. He identified four categories of behavior, each more interesting than the last. You can read one of these papers, “Statistical mechanics of cellular automata,” at <a class="reference external" href="https://thinkcomplex.com/ca">https://thinkcomplex.com/ca</a>.</p>
+<p>In Wolfram’s experiments, the cells are arranged in a lattice (which you might remember from Chapter 3) where each cell is connected to two neighbors. The lattice can be finite, infinite, or arranged in a ring.</p>
+<p>The rules that determine how the system evolves in time are based on the notion of a “neighborhood”, which is the set of cells that determines the next state of a given cell. Wolfram’s experiments use a 3-cell neighborhood: the cell itself and its two neighbors.</p>
+<p>In these experiments, the cells have two states, denoted 0 and 1 or “off” and “on”. A rule can be summarized by a table that maps from the state of the neighborhood (a tuple of three states) to the next state of the center cell. The following table shows an example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>prev</p></th>
+<th class="head"><p>111</p></th>
+<th class="head"><p>110</p></th>
+<th class="head"><p>101</p></th>
+<th class="head"><p>100</p></th>
+<th class="head"><p>011</p></th>
+<th class="head"><p>010</p></th>
+<th class="head"><p>001</p></th>
+<th class="head"><p>000</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>next</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The first row shows the eight states a neighborhood can be in. The second row shows the state of the center cell during the next time step. As a concise encoding of this table, Wolfram suggested reading the bottom row as a binary number; because 00110010 in binary is 50 in decimal, Wolfram calls this CA “Rule 50”.</p>
+<p>The following figure shows the effect of Rule 50 over 10 time steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-1
+</pre></div>
+</div>
+<img alt="_images/cc87519a9906330450d8223fce035a90b6a888681a8629029ced12388d7d1878.png" src="_images/cc87519a9906330450d8223fce035a90b6a888681a8629029ced12388d7d1878.png" />
+</div>
+</div>
+<p>The first row shows the state of the system during the first time step; it starts with one cell “on” and the rest “off”. The second row shows the state of the system during the next time step, and so on.</p>
+<p>The triangular shape in the figure is typical of these CAs; is it a consequence of the shape of the neighborhood. In one time step, each cell influences the state of one neighbor in either direction. During the next time step, that influence can propagate one more cell in each direction. So each cell in the past has a “triangle of influence” that includes all of the cells that can be affected by it.</p>
+</section>
+<section id="classifying-cas">
+<h2><span class="section-number">5.3. </span>Classifying CAs<a class="headerlink" href="#classifying-cas" title="Link to this heading">#</a></h2>
+<p>How many of these CAs are there?</p>
+<p>Since each cell is either on or off, we can specify the state of a cell with a single bit. In a neighborhood with three cells, there are 8 possible configurations, so there are 8 entries in the rule tables. And since each entry contains a single bit, we can specify a table using 8 bits. With 8 bits, we can specify 256 different rules.</p>
+<p>One of Wolfram’s first experiments with CAs was to test all 256 possibilities and classify them.</p>
+<p>Examining the results visually, he proposed that the behavior of CAs can be grouped into four classes. Class 1 contains the simplest (and least interesting) CAs, the ones that evolve from almost any starting condition to the same uniform pattern. As a trivial example, Rule 0 always generates an empty pattern after one time step.</p>
+<p>Rule 50 is an example of Class 2. It generates a simple pattern with nested structure, that is, a pattern that contains many smaller versions of itself. Rule 18 makes the nested structure is even clearer; the following figure shows what it looks like after 64 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-3
+</pre></div>
+</div>
+<img alt="_images/09acb358b3443c327727f9a17ed54040a74a03fa8cea9f5d92eca4b2910b823c.png" src="_images/09acb358b3443c327727f9a17ed54040a74a03fa8cea9f5d92eca4b2910b823c.png" />
+</div>
+</div>
+<p>This pattern resembles the Sierpiński triangle, which you can read about at <a class="reference external" href="https://thinkcomplex.com/sier">https://thinkcomplex.com/sier</a>.</p>
+<p>Some Class 2 CAs generate patterns that are intricate and pretty, but compared to Classes 3 and 4, they are relatively simple.</p>
+</section>
+<section id="randomness">
+<h2><span class="section-number">5.4. </span>Randomness<a class="headerlink" href="#randomness" title="Link to this heading">#</a></h2>
+<p>Class 3 contains CAs that generate randomness. Rule 30 is an example; the following figure shows what it looks like after 100 time steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-4
+</pre></div>
+</div>
+<img alt="_images/159ed031b23b9a6da357f5516cd993c4ce80271d439ecf8851d29b87edd91f4b.png" src="_images/159ed031b23b9a6da357f5516cd993c4ce80271d439ecf8851d29b87edd91f4b.png" />
+</div>
+</div>
+<p>Along the left side there is an apparent pattern, and on the right side there are triangles in various sizes, but the center seems quite random. In fact, if you take the center column and treat it as a sequence of bits, it is hard to distinguish from a truly random sequence. It passes many of the statistical tests people use to test whether a sequence of bits is random.</p>
+<p>Programs that produce random-seeming numbers are called <strong>pseudo-random number generators</strong> (PRNGs). They are not considered truly random because:</p>
+<ul class="simple">
+<li><p>Many of them produce sequences with regularities that can be detected statistically. For example, the original implementation of <code class="docutils literal notranslate"><span class="pre">rand</span></code> in the C library used a linear congruential generator that yielded sequences with easily detectable serial correlations.</p></li>
+<li><p>Any PRNG that uses a finite amount of state (that is, storage) will eventually repeat itself. One of the characteristics of a generator is the <strong>period</strong> of this repetition.</p></li>
+<li><p>The underlying process is fundamentally deterministic, unlike some physical processes, like radioactive decay and thermal noise, that are considered to be fundamentally random.</p></li>
+</ul>
+<p>Modern PRNGs produce sequences that are statistically indistinguishable from random, and they can be implemented with periods so long that the universe will collapse before they repeat. The existence of these generators raises the question of whether there is any real difference between a good quality pseudo-random sequence and a sequence generated by a “truly” random process. In <em>A New Kind of Science</em>, Wolfram argues that there is not (pages 315–326).</p>
+</section>
+<section id="determinism">
+<h2><span class="section-number">5.5. </span>Determinism<a class="headerlink" href="#determinism" title="Link to this heading">#</a></h2>
+<p>The existence of Class 3 CAs is surprising. To explain how surprising, let me start with philosophical <strong>determinism</strong> (see <a class="reference external" href="https://thinkcomplex.com/deter">https://thinkcomplex.com/deter</a>). Many philosophical stances are hard to define precisely because they come in a variety of flavors. I often find it useful to define them with a list of statements ordered from weak to strong:</p>
+<p><strong>D1:</strong> Deterministic models can make accurate predictions for some physical systems.</p>
+<p><strong>D2:</strong> Many physical systems can be modeled by deterministic processes, but some are intrinsically random.</p>
+<p><strong>D3:</strong> All events are caused by prior events, but many physical systems are nevertheless fundamentally unpredictable.</p>
+<p><strong>D4:</strong> All events are caused by prior events, and can (at least in principle) be predicted.</p>
+<p>My goal in constructing this range is to make D1 so weak that virtually everyone would accept it, D4 so strong that almost no one would accept it, with intermediate statements that some people accept.</p>
+<p>The center of mass of world opinion swings along this range in response to historical developments and scientific discoveries. Prior to the scientific revolution, many people regarded the working of the universe as fundamentally unpredictable or controlled by supernatural forces. After the triumphs of Newtonian mechanics, some optimists came to believe something like D4; for example, in 1814 Pierre-Simon Laplace wrote:</p>
+<blockquote>
+<div><p>We may regard the present state of the universe as the effect of its past and the cause of its future. An intellect which at a certain moment would know all forces that set nature in motion, and all positions of all items of which nature is composed, if this intellect were also vast enough to submit these data to analysis, it would embrace in a single formula the movements of the greatest bodies of the universe and those of the tiniest atom; for such an intellect nothing would be uncertain and the future just like the past would be present before its eyes.</p>
+</div></blockquote>
+<p>This “intellect” is now called “Laplace’s Demon”. See <a class="reference external" href="https://thinkcomplex.com/demon">https://thinkcomplex.com/demon</a>. The word “demon” in this context has the sense of “spirit”, with no implication of evil.</p>
+<p>Discoveries in the 19th and 20th centuries gradually dismantled Laplace’s hope. Thermodynamics, radioactivity, and quantum mechanics posed successive challenges to strong forms of determinism.</p>
+<p>In the 1960s chaos theory showed that in some deterministic systems prediction is only possible over short time scales, limited by precision in the measurement of initial conditions.</p>
+<p>Most of these systems are continuous in space (if not time) and nonlinear, so the complexity of their behavior is not entirely surprising. Wolfram’s demonstration of complex behavior in simple cellular automatons is more surprising — and disturbing, at least to a deterministic world view.</p>
+<p>So far I have focused on scientific challenges to determinism, but the longest-standing objection is the apparent conflict between determinism and human free will. Complexity science provides a possible resolution of this conflict; I’ll come back to this topic in Chapter 10.</p>
+</section>
+<section id="spaceships">
+<h2><span class="section-number">5.6. </span>Spaceships<a class="headerlink" href="#spaceships" title="Link to this heading">#</a></h2>
+<p>The behavior of Class 4 CAs is even more surprising. Several 1-D CAs, most notably Rule 110, are <strong>Turing complete</strong>, which means that they can compute any computable function. This property, also called <strong>universality</strong>, was proved by Matthew Cook in 1998. See <a class="reference external" href="https://thinkcomplex.com/r110">https://thinkcomplex.com/r110</a>.</p>
+<p>The following figure shows what Rule 110 looks like with an initial condition of a single cell and 100 time steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-5
+</pre></div>
+</div>
+<img alt="_images/1a9f085dbbd19bc294ede5041268f84f503b4ff63a8252454a545e615019a1ba.png" src="_images/1a9f085dbbd19bc294ede5041268f84f503b4ff63a8252454a545e615019a1ba.png" />
+</div>
+</div>
+<p>At this time scale it is not apparent that anything special is going on. There are some regular patterns but also some features that are hard to characterize.</p>
+<p>The following figure shows a bigger picture, starting with a random initial condition and 600 time steps:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">ca</span> <span class="o">=</span> <span class="n">Cell1D</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">start_random</span><span class="p">()</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-6
+</pre></div>
+</div>
+<img alt="_images/52ef2c8550a4bec21a59698f3824a62bd68d7d358065d1f3ac1f356f2e461a27.png" src="_images/52ef2c8550a4bec21a59698f3824a62bd68d7d358065d1f3ac1f356f2e461a27.png" />
+</div>
+</div>
+<p>After about 100 steps the background settles into a simple repeating pattern, but there are a number of persistent structures that appear as disturbances in the background. Some of these structures are stable, so they appear as vertical lines. Others translate in space, appearing as diagonals with different slopes, depending on how many time steps they take to shift by one column. These structures are called <strong>spaceships</strong>.</p>
+<p>Collisions between spaceships yield different results depending on the types of the spaceships and the phase they are in when they collide. Some collisions annihilate both ships; others leave one ship unchanged; still others yield one or more ships of different types.</p>
+<p>These collisions are the basis of computation in a Rule 110 CA. If you think of spaceships as signals that propagate through space, and collisions as gates that compute logical operations like AND and OR, you can see what it means for a CA to perform a computation.</p>
+</section>
+<section id="universality">
+<h2><span class="section-number">5.7. </span>Universality<a class="headerlink" href="#universality" title="Link to this heading">#</a></h2>
+<p>To understand universality, we have to understand computability theory, which is about models of computation and what they compute.</p>
+<p>One of the most general models of computation is the Turing machine, which is an abstract computer proposed by Alan Turing in 1936. A Turing machine is a 1-D CA, infinite in both directions, augmented with a read-write head. At any time, the head is positioned over a single cell. It can read the state of that cell (usually there are only two states) and it can write a new value into the cell.</p>
+<p>In addition, the machine has a register, which records the state of the machine (one of a finite number of states), and a table of rules. For each machine state and cell state, the table specifies an action. Actions include modifying the cell the head is over and moving one cell to the left or right.</p>
+<p>A Turing machine is not a practical design for a computer, but it models common computer architectures. For a given program running on a real computer, it is possible (at least in principle) to construct a Turing machine that performs an equivalent computation.</p>
+<p>The Turing machine is useful because it is possible to characterize the set of functions that can be computed by a Turing machine, which is what Turing did. Functions in this set are called “Turing computable”.</p>
+<p>To say that a Turing machine can compute any Turing-computable function is a tautology: it is true by definition. But Turing-computability is more interesting than that.</p>
+<p>It turns out that just about every reasonable model of computation anyone has come up with is “Turing complete”; that is, it can compute exactly the same set of functions as the Turing machine. Some of these models, like lamdba calculus, are very different from a Turing machine, so their equivalence is surprising.</p>
+<p>This observation led to the Church-Turing Thesis, which is the claim that these definitions of computability capture something essential that is independent of any particular model of computation.</p>
+<p>The Rule 110 CA is yet another model of computation, and remarkable for its simplicity. That it, too, turns out to be Turing complete lends support to the Church-Turing Thesis.</p>
+<p>In <em>A New Kind of Science</em>, Wolfram states a variation of this thesis, which he calls the “principle of computational equivalence” (see <a class="reference external" href="https://thinkcomplex.com/equiv">https://thinkcomplex.com/equiv</a>):</p>
+<blockquote>
+<div><p>Almost all processes that are not obviously simple can be viewed as computations of equivalent sophistication.</p>
+<p>More specifically, the principle of computational equivalence says that systems found in the natural world can perform computations up to a maximal (“universal”) level of computational power, and that most systems do in fact attain this maximal level of computational power. Consequently, most systems are computationally equivalent.</p>
+</div></blockquote>
+<p>Applying these definitions to CAs, Classes 1 and 2 are “obviously simple”. It may be less obvious that Class 3 is simple, but in a way perfect randomness is as simple as perfect order; complexity happens in between. So Wolfram’s claim is that Class 4 behavior is common in the natural world, and that almost all systems that manifest it are computationally equivalent.</p>
+</section>
+<section id="falsifiability">
+<h2><span class="section-number">5.8. </span>Falsifiability<a class="headerlink" href="#falsifiability" title="Link to this heading">#</a></h2>
+<p>Wolfram holds that his principle is a stronger claim than the Church-Turing thesis because it is about the natural world rather than abstract models of computation. But saying that natural processes “can be viewed as computations” strikes me as a statement about theory choice more than a hypothesis about the natural world.</p>
+<p>Also, with qualifications like “almost” and undefined terms like “obviously simple”, his hypothesis may be <strong>unfalsifiable</strong>. Falsifiability is an idea from the philosophy of science, proposed by Karl Popper as a demarcation between scientific hypotheses and pseudoscience. A hypothesis is falsifiable if there is an experiment, at least in the realm of practicality, that would contradict the hypothesis if it were false.</p>
+<p>For example, the claim that all life on earth is descended from a common ancestor is falsifiable because it makes specific predictions about similarities in the genetics of modern species (among other things). If we discovered a new species whose DNA was almost entirely different from ours, that would contradict (or at least bring into question) the theory of universal common descent.</p>
+<p>On the other hand, “special creation”, the claim that all species were created in their current form by a supernatural agent, is unfalsifiable because there is nothing that we could observe about the natural world that would contradict it. Any outcome of any experiment could be attributed to the will of the creator.</p>
+<p>Unfalsifiable hypotheses can be appealing because they are impossible to refute. If your goal is never to be proved wrong, you should choose hypotheses that are as unfalsifiable as possible.</p>
+<p>But if your goal is to make reliable predictions about the world — and this is at least one of the goals of science — unfalsifiable hypotheses are useless. The problem is that they have no consequences (if they had consequences, they would be falsifiable).</p>
+<p>For example, if the theory of special creation were true, what good would it do me to know it? It wouldn’t tell me anything about the creator except that he has an “inordinate fondness for beetles” (attributed to J. B. S. Haldane). And unlike the theory of common descent, which informs many areas of science and bioengineering, it would be of no use for understanding the world or acting in it.</p>
+</section>
+<section id="what-is-this-a-model-of">
+<h2><span class="section-number">5.9. </span>What is this a model of?<a class="headerlink" href="#what-is-this-a-model-of" title="Link to this heading">#</a></h2>
+<p>Some cellular automatons are primarily mathematical artifacts. They are interesting because they are surprising, or useful, or pretty, or because they provide tools for creating new mathematics (like the Church-Turing thesis).</p>
+<p>But it is not clear that they are models of physical systems. And if they are, they are highly abstracted, which is to say that they are not very detailed or realistic.</p>
+<p>For example, some species of cone snail produce a pattern on their shells that resembles the patterns generated by cellular automatons (see <a class="reference external" href="https://thinkcomplex.com/cone">https://thinkcomplex.com/cone</a>). So it is natural to suppose that a CA is a model of the mechanism that produces patterns on shells as they grow. But, at least initially, it is not clear how the elements of the model (so-called cells, communication between neighbors, rules) correspond to the elements of a growing snail (real cells, chemical signals, protein interaction networks).</p>
+<p>For conventional physical models, being realistic is a virtue. If the elements of a model correspond to the elements of a physical system, there is an obvious analogy between the model and the system. In general, we expect a model that is more realistic to make better predictions and to provide more believable explanations.</p>
+<p>Of course, this is only true up to a point. Models that are more detailed are harder to work with, and usually less amenable to analysis. At some point, a model becomes so complex that it is easier to experiment with the system.</p>
+<p>At the other extreme, simple models can be compelling exactly because they are simple.</p>
+<p>Simple models offer a different kind of explanation than detailed models. With a detailed model, the argument goes something like this: “We are interested in physical system S, so we construct a detailed model, M, and show by analysis and simulation that M exhibits a behavior, B, that is similar (qualitatively or quantitatively) to an observation of the real system, O. So why does O happen? Because S is similar to M, and B is similar to O, and we can prove that M leads to B.”</p>
+<p>With simple models we can’t claim that S is similar to M, because it isn’t. Instead, the argument goes like this: “There is a set of models that share a common set of features. Any model that has these features exhibits behavior B. If we make an observation, O, that resembles B, one way to explain it is to show that the system, S, has the set of features sufficient to produce B.”</p>
+<p>For this kind of argument, adding more features doesn’t help. Making the model more realistic doesn’t make the model more reliable; it only obscures the difference between the essential features that cause B and the incidental features that are particular to S.</p>
+<p>The following figure shows the logical structure of this kind of model.</p>
+<p><img alt="The logical structure of a simple physical model." src="https://github.com/AllenDowney/ThinkComplexity/raw/v3/images/model3.png" /></p>
+<p>The features <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are sufficient to produce the behavior. Adding more detail, like features <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(z\)</span>, might make the model more realistic, but that realism adds no explanatory power.</p>
+</section>
+<section id="implementing-cas">
+<h2><span class="section-number">5.10. </span>Implementing CAs<a class="headerlink" href="#implementing-cas" title="Link to this heading">#</a></h2>
+<p>To generate the figures in this chapter, I wrote a Python class called <code class="docutils literal notranslate"><span class="pre">Cell1D</span></code> that represents a 1-D cellular automaton. It is defined in <code class="docutils literal notranslate"><span class="pre">Cell1D.py</span></code> in the repository for this book, and in this section we’ll develop it step by step.</p>
+<p>To store the state of the CA, I use a NumPy array with one column for each cell and one row for each time step.</p>
+<p>To explain how my implementation works, I’ll start with a CA that computes the parity of the cells in each neighborhood. The “parity” of a number is 0 if the number is even and 1 if it is odd.</p>
+<p>I use the NumPy function <code class="docutils literal notranslate"><span class="pre">zeros</span></code> to create an array of zeros, then put a 1 in the middle of the first row.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span>
@@ -503,7 +742,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>To plot the array I use <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code></p>
+<p>The data type <code class="docutils literal notranslate"><span class="pre">uint8</span></code> indicates that the elements of <code class="docutils literal notranslate"><span class="pre">array</span></code> are unsigned 8-bit integers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_ca</span></code> displays the elements of an <code class="docutils literal notranslate"><span class="pre">array</span></code> graphically:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_ca</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
@@ -512,6 +752,8 @@ document.write(`
 </div>
 </div>
 </div>
+<p>The colormap <code class="docutils literal notranslate"><span class="pre">'Blues'</span></code> draws the “on” cells in dark blue and the “off” cells in light blue.</p>
+<p><code class="docutils literal notranslate"><span class="pre">imshow</span></code> displays the array as an “image”; that is, it draws a colored square for each element of the array. Setting <code class="docutils literal notranslate"><span class="pre">interpolation</span></code> to <code class="docutils literal notranslate"><span class="pre">none</span></code> indicates that <code class="docutils literal notranslate"><span class="pre">imshow</span></code> should not interpolate between on and off cells.</p>
 <p>Here’s what it looks like after we initialize the first row.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -520,10 +762,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/42954ad9af5ed239298a29b7cf558999002a8ccad83d210af996cbff0aeb6fe9.png" src="_images/42954ad9af5ed239298a29b7cf558999002a8ccad83d210af996cbff0aeb6fe9.png" />
+<img alt="_images/9fe9be6db1577ece29804ba4481d0a7f81b6aadf0e880c60a4769146837fc3f7.png" src="_images/9fe9be6db1577ece29804ba4481d0a7f81b6aadf0e880c60a4769146837fc3f7.png" />
 </div>
 </div>
-<p>And here’s the function that fills in the next row.  The rule for this CA is to take the sum of a cell and its two neighbors mod 2.</p>
+<p>To compute the state of the CA during time step <code class="docutils literal notranslate"><span class="pre">i</span></code>, we have to add up consecutive elements of <code class="docutils literal notranslate"><span class="pre">array</span></code> and compute the parity of the sum. We can due that using a slice operator to select the elements and the modulus operator to compute parity:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
@@ -538,6 +780,9 @@ document.write(`
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">rows</span></code> and <code class="docutils literal notranslate"><span class="pre">cols</span></code> are the dimensions of the array. <code class="docutils literal notranslate"><span class="pre">row</span></code> is the previous row of the array.</p>
+<p>Each time through the loop, we select three elements from <code class="docutils literal notranslate"><span class="pre">row</span></code>, add them up, compute the parity, and store the result in row <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<p>In this example, the lattice is finite, so the first and last cells have only one neighbor. To handle this special case, I don’t update the first and last column; they are always 0.</p>
 <p>Here’s the second row.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -547,7 +792,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6ab62208fc83c303c01cdf73f5e34ddfa8cd7890ac3e5a8275b9636874c200fd.png" src="_images/6ab62208fc83c303c01cdf73f5e34ddfa8cd7890ac3e5a8275b9636874c200fd.png" />
+<img alt="_images/eac5f67dd51a32a8a598596af9177ef581e94d281331b72ef9d56c83433d6855.png" src="_images/eac5f67dd51a32a8a598596af9177ef581e94d281331b72ef9d56c83433d6855.png" />
 </div>
 </div>
 <p>And here’s what it looks like with the rest of the cells filled in.</p>
@@ -561,17 +806,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+<img alt="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" src="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" />
 </div>
 </div>
 <p>For a simple set of rules, the behavior is more interesting than you might expect.</p>
 <p><strong>Exercise:</strong> Modify this code to increase the number of rows and columns and see what this CA does after more time steps.</p>
 </section>
 <section id="cross-correlation">
-<h2><span class="section-number">5.3. </span>Cross correlation<a class="headerlink" href="#cross-correlation" title="Link to this heading">#</a></h2>
-<p>We can update the CA more quickly using “cross correlation”.  The cross correlation of an array, <code class="docutils literal notranslate"><span class="pre">a</span></code>, with a window, <code class="docutils literal notranslate"><span class="pre">w</span></code>, is a new array, <code class="docutils literal notranslate"><span class="pre">c</span></code>, where element <code class="docutils literal notranslate"><span class="pre">k</span></code> is:</p>
-<p><span class="math notranslate nohighlight">\( c_k = \sum_{n=0}^{N-1} a_{n+k} \cdot w_n \)</span></p>
-<p>In Python, we can compute element <code class="docutils literal notranslate"><span class="pre">k</span></code> like this:</p>
+<h2><span class="section-number">5.11. </span>Cross-correlation<a class="headerlink" href="#cross-correlation" title="Link to this heading">#</a></h2>
+<p>The operation in the previous section — selecting elements from an array and adding them up — is an example of an operation that is so useful, in so many domains, that it has a name: <strong>cross-correlation</strong>. And NumPy provides a function, called <code class="docutils literal notranslate"><span class="pre">correlate</span></code>, that computes it. In this section I’ll show how we can use NumPy to write a simpler, faster version of <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<p>The NumPy <code class="docutils literal notranslate"><span class="pre">correlate</span></code> function takes an array, <span class="math notranslate nohighlight">\(a\)</span>, and a “window”, <span class="math notranslate nohighlight">\(w\)</span>, with length <span class="math notranslate nohighlight">\(N\)</span> and computes a new array, <span class="math notranslate nohighlight">\(c\)</span>, where element <code class="docutils literal notranslate"><span class="pre">k</span></code> is the following summation: $<span class="math notranslate nohighlight">\(c_k = \sum_{n=0}^{N-1} a_{n+k} \cdot w_n\)</span>$ We can write this operation in Python like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">c_k</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -583,7 +827,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>To see how this works, I’ll create an array:</p>
+<p>This function computes element <code class="docutils literal notranslate"><span class="pre">k</span></code> of the correlation between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code>. To show how it works, I’ll create an array of integers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
@@ -613,7 +857,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>With this window, each element of <code class="docutils literal notranslate"><span class="pre">c</span></code> is the sum of three neighbors in the array:</p>
+<p>With this window, each element, <code class="docutils literal notranslate"><span class="pre">c_k</span></code>, is the sum of consecutive elements from <code class="docutils literal notranslate"><span class="pre">a</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_k</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -621,7 +865,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(3)
 </pre></div>
 </div>
 </div>
@@ -633,12 +877,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(6)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The following function computes the elements of <code class="docutils literal notranslate"><span class="pre">c</span></code> for all values of <code class="docutils literal notranslate"><span class="pre">k</span></code> where the window can overlap with the array:</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">c_k</span></code> to write <code class="docutils literal notranslate"><span class="pre">correlate</span></code>, which computes the elements of <code class="docutils literal notranslate"><span class="pre">c</span></code> for all values of <code class="docutils literal notranslate"><span class="pre">k</span></code> where the window and the array overlap.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
@@ -652,6 +896,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Here’s the result:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span>
@@ -665,7 +910,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>This operation is useful in many domains, so libraries like NumPy usually provide an implementation.  Here’s the version from NumPy.</p>
+<p>The NumPy function <code class="docutils literal notranslate"><span class="pre">correlate</span></code> does the same thing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
@@ -679,8 +924,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">mode='valid'</span></code>, the NumPy version does the same thing as mine: it only computes the elements of <code class="docutils literal notranslate"><span class="pre">c</span></code> where the window overlaps with the array.  A drawback of this mode is that the result is smaller than <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
-<p>And alternative is <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code>, which makes the result the same size as <code class="docutils literal notranslate"><span class="pre">array</span></code> by extending array with zeros on both sides.  Here’s the result:</p>
+<p>The argument <code class="docutils literal notranslate"><span class="pre">mode='valid'</span></code> means that the result contains only the elements where the window and array overlap, which are considered valid.</p>
+<p>The drawback of this mode is that the result is not the same size as <code class="docutils literal notranslate"><span class="pre">array</span></code>. We can fix that with <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code>, which adds zeros to the beginning and end of <code class="docutils literal notranslate"><span class="pre">array</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
@@ -694,6 +939,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Now the result is the same size as <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
 <p><strong>Exercise:</strong> Write a version of <code class="docutils literal notranslate"><span class="pre">correlate</span></code> that returns the same result as <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code> with <code class="docutils literal notranslate"><span class="pre">mode='same'.</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -709,10 +955,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="update-with-correlate">
-<h2><span class="section-number">5.4. </span>Update with correlate<a class="headerlink" href="#update-with-correlate" title="Link to this heading">#</a></h2>
-<p>Now we can use <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code> to update the array.  I’ll start again with an array that contains one column for each cell and one row for each time step, and I’ll initialize the first row with a single “on” cell in the middle:</p>
+<p>We can use NumPy’s implementation of <code class="docutils literal notranslate"><span class="pre">correlate</span></code> to write a simple, faster version of <code class="docutils literal notranslate"><span class="pre">step</span></code>. I’ll start again with an array that contains one column for each cell and one row for each time step, and I’ll initialize the first row with a single “on” cell in the middle:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span>
@@ -733,7 +976,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Now here’s a version of <code class="docutils literal notranslate"><span class="pre">step</span></code> that uses <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code></p>
+<p>Now here’s a version of <code class="docutils literal notranslate"><span class="pre">step</span></code> that uses <code class="docutils literal notranslate"><span class="pre">np.correlate</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
@@ -757,14 +1000,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+<img alt="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" src="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" />
 </div>
 </div>
 </section>
 <section id="ca-tables">
-<h2><span class="section-number">5.5. </span>CA Tables<a class="headerlink" href="#ca-tables" title="Link to this heading">#</a></h2>
-<p>What we have so far is good enough for a CA that only depends on the total number of “on” cells, but for more general CAs, we need a table that maps from the configuration of the neighborhood to the future state of the center cell.</p>
-<p>The following function makes the table by interpreting the Rule number in binary.</p>
+<h2><span class="section-number">5.12. </span>CA tables<a class="headerlink" href="#ca-tables" title="Link to this heading">#</a></h2>
+<p>The function we have so far works if the CA is “totalitic”, which means that the rules only depend on the sum of the neighbors. But most rules also depend on which neighbors are on and off. For example, <code class="docutils literal notranslate"><span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">001</span></code> have the same sum, but for many CAs, they would yield different results.</p>
+<p>We can make <code class="docutils literal notranslate"><span class="pre">step2</span></code> more general using a window with elements <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>, which interprets the neighborhood as a binary number. For example, the neighborhood <code class="docutils literal notranslate"><span class="pre">100</span></code> yields 4; <code class="docutils literal notranslate"><span class="pre">010</span></code> yields 2, and <code class="docutils literal notranslate"><span class="pre">001</span></code> yields 1. Then we can take these results and look them up in the rule table.</p>
+<p>Here’s the function that computes the table:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_table</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
@@ -781,7 +1025,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here’s what it looks like as an array:</p>
+<p>The parameter, <code class="docutils literal notranslate"><span class="pre">rule</span></code>, is an integer between 0 and 255. The first line puts <code class="docutils literal notranslate"><span class="pre">rule</span></code> into an array with a single element so we can use <code class="docutils literal notranslate"><span class="pre">unpackbits</span></code>, which converts the rule number to its binary representation. For example, here’s the table for Rule 150:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
@@ -826,7 +1070,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can wrap up that code in a function:</p>
+<p>Here’s the more general version of <code class="docutils literal notranslate"><span class="pre">step2</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step3</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
@@ -839,6 +1083,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>The first two lines are the same. Then the last line looks up each element from <code class="docutils literal notranslate"><span class="pre">c</span></code> in <code class="docutils literal notranslate"><span class="pre">table</span></code> and assigns the result to <code class="docutils literal notranslate"><span class="pre">array[i]</span></code>.</p>
 <p>And test it again.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -850,14 +1095,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" src="_images/05ff7e0358fd56fb9c4ce3d596ffc88bcae4aafc78eef889183756fdb92a4063.png" />
+<img alt="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" src="_images/42122d95842ee5d059fc1dd62d94dd159ebf1f44b5e11fb1e6c3e647b585f2c9.png" />
 </div>
 </div>
 <p>How did I know that Rule 150 is the same as the previous CA?  I wrote out the table and converted it to binary.</p>
-</section>
-<section id="the-cell1d-object">
-<h2><span class="section-number">5.6. </span>The Cell1D object<a class="headerlink" href="#the-cell1d-object" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Cell1D</span></code> encapsulates the code from the previous section.</p>
+<p>The code in this section is encapsulated in the <code class="docutils literal notranslate"><span class="pre">Cell1D</span></code> class, defined in <code class="docutils literal notranslate"><span class="pre">Cell1D.py</span></code> in the repository for this book. Here it is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cell1D</span><span class="p">:</span>
@@ -928,7 +1170,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The following function makes and draws a CA.</p>
+<p>The following function makes and draws a CA; it’s the one I used to draw the figures in this chapter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
@@ -945,22 +1187,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here’s an example that runs a Rule 50 CA for 10 steps.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-1
-</pre></div>
-</div>
-<img alt="_images/9d331302d1666c0285a50d6dd8e088eff251dff10961302e286fc8c197f91e47.png" src="_images/9d331302d1666c0285a50d6dd8e088eff251dff10961302e286fc8c197f91e47.png" />
-</div>
-</div>
-<p>Another example:</p>
+<p>Here’s Rule 150 again, which is the parity CA from the previous section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -973,108 +1200,46 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-2
 </pre></div>
 </div>
-<img alt="_images/a4ed231dbe8c231ea0b4f68e4a3ea8c515d130f4f073976c50192f4f035cf7c1.png" src="_images/a4ed231dbe8c231ea0b4f68e4a3ea8c515d130f4f073976c50192f4f035cf7c1.png" />
-</div>
-</div>
-<p>And one more example showing recursive structure.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
-
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-3&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-3
-</pre></div>
-</div>
-<img alt="_images/12ad4a48cce96320a389333e4d1d437a3b64cf3e9c4198a52984352c1370dd5a.png" src="_images/12ad4a48cce96320a389333e4d1d437a3b64cf3e9c4198a52984352c1370dd5a.png" />
-</div>
-</div>
-<p>Rule 30 generates a sequence of bits that is indistinguishable from random:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-4&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap05-4
-</pre></div>
-</div>
-<img alt="_images/2b28e4cadb8d6098477dacd366704f616ea41da0b9ecca9ef104e11aa8958faa.png" src="_images/2b28e4cadb8d6098477dacd366704f616ea41da0b9ecca9ef104e11aa8958faa.png" />
-</div>
-</div>
-<p>And Rule 110 is Turing complete!</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-5&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here’s a longer run that has some spaceships.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">600</span>
-<span class="n">ca</span> <span class="o">=</span> <span class="n">Cell1D</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-<span class="n">ca</span><span class="o">.</span><span class="n">start_random</span><span class="p">()</span>
-<span class="n">ca</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ca</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap05-6&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+<img alt="_images/30a42f0eeb077b43fd713c40d00940e0787685550bd2a3c7dd721e065451b4d6.png" src="_images/30a42f0eeb077b43fd713c40d00940e0787685550bd2a3c7dd721e065451b4d6.png" />
 </div>
 </div>
 </section>
 <section id="exercises">
-<h2><span class="section-number">5.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong> This exercise asks you to experiment with Rule 110 and see how
-many spaceships you can find.</p>
-<ol class="arabic simple">
-<li><p>Read the <a class="reference external" href="https://en.wikipedia.org/wiki/Rule_110">Wikipedia page about Rule 110</a>, which describes its background pattern and spaceships.</p></li>
-<li><p>Create a Rule 110 CA with an initial condition that yields the
-stable background pattern.  Note that the CA class provides
-<code class="docutils literal notranslate"><span class="pre">start_string</span></code>, which allow you to initialize the state of
-the array using a string of <code class="docutils literal notranslate"><span class="pre">1</span></code>s and <code class="docutils literal notranslate"><span class="pre">0</span></code>s.</p></li>
-<li><p>Modify the initial condition by adding different patterns in the
-center of the row and see which ones yield spaceships.  You might
-want to enumerate all possible patterns of <span class="math notranslate nohighlight">\(n\)</span> bits, for some
-reasonable value of <span class="math notranslate nohighlight">\(n\)</span>.  For each spaceship, can you find the
-period and rate of translation?  What is the biggest spaceship you
-can find?</p></li>
+<h2><span class="section-number">5.13. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> This exercise asks you to experiment with Rule 110 and some of its spaceships.</p>
+<ol class="arabic">
+<li><p>Read the Wikipedia page about Rule 110, which describes its background pattern and spaceships: <a class="reference external" href="https://thinkcomplex.com/r110">https://thinkcomplex.com/r110</a>.</p></li>
+<li><p>Create a Rule 110 CA with an initial condition that yields the stable background pattern.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">Cell1D</span></code> class provides <code class="docutils literal notranslate"><span class="pre">start_string</span></code>, which allows you to initialize the state of the array using a string of <code class="docutils literal notranslate"><span class="pre">1</span></code>s and <code class="docutils literal notranslate"><span class="pre">0</span></code>s.</p>
+</li>
+<li><p>Modify the initial condition by adding different patterns in the center of the row and see which ones yield spaceships. You might want to enumerate all possible patterns of <span class="math notranslate nohighlight">\(n\)</span> bits, for some reasonable value of <span class="math notranslate nohighlight">\(n\)</span>. For each spaceship, can you find the period and rate of translation? What is the biggest spaceship you can find?</p></li>
 <li><p>What happens when spaceships collide?</p></li>
 </ol>
 <p><strong>Exercise:</strong> The goal of this exercise is to implement a Turing machine.</p>
 <ol class="arabic simple">
-<li><p>Read about Turing machines at <a class="reference external" href="http://en.wikipedia.org/wiki/Turing_machine">http://en.wikipedia.org/wiki/Turing_machine</a>.</p></li>
+<li><p>Read about Turing machines at <a class="reference external" href="https://thinkcomplex.com/tm">https://thinkcomplex.com/tm</a>.</p></li>
 <li><p>Write a class called <code class="docutils literal notranslate"><span class="pre">Turing</span></code> that implements a Turing machine.  For the action table, use the rules for a 3-state busy beaver.</p></li>
-<li><p>Write a <code class="docutils literal notranslate"><span class="pre">draw</span></code> method that plots the state of the tape and the position and state of the head.  For one example of what that might look like, see <a class="reference external" href="http://mathworld.wolfram.com/TuringMachine.html">http://mathworld.wolfram.com/TuringMachine.html</a>.</p></li>
+<li><p>Write a <code class="docutils literal notranslate"><span class="pre">draw</span></code> method that plots the state of the tape and the position and state of the head.  For one example of what that might look like, see <a class="reference external" href="https://thinkcomplex.com/turing">https://thinkcomplex.com/turing</a>.</p></li>
 </ol>
-<p><strong>Exercise:</strong> This exercise asks you to implement and test several PRNGs.
-For testing, you will need to install
-<code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>, which you can download from
-<a class="reference external" href="https://www.phy.duke.edu/~rgb/General/dieharder.php">https://www.phy.duke.edu/~rgb/General/dieharder.php</a>, or it
-might be available as a package for your operating system.</p>
+<p><strong>Exercise:</strong> This exercise asks you to implement and test several PRNGs. For testing, you will need to install <code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>, which you can download from <a class="reference external" href="https://thinkcomplex.com/dh">https://thinkcomplex.com/dh</a>, or it might be available as a package for your operating system.</p>
 <ol class="arabic simple">
-<li><p>Write a program that implements one of the linear congruential
-generators described at <a class="reference external" href="http://en.wikipedia.org/wiki/Linear_congruential_generator">http://en.wikipedia.org/wiki/Linear_congruential_generator</a>}.
-Test it using <code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>.</p></li>
-<li><p>Read the documentation of Python’s <code class="docutils literal notranslate"><span class="pre">random</span></code> module.
-What PRNG does it use?  Test it.</p></li>
-<li><p>Implement a Rule 30 CA with a few hundred cells,
-run it for as many time steps as you can in a reasonable amount
-of time, and output the center column as a sequence of bits.
-Test it.</p></li>
+<li><p>Write a program that implements one of the linear congruential generators described at <a class="reference external" href="https://thinkcomplex.com/lcg">https://thinkcomplex.com/lcg</a>. Test it using <code class="docutils literal notranslate"><span class="pre">DieHarder</span></code>.</p></li>
+<li><p>Read the documentation of Python’s <code class="docutils literal notranslate"><span class="pre">random</span></code> module. What PRNG does it use? Test it.</p></li>
+<li><p>Implement a Rule 30 CA with a few hundred cells, run it for as many time steps as you can in a reasonable amount of time, and output the center column as a sequence of bits. Test it.</p></li>
 </ol>
+<p><strong>Exercise:</strong> Falsifiability is an appealing and useful idea, but among philosophers of science it is not generally accepted as a solution to the demarcation problem, as Popper claimed.</p>
+<p>Read <a class="reference external" href="https://thinkcomplex.com/false">https://thinkcomplex.com/false</a> and answer the following questions.</p>
+<ol class="arabic simple">
+<li><p>What is the demarcation problem?</p></li>
+<li><p>How, according to Popper, does falsifiability solve the demarcation problem?</p></li>
+<li><p>Give an example of two theories, one considered scientific and one considered unscientific, that are successfully distinguished by the criterion of falsifiability.</p></li>
+<li><p>Can you summarize one or more of the objections that philosophers and historians of science have raised to Popper’s claim?</p></li>
+<li><p>Do you get the sense that practicing philosophers think highly of Popper’s work?</p></li>
+</ol>
+<p><a class="reference external" href="https://greenteapress.com/wp/think-complexity-2e/">Think Complexity, 2nd Edition</a></p>
+<p>Copyright 2016 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -1114,7 +1279,7 @@ Test it.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Scale-Free Networks</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Scale-free networks</p>
       </div>
     </a>
     <a class="right-next"
@@ -1142,13 +1307,19 @@ Test it.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-dimensional-ca">5.1. Zero-dimensional CA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-ca">5.2. One-dimensional CA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.3. Cross correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-with-correlate">5.4. Update with correlate</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.5. CA Tables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cell1d-object">5.6. The Cell1D object</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-ca">5.1. A simple CA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wolframs-experiment">5.2. Wolfram’s experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-cas">5.3. Classifying CAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">5.4. Randomness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinism">5.5. Determinism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spaceships">5.6. Spaceships</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universality">5.7. Universality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#falsifiability">5.8. Falsifiability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-a-model-of">5.9. What is this a model of?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-cas">5.10. Implementing CAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation">5.11. Cross-correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ca-tables">5.12. CA tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.13. Exercises</a></li>
 </ul>
   </nav></div>
 

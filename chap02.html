@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Erdos-Renyi Graphs &#8212; Think Complexity</title>
+    <title>2. Graphs &#8212; Think Complexity</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -182,15 +182,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -360,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Erdos-Renyi Graphs</h1>
+    <h1>Graphs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,13 +370,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph">2.1. Directed graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graph">2.2. Undirected graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-graph">2.3. Complete graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.4. Random graphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">2.5. Connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.6. Probability of connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.7. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-graph">2.1. What is a graph?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networkx">2.2. NetworkX</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.3. Random graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-graphs">2.4. Generating graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connected-graphs">2.5. Connected graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-er-graphs">2.6. Generating ER graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.7. Probability of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-graph-algorithms">2.8. Analysis of graph algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.9. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -388,11 +390,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="erdos-renyi-graphs">
-<h1><span class="section-number">2. </span>Erdos-Renyi Graphs<a class="headerlink" href="#erdos-renyi-graphs" title="Link to this heading">#</a></h1>
-<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
-<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+  <p>The second edition of <em>Think Complexity</em> is available from <a class="reference external" href="https://bookshop.org/a/98697/9781492040200">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/3wPN0SJ">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<section id="graphs">
+<h1><span class="section-number">2. </span>Graphs<a class="headerlink" href="#graphs" title="Link to this heading">#</a></h1>
+<p>The next three chapters are about systems made up of components and connections between components. For example, in a social network, the components are people and connections represent friendships, business relationships, etc. In an ecological food web, the components are species and the connections represent predator-prey relationships.</p>
+<p>In this chapter, I introduce NetworkX, a Python package for building models of these systems. We start with the Erdős-Rényi model, which has interesting mathematical properties. In the next chapter we move on to models that are more useful for explaining real-world systems.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap02.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
@@ -403,19 +422,15 @@ document.write(`
         <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
     
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/utils.py&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
 
 <span class="c1"># Set the random seed so the notebook </span>
 <span class="c1"># produces the same results every time.</span>
@@ -442,33 +457,77 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="directed-graph">
-<h2><span class="section-number">2.1. </span>Directed graph<a class="headerlink" href="#directed-graph" title="Link to this heading">#</a></h2>
-<p>The first example is a directed graph that represents a social network with three nodes.</p>
+<section id="what-is-a-graph">
+<h2><span class="section-number">2.1. </span>What is a graph?<a class="headerlink" href="#what-is-a-graph" title="Link to this heading">#</a></h2>
+<p>To most people a “graph” is a visual representation of data, like a bar chart or a plot of stock prices over time. That’s not what this chapter is about.</p>
+<p>In this chapter, a <strong>graph</strong> is a representation of a system that contains discrete, interconnected elements. The elements are represented by <strong>nodes</strong> — also called <strong>vertices</strong> – and the interconnections are represented by <strong>edges</strong>.</p>
+<p>For example, you could represent a road map with a node for each city and an edge for each road between cities. Or you could represent a social network using a node for each person, with an edge between two people if they are friends.</p>
+<p>In some graphs, edges have attributes like length, cost, or weight. For example, in a road map, the length of an edge might represent distance between cities or travel time. In a social network there might be different kinds of edges to represent different kinds of relationships: friends, business associates, etc.</p>
+<p>Edges may be <strong>directed</strong> or <strong>undirected</strong>, depending on whether the relationships they represent are asymmetric or symmetric. In a road map, you might represent a one-way street with a directed edge and a two-way street with an undirected edge. In some social networks, like Facebook, friendship is symmetric: if <span class="math notranslate nohighlight">\(A\)</span> is friends with <span class="math notranslate nohighlight">\(B\)</span> then <span class="math notranslate nohighlight">\(B\)</span> is friends with <span class="math notranslate nohighlight">\(A\)</span>. But on Twitter, for example, the “follows” relationship is not symmetric; if <span class="math notranslate nohighlight">\(A\)</span> follows <span class="math notranslate nohighlight">\(B\)</span>, that doesn’t imply that <span class="math notranslate nohighlight">\(B\)</span> follows <span class="math notranslate nohighlight">\(A\)</span>. So you might use undirected edges to represent a Facebook network and directed edges for Twitter.</p>
+<p>Graphs have interesting mathematical properties, and there is a branch of mathematics called <strong>graph theory</strong> that studies them.</p>
+<p>Graphs are also useful, because there are many real world problems that can be solved using <strong>graph algorithms</strong>. For example, Dijkstra’s shortest path algorithm is an efficient way to find the shortest path from a node to all other nodes in a graph. A <strong>path</strong> is a sequence of nodes with an edge between each consecutive pair.</p>
+<p>Graphs are usually drawn with squares or circles for nodes and lines for edges. In the next section, we’ll draw a directed graph that represents a social network, and an undirected graph that represents driving times between cities.</p>
+</section>
+<section id="networkx">
+<h2><span class="section-number">2.2. </span>NetworkX<a class="headerlink" href="#networkx" title="Link to this heading">#</a></h2>
+<p>To represent graphs, we’ll use a package called NetworkX, which is the most commonly used network library in Python. You can read more about it at <a class="reference external" href="https://thinkcomplex.com/netx">https://thinkcomplex.com/netx</a>, but I’ll explain it as we go along.</p>
+<p>We can create a directed graph by importing NetworkX (usually imported as <code class="docutils literal notranslate"><span class="pre">nx</span></code>) and instantiating <code class="docutils literal notranslate"><span class="pre">nx.DiGraph</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s how we add edges between nodes.</p>
+<p>At this point, <code class="docutils literal notranslate"><span class="pre">G</span></code> is a <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> object that contains no nodes and no edges. We can add nodes using the <code class="docutils literal notranslate"><span class="pre">add_node</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can use the <code class="docutils literal notranslate"><span class="pre">nodes</span></code> method to get a list of nodes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Alice&#39;, &#39;Bob&#39;, &#39;Cate&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">nodes</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">NodeView</span></code>, which can be used in a for loop or, as in this example, used to make a list.</p>
+<p>Adding edges works pretty much the same way:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
 <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
 <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
 <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Cate&#39;</span><span class="p">)</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>And here’s how to draw the graph.</p>
+<p>And we can use <code class="docutils literal notranslate"><span class="pre">edges</span></code> to get the list of edges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Alice&#39;, &#39;Bob&#39;), (&#39;Alice&#39;, &#39;Cate&#39;), (&#39;Bob&#39;, &#39;Alice&#39;), (&#39;Bob&#39;, &#39;Cate&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>NetworkX provides several functions for drawing graphs; <code class="docutils literal notranslate"><span class="pre">draw_circular</span></code> arranges the nodes in a circle and connects them with edges:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
@@ -480,13 +539,17 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-1
+</pre></div>
 </div>
+<img alt="_images/7efb7cbe48170e0afb478928af83d6aae4cf42d5422902e3212516346c8fd1e6.png" src="_images/7efb7cbe48170e0afb478928af83d6aae4cf42d5422902e3212516346c8fd1e6.png" />
+</div>
+</div>
+<p>This directed graph might represent three people who follow each other on Twitter. The arrow indicates the direction of the relationship. In this example, Alice and Bob follow each other, both follow Cate, and Cate follows no one.</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">with_labels</span></code> causes the nodes to be labeled; in the next example we’ll see how to label the edges.</p>
 <p><strong>Exercise:</strong>  Add another node and a few more edges and draw the graph again.</p>
-</section>
-<section id="undirected-graph">
-<h2><span class="section-number">2.2. </span>Undirected graph<a class="headerlink" href="#undirected-graph" title="Link to this heading">#</a></h2>
-<p>The second example is an undirected graph that represents cities and the driving times between them.</p>
-<p><code class="docutils literal notranslate"><span class="pre">positions</span></code> is a dictionary that maps from each city to its coordinates.</p>
+<p>The second example is an undirected graph that represents four cities in the northeast United States and the driving times between them. I start with a dictionary that maps from each city name to its approximate longitude and latitude:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">positions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Albany</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">74</span><span class="p">,</span> <span class="mi">43</span><span class="p">),</span>
@@ -498,8 +561,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-74, 43)
+</pre></div>
 </div>
-<p>We can use the keys in <code class="docutils literal notranslate"><span class="pre">pos</span></code> to add nodes to the graph.</p>
+</div>
+</div>
+<p>Since this is an undirected graph, I instantiate <code class="docutils literal notranslate"><span class="pre">nx.Graph</span></code>. Then I can use <code class="docutils literal notranslate"><span class="pre">add_nodes_from</span></code> to iterate the keys of <code class="docutils literal notranslate"><span class="pre">positions</span></code> and add them as nodes:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
@@ -508,8 +576,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NodeView((&#39;Albany&#39;, &#39;Boston&#39;, &#39;NYC&#39;, &#39;Philly&#39;))
+</pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">drive_times</span></code> is a dictionary that maps from pairs of cities to the driving times between them.</p>
+</div>
+</div>
+<p>Next I’ll make a dictionary that maps from each edge to the corresponding driving time:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drive_times</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;Albany&#39;</span><span class="p">,</span> <span class="s1">&#39;Boston&#39;</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span>
@@ -520,7 +593,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can use the keys from <code class="docutils literal notranslate"><span class="pre">drive_times</span></code> to add edges to the graph.</p>
+<p>Now I can use <code class="docutils literal notranslate"><span class="pre">add_edges_from</span></code>, which iterates the keys of <code class="docutils literal notranslate"><span class="pre">drive_times</span></code> and adds them as edges:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">drive_times</span><span class="p">)</span>
@@ -528,8 +601,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EdgeView([(&#39;Albany&#39;, &#39;Boston&#39;), (&#39;Albany&#39;, &#39;NYC&#39;), (&#39;Boston&#39;, &#39;NYC&#39;), (&#39;NYC&#39;, &#39;Philly&#39;)])
+</pre></div>
 </div>
-<p>Now we can draw the graph using <code class="docutils literal notranslate"><span class="pre">positions</span></code> to indicate the positions of the nodes, and <code class="docutils literal notranslate"><span class="pre">drive_times</span></code> to label the edges.</p>
+</div>
+</div>
+<p>Instead of <code class="docutils literal notranslate"><span class="pre">draw_circular</span></code>, which arranges the nodes in a circle, I’ll use <code class="docutils literal notranslate"><span class="pre">draw</span></code>, which takes the position dictionary as the second parameter. <code class="docutils literal notranslate"><span class="pre">draw</span></code> uses <code class="docutils literal notranslate"><span class="pre">positions</span></code> to determine the locations of the nodes.</p>
+<p>To add the edge labels, we use <code class="docutils literal notranslate"><span class="pre">draw_networkx_edge_labels</span></code>. The <code class="docutils literal notranslate"><span class="pre">edge_labels</span></code> parameter expects a dictionary that maps from each pair of nodes to a label; in this case, the labels are driving times between cities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> 
@@ -546,12 +625,32 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-2
+</pre></div>
 </div>
+<img alt="_images/87209cc300dd813245bf4d15a2a7247e60dfa26101233ee54a875ef2739d628c.png" src="_images/87209cc300dd813245bf4d15a2a7247e60dfa26101233ee54a875ef2739d628c.png" />
+</div>
+</div>
+<p>The labels on the edges indicate driving time in hours. In this example the placement of the nodes corresponds roughly to the geography of the cities, but in general the layout of a graph is arbitrary.</p>
+<p>In both of these examples, the nodes are strings, but in general they can be any hashable type.</p>
 <p><strong>Exercise:</strong>  Add another city and at least one edge.</p>
 </section>
-<section id="complete-graph">
-<h2><span class="section-number">2.3. </span>Complete graph<a class="headerlink" href="#complete-graph" title="Link to this heading">#</a></h2>
-<p>To make a complete graph, we use a generator function that iterates through all pairs of nodes.</p>
+<section id="random-graphs">
+<h2><span class="section-number">2.3. </span>Random graphs<a class="headerlink" href="#random-graphs" title="Link to this heading">#</a></h2>
+<p>A random graph is just what it sounds like: a graph with nodes and edges generated at random. Of course, there are many random processes that can generate graphs, so there are many kinds of random graphs.</p>
+<p>One of the more interesting kinds is the Erdős-Rényi model, studied by Paul Erdős and Alfréd Rényi in the 1960s.</p>
+<p>An Erdős-Rényi graph (ER graph) is characterized by two parameters: <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes and <span class="math notranslate nohighlight">\(p\)</span> is the probability that there is an edge between any two nodes. See <a class="reference external" href="https://thinkcomplex.com/er">https://thinkcomplex.com/er</a>.</p>
+<p>Erdős and Rényi studied the properties of these random graphs; one of their surprising results is the existence of abrupt changes in the properties of random graphs as random edges are added.</p>
+<p>One of the properties that displays this kind of transition is connectivity. An undirected graph is <strong>connected</strong> if there is a path from every node to every other node.</p>
+<p>In an ER graph, the probability that the graph is connected is very low when <span class="math notranslate nohighlight">\(p\)</span> is small and nearly 1 when <span class="math notranslate nohighlight">\(p\)</span> is large. Between these two regimes, there is a rapid transition at a particular value of <span class="math notranslate nohighlight">\(p\)</span>, denoted <span class="math notranslate nohighlight">\(p^*\)</span>.</p>
+<p>Erdős and Rényi showed that this critical value is <span class="math notranslate nohighlight">\(p^* = (\ln n) / n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes. A random graph, <span class="math notranslate nohighlight">\(G(n, p)\)</span>, is unlikely to be connected if <span class="math notranslate nohighlight">\(p &lt; p^*\)</span> and very likely to be connected if <span class="math notranslate nohighlight">\(p &gt; p^*\)</span>.</p>
+<p>To test this claim, we’ll develop algorithms to generate random graphs and check whether they are connected.</p>
+</section>
+<section id="generating-graphs">
+<h2><span class="section-number">2.4. </span>Generating graphs<a class="headerlink" href="#generating-graphs" title="Link to this heading">#</a></h2>
+<p>I’ll start by generating a <strong>complete</strong> graph, which is a graph where every node is connected to every other.</p>
+<p>Here’s a generator function that takes a list of nodes and enumerates all distinct pairs. If you are not familiar with generator functions, you can read about them at <a class="reference external" href="https://thinkcomplex.com/gen">https://thinkcomplex.com/gen</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
@@ -563,7 +662,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">make_complete_graph</span></code> makes a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> with the given number of nodes and edges between all pairs of nodes.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">all_pairs</span></code> to construct a complete graph:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_complete_graph</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -576,11 +675,17 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here’s a complete graph with 10 nodes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">make_complete_graph</span></code> takes the number of nodes, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and returns a new <code class="docutils literal notranslate"><span class="pre">Graph</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span></code> nodes and edges between all pairs of nodes.</p>
+<p>The following code makes a complete graph with 10 nodes:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">make_complete_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">complete</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -596,80 +701,36 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-3
+</pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">neighbors</span></code> method the neighbors for a given node.</p>
+<img alt="_images/52f5196970d1ad19a9c417547818de75f8d341bfaf34b3be3ff2c1fc4976d5d8.png" src="_images/52f5196970d1ad19a9c417547818de75f8d341bfaf34b3be3ff2c1fc4976d5d8.png" />
+</div>
+</div>
+<p>Soon we will modify this code to generate ER graphs, but first we’ll develop functions to check whether a graph is connected.</p>
+<p><strong>Exercise:</strong> Make and draw a complete directed graph with 5 nodes.</p>
+</section>
+<section id="connected-graphs">
+<h2><span class="section-number">2.5. </span>Connected graphs<a class="headerlink" href="#connected-graphs" title="Link to this heading">#</a></h2>
+<p>A graph is <strong>connected</strong> if there is a path from every node to every other node (see <a class="reference external" href="https://thinkcomplex.com/conn">https://thinkcomplex.com/conn</a>).</p>
+<p>For many applications involving graphs, it is useful to check whether a graph is connected. Fortunately, there is a simple algorithm that does it.</p>
+<p>You can start at any node and check whether you can reach all other nodes. If you can reach a node, <span class="math notranslate nohighlight">\(v\)</span>, you can reach any of the <strong>neighbors</strong> of <span class="math notranslate nohighlight">\(v\)</span>, which are the nodes connected to <span class="math notranslate nohighlight">\(v\)</span> by an edge.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Graph</span></code> class provides a method called <code class="docutils literal notranslate"><span class="pre">neighbors</span></code> that returns a list of neighbors for a given node. For example, in the complete graph we generated in the previous section:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">complete</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-</div>
-<p><strong>Exercise:</strong> Make and draw complete directed graph with 5 nodes.</p>
-</section>
-<section id="random-graphs">
-<h2><span class="section-number">2.4. </span>Random graphs<a class="headerlink" href="#random-graphs" title="Link to this heading">#</a></h2>
-<p>Next we’ll make a random graph where the probability of an edge between each pair of nodes is <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<p>The helper function <code class="docutils literal notranslate"><span class="pre">flip</span></code> returns True with probability <code class="docutils literal notranslate"><span class="pre">p</span></code> and False with probability <code class="docutils literal notranslate"><span class="pre">1-p</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 7, 8, 9]
 </pre></div>
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">random_pairs</span></code> is a generator function that enumerates all possible pairs of nodes and yields each one with probability <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="n">edge</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code> makes an ER graph where the probability of an edge between each pair of nodes is <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">G</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">p=0.3</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">random_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And here’s what it looks like:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> 
-                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> 
-                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
-                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-4&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="connectivity">
-<h2><span class="section-number">2.5. </span>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">#</a></h2>
-<p>To check whether a graph is connected, we’ll start by finding all nodes that can be reached, starting with a given node:</p>
+<p>Suppose we start at node <span class="math notranslate nohighlight">\(s\)</span>. We can mark <span class="math notranslate nohighlight">\(s\)</span> as “seen” and mark its neighbors. Then we mark the neighbor’s neighbors, and their neighbors, and so on, until we can’t reach any more nodes. If all nodes are seen, the graph is connected.</p>
+<p>Here’s what that looks like in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
@@ -685,23 +746,32 @@ document.write(`
 </div>
 </div>
 </div>
-<p>In the complete graph, starting from node 0, we can reach all nodes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> and a starting node, <code class="docutils literal notranslate"> <span class="pre">start</span></code>, and returns the set of nodes that can be reached from <code class="docutils literal notranslate"> <span class="pre">start</span></code>.</p>
+<p>Initially the set, <code class="docutils literal notranslate"><span class="pre">seen</span></code>, is empty, and we create a list called <code class="docutils literal notranslate"><span class="pre">stack</span></code> that keeps track of nodes we have discovered but not yet processed. Initially the stack contains a single node, <code class="docutils literal notranslate"><span class="pre">start</span></code>.</p>
+<p>Now, each time through the loop, we:</p>
+<ol class="arabic simple">
+<li><p>Remove one node from the stack.</p></li>
+<li><p>If the node is already in <code class="docutils literal notranslate"><span class="pre">seen</span></code>, we go back to Step 1.</p></li>
+<li><p>Otherwise, we add the node to <code class="docutils literal notranslate"><span class="pre">seen</span></code> and add its neighbors to the stack.</p></li>
+</ol>
+<p>When the stack is empty, we can’t reach any more nodes, so we break out of the loop and return <code class="docutils literal notranslate"><span class="pre">seen</span></code>.</p>
+<p>As an example, we can find all nodes in the complete graph that are reachable from node 0:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes</span><span class="p">(</span><span class="n">complete</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-<p>In the random graph we generated, we can also reach all nodes (but that’s not always true):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can use <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> to check whether a graph is connected:</p>
+<p>Initially, the stack contains node 0 and <code class="docutils literal notranslate"><span class="pre">seen</span></code> is empty. The first time through the loop, node 0 is added to <code class="docutils literal notranslate"><span class="pre">seen</span></code> and all the other nodes are added to the stack (since they are all neighbors of node 0).</p>
+<p>The next time through the loop, <code class="docutils literal notranslate"><span class="pre">pop</span></code> returns the last element in the stack, which is node 9. So node 9 gets added to <code class="docutils literal notranslate"><span class="pre">seen</span></code> and its neighbors get added to the stack.</p>
+<p>Notice that the same node can appear more than once in the stack; in fact, a node with <span class="math notranslate nohighlight">\(k\)</span> neighbors will be added to the stack <span class="math notranslate nohighlight">\(k\)</span> times. Later, we will look for ways to make this algorithm more efficient.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> to write <code class="docutils literal notranslate"><span class="pre">is_connected</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
@@ -712,19 +782,119 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Again, the complete graph is connected:</p>
+<p><code class="docutils literal notranslate"><span class="pre">is_connected</span></code> chooses a starting node by making a node iterator and choosing the first element. Then it uses <code class="docutils literal notranslate"><span class="pre">reachable</span></code> to get the set of nodes that can be reached from <code class="docutils literal notranslate"><span class="pre">start</span></code>. If the size of this set is the same as the size of the graph, that means we can reach all nodes, which means the graph is connected.</p>
+<p>A complete graph is, not surprisingly, connected:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_connected</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
 </div>
-<p>But if we generate a random graph with a low value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, it’s not:</p>
+</div>
+</div>
+<p>In the next section we will generate ER graphs and check whether they are connected.</p>
+<p><strong>Exercise:</strong> What do you think it means for a directed graph to be connected?  Write a function that checks whether a directed graph is connected.</p>
+</section>
+<section id="generating-er-graphs">
+<h2><span class="section-number">2.6. </span>Generating ER graphs<a class="headerlink" href="#generating-er-graphs" title="Link to this heading">#</a></h2>
+<p>The ER graph <span class="math notranslate nohighlight">\(G(n, p)\)</span> contains <span class="math notranslate nohighlight">\(n\)</span> nodes, and each pair of nodes is connected by an edge with probability <span class="math notranslate nohighlight">\(p\)</span>. Generating an ER graph is similar to generating a complete graph.</p>
+<p>The following generator function enumerates all possible edges and chooses which ones should be added to the graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">edge</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pairs</span></code> uses <code class="docutils literal notranslate"><span class="pre">flip</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the first example we’re seen that uses NumPy. Following convention, I import <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as <code class="docutils literal notranslate"><span class="pre">np</span></code>. NumPy provides a module named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which provides a method named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which returns a number between 0 and 1, uniformly distributed.</p>
+<p>So <code class="docutils literal notranslate"><span class="pre">flip</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> with the given probability, <code class="docutils literal notranslate"><span class="pre">p</span></code>, and <code class="docutils literal notranslate"><span class="pre">False</span></code> with the complementary probability, <code class="docutils literal notranslate"><span class="pre">1-p</span></code>.</p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code> generates and returns the ER graph <span class="math notranslate nohighlight">\(G(n, p)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">random_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code> is almost identical to <code class="docutils literal notranslate"><span class="pre">make_complete_graph</span></code>; the only difference is that it uses <code class="docutils literal notranslate"><span class="pre">random_pairs</span></code> instead of <code class="docutils literal notranslate"><span class="pre">all_pairs</span></code>.</p>
+<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">p=0.3</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">random_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s what it looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figs/chap02-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-4
+</pre></div>
+</div>
+<img alt="_images/6beb155cc37f59cae324ff0bfc280cdc0fe0fc45e11bfa39d3df552fd54f2414.png" src="_images/6beb155cc37f59cae324ff0bfc280cdc0fe0fc45e11bfa39d3df552fd54f2414.png" />
+</div>
+</div>
+<p>This graph turns out to be connected: starting from node 0, we can reach all nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes</span><span class="p">(</span><span class="n">random_graph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+</pre></div>
+</div>
+</div>
+</div>
+<p>In fact, most ER graphs with <span class="math notranslate nohighlight">\(n=10\)</span> and <span class="math notranslate nohighlight">\(p=0.3\)</span> are connected. But if we generate a random graph with a low value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, it’s not:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_graph</span> <span class="o">=</span> <span class="n">make_random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">random_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
 </div>
@@ -735,13 +905,17 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
 </div>
-<p><strong>Exercise:</strong> What do you think it means for a directed graph to be connected?  Write a function that checks whether a directed graph is connected.</p>
+</div>
+</div>
+<p>In the next section, we’ll see how many are connected.</p>
 </section>
 <section id="probability-of-connectivity">
-<h2><span class="section-number">2.6. </span>Probability of connectivity<a class="headerlink" href="#probability-of-connectivity" title="Link to this heading">#</a></h2>
-<p>Now let’s estimare the probability that a randomly-generated ER graph is connected.</p>
-<p>This function takes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code>, generates <code class="docutils literal notranslate"><span class="pre">iters</span></code> graphs, and returns the fraction of them that are connected.</p>
+<h2><span class="section-number">2.7. </span>Probability of connectivity<a class="headerlink" href="#probability-of-connectivity" title="Link to this heading">#</a></h2>
+<p>For given values of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, we would like to know the probability that <span class="math notranslate nohighlight">\(G(n, p)\)</span> is connected. We can estimate it by generating a large number of random graphs and counting how many are connected. This function takes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code>, generates <code class="docutils literal notranslate"><span class="pre">iters</span></code> graphs, and returns the fraction of them that are connected.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># version with a for loop</span>
@@ -757,6 +931,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Here’s a more concise version:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># version with a list comprehension</span>
@@ -769,7 +944,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">p=0.23</span></code>, the probability of being connected is about 33%.</p>
+<p>The parameters <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> are passed along to <code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code>; <code class="docutils literal notranslate"><span class="pre">iters</span></code> is the number of random graphs we generate.</p>
+<p>This function uses a list comprehension; if you are not familiar with this feature, you can read about it at <a class="reference external" href="https://thinkcomplex.com/comp">https://thinkcomplex.com/comp</a>.</p>
+<p>The result, <code class="docutils literal notranslate"><span class="pre">tf</span></code>, is a list of boolean values: <code class="docutils literal notranslate"><span class="pre">True</span></code> for each graph that’s connected and <code class="docutils literal notranslate"><span class="pre">False</span></code> for each one that’s not.</p>
+<p><code class="docutils literal notranslate"><span class="pre">np.mean</span></code> is a NumPy function that computes the mean of this list, treating <code class="docutils literal notranslate"><span class="pre">True</span></code> as 1 and <code class="docutils literal notranslate"><span class="pre">False</span></code> as 0. The result is the fraction of random graphs that are connected.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
@@ -779,8 +957,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.3393)
+</pre></div>
 </div>
-<p>According to Erdos and Renyi, the critical value of <code class="docutils literal notranslate"><span class="pre">p</span></code> for <code class="docutils literal notranslate"><span class="pre">n=10</span></code> is about 0.23.</p>
+</div>
+</div>
+<p>I chose <span class="math notranslate nohighlight">\(0.23\)</span> because it is close to the critical value where the probability of connectivity goes from near 0 to near 1. According to Erdős and Rényi, <span class="math notranslate nohighlight">\(p^* = \ln n / n = 0.23\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pstar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
@@ -788,8 +971,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.23025850929940458)
+</pre></div>
 </div>
-<p>So let’s plot the probability of connectivity for a range of values for <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+</div>
+</div>
+<p>We can get a clearer view of the transition by estimating the probability of connectivity for a range of values of <span class="math notranslate nohighlight">\(p\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
@@ -797,8 +985,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.05011872, 0.0676083 , 0.09120108, 0.12302688, 0.16595869,
+       0.22387211, 0.30199517, 0.40738028, 0.54954087, 0.74131024,
+       1.        ])
+</pre></div>
 </div>
-<p>I’ll estimate the probabilities with <code class="docutils literal notranslate"><span class="pre">iters=1000</span></code></p>
+</div>
+</div>
+<p>The NumPy function <code class="docutils literal notranslate"><span class="pre">logspace</span></code> returns an array of 11 values from <span class="math notranslate nohighlight">\(10^{-1.3}\)</span> to <span class="math notranslate nohighlight">\(10^0 = 1\)</span>, equally spaced on a logarithmic scale.</p>
+<p>For each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> in the array, we compute the probability that a graph with parameter <code class="docutils literal notranslate"><span class="pre">p</span></code> is connected and store the results in <code class="docutils literal notranslate"><span class="pre">ys</span></code>. I’ll estimate the probabilities with <code class="docutils literal notranslate"><span class="pre">iters=1000</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">]</span>
@@ -808,8 +1004,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05011872336272722 0.0
+0.06760829753919818 0.0
+0.09120108393559097 0.004
+0.12302687708123815 0.016
+0.16595869074375605 0.109
+0.22387211385683395 0.346
+0.3019951720402016 0.664
+0.40738027780411273 0.899
+0.5495408738576245 0.989
+0.7413102413009173 1.0
+1.0 1.0
+</pre></div>
 </div>
-<p>And then plot them, adding a vertical line at the computed critical value</p>
+</div>
+</div>
+<p>The following figure shows the results, with a vertical line at the computed critical value, <span class="math notranslate nohighlight">\(p^* = 0.23\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">pstar</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
@@ -822,8 +1033,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-5
+</pre></div>
 </div>
-<p>We can run the same analysis for a few more values of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<img alt="_images/7c95beed2a468c7b88d7754bb93dfa44ae62887c2a5474024f31b07ad190632c.png" src="_images/7c95beed2a468c7b88d7754bb93dfa44ae62887c2a5474024f31b07ad190632c.png" />
+</div>
+</div>
+<p>As expected, the transition from 0 to 1 occurs near the critical value.</p>
+<p>We can run the same analysis for a few more values of <code class="docutils literal notranslate"><span class="pre">n</span></code>. The following figure shows the results, with vertical lines at the critical values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
@@ -848,13 +1066,55 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>300
+</pre></div>
 </div>
-<p>As <code class="docutils literal notranslate"><span class="pre">n</span></code> increases, the critical value gets smaller and the transition gets more abrupt.</p>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap02-6
+</pre></div>
+</div>
+<img alt="_images/5c82e2971ab169a29ae7d33e576165ea6612971d86a7f236015b33662816e113.png" src="_images/5c82e2971ab169a29ae7d33e576165ea6612971d86a7f236015b33662816e113.png" />
+</div>
+</div>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> increases, the critical value gets smaller and the transition gets more abrupt.</p>
+<p>These experimental results are consistent with the analytic results Erdős and Rényi presented in their papers.</p>
+</section>
+<section id="analysis-of-graph-algorithms">
+<h2><span class="section-number">2.8. </span>Analysis of graph algorithms<a class="headerlink" href="#analysis-of-graph-algorithms" title="Link to this heading">#</a></h2>
+<p>Earlier in this chapter I presented an algorithm for checking whether a graph is connected; in the next few chapters, we will see other graph algorithms. Along the way, we will analyze the performance of those algorithms, figuring out how their run times grow as the size of the graphs increases.</p>
+<p>If you are not already familiar with analysis of algorithms, you might want to read Appendix B of <em>Think Python, 2nd Edition</em>, at <a class="reference external" href="https://thinkcomplex.com/tp2">https://thinkcomplex.com/tp2</a>.</p>
+<p>The order of growth for graph algorithms is usually expressed as a function of <span class="math notranslate nohighlight">\(n\)</span>, the number of vertices (nodes), and <span class="math notranslate nohighlight">\(m\)</span>, the number of edges.</p>
+<p>As an example, let’s analyze <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> from the “Connected graphs” section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">seen</span>
+</pre></div>
+</div>
+<p>Each time through the loop, we pop a node off the stack; by default, <code class="docutils literal notranslate"><span class="pre">pop</span></code> removes and returns the last element of a list, which is a constant time operation.</p>
+<p>Next we check whether the node is in <code class="docutils literal notranslate"><span class="pre">seen</span></code>, which is a set, so checking membership is constant time.</p>
+<p>If the node is not already in <code class="docutils literal notranslate"><span class="pre">seen</span></code>, we add it, which is constant time, and then add the neighbors to the stack, which is linear in the number of neighbors.</p>
+<p>To express the run time in terms of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>, we can add up the total number of times each node is added to <code class="docutils literal notranslate"><span class="pre">seen</span></code> and <code class="docutils literal notranslate"><span class="pre">stack</span></code>.</p>
+<p>Each node is only added to <code class="docutils literal notranslate"><span class="pre">seen</span></code> once, so the total number of additions is <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>But nodes might be added to <code class="docutils literal notranslate"><span class="pre">stack</span></code> many times, depending on how many neighbors they have. If a node has <span class="math notranslate nohighlight">\(k\)</span> neighbors, it is added to <code class="docutils literal notranslate"><span class="pre">stack</span></code> <span class="math notranslate nohighlight">\(k\)</span> times. Of course, if it has <span class="math notranslate nohighlight">\(k\)</span> neighbors, that means it is connected to <span class="math notranslate nohighlight">\(k\)</span> edges.</p>
+<p>So the total number of additions to <code class="docutils literal notranslate"><span class="pre">stack</span></code> is the total number of edges, <span class="math notranslate nohighlight">\(m\)</span>, doubled because we consider every edge twice.</p>
+<p>Therefore, the order of growth for this function is <span class="math notranslate nohighlight">\(O(n+ m)\)</span>, which is a convenient way to say that the run time grows in proportion to either <span class="math notranslate nohighlight">\(n\)</span> or <span class="math notranslate nohighlight">\(m\)</span>, whichever is bigger.</p>
+<p>If we know the relationship between <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>, we can simplify this expression. For example, in a complete graph the number of edges is <span class="math notranslate nohighlight">\(n(n-1)/2\)</span>, which is in <span class="math notranslate nohighlight">\(O(n^2)\)</span>. So for a complete graph, <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> is quadratic in <span class="math notranslate nohighlight">\(n\)</span>.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">2.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<p><strong>Exercise:</strong> In Chapter 2 we analyzed the performance of <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> and classified it in <span class="math notranslate nohighlight">\(O(n + m)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes and <span class="math notranslate nohighlight">\(m\)</span> is the number of edges.  Continuing the
-analysis, what is the order of growth for <code class="docutils literal notranslate"><span class="pre">is_connected</span></code>?</p>
+<h2><span class="section-number">2.9. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> In the “Analysis of graph algorithms” section we analyzed the performance of <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> and classified it in <span class="math notranslate nohighlight">\(O(n + m)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes and <span class="math notranslate nohighlight">\(m\)</span> is the number of edges.  Continuing the analysis, what is the order of growth for <code class="docutils literal notranslate"><span class="pre">is_connected</span></code>?</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def is_connected(G):
     start = list(G)[0]
     reachable = reachable_nodes(G, start)
@@ -877,6 +1137,11 @@ analysis, what is the order of growth for <code class="docutils literal notransl
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>616 μs ± 8.16 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -884,8 +1149,13 @@ analysis, what is the order of growth for <code class="docutils literal notransl
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>715 μs ± 22.4 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
 </div>
-<p><strong>Exercise:</strong> There are actually two kinds of ER graphs.  The one we generated in the chapter, <span class="math notranslate nohighlight">\(G(n, p)\)</span>, is characterized by two parameters, the number of nodes and the probability of an edge between nodes.</p>
+</div>
+</div>
+<p><strong>Exercise:</strong> There are actually two kinds of ER graphs.  The one we generated in this chapter, <span class="math notranslate nohighlight">\(G(n, p)\)</span>, is characterized by two parameters, the number of nodes and the probability of an edge between nodes.</p>
 <p>An alternative definition, denoted <span class="math notranslate nohighlight">\(G(n, m)\)</span>, is also characterized by two parameters: the number of nodes, <span class="math notranslate nohighlight">\(n\)</span>, and the number of edges, <span class="math notranslate nohighlight">\(m\)</span>.  Under this definition, the number of edges is fixed, but their location is random.</p>
 <p>Repeat the experiments we did in this chapter using this alternative definition.  Here are a few suggestions for how to proceed:</p>
 <ol class="arabic simple">
@@ -901,7 +1171,16 @@ analysis, what is the order of growth for <code class="docutils literal notransl
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45
+</pre></div>
 </div>
+</div>
+</div>
+<p><a class="reference external" href="https://greenteapress.com/wp/think-complexity-2e/">Think Complexity, 2nd Edition</a></p>
+<p>Copyright 2016 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -969,13 +1248,15 @@ analysis, what is the order of growth for <code class="docutils literal notransl
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph">2.1. Directed graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graph">2.2. Undirected graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-graph">2.3. Complete graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.4. Random graphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">2.5. Connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.6. Probability of connectivity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.7. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-graph">2.1. What is a graph?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networkx">2.2. NetworkX</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-graphs">2.3. Random graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-graphs">2.4. Generating graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connected-graphs">2.5. Connected graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-er-graphs">2.6. Generating ER graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-connectivity">2.7. Probability of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-graph-algorithms">2.8. Analysis of graph algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.9. Exercises</a></li>
 </ul>
   </nav></div>
 

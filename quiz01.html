@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -182,15 +182,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -470,29 +470,6 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">prob_strongly_connected</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimates the probability that a directed ER graph is strongly connected.</span>
-<span class="sd">    </span>
-<span class="sd">    n: number of nodes</span>
-<span class="sd">    p: probability each edge exists</span>
-<span class="sd">    iters: number of graphs to test</span>
-<span class="sd">    </span>
-<span class="sd">    returns: the fraction of graphs that are strongly connected</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-        <span class="n">er</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">er</span><span class="p">):</span>
-            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">count</span><span class="o">/</span><span class="n">iters</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Use the following cell to test your function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -564,24 +541,6 @@ document.write(`
 </ul>
 <p>Do you expect the location of this transition to be higher or lower than the critical value, <span class="math notranslate nohighlight">\(p^*\)</span>, derived by Erdos and Renyi? Why?</p>
 <p>In the space below, write 1-3 clear, concise, complete sentences that explain your answer.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="sd">&quot;&quot;&quot;I expect it to be higher because it is harder for a directed</span>
-<span class="sd">graph to be strongly connected than for an undirected graph to be connected;</span>
-<span class="sd">that is, I expect it to take more edges.</span>
-
-<span class="sd">For example, if we start with a connected undirected graph and make it directed</span>
-<span class="sd">by making all of the edges one-way, there&#39;s a good chance the result is not</span>
-<span class="sd">strongly connected. It&#39;s likely we would have to add edges to make it strongly</span>
-<span class="sd">connected.</span>
-
-<span class="sd">&quot;&quot;&quot;</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="question-3">
 <h2>Question 3<a class="headerlink" href="#question-3" title="Link to this heading">#</a></h2>
@@ -637,24 +596,6 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># FILL THIS IN</span>
     <span class="k">return</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">mean_closeness_centrality</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the average of the closeness centrality for each node.</span>
-<span class="sd">    </span>
-<span class="sd">    n: number of nodes</span>
-<span class="sd">    k: number of edges for each node</span>
-<span class="sd">    p: probability of rewiring</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ws</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">watts_strogatz_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -759,32 +700,6 @@ document.write(`
 </div>
 </div>
 <p>Suppose another student in the class asked you to interpret this graph. In a few clear, concise, complete sentences, explain what closeness centrality means in the context of a social network. What, if anything, does this graph tell us about small world graphs?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">For each node, centrality closeness is the inverse of the </span>
-<span class="sd">mean distance to all other nodes, so high closeness means a node</span>
-<span class="sd">is close to all other nodes.</span>
-
-<span class="sd">In a social network, that means the average number of degrees of</span>
-<span class="sd">separation is small.</span>
-
-<span class="sd">If the average closeness in a graph is high, that means that</span>
-<span class="sd">distances between nodes are short, as in a small world graph.</span>
-
-<span class="sd">In this example, `mcc` does not increase as fast as I expected.</span>
-<span class="sd">You have to rewire a lot of edges to get high `mcc`.</span>
-
-<span class="sd">So it looks like there may be no range of ps where both clustering</span>
-<span class="sd">and closeness are high.</span>
-
-<span class="sd">&quot;&quot;&quot;</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 

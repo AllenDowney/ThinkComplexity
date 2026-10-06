@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap03';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Scale-Free Networks" href="chap04.html" />
-    <link rel="prev" title="2. Erdos-Renyi Graphs" href="chap02.html" />
+    <link rel="next" title="4. Scale-free networks" href="chap04.html" />
+    <link rel="prev" title="2. Graphs" href="chap02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,15 +182,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -370,14 +370,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-ring-lattice">3.1. Regular ring lattice</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graph">3.2. WS graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.3. Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-length">3.4. Path length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experiment">3.5. The experiment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.6. Breadth-first search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.7. Dijkstra’s algorithm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.8. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stanley-milgram">3.1. Stanley Milgram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watts-and-strogatz">3.2. Watts and Strogatz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-lattice">3.3. Ring lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graphs">3.4. WS graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.5. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-lengths">3.6. Shortest path lengths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ws-experiment">3.7. The WS experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-kind-of-explanation-is-that">3.8. What kind of explanation is <em>that</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.9. Breadth-First Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.10. Dijkstra’s algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.11. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -389,11 +392,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="small-world-graphs">
+  <p>The second edition of <em>Think Complexity</em> is available from <a class="reference external" href="https://bookshop.org/a/98697/9781492040200">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/3wPN0SJ">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<section id="small-world-graphs">
 <h1><span class="section-number">3. </span>Small World Graphs<a class="headerlink" href="#small-world-graphs" title="Link to this heading">#</a></h1>
-<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
-<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+<p>Many networks in the real world, including social networks, have the “small world property”, which is that the average distance between nodes, measured in number of edges on the shortest path, is much smaller than expected.</p>
+<p>In this chapter, I present Stanley Milgram’s famous Small World Experiment, which was the first demonstration of the small world property in a real social network. Then we’ll consider Watts-Strogatz graphs, which are intended as a model of small world graphs. I’ll replicate the experiment Watts and Strogatz performed and explain what it is intended to show.</p>
+<p>Along the way, we’ll see two new graph algorithms: breadth-first search (BFS) and Dijkstra’s algorithm for computing the shortest path between nodes in a graph.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap03.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
@@ -404,19 +425,15 @@ document.write(`
         <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
     
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/utils.py&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">savefig</span>
 
 <span class="c1"># Set the random seed so the notebook </span>
 <span class="c1"># produces the same results every time.</span>
@@ -443,9 +460,44 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="regular-ring-lattice">
-<h2><span class="section-number">3.1. </span>Regular ring lattice<a class="headerlink" href="#regular-ring-lattice" title="Link to this heading">#</a></h2>
-<p>To make a ring lattice, I’ll start with a generator function that yields edges between each node and the next <code class="docutils literal notranslate"><span class="pre">halfk</span></code> neighbors.</p>
+<section id="stanley-milgram">
+<h2><span class="section-number">3.1. </span>Stanley Milgram<a class="headerlink" href="#stanley-milgram" title="Link to this heading">#</a></h2>
+<p>Stanley Milgram was an American social psychologist who conducted two of the most famous experiments in social science, the Milgram experiment, which studied people’s obedience to authority (<a class="reference external" href="https://thinkcomplex.com/milgram">https://thinkcomplex.com/milgram</a>) and the Small World Experiment, which studied the structure of social networks (<a class="reference external" href="https://thinkcomplex.com/small">https://thinkcomplex.com/small</a>).</p>
+<p>In the Small World Experiment, Milgram sent a package to several randomly-chosen people in Wichita, Kansas, with instructions asking them to forward an enclosed letter to a target person, identified by name and occupation, in Sharon, Massachusetts (which happens to be the town near Boston where I grew up). The subjects were told that they could mail the letter directly to the target person only if they knew him personally; otherwise they were instructed to send it, and the same instructions, to a relative or friend they thought would be more likely to know the target person.</p>
+<p>Many of the letters were never delivered, but for the ones that were the average path length — the number of times the letters were forwarded — was about six. This result was taken to confirm previous observations (and speculations) that the typical distance between any two people in a social network is about “six degrees of separation”.</p>
+<p>This conclusion is surprising because most people expect social networks to be localized — people tend to live near their friends — and in a graph with local connections, path lengths tend to increase in proportion to geographical distance. For example, most of my friends live nearby, so I would guess that the average distance between nodes in a social network is about 50 miles. Wichita is about 1600 miles from Boston, so if Milgram’s letters traversed typical links in the social network, they should have taken 32 hops, not 6.</p>
+</section>
+<section id="watts-and-strogatz">
+<h2><span class="section-number">3.2. </span>Watts and Strogatz<a class="headerlink" href="#watts-and-strogatz" title="Link to this heading">#</a></h2>
+<p>In 1998 Duncan Watts and Steven Strogatz published a paper in <em>Nature</em>, “Collective dynamics of ‘small-world’ networks”, that proposed an explanation for the small world phenomenon. You can download it from <a class="reference external" href="https://thinkcomplex.com/watts">https://thinkcomplex.com/watts</a>.</p>
+<p>Watts and Strogatz start with two kinds of graph that were well understood: random graphs and regular graphs. In a random graph, nodes are connected at random. In a regular graph, every node has the same number of neighbors. They consider two properties of these graphs, clustering and path length:</p>
+<ul class="simple">
+<li><p>Clustering is a measure of the “cliquishness” of the graph. In a graph, a <strong>clique</strong> is a subset of nodes that are all connected to each other; in a social network, a clique is a set of people who are all friends with each other. Watts and Strogatz defined a clustering coefficient that quantifies the likelihood that two nodes that are connected to the same node are also connected to each other.</p></li>
+<li><p>Path length is a measure of the average distance between two nodes, which corresponds to the degrees of separation in a social network.</p></li>
+</ul>
+<p>Watts and Strogatz show that regular graphs have high clustering and high path lengths, whereas random graphs with the same size usually have low clustering and low path lengths. So neither of these is a good model of social networks, which combine high clustering with short path lengths.</p>
+<p>Their goal was to create a <strong>generative model</strong> of a social network. A generative model tries to explain a phenomenon by modeling the process that builds or leads to the phenomenon. Watts and Strogatz proposed this process for building small-world graphs:</p>
+<ol class="arabic simple">
+<li><p>Start with a regular graph with <span class="math notranslate nohighlight">\(n\)</span> nodes and each node connected to <span class="math notranslate nohighlight">\(k\)</span> neighbors.</p></li>
+<li><p>Choose a subset of the edges and “rewire” them by replacing them with random edges.</p></li>
+</ol>
+<p>The probability that an edge is rewired is a parameter, <span class="math notranslate nohighlight">\(p\)</span>, that controls how random the graph is. With <span class="math notranslate nohighlight">\(p=0\)</span>, the graph is regular; with <span class="math notranslate nohighlight">\(p=1\)</span> it is completely random.</p>
+<p>Watts and Strogatz found that small values of <span class="math notranslate nohighlight">\(p\)</span> yield graphs with high clustering, like a regular graph, and low path lengths, like a random graph.</p>
+<p>In this chapter I replicate the Watts and Strogatz experiment in the following steps:</p>
+<ol class="arabic simple">
+<li><p>We’ll start by constructing a ring lattice, which is a kind of regular graph.</p></li>
+<li><p>Then we’ll rewire it as Watts and Strogatz did.</p></li>
+<li><p>We’ll write a function to measure the degree of clustering and use a NetworkX function to compute path lengths.</p></li>
+<li><p>Then we’ll compute the degree of clustering and path length for a range of values of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Finally, I’ll present Dijkstra’s algorithm, which computes shortest paths efficiently.</p></li>
+</ol>
+</section>
+<section id="ring-lattice">
+<h2><span class="section-number">3.3. </span>Ring lattice<a class="headerlink" href="#ring-lattice" title="Link to this heading">#</a></h2>
+<p>A <strong>regular</strong> graph is a graph where each node has the same number of neighbors; the number of neighbors is also called the <strong>degree</strong> of the node.</p>
+<p>A ring lattice is a kind of regular graph, which Watts and Strogatz use as the basis of their model. In a ring lattice with <span class="math notranslate nohighlight">\(n\)</span> nodes, the nodes can be arranged in a circle with each node connected to the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors.</p>
+<p>For example, a ring lattice with <span class="math notranslate nohighlight">\(n=3\)</span> and <span class="math notranslate nohighlight">\(k=2\)</span> would contain the following edges: <span class="math notranslate nohighlight">\((0, 1)\)</span>, <span class="math notranslate nohighlight">\((1, 2)\)</span>, and <span class="math notranslate nohighlight">\((2, 0)\)</span>. Notice that the edges “wrap around” from the highest-numbered node back to 0.</p>
+<p>More generally, we can enumerate the edges like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adjacent_edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">halfk</span><span class="p">):</span>
@@ -462,7 +514,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can test it with 3 nodes and <code class="docutils literal notranslate"><span class="pre">halfk=1</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">adjacent_edges</span></code> takes a list of nodes and a parameter, <code class="docutils literal notranslate"><span class="pre">halfk</span></code>, which is half of <span class="math notranslate nohighlight">\(k\)</span>. It is a generator function that yields one edge at a time. It uses the modulus operator, <code class="docutils literal notranslate"><span class="pre">%</span></code>, to wrap around from the highest-numbered node to the lowest.</p>
+<p>We can test it like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -471,8 +524,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1)
+(1, 2)
+(2, 0)
+</pre></div>
 </div>
-<p>Now we use <code class="docutils literal notranslate"><span class="pre">adjacent_edges</span></code> to write <code class="docutils literal notranslate"><span class="pre">make_ring_lattice</span></code></p>
+</div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">adjacent_edges</span></code> to make a ring lattice:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_ring_lattice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -492,7 +552,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>And we can test it out with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">k=4</span></code></p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">make_ring_lattice</span></code> uses floor division to compute <code class="docutils literal notranslate"><span class="pre">halfk</span></code>, so it is only correct if <code class="docutils literal notranslate"><span class="pre">k</span></code> is even. If <code class="docutils literal notranslate"><span class="pre">k</span></code> is odd, floor division rounds down, so the result is a ring lattice with degree <code class="docutils literal notranslate"><span class="pre">k-1</span></code>. As one of the exercises at the end of the chapter, you will generate regular graphs with odd values of <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<p>We can test <code class="docutils literal notranslate"><span class="pre">make_ring_lattice</span></code> with <span class="math notranslate nohighlight">\(n=10\)</span> and <span class="math notranslate nohighlight">\(k=4\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -500,6 +561,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Here’s what the result looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
@@ -511,13 +573,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap03-1
+</pre></div>
+</div>
+<img alt="_images/c2c9a6808304c10c2fc7c8526d6e56d0b42adbffdc79622412b1219fab0394b2.png" src="_images/c2c9a6808304c10c2fc7c8526d6e56d0b42adbffdc79622412b1219fab0394b2.png" />
+</div>
 </div>
 <p><strong>Exercise:</strong> To see how this function fails when <code class="docutils literal notranslate"><span class="pre">k</span></code> is odd, run it again with <code class="docutils literal notranslate"><span class="pre">k=3</span></code> or <code class="docutils literal notranslate"><span class="pre">k=5</span></code>.</p>
-<p>One of the exercises below asks you to explore regular graphs with odd values of <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
 </section>
-<section id="ws-graph">
-<h2><span class="section-number">3.2. </span>WS graph<a class="headerlink" href="#ws-graph" title="Link to this heading">#</a></h2>
-<p>To make a WS graph, you start with a ring lattice and then rewire.</p>
+<section id="ws-graphs">
+<h2><span class="section-number">3.4. </span>WS graphs<a class="headerlink" href="#ws-graphs" title="Link to this heading">#</a></h2>
+<p>To make a Watts-Strogatz (WS) graph, we start with a ring lattice and “rewire” some of the edges.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_ws_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -534,7 +601,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>To do the rewiring, we’ll need <code class="docutils literal notranslate"><span class="pre">flip</span></code>.</p>
+<p>In their paper, Watts and Strogatz consider the edges in a particular order and rewire each one with probability <span class="math notranslate nohighlight">\(p\)</span>. If an edge is rewired, they leave the first node unchanged and choose the second node at random. They don’t allow self loops or multiple edges; that is, you can’t have an edge from a node to itself, and you can’t have more than one edge between the same two nodes.</p>
+<p>To choose which edges get rewired, we’ll need <code class="docutils literal notranslate"><span class="pre">flip</span></code>, which we saw in Chapter 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -544,7 +612,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here’s the function that does the rewiring</p>
+<p>Here is my implementation of this process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rewire</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -553,12 +621,28 @@ document.write(`
 <span class="sd">    G: Graph</span>
 <span class="sd">    p: float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Fill this in</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">flip</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">choices</span> <span class="o">=</span> <span class="n">nodes</span> <span class="o">-</span> <span class="p">{</span><span class="n">u</span><span class="p">}</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">])</span>
+            <span class="n">new_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">choices</span><span class="p">))</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">new_v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">p=0.2</span></code></p>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">p</span></code> is the probability of rewiring an edge. The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop enumerates the edges and uses <code class="docutils literal notranslate"><span class="pre">flip</span></code> to choose which ones get rewired.</p>
+<p>If we are rewiring an edge from node <code class="docutils literal notranslate"><span class="pre">u</span></code> to node <code class="docutils literal notranslate"><span class="pre">v</span></code>, we have to choose a replacement for <code class="docutils literal notranslate"><span class="pre">v</span></code>, called <code class="docutils literal notranslate"><span class="pre">new_v</span></code>.</p>
+<ol class="arabic simple">
+<li><p>To compute the possible choices, we start with <code class="docutils literal notranslate"><span class="pre">nodes</span></code>, which is a set, and subtract off <code class="docutils literal notranslate"><span class="pre">u</span></code> and its neighbors, which avoids self loops and multiple edges.</p></li>
+<li><p>To choose <code class="docutils literal notranslate"><span class="pre">new_v</span></code>, we use the NumPy function <code class="docutils literal notranslate"><span class="pre">choice</span></code>, which is in the module <code class="docutils literal notranslate"><span class="pre">random</span></code>.</p></li>
+<li><p>Then we remove the existing edge from <code class="docutils literal notranslate"><span class="pre">u</span></code> to <code class="docutils literal notranslate"><span class="pre">v</span></code>, and</p></li>
+<li><p>Add a new edge from <code class="docutils literal notranslate"><span class="pre">u</span></code> to <code class="docutils literal notranslate"><span class="pre">new_v</span></code>.</p></li>
+</ol>
+<p>As an aside, the expression <code class="docutils literal notranslate"><span class="pre">G[u]</span></code> returns a dictionary that contains the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> as keys. It is usually faster than using <code class="docutils literal notranslate"><span class="pre">G.neighbors</span></code> (see <a class="reference external" href="https://thinkcomplex.com/neigh">https://thinkcomplex.com/neigh</a>).</p>
+<p>This function does not consider the edges in the order specified by Watts and Strogatz, but that doesn’t seem to affect the results.</p>
+<p>Here’s an example with <code class="docutils literal notranslate"><span class="pre">p=0.2</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">make_ws_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
@@ -569,6 +653,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/0251ad4656684fd2bd3efac96a6b6cab3833e8f30010e59a934bc1307d77e70a.png" src="_images/0251ad4656684fd2bd3efac96a6b6cab3833e8f30010e59a934bc1307d77e70a.png" />
+</div>
 </div>
 <p>Just checking that we have the same number of edges we started with:</p>
 <div class="cell docutils container">
@@ -577,8 +664,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20, 20)
+</pre></div>
 </div>
-<p>Now I’ll generate a plot that shows WS graphs for a few values of <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+</div>
+</div>
+<p>The following figure shows WS graphs with <span class="math notranslate nohighlight">\(n=10\)</span>, <span class="math notranslate nohighlight">\(k=4\)</span>, and a range of values of <span class="math notranslate nohighlight">\(p\)</span>: <span class="math notranslate nohighlight">\(p=0\)</span> (left), <span class="math notranslate nohighlight">\(p=0.2\)</span> (middle), and <span class="math notranslate nohighlight">\(p=1\)</span> (right).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -604,12 +696,22 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap03-2
+</pre></div>
 </div>
+<img alt="_images/bc5d1d0c2b951efc75872aae8e8afd77ccc3e6385670058d0503600e0f0ff228.png" src="_images/bc5d1d0c2b951efc75872aae8e8afd77ccc3e6385670058d0503600e0f0ff228.png" />
+</div>
+</div>
+<p>When <span class="math notranslate nohighlight">\(p=0\)</span>, the graph is a ring lattice. When <span class="math notranslate nohighlight">\(p=1\)</span>, it is completely random. As we’ll see, the interesting things happen in between.</p>
 <p><strong>Exercise:</strong> What is the order of growth of <code class="docutils literal notranslate"><span class="pre">rewire</span></code>?</p>
 </section>
 <section id="clustering">
-<h2><span class="section-number">3.3. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
-<p>The following function computes the local clustering coefficient for a given node, <code class="docutils literal notranslate"><span class="pre">u</span></code>:</p>
+<h2><span class="section-number">3.5. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
+<p>The next step is to compute the clustering coefficient, which quantifies the tendency for the nodes to form cliques. A <strong>clique</strong> is a set of nodes that are completely connected; that is, there are edges between all pairs of nodes in the set.</p>
+<p>Suppose a particular node, <span class="math notranslate nohighlight">\(u\)</span>, has <span class="math notranslate nohighlight">\(k\)</span> neighbors. If all of the neighbors are connected to each other, there would be <span class="math notranslate nohighlight">\(k(k-1)/2\)</span> edges among them. The fraction of those edges that actually exist is the local clustering coefficient for <span class="math notranslate nohighlight">\(u\)</span>, denoted <span class="math notranslate nohighlight">\(C_u\)</span>.</p>
+<p>If we compute the average of <span class="math notranslate nohighlight">\(C_u\)</span> over all nodes, we get the “network average clustering coefficient”, denoted <span class="math notranslate nohighlight">\(\bar{C}\)</span>.</p>
+<p>Here is a function that computes the local clustering coefficient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">node_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
@@ -635,6 +737,10 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Again I use <code class="docutils literal notranslate"><span class="pre">G[u]</span></code>, which returns a dictionary with the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> as keys.</p>
+<p>If a node has fewer than 2 neighbors, the clustering coefficient is undefined, so we return <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>, which is a special value that indicates “Not a Number”.</p>
+<p>Otherwise we compute the number of possible edges among the neighbors, count the number of those edges that actually exist, and return the fraction that exist.</p>
+<p><code class="docutils literal notranslate"><span class="pre">node_clustering</span></code> uses <code class="docutils literal notranslate"><span class="pre">all_pairs</span></code>, which we saw in Chapter 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">all_pairs</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
@@ -647,7 +753,22 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The network average clustering coefficient is just the mean of the local CCs.</p>
+<p>We can test the function like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">node_clustering</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a ring lattice with <span class="math notranslate nohighlight">\(k=4\)</span>, the clustering coefficient for each node is 0.5 (if you are not convinced, take another look at the first figure in this chapter).</p>
+<p>Now we can compute the network average clustering coefficient like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clustering_coefficient</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
@@ -657,33 +778,35 @@ document.write(`
 <span class="sd">    </span>
 <span class="sd">    returns: float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># FILL THIS IN</span>
-    <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">cu</span> <span class="o">=</span> <span class="p">[</span><span class="n">node_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">cu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>In a ring lattice with <code class="docutils literal notranslate"><span class="pre">k=4</span></code>, the clustering coefficient for each node should be 0.5</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">node_clustering</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And the network average should be 0.5</p>
+<p>The NumPy function <code class="docutils literal notranslate"><span class="pre">nanmean</span></code> computes the mean of the local clustering coefficients, ignoring any values that are <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<p>We can test <code class="docutils literal notranslate"><span class="pre">clustering_coefficient</span></code> like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clustering_coefficient</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5)
+</pre></div>
 </div>
-<p>Correct.</p>
+</div>
+</div>
+<p>In this graph, the local clustering coefficient for all nodes is 0.5, so the average across nodes is 0.5. Of course, we expect this value to be different for WS graphs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> clustering_coefficient(lattice)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86.4 μs ± 4.61 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -695,22 +818,30 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</div>
-<p><strong>Exercise:</strong> What is the order of growth of <code class="docutils literal notranslate"><span class="pre">clustering_coefficient</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code>, and <code class="docutils literal notranslate"><span class="pre">k</span></code>?</p>
-</section>
-<section id="path-length">
-<h2><span class="section-number">3.4. </span>Path length<a class="headerlink" href="#path-length" title="Link to this heading">#</a></h2>
-<p>The following function computes path lengths between all pairs of nodes</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path_lengths</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-    <span class="c1"># FILL THIS IN</span>
-    <span class="k">yield</span> <span class="mi">0</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>227 μs ± 8.7 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The characteristic path length is the mean path length for all pairs.</p>
+<p><strong>Exercise:</strong> What is the order of growth of <code class="docutils literal notranslate"><span class="pre">clustering_coefficient</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code>, and <code class="docutils literal notranslate"><span class="pre">k</span></code>?</p>
+</section>
+<section id="shortest-path-lengths">
+<h2><span class="section-number">3.6. </span>Shortest path lengths<a class="headerlink" href="#shortest-path-lengths" title="Link to this heading">#</a></h2>
+<p>The next step is to compute the characteristic path length, <span class="math notranslate nohighlight">\(L\)</span>, which is the average length of the shortest path between each pair of nodes. To compute it, I’ll start with a function provided by NetworkX, <code class="docutils literal notranslate"><span class="pre">shortest_path_length</span></code>. I’ll use it to replicate the Watts and Strogatz experiment, then I’ll explain how it works.</p>
+<p>Here’s a function that takes a graph and returns a list of shortest path lengths, one for each pair of nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path_lengths</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="n">length_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">length_map</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">(</span><span class="n">G</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">lengths</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The return value from <code class="docutils literal notranslate"><span class="pre">nx.shortest_path_length</span></code> is an iterator of pairs; converting it to a dictionary yields a dictionary of dictionaries. The outer dictionary maps from each node, <code class="docutils literal notranslate"><span class="pre">u</span></code>, to a dictionary that maps from each node, <code class="docutils literal notranslate"><span class="pre">v</span></code>, to the length of the shortest path from <code class="docutils literal notranslate"><span class="pre">u</span></code> to <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<p>With the list of lengths from <code class="docutils literal notranslate"><span class="pre">path_lengths</span></code>, we can compute <span class="math notranslate nohighlight">\(L\)</span> like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">characteristic_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
@@ -719,7 +850,22 @@ document.write(`
 </div>
 </div>
 </div>
-<p>On a complete graph, the average path length should be 1</p>
+<p>And we can test it with a small ring lattice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">characteristic_path_length</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, all 3 nodes are connected to each other, so the mean path length is 1.</p>
+<p>Similarly, on a complete graph, the average path length should be 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">complete</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -727,8 +873,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.0)
+</pre></div>
 </div>
-<p>On a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, the mean is about 50</p>
+</div>
+</div>
+<p>On a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, the mean is about 50:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -736,12 +887,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(50.450450450450454)
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Exercise:</strong>  What is the mean path length in a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">k=4</span></code>?</p>
 </section>
-<section id="the-experiment">
-<h2><span class="section-number">3.5. </span>The experiment<a class="headerlink" href="#the-experiment" title="Link to this heading">#</a></h2>
-<p>This function generates a WS graph with the given parameters and returns a pair of (mean path length, clustering coefficient):</p>
+<section id="the-ws-experiment">
+<h2><span class="section-number">3.7. </span>The WS experiment<a class="headerlink" href="#the-ws-experiment" title="Link to this heading">#</a></h2>
+<p>Now we are ready to replicate the WS experiment, which shows that for a range of values of <span class="math notranslate nohighlight">\(p\)</span>, a WS graph has high clustering like a regular graph and short path lengths like a random graph.</p>
+<p>I’ll start with <code class="docutils literal notranslate"><span class="pre">run_one_graph</span></code>, which takes <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, and <code class="docutils literal notranslate"><span class="pre">p</span></code>; it generates a WS graph with the given parameters and computes the mean path length, <code class="docutils literal notranslate"><span class="pre">mpl</span></code>, and clustering coefficient, <code class="docutils literal notranslate"><span class="pre">cc</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_one_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -762,15 +919,25 @@ document.write(`
 </div>
 </div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, it takes a few seconds on my computer:</p>
+<p>Watts and Strogatz ran their experiment with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>. With these parameters, <code class="docutils literal notranslate"><span class="pre">run_one_graph</span></code> takes a few seconds on my computer; most of that time is spent computing the mean path length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> run_one_graph(1000, 10, 0.01)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.286914914914915 0.6443376623376623
+CPU times: user 1.02 s, sys: 16 ms, total: 1.04 s
+Wall time: 1.04 s
+</pre></div>
 </div>
-<p>Now we’ll run it with a range of values for <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(8.286914914914915), np.float64(0.6443376623376623))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we need to compute these values for a range of <code class="docutils literal notranslate"><span class="pre">p</span></code>. I’ll use the NumPy function <code class="docutils literal notranslate"><span class="pre">logspace</span></code> again to compute <code class="docutils literal notranslate"><span class="pre">ps</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
@@ -778,8 +945,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.00000000e-04 3.16227766e-04 1.00000000e-03 3.16227766e-03
+ 1.00000000e-02 3.16227766e-02 1.00000000e-01 3.16227766e-01
+ 1.00000000e+00]
+</pre></div>
 </div>
-<p>This function runs each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> several times and returns a dictionary that maps from each <code class="docutils literal notranslate"><span class="pre">p</span></code> to a list of (mpl, cc) pairs.</p>
+</div>
+</div>
+<p>Here’s the function that runs the experiment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -804,10 +978,306 @@ document.write(`
 </div>
 </div>
 </div>
+<p>For each value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, we generate 10 random graphs and average the results. Since the return value from <code class="docutils literal notranslate"><span class="pre">run_one_graph</span></code> is a pair, <code class="docutils literal notranslate"><span class="pre">t</span></code> is a list of pairs. When we convert it to an array, we get one row for each iteration and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>. Calling <code class="docutils literal notranslate"><span class="pre">mean</span></code> with the option <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> computes the mean of each column; the result is an array with one row and two columns.</p>
+<p>When the loop exits, <code class="docutils literal notranslate"><span class="pre">means</span></code> is a list of pairs, which we convert to a NumPy array with one row for each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 <p>Here are the raw results.  Warning: this takes a few minutes to run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> res = run_experiment(ps)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.558644644644644 0.6664232323232322
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.54351351351352 0.6664232323232322
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.28726326326326 0.6662787878787878
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.82804004004004 0.66635101010101
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.110276276276274 0.6661343434343433
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+[47.257999    0.66649439]
+0.00031622776601683794
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.997943943943945 0.6656474747474747
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.00438238238238 0.6660353535353535
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.869533533533534 0.6661075757575756
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.47128128128128 0.6661343434343433
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.3858018018018 0.6648262626262625
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.83867067067067 0.665430808080808
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.27136136136136 0.6652595959595958
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.595467467467465 0.6657499999999998
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.450450450450454 0.6666666666666665
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39.24145745745746 0.6662065656565656
+[36.01263504  0.66580646]
+0.001
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.31946146146146 0.6642671717171716
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.974042042042043 0.6644570707070707
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.606564564564565 0.6650469696969696
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.64162162162162 0.6647994949494949
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.771625625625624 0.664970707070707
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.04740740740741 0.6645601010101009
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.959245245245246 0.6653318181818181
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.424486486486487 0.6621393939393938
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.619961961961963 0.664050505050505
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.214372372372374 0.663590404040404
+[24.75787888  0.66432136]
+0.0031622776601683794
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.764506506506507 0.6579535353535353
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.608458458458458 0.6606464646464646
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.301973973973974 0.6601491341991341
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.14306706706707 0.6602171717171718
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.312592592592592 0.6594352813852813
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.043293293293294 0.6587242424242423
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.55924924924925 0.6623146464646464
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.38045045045045 0.6611681818181818
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.776588588588588 0.6612161616161616
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.845355355355355 0.6589601010101009
+[14.87355355  0.66007849]
+0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.80816016016016 0.6417193362193361
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.838108108108107 0.6475658008658008
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.7646006006006 0.6517371572871573
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.715663663663664 0.6495540404040404
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.320296296296297 0.643379797979798
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.561213213213213 0.6455775613275613
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.172128128128127 0.6476368686868686
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.48614014014014 0.6468714285714287
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.940568568568569 0.6482772727272728
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.45082882882883 0.6500584415584415
+[8.90577077 0.64723777]
+0.03162277660168379
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.963993993993994 0.6077493506493507
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.9501621621621625 0.6090330502830503
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.998762762762762 0.6084161893661895
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.01980980980981 0.608768759018759
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.961185185185185 0.6054075036075036
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.089197197197197 0.6109230158730159
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.069805805805806 0.6097416305916306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.272324324324324 0.6168896103896104
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.934808808808809 0.6070453102453103
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.992616616616616 0.6102109668109668
+[6.02526667 0.60941854]
+0.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.395113113113113 0.4859027583527583
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.407911911911912 0.48549335109335107
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.368984984984985 0.47735145965145964
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.428724724724725 0.4960436369186369
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.419787787787787 0.4898358696858697
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.42217017017017 0.49066799866799865
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.452494494494495 0.49600636030636025
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.424342342342342 0.49285528915528914
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.468266266266267 0.49973649683649685
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.446034034034034 0.49286443556443554
+[4.42338298 0.49067577]
+0.31622776601683794
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5764504504504506 0.2153300394050394
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.587995995995996 0.2264512876012876
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5803383383383385 0.2158238872238872
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5872232232232233 0.22358244255744256
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.563825825825826 0.210626328083681
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5795515515515515 0.21813316128316126
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5695595595595595 0.21473274307391954
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5744184184184182 0.21397110112110113
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5832932932932935 0.21822162004662005
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.581605605605606 0.22271169941169938
+[3.57842623 0.21795843]
+1.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2686906906906907 0.009298524514700986
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2667807807807807 0.009269463027632964
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.267945945945946 0.008302852102301708
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.268860860860861 0.010096887348977132
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.271117117117117 0.008161807147101264
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2675615615615614 0.00952246838129191
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2704664664664667 0.008854503503032914
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.265917917917918 0.009702446006006378
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2695915915915914 0.011236585473350179
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.270194194194194 0.009963493859082096
+[3.26871271 0.0094409 ]
+CPU times: user 1min 45s, sys: 1.74 s, total: 1min 46s
+Wall time: 1min 46s
 </pre></div>
 </div>
 </div>
@@ -818,8 +1288,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[4.72579990e+01, 6.66494394e-01],
+       [3.60126350e+01, 6.65806465e-01],
+       [2.47578789e+01, 6.64321364e-01],
+       [1.48735536e+01, 6.60078492e-01],
+       [8.90577077e+00, 6.47237771e-01],
+       [6.02526667e+00, 6.09418539e-01],
+       [4.42338298e+00, 4.90675766e-01],
+       [3.57842623e+00, 2.17958431e-01],
+       [3.26871271e+00, 9.44090314e-03]])
+</pre></div>
 </div>
-<p>Let’s get the results into a form that’s easy to plot.</p>
+</div>
+</div>
+<p>We can extract the columns like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
@@ -833,6 +1316,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([47.257999  , 36.01263504, 24.75787888, 14.87355355,  8.90577077,
+        6.02526667,  4.42338298,  3.57842623,  3.26871271])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -840,8 +1329,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.66649439, 0.66580646, 0.66432136, 0.66007849, 0.64723777,
+       0.60941854, 0.49067577, 0.21795843, 0.0094409 ])
+</pre></div>
 </div>
-<p>And normalize them so they both start at 1.0</p>
+</div>
+</div>
+<p>In order to plot <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> on the same axes, we standardize them by dividing through by the first element:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">/=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -850,7 +1345,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here’s the plot that replicates Watts and Strogatz’s Figure 2.</p>
+<p>The following figure shows the clustering coefficient © and characteristic path length (L) for WS graphs with <span class="math notranslate nohighlight">\(n=1000\)</span>, <span class="math notranslate nohighlight">\(k=10\)</span>, and a range of <span class="math notranslate nohighlight">\(p\)</span>. It replicates Figure 2 in the Watts and Strogatz paper.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="s1">&#39;s-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;C(p) / C(0)&#39;</span><span class="p">)</span>
@@ -863,30 +1358,59 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap03-3
+</pre></div>
 </div>
+<img alt="_images/123a8af1255c6dfc93f66ae5d23d3c99ead42dc5b17b0877835295463226f6e1.png" src="_images/123a8af1255c6dfc93f66ae5d23d3c99ead42dc5b17b0877835295463226f6e1.png" />
+</div>
+</div>
+<p>As <span class="math notranslate nohighlight">\(p\)</span> increases, the mean path length drops quickly, because even a small number of randomly rewired edges provide shortcuts between regions of the graph that are far apart in the lattice. On the other hand, removing local links decreases the clustering coefficient much more slowly.</p>
+<p>As a result, there is a wide range of <span class="math notranslate nohighlight">\(p\)</span> where a WS graph has the properties of a small world graph, high clustering and low path lengths.</p>
+<p>And that’s why Watts and Strogatz propose WS graphs as a model for real-world networks that exhibit the small world phenomenon.</p>
+</section>
+<section id="what-kind-of-explanation-is-that">
+<h2><span class="section-number">3.8. </span>What kind of explanation is <em>that</em>?<a class="headerlink" href="#what-kind-of-explanation-is-that" title="Link to this heading">#</a></h2>
+<p>If you ask me why planetary orbits are elliptical, I might start by modeling a planet and a star as point masses; I would look up the law of universal gravitation at <a class="reference external" href="https://thinkcomplex.com/grav">https://thinkcomplex.com/grav</a> and use it to write a differential equation for the motion of the planet. Then I would either derive the orbit equation or, more likely, look it up at <a class="reference external" href="https://thinkcomplex.com/orbit">https://thinkcomplex.com/orbit</a>. With a little algebra, I could derive the conditions that yield an elliptical orbit. Then I would argue that the objects we consider planets satisfy these conditions.</p>
+<p>People, or at least scientists, are generally satisfied with this kind of explanation. One of the reasons for its appeal is that the assumptions and approximations in the model seem reasonable. Planets and stars are not really point masses, but the distances between them are so big that their actual sizes are negligible. Planets in the same solar system can affect each other’s orbits, but the effect is usually small. And we ignore relativistic effects, again on the assumption that they are small.</p>
+<p>This explanation is also appealing because it is equation-based. We can express the orbit equation in a closed form, which means that we can compute orbits efficiently. It also means that we can derive general expressions for the orbital velocity, orbital period, and other quantities.</p>
+<p>Finally, I think this kind of explanation is appealing because it has the form of a mathematical proof. It is important to remember that the proof pertains to the model and not the real world. That is, we can prove that an idealized model yields elliptical orbits, but we can’t prove that real orbits are ellipses (in fact, they are not). Nevertheless, the resemblance to a proof is appealing.</p>
+<p>By comparison, Watts and Strogatz’s explanation of the small world phenomenon may seem less satisfying. First, the model is more abstract, which is to say less realistic. Second, the results are generated by simulation, not by mathematical analysis. Finally, the results seem less like a proof and more like an example.</p>
+<p>Many of the models in this book are like the Watts and Strogatz model: abstract, simulation-based and (at least superficially) less formal than conventional mathematical models. One of the goals of this book is to consider the questions these models raise:</p>
+<ul class="simple">
+<li><p>What kind of work can these models do: are they predictive, or explanatory, or both?</p></li>
+<li><p>Are the explanations these models offer less satisfying than explanations based on more traditional models? Why?</p></li>
+<li><p>How should we characterize the differences between these and more conventional models? Are they different in kind or only in degree?</p></li>
+</ul>
+<p>Over the course of the book I will offer my answers to these questions, but they are tentative and sometimes speculative. I encourage you to consider them skeptically and reach your own conclusions.</p>
 </section>
 <section id="breadth-first-search">
-<h2><span class="section-number">3.6. </span>Breadth-first search<a class="headerlink" href="#breadth-first-search" title="Link to this heading">#</a></h2>
-<p>Now let’s see how the shortest path algorithm works.  We’ll start with BFS, which is the basis for Dijkstra’s algorithm.</p>
-<p>Here’s our old friend, the ring lattice:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<h2><span class="section-number">3.9. </span>Breadth-First Search<a class="headerlink" href="#breadth-first-search" title="Link to this heading">#</a></h2>
+<p>When we computed shortest paths, we used a function provided by NetworkX, but I have not explained how it works. To do that, I’ll start with breadth-first search, which is the basis of Dijkstra’s algorithm for computing shortest paths.</p>
+<p>In Chapter 2 I presented <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code>, which finds all the nodes that can be reached from a given starting node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reachable_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">seen</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
-                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> 
-                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
-                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>I didn’t say so at the time, but <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> performs a depth-first search (DFS). Now we’ll modify it to perform breadth-first search (BFS).</p>
+<p>To understand the difference, imagine you are exploring a castle. You start in a room with three doors marked A, B, and C. You open door C and discover another room, with doors marked D, E, and F.</p>
+<p>Which door do you open next? If you are feeling adventurous, you might want to go deeper into the castle and choose D, E, or F. That would be a depth-first search.</p>
+<p>But if you wanted to be more systematic, you might go back and explore A and B before D, E, and F. That would be a breadth-first search.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code>, we use the list method <code class="docutils literal notranslate"><span class="pre">pop</span></code> to choose the next node to “explore”. By default, <code class="docutils literal notranslate"><span class="pre">pop</span></code> returns the last element of the list, which is the last one we added. In the example, that would be door F.</p>
+<p>If we want to perform a BFS instead, the simplest solution is to pop the first element of the list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<p>And here’s my implementation of BFS using a deque.</p>
+<p>That works, but it is slow. In Python, popping the last element of a list takes constant time, but popping the first element is linear in the length of the list. In the worst case, the length of the stack is <span class="math notranslate nohighlight">\(O(n)\)</span>, which makes this implementation of BFS <span class="math notranslate nohighlight">\(O(nm)\)</span>, which is much worse than what it should be, <span class="math notranslate nohighlight">\(O(n + m)\)</span>.</p>
+<p>We can solve this problem with a double-ended queue, also known as a <strong>deque</strong>. The important feature of a deque is that you can add and remove elements from the beginning or end in constant time. To see how it is implemented, see <a class="reference external" href="https://thinkcomplex.com/deque">https://thinkcomplex.com/deque</a>.</p>
+<p>Python provides a <code class="docutils literal notranslate"><span class="pre">deque</span></code> in the <code class="docutils literal notranslate"><span class="pre">collections</span></code> module, and we can use it to write an efficient BFS:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -911,10 +1435,42 @@ document.write(`
 </div>
 </div>
 </div>
+<p>The differences are:</p>
+<ul class="simple">
+<li><p>I replaced the list called <code class="docutils literal notranslate"><span class="pre">stack</span></code> with a deque called <code class="docutils literal notranslate"><span class="pre">queue</span></code>.</p></li>
+<li><p>I replaced <code class="docutils literal notranslate"><span class="pre">pop</span></code> with <code class="docutils literal notranslate"><span class="pre">popleft</span></code>, which removes and returns the leftmost element of the queue.</p></li>
+</ul>
+<p>This version is back to being <span class="math notranslate nohighlight">\(O(n + m)\)</span>.</p>
+<p>We’ll test it on our old friend, the ring lattice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">make_ring_lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> 
+                 <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> 
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6d4948997cd49f6ab37a48d3450349d2e19b7063f5d42978a8733f42934e81a4.png" src="_images/6d4948997cd49f6ab37a48d3450349d2e19b7063f5d42978a8733f42934e81a4.png" />
+</div>
+</div>
 <p>It works:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reachable_nodes_bfs</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 </pre></div>
 </div>
 </div>
@@ -950,11 +1506,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+</pre></div>
 </div>
+</div>
+</div>
+<p>Now we’re ready to find shortest paths.</p>
 </section>
 <section id="dijkstras-algorithm">
-<h2><span class="section-number">3.7. </span>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h2>
-<p>Now we’re ready for Dijkstra’s algorithm, at least for graphs where all the edges have the same weight/length.</p>
+<h2><span class="section-number">3.10. </span>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h2>
+<p>Edsger W. Dijkstra was a Dutch computer scientist who invented an efficient shortest-path algorithm (see <a class="reference external" href="https://thinkcomplex.com/dijk">https://thinkcomplex.com/dijk</a>). He also invented the semaphore, which is a data structure used to coordinate programs that communicate with each other (see <a class="reference external" href="https://thinkcomplex.com/sem">https://thinkcomplex.com/sem</a> and Downey, <em>The Little Book of Semaphores</em>).</p>
+<p>Dijkstra is famous (and notorious) as the author of a series of essays on computer science. Some, like “A Case against the GO TO Statement”, had a profound effect on programming practice. Others, like “On the Cruelty of Really Teaching Computing Science”, are entertaining in their cantankerousness, but less effective.</p>
+<p><strong>Dijkstra’s algorithm</strong> solves the “single source shortest path problem”, which means that it finds the minimum distance from a given “source” node to every other node in the graph (or at least every connected node).</p>
+<p>I’ll present a simplified version of the algorithm that considers all edges the same length. The more general version works with any non-negative edge lengths.</p>
+<p>The simplified version is similar to the breadth-first search in the previous section except that we replace the set called <code class="docutils literal notranslate"><span class="pre">seen</span></code> with a dictionary called <code class="docutils literal notranslate"><span class="pre">dist</span></code>, which maps from each node to its distance from the source:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shortest_path_dijkstra</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
@@ -981,6 +1547,23 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Here’s how it works:</p>
+<ul class="simple">
+<li><p>Initially, <code class="docutils literal notranslate"><span class="pre">queue</span></code> contains a single element, <code class="docutils literal notranslate"><span class="pre">source</span></code>, and <code class="docutils literal notranslate"><span class="pre">dist</span></code> maps from <code class="docutils literal notranslate"><span class="pre">source</span></code> to distance 0 (which is the distance from <code class="docutils literal notranslate"><span class="pre">source</span></code> to itself).</p></li>
+<li><p>Each time through the loop, we use <code class="docutils literal notranslate"><span class="pre">popleft</span></code> to select the next node in the queue.</p></li>
+<li><p>Next we find all neighbors of <code class="docutils literal notranslate"><span class="pre">node</span></code> that are not already in <code class="docutils literal notranslate"><span class="pre">dist</span></code>.</p></li>
+<li><p>Since the distance from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">node</span></code> is <code class="docutils literal notranslate"><span class="pre">dist[node]</span></code>, the distance to any of the undiscovered neighbors is <code class="docutils literal notranslate"><span class="pre">dist[node]+1</span></code>.</p></li>
+<li><p>For each neighbor, we add an entry to <code class="docutils literal notranslate"><span class="pre">dist</span></code>, then we add the neighbors to the queue.</p></li>
+</ul>
+<p>This algorithm only works if we use BFS, not DFS. To see why, consider this:</p>
+<ol class="arabic simple">
+<li><p>The first time through the loop <code class="docutils literal notranslate"><span class="pre">node</span></code> is <code class="docutils literal notranslate"><span class="pre">source</span></code>, and <code class="docutils literal notranslate"><span class="pre">new_dist</span></code> is 1. So the neighbors of <code class="docutils literal notranslate"><span class="pre">source</span></code> get distance 1 and they go in the queue.</p></li>
+<li><p>When we process the neighbors of <code class="docutils literal notranslate"><span class="pre">source</span></code>, all of <em>their</em> neighbors get distance 2. We know that none of them can have distance 1, because if they did, we would have discovered them during the first iteration.</p></li>
+<li><p>Similarly, when we process the nodes with distance 2, we give their neighbors distance 3. We know that none of them can have distance 1 or 2, because if they did, we would have discovered them during a previous iteration.</p></li>
+</ol>
+<p>And so on. If you are familiar with proof by induction, you can see where this is going.</p>
+<p>But this argument only works if we process all nodes with distance 1 before we start processing nodes with distance 2, and so on. And that’s exactly what BFS does.</p>
+<p>In the exercises at the end of this chapter, you’ll write a version of Dijkstra’s algorithm using DFS, so you’ll have a chance to see what goes wrong.</p>
 <p>Again, we’ll test it on a ring lattice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -998,12 +1581,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/8b14e082cc5861e08effbe770244f76a5bb7e5de4d4196e6db397f40c3918fe5.png" src="_images/8b14e082cc5861e08effbe770244f76a5bb7e5de4d4196e6db397f40c3918fe5.png" />
+</div>
 </div>
 <p>Here’s my implementation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">shortest_path_dijkstra</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">d1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 0, 8: 1, 1: 1, 2: 1, 9: 1, 6: 2, 7: 2, 3: 2, 4: 2, 5: 3}
 </pre></div>
 </div>
 </div>
@@ -1016,6 +1607,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 0, 1: 1, 2: 1, 8: 1, 9: 1, 3: 2, 4: 2, 6: 2, 7: 2, 5: 3}
+</pre></div>
+</div>
+</div>
 </div>
 <p>They are the same:</p>
 <div class="cell docutils container">
@@ -1024,12 +1620,17 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Exercise:</strong> In a ring lattice with <code class="docutils literal notranslate"><span class="pre">n=1000</span></code> and <code class="docutils literal notranslate"><span class="pre">k=10</span></code>, which node is farthest from 0 and how far is it?  Use <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code> to check your answer.</p>
 <p>Note: the maximum distance between two nodes is the <strong>diameter</strong> of the graph.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">3.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> In a ring lattice, every node has the same number of neighbors.  The number of neighbors is called the <strong>degree</strong> of the node, and a graph where all nodes have the same degree is called a <strong>regular graph</strong>.</p>
 <p>All ring lattices are regular, but not all regular graphs are ring lattices.  In particular, if <code class="docutils literal notranslate"><span class="pre">k</span></code> is odd, we can’t construct a ring lattice, but we might be able to construct a regular graph.</p>
 <p>Write a function called <code class="docutils literal notranslate"><span class="pre">make_regular_graph</span></code> that takes <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">k</span></code> and returns a regular graph that contains <code class="docutils literal notranslate"><span class="pre">n</span></code> nodes, where every node has <code class="docutils literal notranslate"><span class="pre">k</span></code> neighbors.  If it’s not possible to make a regular graph with the given values of <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">k</span></code>, the function should raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
@@ -1067,9 +1668,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Compare this function to <code class="docutils literal notranslate"><span class="pre">reachable_nodes_bfs</span></code> and see which is faster.  Then see if you can modify this function to implement a faster version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code></p>
-<p><strong>Exercise:</strong> The following implementation of a BFS contains two performance errors.  What are
-they?  What is the actual order of growth for this algorithm?</p>
+<p>Compare this function to <code class="docutils literal notranslate"><span class="pre">reachable_nodes_bfs</span></code> and see which is faster.  Then see if you can modify this function to implement a faster version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code>.</p>
+<p><strong>Exercise:</strong> The following implementation of a BFS contains two performance errors.  What are they?  What is the actual order of growth for this algorithm?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
@@ -1088,7 +1688,22 @@ they?  What is the actual order of growth for this algorithm?</p>
 </div>
 </div>
 </div>
-<p><strong>Exercise:</strong> In the book, I claimed that Dijkstra’s algorithm does not work unless it uses BFS.  Write a version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code> that uses DFS and test it on a few examples to see what goes wrong.</p>
+<p><strong>Exercise:</strong> In the “Dijkstra’s algorithm” section, I claimed that Dijkstra’s algorithm does not work unless it uses BFS.  Write a version of <code class="docutils literal notranslate"><span class="pre">shortest_path_dijkstra</span></code> that uses DFS and test it on a few examples to see what goes wrong.</p>
+<p><strong>Exercise:</strong> A natural question about the Watts and Strogatz paper is whether the small world phenomenon is specific to their generative model or whether other similar models yield the same qualitative result (high clustering and low path lengths).</p>
+<p>To answer this question, choose a variation of the Watts and Strogatz model and repeat the experiment. There are two kinds of variation you might consider:</p>
+<ul class="simple">
+<li><p>Instead of starting with a regular graph, start with another graph with high clustering. For example, you could put nodes at random locations in a 2-D space and connect each node to its nearest <span class="math notranslate nohighlight">\(k\)</span> neighbors.</p></li>
+<li><p>Experiment with different kinds of rewiring.</p></li>
+</ul>
+<p>If a range of similar models yield similar behavior, we say that the results of the paper are <strong>robust</strong>.</p>
+<p><strong>Exercise:</strong> Dijkstra’s algorithm solves the “single source shortest path” problem, but to compute the characteristic path length of a graph, we actually want to solve the “all pairs shortest path” problem.</p>
+<p>Of course, one option is to run Dijkstra’s algorithm <span class="math notranslate nohighlight">\(n\)</span> times, once for each starting node. And for some applications, that’s probably good enough. But there are more efficient alternatives.</p>
+<p>Find an algorithm for the all-pairs shortest path problem and implement it. See <a class="reference external" href="https://thinkcomplex.com/short">https://thinkcomplex.com/short</a>.</p>
+<p>Compare the run time of your implementation with running Dijkstra’s algorithm <span class="math notranslate nohighlight">\(n\)</span> times. Which algorithm is better in theory? Which is better in practice? Which one does NetworkX use?</p>
+<p><a class="reference external" href="https://greenteapress.com/wp/think-complexity-2e/">Think Complexity, 2nd Edition</a></p>
+<p>Copyright 2016 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -1128,7 +1743,7 @@ they?  What is the actual order of growth for this algorithm?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Erdos-Renyi Graphs</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Graphs</p>
       </div>
     </a>
     <a class="right-next"
@@ -1136,7 +1751,7 @@ they?  What is the actual order of growth for this algorithm?</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Scale-Free Networks</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Scale-free networks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1156,14 +1771,17 @@ they?  What is the actual order of growth for this algorithm?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-ring-lattice">3.1. Regular ring lattice</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graph">3.2. WS graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.3. Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-length">3.4. Path length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experiment">3.5. The experiment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.6. Breadth-first search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.7. Dijkstra’s algorithm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.8. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stanley-milgram">3.1. Stanley Milgram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watts-and-strogatz">3.2. Watts and Strogatz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-lattice">3.3. Ring lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ws-graphs">3.4. WS graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">3.5. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-lengths">3.6. Shortest path lengths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ws-experiment">3.7. The WS experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-kind-of-explanation-is-that">3.8. What kind of explanation is <em>that</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search">3.9. Breadth-First Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstras-algorithm">3.10. Dijkstra’s algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.11. Exercises</a></li>
 </ul>
   </nav></div>
 

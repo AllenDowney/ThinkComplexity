@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>10. Flocks, Herds, and Traffic Jams &#8212; Think Complexity</title>
+    <title>10. Herds, Flocks, and Traffic Jams &#8212; Think Complexity</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="11. Evolution" href="chap11.html" />
-    <link rel="prev" title="9. Agent Based Models" href="chap09.html" />
+    <link rel="prev" title="9. Agent-based models" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,15 +180,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -358,7 +358,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Flocks, Herds, and Traffic Jams</h1>
+    <h1>Herds, Flocks, and Traffic Jams</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,7 +368,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">10.1. Traffic jam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jams">10.1. Traffic jams</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-perturbation">10.2. Random perturbation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boids">10.3. Boids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boid-algorithm">10.4. The Boid algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitration">10.5. Arbitration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#emergence-and-free-will">10.6. Emergence and free will</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.7. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -380,10 +386,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="flocks-herds-and-traffic-jams">
-<h1><span class="section-number">10. </span>Flocks, Herds, and Traffic Jams<a class="headerlink" href="#flocks-herds-and-traffic-jams" title="Link to this heading">#</a></h1>
-<p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
-<p>Copyright 2016 Allen Downey, <a class="reference external" href="http://opensource.org/licenses/MIT">MIT License</a></p>
+  <p>The second edition of <em>Think Complexity</em> is available from <a class="reference external" href="https://bookshop.org/a/98697/9781492040200">Bookshop.org</a> and <a class="reference external" href="https://amzn.to/3wPN0SJ">Amazon</a> (those are affiliate links). If you are enjoying the free, online version, consider <a class="reference external" href="https://buymeacoffee.com/allendowney">buying me a coffee</a>.</p>
+<section id="herds-flocks-and-traffic-jams">
+<h1><span class="section-number">10. </span>Herds, Flocks, and Traffic Jams<a class="headerlink" href="#herds-flocks-and-traffic-jams" title="Link to this heading">#</a></h1>
+<p>The agent-based models in the previous chapter are based on grids: the agents occupy discrete locations in two-dimensional space. In this chapter we consider agents that move is continuous space, including simulated cars on a one-dimensional highway and simulated birds in three-dimensional space.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap10.ipynb">Click here to run this notebook on Colab</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -408,8 +415,8 @@ document.write(`
         <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
     
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/utils.py&#39;</span><span class="p">)</span>
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity2/raw/master/notebooks/Cell2D.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/utils.py&#39;</span><span class="p">)</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/Cell2D.py&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -424,9 +431,11 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="traffic-jam">
-<h2><span class="section-number">10.1. </span>Traffic jam<a class="headerlink" href="#traffic-jam" title="Link to this heading">#</a></h2>
-<p>Here’s the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> class from Chapter 10.</p>
+<section id="traffic-jams">
+<h2><span class="section-number">10.1. </span>Traffic jams<a class="headerlink" href="#traffic-jams" title="Link to this heading">#</a></h2>
+<p>What causes traffic jams? Sometimes there is an obvious cause, like an accident, a speed trap, or something else that disturbs the flow of traffic. But other times traffic jams appear for no apparent reason.</p>
+<p>Agent-based models can help explain spontaneous traffic jams. As an example, I implement a highway simulation based on a model in Mitchell Resnick’s book, <em>Turtles, Termites and Traffic Jams</em>.</p>
+<p>The agents in this model are drivers. Here’s the definition for the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Driver</span><span class="p">:</span>
@@ -459,7 +468,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>And the Highway.</p>
+<p>The attributes <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">speed</span></code> are the location and speed of the driver. <code class="docutils literal notranslate"><span class="pre">set_odometer</span></code> and <code class="docutils literal notranslate"><span class="pre">read_odometer</span></code> keep track of the distance a driver travels, which we’ll use to compute average speed.</p>
+<p>This implementation of <code class="docutils literal notranslate"><span class="pre">choose_acceleration</span></code> is simple: it always accelerates at the maximum rate.</p>
+<p>Here’s the class that represents the “highway”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Cell2D</span> <span class="kn">import</span> <span class="n">Cell2D</span>
@@ -490,41 +501,6 @@ document.write(`
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">drivers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drivers</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            
-    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs one time step.&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">driver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">drivers</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-            
-    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Updates `driver`.</span>
-<span class="sd">        </span>
-<span class="sd">        driver: Driver object</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># get the distance to the next driver</span>
-        <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-
-        <span class="c1"># let the driver choose acceleration</span>
-        <span class="n">acc</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">choose_acceleration</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
-        <span class="n">acc</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_acc</span><span class="p">)</span>
-        <span class="n">acc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_acc</span><span class="p">)</span>
-        <span class="n">speed</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">speed</span> <span class="o">+</span> <span class="n">acc</span>
-            
-        <span class="c1"># add random noise to speed</span>
-        <span class="n">speed</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
-        
-        <span class="c1"># keep it nonnegative and under the speed limit</span>
-        <span class="n">speed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">speed</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_limit</span><span class="p">)</span>
-        
-        <span class="c1"># if current speed would collide with next driver, stop</span>
-        <span class="k">if</span> <span class="n">speed</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">:</span>
-            <span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">crashes</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-        <span class="c1"># update speed and loc</span>
-        <span class="n">driver</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
-        <span class="n">driver</span><span class="o">.</span><span class="n">loc</span> <span class="o">+=</span> <span class="n">speed</span>
             
     <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Distance from `driver` to next driver.</span>
@@ -581,7 +557,70 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Make the animation:</p>
+<p><code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of cars, <code class="docutils literal notranslate"><span class="pre">length</span></code> is the length of the highway, and <code class="docutils literal notranslate"><span class="pre">eps</span></code> is the amount of random noise we’ll add to the system. <code class="docutils literal notranslate"><span class="pre">constructor</span></code> is the function used to make the drivers; by default it is <code class="docutils literal notranslate"><span class="pre">Driver</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">locs</span></code> contains the locations of the drivers; the NumPy function <code class="docutils literal notranslate"><span class="pre">linspace</span></code> creates an array of <code class="docutils literal notranslate"><span class="pre">n</span></code> locations equally spaced between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">length</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">drivers</span></code> attribute is a list of <code class="docutils literal notranslate"><span class="pre">Driver</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop links them so each <code class="docutils literal notranslate"><span class="pre">Driver</span></code> contains a reference to the next. The highway is circular, so the last <code class="docutils literal notranslate"><span class="pre">Driver</span></code> contains a reference to the first.</p>
+<p>During each time step, the <code class="docutils literal notranslate"><span class="pre">Highway</span></code> moves each of the drivers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">add_method_to</span> Highway
+
+    def step(self):
+        &quot;&quot;&quot;Performs one time step.&quot;&quot;&quot;
+        for driver in self.drivers:
+            self.move(driver)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">move</span></code> method lets the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> choose its acceleration. Then <code class="docutils literal notranslate"><span class="pre">move</span></code> computes the updated speed and position. Here’s the implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">add_method_to</span> Highway
+
+    def move(self, driver):
+        &quot;&quot;&quot;Updates `driver`.
+        
+        driver: Driver object
+        &quot;&quot;&quot;
+        # get the distance to the next driver
+        dist = self.distance(driver)
+
+        # let the driver choose acceleration
+        acc = driver.choose_acceleration(dist)
+        acc = min(acc, self.max_acc)
+        acc = max(acc, self.min_acc)
+        speed = driver.speed + acc
+            
+        # add random noise to speed
+        speed *= np.random.uniform(1-self.eps, 1+self.eps)
+        
+        # keep it nonnegative and under the speed limit
+        speed = max(speed, 0)
+        speed = min(speed, self.speed_limit)
+        
+        # if current speed would collide with next driver, stop
+        if speed &gt; dist:
+            speed = 0
+            self.crashes += 1
+            
+        # update speed and loc
+        driver.speed = speed
+        driver.loc += speed
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dist</span></code> is the distance between <code class="docutils literal notranslate"><span class="pre">driver</span></code> and the next driver ahead. This distance is passed to <code class="docutils literal notranslate"><span class="pre">choose_acceleration</span></code>, which specifies the behavior of the driver. This is the only decision the driver gets to make; everything else is determined by the “physics” of the simulation.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">acc</span></code> is acceleration, which is bounded by <code class="docutils literal notranslate"><span class="pre">min_acc</span></code> and <code class="docutils literal notranslate"><span class="pre">max_acc</span></code>. In my implementation, cars can accelerate with <code class="docutils literal notranslate"><span class="pre">max_acc=1</span></code> and brake with <code class="docutils literal notranslate"><span class="pre">min_acc=-10</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code> is the old speed plus the requested acceleration, but then we make some adjustments. First, we add random noise to <code class="docutils literal notranslate"><span class="pre">speed</span></code>, because the world is not perfect. <code class="docutils literal notranslate"><span class="pre">eps</span></code> determines the magnitude of the relative error; for example, if <code class="docutils literal notranslate"><span class="pre">eps</span></code> is 0.02, <code class="docutils literal notranslate"><span class="pre">speed</span></code> is multiplied by a random factor between 0.98 and 1.02.</p></li>
+<li><p>Speed is bounded between 0 and <code class="docutils literal notranslate"><span class="pre">speed_limit</span></code>, which is 40 in my implementation, so cars are not allowed to go backward or speed.</p></li>
+<li><p>If the requested speed would cause a collision with the next car, <code class="docutils literal notranslate"><span class="pre">speed</span></code> is set to 0.</p></li>
+<li><p>Finally, we update the <code class="docutils literal notranslate"><span class="pre">speed</span></code> and <code class="docutils literal notranslate"><span class="pre">loc</span></code> attributes of <code class="docutils literal notranslate"><span class="pre">driver</span></code>.</p></li>
+</ul>
+<p>Since the cars start out equally spaced, we expect them all to accelerate until they reach the speed limit, or until their speed exceeds the space between them. At that point, at least one “collision” will occur, causing some cars to stop.</p>
+<p>Here’s an animation of the process, starting with 30 cars and <code class="docutils literal notranslate"><span class="pre">eps=0.02</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">highway</span> <span class="o">=</span> <span class="n">Highway</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
@@ -590,10 +629,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fe086a3c7f9ab530790ab24bab1f4c43c4b0eba09e13a0b1418a35e2d83caca9.png" src="_images/fe086a3c7f9ab530790ab24bab1f4c43c4b0eba09e13a0b1418a35e2d83caca9.png" />
+<img alt="_images/4257932a0bf361d5a441ff601f3215fb43bb09b07e49b7992e034f46330e2e7a.png" src="_images/4257932a0bf361d5a441ff601f3215fb43bb09b07e49b7992e034f46330e2e7a.png" />
 </div>
 </div>
-<p>And generate the figure:</p>
+<p>The following figure shows a few steps in this process. Squares indicate the position of the drivers; triangles indicate places where one driver has to brake to avoid another.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">three_frame</span>
@@ -608,10 +647,17 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap10-1
 </pre></div>
 </div>
-<img alt="_images/59a8f4a285b1cf9f9cd07da6acb85112b4d7327081993dc3bd7428e69e56e475.png" src="_images/59a8f4a285b1cf9f9cd07da6acb85112b4d7327081993dc3bd7428e69e56e475.png" />
+<img alt="_images/0ae457b1a7e111a01e1fa6285d1c5de47b56feafcb24428b22c5d0284fe0f7a4.png" src="_images/0ae457b1a7e111a01e1fa6285d1c5de47b56feafcb24428b22c5d0284fe0f7a4.png" />
 </div>
 </div>
-<p>Explore the relationship between <code class="docutils literal notranslate"><span class="pre">eps</span></code> and average speed.</p>
+<p>On the left is the configuration after 16 time steps, with the highway mapped to a circle. Because of random noise, some cars are going faster than others, and the spacing has become uneven.</p>
+<p>During the next time step (middle) there are two collisions, indicated by the triangles.</p>
+<p>During the next time step (right) two cars collide with the stopped cars, and we can see the initial formation of a traffic jam. Once a jam forms, it tends to persist, with additional cars approaching from behind and colliding, and with cars in the front accelerating away.</p>
+<p>Under some conditions, the jam itself propagates backwards, as you can see in the animation.</p>
+</section>
+<section id="random-perturbation">
+<h2><span class="section-number">10.2. </span>Random perturbation<a class="headerlink" href="#random-perturbation" title="Link to this heading">#</a></h2>
+<p>As the number of cars increases, traffic jams become more severe. To see how much, the following function runs simulations with a range of numbers of cars and computes the average speed the cars are able to achieve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">constructor</span><span class="o">=</span><span class="n">Driver</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -632,7 +678,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Generate the figure:</p>
+<p>The following figure shows average speed as a function of the number of cars, for three magnitudes of added random noise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -655,9 +701,163 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap10-2
 </pre></div>
 </div>
-<img alt="_images/f1f58b848f1725847cf0dcd2de49e0af616aeae2e761ebfbe5dea57a876fadd2.png" src="_images/f1f58b848f1725847cf0dcd2de49e0af616aeae2e761ebfbe5dea57a876fadd2.png" />
+<img alt="_images/539cc3d57d7cd414299bb831d5e8f0fdc0a3412698a66d8a5fd3c205843c2a83.png" src="_images/539cc3d57d7cd414299bb831d5e8f0fdc0a3412698a66d8a5fd3c205843c2a83.png" />
 </div>
 </div>
+<p>The top line shows results with <code class="docutils literal notranslate"><span class="pre">eps=0</span></code>, that is, with no random variation in speed. With 25 or fewer cars, the spacing between cars is greater than 40, which allows cars to reach and maintain the maximum speed, which is 40. With more than 25 cars, traffic jams form and the average speed drops quickly.</p>
+<p>This effect is a direct result of the physics of the simulation, so it should not be surprising. If the length of the road is 1000, the spacing between <code class="docutils literal notranslate"><span class="pre">n</span></code> cars is <code class="docutils literal notranslate"><span class="pre">1000/n</span></code>. And since cars can’t move faster than the space in front of them, the highest average speed we expect is <code class="docutils literal notranslate"><span class="pre">1000/n</span></code> or 40, whichever is less.</p>
+<p>But that’s the best case scenario. With just a small amount of randomness, things get much worse.</p>
+<p>The figure also shows results with <code class="docutils literal notranslate"><span class="pre">eps=0.001</span></code> and <code class="docutils literal notranslate"><span class="pre">eps=0.01</span></code>, which correspond to errors in speed of 0.1% and 1%.</p>
+<p>With 0.1% errors, the capacity of the highway drops from 25 to 20 (by “capacity” I mean the maximum number of cars that can reach and sustain the speed limit). And with 1% errors, the capacity drops to 10. Ugh.</p>
+<p>As one of the exercises at the end of this chapter, you’ll have a chance to design a better driver; that is, you will experiment with different strategies in <code class="docutils literal notranslate"><span class="pre">choose_acceleration</span></code> and see if you can find driver behaviors that improve average speed.</p>
+</section>
+<section id="boids">
+<h2><span class="section-number">10.3. </span>Boids<a class="headerlink" href="#boids" title="Link to this heading">#</a></h2>
+<p>In 1987 Craig Reynolds published “Flocks, herds and schools: A distributed behavioral model”, which describes an agent-based model of herd behavior. You can download his paper from <a class="reference external" href="https://thinkcomplex.com/boid">https://thinkcomplex.com/boid</a>.</p>
+<p>Agents in this model are called “Boids”, which is both a contraction of “bird-oid” and an accented pronunciation of “bird” (although Boids are also used to model fish and herding land animals).</p>
+<p>Each agent simulates three behaviors:</p>
+<p><strong>Flock centering:</strong> Move toward the center of the flock.</p>
+<p><strong>Collision avoidance:</strong> Avoid obstacles, including other Boids.</p>
+<p><strong>Velocity matching:</strong> Align velocity (speed and direction) with neighboring Boids.</p>
+<p>Boids make decisions based on local information only; each Boid only sees (or pays attention to) other Boids in its field of vision.</p>
+<p>In the repository for this book, you will find <code class="docutils literal notranslate"><span class="pre">Boids7.py</span></code>, which contains my implementation of Boids, based in part on the description in Gary William Flake’s book, <em>The Computational Beauty of Nature</em>.</p>
+<p>My implementation uses VPython, which is a library that provides 3-D graphics. VPython provides a <code class="docutils literal notranslate"><span class="pre">Vector</span></code> object, which I use to represent the position and velocity of Boids in three dimensions. You can read about them at <a class="reference external" href="https://thinkcomplex.com/vector">https://thinkcomplex.com/vector</a>.</p>
+<p>VPython doesn’t run in this notebook (or on Colab), so the code in the next two sections is shown but not run. One of the exercises at the end of the chapter explains how to run <code class="docutils literal notranslate"><span class="pre">Boids7.py</span></code>.</p>
+</section>
+<section id="the-boid-algorithm">
+<h2><span class="section-number">10.4. </span>The Boid algorithm<a class="headerlink" href="#the-boid-algorithm" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Boids7.py</span></code> defines two classes: <code class="docutils literal notranslate"><span class="pre">Boid</span></code>, which implements the Boid behaviors, and <code class="docutils literal notranslate"><span class="pre">World</span></code>, which contains a list of Boids and a “carrot” the Boids are attracted to.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Boid</span></code> class defines the following methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">center</span></code>: Finds other Boids within range and computes a vector toward their centroid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">avoid</span></code>: Finds objects, including other Boids, within a given range, and computes a vector that points away from their centroid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: Finds other Boids within range and computes the average of their headings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">love</span></code>: Computes a vector that points toward the carrot.</p></li>
+</ul>
+<p>Here’s the implementation of <code class="docutils literal notranslate"><span class="pre">center</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boids</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">boids</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">vecs</span> <span class="o">=</span> <span class="p">[</span><span class="n">boid</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">boid</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_toward_center</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parameters <code class="docutils literal notranslate"><span class="pre">radius</span></code> and <code class="docutils literal notranslate"><span class="pre">angle</span></code> are the radius and angle of the field of view, which determines which other Boids are taken into consideration. <code class="docutils literal notranslate"><span class="pre">radius</span></code> is in arbitrary units of length; <code class="docutils literal notranslate"><span class="pre">angle</span></code> is in radians.</p>
+<p><code class="docutils literal notranslate"><span class="pre">center</span></code> uses <code class="docutils literal notranslate"><span class="pre">get_neighbors</span></code> to get a list of <code class="docutils literal notranslate"><span class="pre">Boid</span></code> objects that are in the field of view. <code class="docutils literal notranslate"><span class="pre">vecs</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> objects that represent their positions.</p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">vector_toward_center</span></code> computes a <code class="docutils literal notranslate"><span class="pre">Vector</span></code> that points from <code class="docutils literal notranslate"><span class="pre">self</span></code> to the centroid of <code class="docutils literal notranslate"><span class="pre">neighbors</span></code>.</p>
+<p>Here’s how <code class="docutils literal notranslate"><span class="pre">get_neighbors</span></code> works:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boids</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">boid</span> <span class="ow">in</span> <span class="n">boids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">boid</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">boid</span><span class="o">.</span><span class="n">pos</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span>
+
+            <span class="c1"># if not in range, skip it</span>
+            <span class="k">if</span> <span class="n">offset</span><span class="o">.</span><span class="n">mag</span> <span class="o">&gt;</span> <span class="n">radius</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># if not within viewing angle, skip it</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="o">.</span><span class="n">diff_angle</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">angle</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># otherwise add it to the list</span>
+            <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boid</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">neighbors</span>
+</pre></div>
+</div>
+<p>For each other Boid, <code class="docutils literal notranslate"><span class="pre">get_neighbors</span></code> uses vector subtraction to compute the vector from <code class="docutils literal notranslate"><span class="pre">self</span></code> to <code class="docutils literal notranslate"><span class="pre">boid</span></code>. The magnitude of this vector is the distance between them; if this magnitude exceeds <code class="docutils literal notranslate"><span class="pre">radius</span></code>, we ignore <code class="docutils literal notranslate"><span class="pre">boid</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_angle</span></code> computes the angle between the velocity of <code class="docutils literal notranslate"><span class="pre">self</span></code>, which points in the direction the Boid is heading, and the position of <code class="docutils literal notranslate"><span class="pre">boid</span></code>. If this angle exceeds <code class="docutils literal notranslate"><span class="pre">angle</span></code>, we ignore <code class="docutils literal notranslate"><span class="pre">boid</span></code>.</p>
+<p>Otherwise <code class="docutils literal notranslate"><span class="pre">boid</span></code> is in view, so we add it to <code class="docutils literal notranslate"><span class="pre">neighbors</span></code>.</p>
+<p>Now here’s the implementation of <code class="docutils literal notranslate"><span class="pre">vector_toward_center</span></code>, which computes a vector from <code class="docutils literal notranslate"><span class="pre">self</span></code> to the centroid of its neighbors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">vector_toward_center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vecs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vecs</span><span class="p">:</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
+            <span class="n">toward</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">center</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">limit_vector</span><span class="p">(</span><span class="n">toward</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">null_vector</span>
+</pre></div>
+</div>
+<p>VPython vectors work with NumPy, so <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> computes the mean of <code class="docutils literal notranslate"><span class="pre">vecs</span></code>, which is a sequence of vectors. <code class="docutils literal notranslate"><span class="pre">limit_vector</span></code> limits the magnitude of the result to 1; <code class="docutils literal notranslate"><span class="pre">null_vector</span></code> has magnitude 0.</p>
+<p>We use the same helper methods to implement <code class="docutils literal notranslate"><span class="pre">avoid</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">avoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boids</span><span class="p">,</span> <span class="n">carrot</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">):</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="n">boids</span> <span class="o">+</span> <span class="p">[</span><span class="n">carrot</span><span class="p">]</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">vecs</span> <span class="o">=</span> <span class="p">[</span><span class="n">boid</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">boid</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">vector_toward_center</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">avoid</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">center</span></code>, but it takes into account the carrot as well as the other Boids. Also, the parameters are different: <code class="docutils literal notranslate"><span class="pre">radius</span></code> is smaller, so Boids only avoid objects that are too close, and <code class="docutils literal notranslate"><span class="pre">angle</span></code> is wider, so Boids avoid objects from all directions. Finally, the result from <code class="docutils literal notranslate"><span class="pre">vector_toward_center</span></code> is negated, so it points <em>away</em> from the centroid of any objects that are too close.</p>
+<p>Here’s the implementation of <code class="docutils literal notranslate"><span class="pre">align</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">align</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boids</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">boids</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">vecs</span> <span class="o">=</span> <span class="p">[</span><span class="n">boid</span><span class="o">.</span><span class="n">vel</span> <span class="k">for</span> <span class="n">boid</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_toward_center</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">align</span></code> is also similar to <code class="docutils literal notranslate"><span class="pre">center</span></code>; the big difference is that it computes the average of the neighbors’ velocities, rather than their positions. If the neighbors point in a particular direction, the Boid tends to steer toward that direction.</p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">love</span></code> computes a vector that points in the direction of the carrot.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">love</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">carrot</span><span class="p">):</span>
+        <span class="n">toward</span> <span class="o">=</span> <span class="n">carrot</span><span class="o">.</span><span class="n">pos</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span>
+        <span class="k">return</span> <span class="n">limit_vector</span><span class="p">(</span><span class="n">toward</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The results from <code class="docutils literal notranslate"><span class="pre">center</span></code>, <code class="docutils literal notranslate"><span class="pre">avoid</span></code>, <code class="docutils literal notranslate"><span class="pre">align</span></code>, and <code class="docutils literal notranslate"><span class="pre">love</span></code> are what Reynolds calls “acceleration requests”, where each request is intended to achieve a different goal.</p>
+</section>
+<section id="arbitration">
+<h2><span class="section-number">10.5. </span>Arbitration<a class="headerlink" href="#arbitration" title="Link to this heading">#</a></h2>
+<p>To arbitrate among these possibly conflicting goals, we compute a weighted sum of the four requests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">set_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boids</span><span class="p">,</span> <span class="n">carrot</span><span class="p">):</span>
+        <span class="n">w_avoid</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">w_center</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">w_align</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">w_love</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span> <span class="o">=</span> <span class="p">(</span><span class="n">w_center</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">boids</span><span class="p">)</span> <span class="o">+</span>
+                     <span class="n">w_avoid</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">avoid</span><span class="p">(</span><span class="n">boids</span><span class="p">,</span> <span class="n">carrot</span><span class="p">)</span> <span class="o">+</span>
+                     <span class="n">w_align</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">boids</span><span class="p">)</span> <span class="o">+</span>
+                     <span class="n">w_love</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">love</span><span class="p">(</span><span class="n">carrot</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">w_center</span></code>, <code class="docutils literal notranslate"><span class="pre">w_avoid</span></code>, and the other weights determine the importance of the acceleration requests. Usually <code class="docutils literal notranslate"><span class="pre">w_avoid</span></code> is relatively high and <code class="docutils literal notranslate"><span class="pre">w_align</span></code> is relatively low.</p>
+<p>After computing a goal for each Boid, we update their velocity and position:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span>
+</pre></div>
+</div>
+<p>The new velocity is the weighted sum of the old velocity and the goal. The parameter <code class="docutils literal notranslate"><span class="pre">mu</span></code> determines how quickly the birds can change speed and direction. Then we normalize velocity so its magnitude is 1, and orient the axis of the Boid to point in the direction it is moving.</p>
+<p>To update position, we multiply velocity by the time step, <code class="docutils literal notranslate"><span class="pre">dt</span></code>, to get the change in position. Finally, we update <code class="docutils literal notranslate"><span class="pre">axis</span></code> so the orientation of the Boid when it is drawn is aligned with its velocity.</p>
+<p>Many parameters influence flock behavior, including the radius, angle and weight for each behavior, as well as maneuverability, <code class="docutils literal notranslate"><span class="pre">mu</span></code>. These parameters determine the ability of the Boids to form and maintain a flock, and the patterns of motion and organization within the flock. For some settings, the Boids resemble a flock of birds; other settings resemble a school of fish or a cloud of flying insects.</p>
+<p>As one of the exercises at the end of this chapter, you can modify these parameters and see how they affect Boid behavior.</p>
+</section>
+<section id="emergence-and-free-will">
+<h2><span class="section-number">10.6. </span>Emergence and free will<a class="headerlink" href="#emergence-and-free-will" title="Link to this heading">#</a></h2>
+<p>Many complex systems have properties, as a whole, that their components do not:</p>
+<ul class="simple">
+<li><p>The Rule 30 cellular automaton is deterministic, and the rules that govern its evolution are completely known. Nevertheless, it generates a sequence that is statistically indistinguishable from random.</p></li>
+<li><p>The agents in Schelling’s model are not racist, but the outcome of their interactions is a high degree of segregation.</p></li>
+<li><p>Agents in Sugarscape form waves that move diagonally even though the agents cannot.</p></li>
+<li><p>Traffic jams move backward even though the cars in them are moving forward.</p></li>
+<li><p>Flocks and herds behave as if they are centrally organized even though the animals in them are making individual decisions based on local information.</p></li>
+</ul>
+<p>These examples suggest an approach to several old and challenging questions, including the problems of consciousness and free will.</p>
+<p>Free will is the ability to make choices, but if our bodies and brains are governed by deterministic physical laws, our choices are completely determined.</p>
+<p>Philosophers and scientists have proposed many possible resolutions to this apparent conflict; for example:</p>
+<ul class="simple">
+<li><p>William James proposed a two-stage model in which possible actions are generated by a random process and then selected by a deterministic process. In that case our actions are fundamentally unpredictable because the process that generates them includes a random element.</p></li>
+<li><p>David Hume suggested that our perception of making choices is an illusion; in that case, our actions are deterministic because the system that produces them is deterministic.</p></li>
+</ul>
+<p>These arguments reconcile the conflict in opposite ways, but they agree that there is a conflict: the system cannot have free will if the parts are deterministic.</p>
+<p>The complex systems in this book suggest the alternative that free will, at the level of options and decisions, is compatible with determinism at the level of neurons (or some lower level). In the same way that a traffic jam moves backward while the cars move forward, a person can have free will even though neurons don’t.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">10.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> In the traffic jam simulation, define a class, <code class="docutils literal notranslate"><span class="pre">BetterDriver</span></code>,
 that inherits from <code class="docutils literal notranslate"><span class="pre">Driver</span></code> and overrides <code class="docutils literal notranslate"><span class="pre">choose_acceleration</span></code>.
 See if you can define driving rules that do better than the basic
@@ -696,10 +896,12 @@ average speed, or a lower number of collisions.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Driver 1512.925
-BetterDriver 1238.725
 </pre></div>
 </div>
-<img alt="_images/6988ce900a0e82ba6e3f86f7eef13404708e4058ea0eefdafbc7bfe443980de1.png" src="_images/6988ce900a0e82ba6e3f86f7eef13404708e4058ea0eefdafbc7bfe443980de1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BetterDriver 1238.725
+</pre></div>
+</div>
+<img alt="_images/e384769990a3b2df78006d6a0947c84cb69e5c549151694b7d237e2c5f45ef84.png" src="_images/e384769990a3b2df78006d6a0947c84cb69e5c549151694b7d237e2c5f45ef84.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">BetterDriver</span></code> is a little better in the sense that it keeps traffic moving smoothly at medium densities. However:</p>
@@ -709,6 +911,18 @@ BetterDriver 1238.725
 </ul>
 <p>As a result, the total are under the curve is much less.</p>
 <p>See if you can write rules for the agents that maximize the area under the curve.</p>
+<p><strong>Exercise:</strong> The code for my Boid implementation is in <code class="docutils literal notranslate"><span class="pre">Boids7.py</span></code> in the repository for this book. To run it, you will need VPython, a library for 3-D graphics and animation, which you can install by running the following in a terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">vpython</span>
+</pre></div>
+</div>
+<p>Then run <code class="docutils literal notranslate"><span class="pre">Boids7.py</span></code>. It should either launch a browser or create a window in a running browser, and create an animated display showing Boids, as white cones, circling a red sphere, which is the carrot. If you click and move the mouse, you can move the carrot and see how the Boids react.</p>
+<p>Read the code to see how the parameters control Boid behaviors. Experiment with different parameters. What happens if you “turn off” one of the behaviors by setting its weight to 0?</p>
+<p>To generate more bird-like behavior, Flake suggests adding a behavior to maintain a clear line of sight; in other words, if there is another bird directly ahead, the Boid should move away laterally. What effect do you expect this rule to have on the behavior of the flock? Implement it and see.</p>
+<p><strong>Exercise:</strong> Read more about free will at <a class="reference external" href="https://thinkcomplex.com/will">https://thinkcomplex.com/will</a>. The view that free will is compatible with determinism is called <strong>compatibilism</strong>. One of the strongest challenges to compatibilism is the “consequence argument”. What is the consequence argument? What response can you give to the consequence argument based on what you have read in this book?</p>
+<p><a class="reference external" href="https://greenteapress.com/wp/think-complexity-2e/">Think Complexity, 2nd Edition</a></p>
+<p>Copyright 2016 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
 </section>
 </section>
 
@@ -748,7 +962,7 @@ BetterDriver 1238.725
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Agent Based Models</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Agent-based models</p>
       </div>
     </a>
     <a class="right-next"
@@ -776,7 +990,13 @@ BetterDriver 1238.725
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jam">10.1. Traffic jam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traffic-jams">10.1. Traffic jams</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-perturbation">10.2. Random perturbation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boids">10.3. Boids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boid-algorithm">10.4. The Boid algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitration">10.5. Arbitration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#emergence-and-free-will">10.6. Emergence and free will</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.7. Exercises</a></li>
 </ul>
   </nav></div>
 

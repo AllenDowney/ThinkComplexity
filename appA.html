@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -182,15 +182,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Complexity Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Erdos-Renyi Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Small World Graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-Free Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular automata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Scale-free networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Cellular Automatons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Game of Life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Physical modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Self-organized criticality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent Based Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Flocks, Herds, and Traffic Jams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Agent-based models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Herds, Flocks, and Traffic Jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">11. Evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Evolution of cooperation</a></li>
 </ul>
@@ -391,6 +391,28 @@ document.write(`
 <h1>Analysis of Algorithms<a class="headerlink" href="#analysis-of-algorithms" title="Link to this heading">#</a></h1>
 <p>Code examples from <a class="reference external" href="https://thinkcomplex.com">Think Complexity, 2nd edition</a>.</p>
 <p>Copyright 2017 Allen Downey, <a class="reference external" href="https://opensource.org/licenses/MIT">MIT License</a></p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/AllenDowney/ThinkComplexity/raw/v3/nb/utils.py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -635,44 +657,6 @@ document.write(`
 </div>
 <p>The last few points converge on the line with slope 2, which suggests that <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code> is quadratic.</p>
 <p><strong>Exercise:</strong>  What happens if you pop from the end of the list?  Write a function called <code class="docutils literal notranslate"><span class="pre">pop_right_list</span></code> that pops the last element instead of the first.  Use <code class="docutils literal notranslate"><span class="pre">run_timing_test</span></code> to characterize its performance.  Then use <code class="docutils literal notranslate"><span class="pre">plot_timing_test</span></code> with a few different values of <code class="docutils literal notranslate"><span class="pre">exp</span></code> to find the slope that best matches the data.  What conclusion can you draw about the order of growth for popping an element from the end of a list?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">pop_right_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">t</span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">t</span>
-
-<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">pop_right_list</span><span class="p">)</span>
-<span class="n">plot_timing_test</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;pop_right_list&#39;</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.0
-4096 0.0
-8192 0.00999999999999801
-16384 0.0
-32768 0.00999999999999801
-65536 0.020000000000003126
-131072 0.00999999999999801
-262144 0.020000000000003126
-524288 0.04999999999999716
-1048576 0.10000000000000142
-2097152 0.17999999999999972
-4194304 0.389999999999997
-8388608 0.7700000000000031
-16777216 1.4999999999999964
-</pre></div>
-</div>
-<img alt="_images/0cdc4e6929a8efb09694e49eee1c761558a6a9dd6873e29c9b857cbc9ff2e8c9.png" src="_images/0cdc4e6929a8efb09694e49eee1c761558a6a9dd6873e29c9b857cbc9ff2e8c9.png" />
-</div>
-</div>
 </section>
 <section id="sorting">
 <h2>Sorting<a class="headerlink" href="#sorting" title="Link to this heading">#</a></h2>
@@ -725,7 +709,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">search_sorted_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> 
+        <span class="n">index</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span> 
     <span class="k">return</span> <span class="n">index</span>
 
 <span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">search_sorted_list</span><span class="p">,</span> <span class="n">max_n</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">24</span><span class="p">)</span>
@@ -770,93 +754,6 @@ document.write(`
 <section id="dictionary-methods">
 <h2>Dictionary methods<a class="headerlink" href="#dictionary-methods" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> Write methods called <code class="docutils literal notranslate"><span class="pre">add_dict</span></code> and <code class="docutils literal notranslate"><span class="pre">lookup_dict</span></code>, based on <code class="docutils literal notranslate"><span class="pre">append_list</span></code> and <code class="docutils literal notranslate"><span class="pre">pop_left_list</span></code>.  What is the order of growth for adding and looking up elements in a dictionary?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">add_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">d</span>
-
-<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">add_dict</span><span class="p">)</span>
-<span class="n">plot_timing_test</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;add_dict&#39;</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.0
-4096 0.0
-8192 0.0
-16384 0.010000000000005116
-32768 0.0
-65536 0.0
-131072 0.00999999999999801
-262144 0.01999999999999602
-524288 0.03999999999999915
-1048576 0.0800000000000054
-2097152 0.1799999999999926
-4194304 0.3400000000000105
-8388608 0.6799999999999926
-16777216 1.3699999999999974
-</pre></div>
-</div>
-<img alt="_images/3de5b041b7da0013c624c2aafc7937e62224c9eb5fddc589f74aac7b25232b78.png" src="_images/3de5b041b7da0013c624c2aafc7937e62224c9eb5fddc589f74aac7b25232b78.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">lookup_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">d</span>
-
-<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">)</span>
-<span class="n">plot_timing_test</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;lookup_dict&#39;</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.0
-4096 0.0
-8192 0.0
-16384 0.00999999999999801
-32768 0.0
-65536 0.00999999999999801
-131072 0.00999999999999801
-262144 0.030000000000001137
-524288 0.07000000000000028
-1048576 0.13000000000000256
-2097152 0.28999999999999915
-4194304 0.5700000000000003
-8388608 1.1400000000000006
-</pre></div>
-</div>
-<img alt="_images/f293e3c0e969249a1cd577c22ea140e779ad30385f1b901353d84e18c0ae914c.png" src="_images/f293e3c0e969249a1cd577c22ea140e779ad30385f1b901353d84e18c0ae914c.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-
-<span class="c1"># Adding `n` elements to a dictionary takes linear time, </span>
-<span class="c1"># so adding a single element is constant time.</span>
-
-<span class="c1"># Same with looking up `n` elements.</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="implementing-a-hash-table">
 <h2>Implementing a hash table<a class="headerlink" href="#implementing-a-hash-table" title="Link to this heading">#</a></h2>
@@ -1116,7 +1013,7 @@ document.write(`
 </div>
 </div>
 <p>It might be converging to the line with slope 2, but it’s hard to say anything conclusive without running larger problem sizes.</p>
-<p><strong>Exercise:</strong> Go back and run <code class="docutils literal notranslate"><span class="pre">run_timing_test</span></code> with a larger value of <code class="docutils literal notranslate"><span class="pre">max_time</span></code> and see if the run time converges to the line with slope 2.  Just be careful not to make <code class="docutils literal notranslate"><span class="pre">max_time</span></code> to big.</p>
+<p><strong>Exercise:</strong> Go back and run <code class="docutils literal notranslate"><span class="pre">run_timing_test</span></code> with a larger value of <code class="docutils literal notranslate"><span class="pre">max_time</span></code> and see if the run time converges to the line with slope 2.  Just be careful not to make <code class="docutils literal notranslate"><span class="pre">max_time</span></code> too big.</p>
 <p>Now we’re ready for a complete implementation of a hash map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1199,39 +1096,6 @@ document.write(`
 </div>
 <p><strong>Exercise:</strong> Write a function called <code class="docutils literal notranslate"><span class="pre">lookup_hash_map</span></code>, based on <code class="docutils literal notranslate"><span class="pre">lookup_better_map</span></code>, and characterize its run time.</p>
 <p>If things go according to plan, the results should converge to a line with slope 1.  Which means that <code class="docutils literal notranslate"><span class="pre">n</span></code> lookups is linear, which means that each lookup is constant time.  Which is pretty much magic.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
-
-<span class="k">def</span> <span class="nf">lookup_hash_map</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">HashMap</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">d</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span>
-
-<span class="n">ns</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">run_timing_test</span><span class="p">(</span><span class="n">lookup_hash_map</span><span class="p">)</span>
-<span class="n">plot_timing_test</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;lookup_hash_map&#39;</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024 0.0
-2048 0.09000000000000341
-4096 0.009999999999990905
-8192 0.01999999999999602
-16384 0.1700000000000017
-32768 0.21999999999999886
-65536 0.5600000000000023
-131072 0.8499999999999943
-262144 1.75
-</pre></div>
-</div>
-<img alt="_images/f80ea5c231d1a05239b66bef542a070e4b0ad5c82e01d80b99d16fe90472f588.png" src="_images/f80ea5c231d1a05239b66bef542a070e4b0ad5c82e01d80b99d16fe90472f588.png" />
-</div>
-</div>
 </section>
 </section>
 
