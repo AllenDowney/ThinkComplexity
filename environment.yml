@@ -9,6 +9,7 @@ dependencies:
   - scipy
   - jupyter
   - networkx
+  - pytables
   - pip
   - pip:
     - empiricaldist
