@@ -47,8 +47,12 @@ def preprocess(tex):
     tex = re.sub(r'\\index' + BRACES + r'\n?', '', tex)
     # macros defined partway through book.tex: \V and \E for the number of
     # nodes and edges
+    tex = re.sub(r'\\newcommand\{\\[VE]\}\{[nm]\}\n?', '', tex)
     tex = re.sub(r'\\V(?![A-Za-z])', 'n', tex)
     tex = re.sub(r'\\E(?![A-Za-z])', 'm', tex)
+    # pandoc can't parse a tabular inside \centerline{...}
+    tex = re.sub(r'\\centerline\{\s*(\\begin\{tabular\}.*?\\end\{tabular\})\s*\}', r'\1',
+                 tex, flags=re.S)
     # LaTeX quotes: ``like this'' (or ``like this" in places)
     tex = tex.replace("``", '"').replace("''", '"')
     tex = re.sub(r'\\py\{([^}]*)\}',
