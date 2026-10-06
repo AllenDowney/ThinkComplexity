@@ -4,3 +4,5 @@ flake8
 nbformat
 nbmake
 pytest
+jupyter-book<2
+ghp-import

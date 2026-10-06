@@ -2,6 +2,9 @@
 title: Think Complexity
 author: Allen B. Downey
 
+# build.sh copies in every notebook from soln/; only build the ones in _toc.yml
+only_build_toc_files: true
+
 latex:
   latex_documents:
     targetname: book.tex

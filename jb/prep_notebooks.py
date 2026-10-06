@@ -30,14 +30,14 @@ def process_cell(cell):
 def process_notebook(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
 
-    # if the third element of ntbk.cells defines download,
-    # add a hide-cell tag to it
-    third = ntbk.cells[2]
-    if third.source.startswith(r'from os.path import basename, exists'):
-        tags = third.metadata.get('tags', [])
-        if 'hide-cell' not in tags:
-            tags.append('hide-cell')
-        third.metadata['tags'] = tags
+    # add a hide-cell tag to the cell that defines download,
+    # wherever it is in the setup cells
+    for cell in ntbk.cells:
+        if cell.source.startswith(r'from os.path import basename, exists'):
+            tags = cell.metadata.get('tags', [])
+            if 'hide-cell' not in tags:
+                tags.append('hide-cell')
+            cell.metadata['tags'] = tags
 
     # if the second element of ntbk.cells loads nb_black, remove it
     second = ntbk.cells[1]
@@ -51,7 +51,7 @@ def process_notebook(path):
 
 
 # Collect a list of the notebooks in the content folder
-paths = glob("chap*.ipynb")
+paths = glob("*.ipynb")
 
 for path in sorted(paths):
     print('prepping', path)

@@ -26,7 +26,6 @@ parts:
     - file: quiz03
     - file: quiz04
     - file: quiz05
-    - file: quiz06
 - caption: Examples
   chapters:
     - file: appA
