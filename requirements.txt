@@ -6,4 +6,3 @@ scipy
 jupyter
 networkx
 empiricaldist
-tables
