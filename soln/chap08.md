@@ -96,7 +96,7 @@ from scipy.signal import correlate2d
 from Cell2D import Cell2D, draw_array
 
 class SandPile(Cell2D):
-    """Diffusion Cellular Automaton."""
+    """Sand pile cellular automaton."""
 
     kernel = np.array([[0, 1, 0],
                        [1,-4, 1],
@@ -444,7 +444,7 @@ def count_cells(a):
     
     a: NumPy array
     
-    returns: list of (i, i**2, cell count) tuples
+    returns: array with three rows: i, i**2, and cell count
     """
     n, m = a.shape
     end = min(n, m)
@@ -708,7 +708,7 @@ def plot_cdf(series, label, xlabel):
     plt.figure(figsize=(10, 5))
     plt.subplot(1, 2, 1)
 
-    cdf = Cdf.from_seq(S)
+    cdf = Cdf.from_seq(series)
     cdf.step(label=label)
     decorate(xlabel=xlabel,
              ylabel='Cdf',
@@ -725,7 +725,7 @@ def plot_cdf(series, label, xlabel):
 ```python
 # Solution
 
-plot_cdf(S, 'S', xlabel='Avalance size')
+plot_cdf(S, 'S', xlabel='Avalanche size')
 ```
 
 ```python
@@ -733,7 +733,7 @@ plot_cdf(S, 'S', xlabel='Avalance size')
 
 # And here are the results for `T`.
 
-plot_cdf(T, 'T', xlabel='Avalance duration')
+plot_cdf(T, 'T', xlabel='Avalanche duration')
 ```
 
 ```python

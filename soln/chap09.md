@@ -261,7 +261,7 @@ Here's `step`:
         return np.nanmean(frac_same)
 ```
 
-Similarly, `empty_locs` is a list that contains the coordinates of the empty cells.
+`empty_locs` is a list that contains the coordinates of the empty cells.
 
 Now we get to the core of the simulation. We loop through the unhappy agents and move them. `i` is the index of a random empty cell; `dest` is a tuple containing the coordinates of the empty cell.
 
@@ -946,15 +946,14 @@ You should be able to implement this model by inheriting from
 
 class BigSort(Schelling):
     
-    def __init__(self, n, m=None, num_comps=2):
+    def __init__(self, n, num_comps=2):
         """Initializes the attributes.
 
         n: number of rows
-        m: number of columns
         num_comps: number of houses a mover compares
         """
         self.num_comps = num_comps
-        super().__init__(n, m)
+        super().__init__(n, p=None)
 
     def step(self, prob_move=0.1):
         """Executes one time step.
@@ -1020,8 +1019,6 @@ grid = BigSort(n=10)
 grid.draw()
 grid.segregation()
 ```
-
-And a test of the `step` method
 
 ```python
 # Solution
@@ -1120,7 +1117,7 @@ class EvoSugarscape(Sugarscape):
 ```python
 # Solution
 
-# I'll start with the original model, which does not add agents, and `n=300`
+# I'll start with the original model, which does not add agents, and `num_agents=300`
 
 np.random.seed(17)
 
