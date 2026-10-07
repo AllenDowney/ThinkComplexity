@@ -19,7 +19,7 @@ The second edition of *Think Complexity* is available from [Bookshop.org](https:
 
 In the previous chapter we saw an example of a system with a critical point and we explored one of the common properties of critical systems, fractal geometry.
 
-In this chapter, we explore two other properties of critical systems: heavy-tailed distributions, which we saw in Chapter 4 and pink noise, which I'll explain in this chapter.
+In this chapter, we explore two other properties of critical systems: heavy-tailed distributions, which we saw in Chapter 4, and pink noise, which I'll explain in this chapter.
 
 These properties are interesting in part because they appear frequently in nature; that is, many natural systems produce fractal-like geometry, heavy-tailed distributions, and pink noise.
 
@@ -576,7 +576,7 @@ Other kinds of noise have different relationships between frequency and power. I
 
 We can use this relationship to derive a test for pink noise. Taking the log of both sides yields $$\log P(f) = -\beta \log f$$ So if we plot $P(f)$ versus $f$ on a log-log scale, we expect a straight line with slope $-\beta$.
 
-What does this have to do with the sand pile model? Suppose that every time a cell topples, it makes a sound. If we record a sand pile model while its running, what would it sound like? In the next section, we'll simulate the sound of the sand pile model and see if it is pink noise.
+What does this have to do with the sand pile model? Suppose that every time a cell topples, it makes a sound. If we record a sand pile model while it's running, what would it sound like? In the next section, we'll simulate the sound of the sand pile model and see if it is pink noise.
 
 ## The sound of sand
 
@@ -681,7 +681,7 @@ These conclusions are not comforting. Among other things, they imply that large 
 
 In a sand pile model, what is the cause of a large avalanche? Philosophers sometimes distinguish the **proximate** cause, which is most immediately responsible, from the **ultimate** cause, which is considered some deeper kind of explanation (see <https://thinkcomplex.com/cause>).
 
-In the sand pile model, the proximate cause of an avalanche is a grain of sand, but the grain that causes a large avalanche is identical to every other grain, so it offers no special explanation. The ultimate cause of a large avalanche is the structure and dynamics of the systems as a whole: large avalanches occur because they are a property of the system.
+In the sand pile model, the proximate cause of an avalanche is a grain of sand, but the grain that causes a large avalanche is identical to every other grain, so it offers no special explanation. The ultimate cause of a large avalanche is the structure and dynamics of the system as a whole: large avalanches occur because they are a property of the system.
 
 Many social phenomena, including wars, revolutions, epidemics, inventions, and terrorist attacks, are characterized by heavy-tailed distributions. If these distributions are prevalent because social systems are SOC, major historical events may be fundamentally unpredictable and unexplainable.
 

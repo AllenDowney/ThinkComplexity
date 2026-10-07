@@ -191,9 +191,9 @@ Depending on the starting orientation, gliders can move along any of the four di
 
 People have spent embarrassing amounts of time finding and naming these patterns. If you search the web, you will find many collections.
 
-**Exercise:** If you start GoL from a random configuration, it usually runs chaotically for a while and then settles into stable patterns that include blinkers, blocks, and beehives, ships, boats, and loaves.
+**Exercise:** If you start GoL from a random configuration, it usually runs chaotically for a while and then settles into stable patterns that include blinkers, blocks, beehives, ships, boats, and loaves.
 
-For a list of common "natually" occurring patterns, see Achim Flammenkamp, "[Most seen natural occurring ash objects in Game of Life](http://wwwhomes.uni-bielefeld.de/achim/freq_top_life.html)",
+For a list of common "naturally" occurring patterns, see Achim Flammenkamp, "[Most seen natural occurring ash objects in Game of Life](http://wwwhomes.uni-bielefeld.de/achim/freq_top_life.html)".
 
 Start GoL in a random state and run it until it stabilizes (try 1000 steps).
 What stable patterns can you identify?

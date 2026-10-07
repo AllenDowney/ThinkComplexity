@@ -243,7 +243,7 @@ def degrees(G):
     return [G.degree(u) for u in G]
 ```
 
-The mean degree in model is 44, which is close to the mean degree in the dataset, 43.7.
+The mean degree in the model is 44, which is close to the mean degree in the dataset, 43.7.
 
 ```python
 np.mean(degrees(fb)), np.mean(degrees(ws))
@@ -414,7 +414,7 @@ def barabasi_albert_graph(n, k, seed=None):
     
     n: number of nodes
     k: number of edges for each new node
-    seed: random seen
+    seed: random seed
     """
     if seed is not None:
         random.seed(seed)
@@ -723,7 +723,7 @@ Choosing among competing models is the topic of Thomas Kuhn's essay, "Objectivit
 
 What criteria does Kuhn propose for choosing among competing models? Do these criteria influence your opinion about the WS and BA models? Are there other criteria you think should be considered?
 
-**Exercise:** Data files from the Barabasi and Albert paper are available from
+**Exercise:** Data files from the Barabási and Albert paper are available from
 [this web page](https://web.archive.org/web/20150910025718/http://www3.nd.edu/~networks/resources.htm).
 
 Their actor collaboration data is included in the repository for this book in a file named

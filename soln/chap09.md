@@ -641,7 +641,7 @@ def make_locs(n, m):
 make_locs(2, 3)
 ```
 
-`make_visible_locs` takes the range of an agents vision and returns an array where each row is the coordinate of a visible cell.
+`make_visible_locs` takes the range of an agent's vision and returns an array where each row is the coordinate of a visible cell.
 
 The cells are at increasing distances.  The cells at each distance are shuffled. 
 
@@ -774,7 +774,7 @@ The model also demonstrates a kind of wealth inequality, with some agents accumu
 
 However, if we give the agents finite lifespans, the model produces a stationary distribution of wealth. Then we can run experiments to see what effect the parameters and rules have on this distribution.
 
-In this version of the model, agents have an age that gets incremented each time step, and a random lifespan chosen from a uniform distribution between 60 to 100. If an agent's age exceeds its lifespan, it dies.
+In this version of the model, agents have an age that gets incremented each time step, and a random lifespan chosen from a uniform distribution between 60 and 100. If an agent's age exceeds its lifespan, it dies.
 
 When an agent dies, from starvation or old age, it is replaced by a new agent with random attributes, so the number of agents is constant.
 
@@ -892,7 +892,7 @@ The examples in this chapter demonstrate one of the most important ideas in comp
 
 To clarify what emergence is, it helps to consider what it isn't. For example, a brick wall is hard because bricks and mortar are hard, so that's not an emergent property. As another example, some rigid structures are built from flexible components, so that seems like a kind of emergence. But it is at best a weak kind, because structural properties follow from well understood laws of mechanics.
 
-In contrast, the segregation we see in Schelling's model is an emergent property because it is not caused by racist agents. Even when the agents are only mildly xenophobic, the outcome of the system is substantially different from the intention of the agent's decisions.
+In contrast, the segregation we see in Schelling's model is an emergent property because it is not caused by racist agents. Even when the agents are only mildly xenophobic, the outcome of the system is substantially different from the intention of the agents' decisions.
 
 The distribution of wealth in Sugarscape might be an emergent property, but it is a weak example because we could reasonably predict it based on the distributions of vision, metabolism, and lifespan. The wave behavior we saw in the last example might be a stronger example, since the wave displays a capability — diagonal movement — that the agents do not have.
 
@@ -1174,7 +1174,7 @@ env.loop(300)
 # Part of the reason for the increase is that the fitness 
 # of the agents increases, which increases the carrying capacity.
 
-# But it is also posssible that the initial die-off overshoots 
+# But it is also possible that the initial die-off overshoots 
 # the actual carrying capacity.
 
 plt.plot(env.agent_count_seq)

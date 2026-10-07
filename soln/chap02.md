@@ -340,7 +340,7 @@ The `Graph` class provides a method called `neighbors` that returns a list of ne
 list(complete.neighbors(0))
 ```
 
-Suppose we start at node $s$. We can mark $s$ as "seen" and mark its neighbors. Then we mark the neighbor's neighbors, and their neighbors, and so on, until we can't reach any more nodes. If all nodes are seen, the graph is connected.
+Suppose we start at node $s$. We can mark $s$ as "seen" and mark its neighbors. Then we mark the neighbors' neighbors, and their neighbors, and so on, until we can't reach any more nodes. If all nodes are seen, the graph is connected.
 
 Here's what that looks like in Python:
 
@@ -356,7 +356,7 @@ def reachable_nodes(G, start):
     return seen
 ```
 
-`reachable_nodes` takes a `Graph` and a starting node, ` start`, and returns the set of nodes that can be reached from ` start`.
+`reachable_nodes` takes a `Graph` and a starting node, `start`, and returns the set of nodes that can be reached from `start`.
 
 Initially the set, `seen`, is empty, and we create a list called `stack` that keeps track of nodes we have discovered but not yet processed. Initially the stack contains a single node, `start`.
 
@@ -457,7 +457,7 @@ def flip(p):
     return np.random.random() < p
 ```
 
-This is the first example we're seen that uses NumPy. Following convention, I import `numpy` as `np`. NumPy provides a module named `random`, which provides a method named `random`, which returns a number between 0 and 1, uniformly distributed.
+This is the first example we've seen that uses NumPy. Following convention, I import `numpy` as `np`. NumPy provides a module named `random`, which provides a method named `random`, which returns a number between 0 and 1, uniformly distributed.
 
 So `flip` returns `True` with the given probability, `p`, and `False` with the complementary probability, `1-p`.
 

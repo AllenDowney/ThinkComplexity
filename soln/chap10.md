@@ -17,7 +17,7 @@ The second edition of *Think Complexity* is available from [Bookshop.org](https:
 
 # Herds, Flocks, and Traffic Jams
 
-The agent-based models in the previous chapter are based on grids: the agents occupy discrete locations in two-dimensional space. In this chapter we consider agents that move is continuous space, including simulated cars on a one-dimensional highway and simulated birds in three-dimensional space.
+The agent-based models in the previous chapter are based on grids: the agents occupy discrete locations in two-dimensional space. In this chapter we consider agents that move in continuous space, including simulated cars on a one-dimensional highway and simulated birds in three-dimensional space.
 
 
 [Click here to run this notebook on Colab](https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap10.ipynb).
@@ -580,7 +580,7 @@ decorate(xlabel='Number of cars',
 
 * At low densities, it is substantially worse.
 
-As a result, the total are under the curve is much less.
+As a result, the total area under the curve is much less.
 
 See if you can write rules for the agents that maximize the area under the curve.
 

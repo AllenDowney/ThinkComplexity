@@ -762,7 +762,7 @@ def shortest_path_dijkstra(G, source):
     G: graph
     source: node to start at
     
-    returns: make from node to path length
+    returns: map from node to path length
     """
     dist = {source: 0}
     queue = deque([source])

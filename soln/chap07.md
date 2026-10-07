@@ -810,7 +810,7 @@ class Wrap1D(Cell1D):
         row[0], row[-1] = row[-2], row[1]   
 ```
 
-Here's a modified version of `count_cells` that uses `Wrap1D`
+Here's a modified version of `count_cells` that uses `Wrap1D`.
 
 ```python
 def count_cells(rule, n=256):

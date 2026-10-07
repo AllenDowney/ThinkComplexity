@@ -23,7 +23,7 @@ To demonstrate the difference, I'll start with an example of classical science: 
 
 Most people find this kind of explanation satisfying. It includes a mathematical derivation — so it has some of the rigor of a proof — and it explains a specific observation, elliptical orbits, by appealing to a general principle, gravitation.
 
-Let me contrast that with a different kind of explanation. Suppose you move to a city like Detroit that is racially segregated, and you want to know why it's like that. If you do some research, you might find a paper by Thomas Schelling called "Dynamic Models of Segregation", which proposes a simple model of racial segregation:
+Let me contrast that with a different kind of explanation. Suppose you move to a city like Detroit that is racially segregated, and you want to know why it's like that. If you do some research, you might find a paper by Thomas Schelling called "Dynamic Models of Segregation", which proposes a simple model of racial segregation.
 
 Here is my description of the model, from Chapter 9:
 

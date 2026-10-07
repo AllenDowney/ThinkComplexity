@@ -21,7 +21,7 @@ In this final chapter, I take on two questions, one from biology and one from ph
 
 -   In biology, the "problem of altruism" is the apparent conflict between natural selection, which suggests that animals live in a state of constant competition, and altruism, which is the tendency of many animals to help other animals, even to their own detriment. See <https://thinkcomplex.com/altruism>.
 
--   In moral philosophy, the question of human nature asks whether humans are fundamentally good, or evil, or blank states shaped by their environment. See <https://thinkcomplex.com/nature>.
+-   In moral philosophy, the question of human nature asks whether humans are fundamentally good, or evil, or blank slates shaped by their environment. See <https://thinkcomplex.com/nature>.
 
 The tools I use to address these questions are agent-based simulation (again) and game theory, which is a set of abstract models meant to describe ways agents interact. Specifically, the game we will consider is the Prisoner's Dilemma.
 
@@ -120,7 +120,7 @@ In Axelrod's tournaments, a simple strategy that did surprisingly well was calle
 For more information about these tournaments, and an explanation of why TFT does so well, see this video: <https://thinkcomplex.com/pdvid2>.
 
 
-Looking at the strategies that did well in these tournaments, Alexrod identified the characteristics they tended to share:
+Looking at the strategies that did well in these tournaments, Axelrod identified the characteristics they tended to share:
 
 -   Nice: The strategies that do well cooperate during the first round, and generally cooperate as often as they defect in subsequent rounds.
 
@@ -562,7 +562,7 @@ We need a function to map from points per round (0 to 5) to probability of survi
 
 ```python
 def logistic(x, A=0, B=1, C=1, M=0, K=1, Q=1, nu=1):
-    """Computes the generalize logistic function.
+    """Computes the generalized logistic function.
     
     A: controls the lower bound
     B: controls the steepness of the transition 
@@ -678,7 +678,7 @@ class Opening(Instrument):
         self.metrics.append(metric)
 ```
 
-`Retaliating` compares the number of elements in all genomes where an agent defects after the opponent defects (elements 2, 4, and 6) with the number of places where an agents defects after the opponent cooperates.
+`Retaliating` compares the number of elements in all genomes where an agent defects after the opponent defects (elements 2, 4, and 6) with the number of places where an agent defects after the opponent cooperates.
 
 ```python
 class Retaliating(Instrument):
@@ -843,7 +843,7 @@ The simulations in this chapter suggest:
 
 -   As a result, the average level of niceness oscillates, but it is generally low, and the average level of fitness is about halfway between a dystopia of defection and a utopia of cooperation.
 
--   TFT, which was a successful strategy in Alexrod's tournaments, does not seem to be a specially optimal strategy in an evolving population. In fact, there is probably no stable optimal strategy.
+-   TFT, which was a successful strategy in Axelrod's tournaments, does not seem to be a specially optimal strategy in an evolving population. In fact, there is probably no stable optimal strategy.
 
 -   Some degree of retaliation may be adaptive, but it might not be necessary for all agents to retaliate. If there is enough retaliation in the population as a whole, that might be enough to prevent invasion by defectors. (And that introduces a whole new topic in game theory, the free-rider problem; see <https://thinkcomplex.com/rider>.)
 
@@ -864,7 +864,7 @@ So this model, by itself, does not explain how altruism could evolve. That doesn
 
 4.  The function I chose for `prob_survival` varies from 0.7 to 0.9, so the least fit agent, with `p=0.7`, lives for 3.33 time steps on average, and the most fit agent lives for 10 time steps. What happens if you make the degree of differential survival more or less "aggressive"?
 
-5.  I chose `num_rounds=6` so that each element of the genome has roughly the same impact on the outcome of a match. But that is substantially shorter than what Alexrod used in his tournaments. What happens if you increase `num_rounds`? Note: if you explore the effect of this parameter, you might want to modify `Niceness` to measure the niceness of the last 4 elements of the genome, which will be under more selective pressure as `num_rounds` increases.
+5.  I chose `num_rounds=6` so that each element of the genome has roughly the same impact on the outcome of a match. But that is substantially shorter than what Axelrod used in his tournaments. What happens if you increase `num_rounds`? Note: if you explore the effect of this parameter, you might want to modify `Niceness` to measure the niceness of the last 4 elements of the genome, which will be under more selective pressure as `num_rounds` increases.
 
 6.  My implementation has differential survival but not differential reproduction. What happens if you add differential reproduction?
 
