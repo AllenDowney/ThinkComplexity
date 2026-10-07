@@ -315,7 +315,7 @@ In the initial configuration, the average fraction of similar neighbors is about
 grid.segregation()
 ```
 
-About 74%!
+About 75%!
 
 Remember that when `p=0.3` the agents would be happy if 3 of 8 neighbors were their own color, but they end up living in neighborhoods where 6 or 7 of their neighbors are their own color, typically.
 
