@@ -535,8 +535,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63644723, 0.5426304 , 0.66793792]),
- array([0.38478016, 0.20676162, 0.52461637]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.08165061, 0.73847146, 0.10521197]),
+ array([0.55907311, 0.13084348, 0.75675081]))
 </pre></div>
 </div>
 </div>
@@ -550,7 +550,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 0, 0], dtype=int8)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 0], dtype=int8)
 </pre></div>
 </div>
 </div>
@@ -563,7 +563,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63644723, 0.20676162, 0.52461637]), np.float64(0.4559417411663927))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.55907311, 0.73847146, 0.75675081]), np.float64(0.6847651304341351))
 </pre></div>
 </div>
 </div>
@@ -576,7 +576,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 0, 0], dtype=int8), np.float64(0.4559417411663927))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 0], dtype=int8), np.float64(0.6847651304341351))
 </pre></div>
 </div>
 </div>
@@ -595,7 +595,7 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an agent at the given location.</span>
 <span class="sd">        </span>
 <span class="sd">        loc: array of N 0s and 1s</span>
-<span class="sd">        fit_land: reference to an fit_land</span>
+<span class="sd">        fit_land: reference to a FitnessLandscape</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fit_land</span> <span class="o">=</span> <span class="n">fit_land</span>
@@ -622,7 +622,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 1], dtype=int8), np.float64(0.41982656829718873))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 1], dtype=int8), np.float64(0.46758551558176203))
 </pre></div>
 </div>
 </div>
@@ -720,7 +720,7 @@ document.write(`
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">get_fitnesses</span></code> returns an array containing the fitness of each agent.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">choose_dead</span></code> decides which agents die during this time step, and returns an array that contains the indices of the dead agents.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">choose_replacements</span></code> decides which agents reproduce during this time step, invokes <code class="docutils literal notranslate"><span class="pre">copy</span></code> on each one, and returns an array of new <code class="docutils literal notranslate"><span class="pre">Agent</span></code> objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">choose_replacements</span></code> decides which agents reproduce during this time step, invokes <code class="docutils literal notranslate"><span class="pre">copy</span></code> on each one, and returns a list of new <code class="docutils literal notranslate"><span class="pre">Agent</span></code> objects.</p></li>
 </ul>
 <p>In this version of the simulation, the number of new agents during each time step equals the number of dead agents, so the number of live agents is constant.</p>
 </section>
@@ -805,14 +805,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0, 0) 0.46551132162367853
-(0, 0, 1) 0.3854556257665745
-(0, 1, 0) 0.6636981000632827
-(0, 1, 1) 0.5836424042061786
-(1, 0, 0) 0.740640181469448
-(1, 0, 1) 0.6605844856123441
-(1, 1, 0) 0.9388269599090521
-(1, 1, 1) 0.8587712640519481
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0, 0) 0.6971375912158907
+(0, 0, 1) 0.5904773583585717
+(0, 1, 0) 0.5824530059507769
+(0, 1, 1) 0.4757927730934579
+(1, 0, 0) 0.8392345909763529
+(1, 0, 1) 0.7325743581190339
+(1, 1, 0) 0.724550005711239
+(1, 1, 1) 0.61788977285392
 </pre></div>
 </div>
 </div>
@@ -1363,12 +1363,13 @@ document.write(`
     <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean distance&#39;</span>
         
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">fit_land</span><span class="o">.</span><span class="n">N</span>
-        <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="c1"># all pairs of distinct agents</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">agents</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i1</span><span class="p">],</span> <span class="n">sim</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
         
-        <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a1</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">a2</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
-                     <span class="k">for</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">in</span> <span class="n">agents</span> <span class="k">if</span> <span class="n">a1</span> <span class="o">!=</span> <span class="n">a2</span><span class="p">]</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">sim</span><span class="o">.</span><span class="n">fit_land</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a1</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">a2</span><span class="o">.</span><span class="n">loc</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span>
         
         <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
@@ -1396,7 +1397,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap11-5
 </pre></div>
 </div>
-<img alt="_images/05168049d2e7d0befe0ff71dd930602c0f0d66827ddee20f1a2f6b5b39d5715a.png" src="_images/05168049d2e7d0befe0ff71dd930602c0f0d66827ddee20f1a2f6b5b39d5715a.png" />
+<img alt="_images/f1c407a85ca3038fbc49880175917cf9a0f09d0d813ca2f61453027417eb60a5.png" src="_images/f1c407a85ca3038fbc49880175917cf9a0f09d0d813ca2f61453027417eb60a5.png" />
 </div>
 </div>
 <p>Because we start with identical mutants, the initial distances are 0. As mutations occur, mean distance increases, reaching a maximum while the population migrates across the landscape.</p>
@@ -1408,7 +1409,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7944223107569721)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7635003420660791)
 </pre></div>
 </div>
 </div>
@@ -1500,7 +1501,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/615ae41a5b7a2488977343b0f4b3641c0954c1d0ee8b9da567e8960301227b79.png" src="_images/615ae41a5b7a2488977343b0f4b3641c0954c1d0ee8b9da567e8960301227b79.png" />
+<img alt="_images/3d45da02b802307ae46b94cc5fe43e454be7795f9f0b02608d7da2256c5ded68.png" src="_images/3d45da02b802307ae46b94cc5fe43e454be7795f9f0b02608d7da2256c5ded68.png" />
 </div>
 </div>
 <p>Once the population reaches steady state, it forms a new cluster.</p>

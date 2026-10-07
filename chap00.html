@@ -370,6 +370,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new-in-the-third-edition">What’s new in the third edition?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>
@@ -417,7 +418,14 @@ document.write(`
 <p>For the second edition, I replaced some of my own code with standard libraries like NumPy and NetworkX. The result is more concise and more efficient, and it gives readers a chance to learn these libraries.</p>
 <p>Also, the Jupyter notebooks are new.</p>
 <p>Finally, all supporting software has been updated to Python 3.</p>
-<p>In this online version, the notebooks are the chapters: each one contains the text of the chapter along with the code that produces its results. There are two versions of each notebook, one with solutions to the exercises and one with the solutions left out. The code has also been updated to work with current versions of the libraries, and it uses <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> to represent distributions, where the printed book uses <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> and <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>.</p>
+</section>
+<section id="whats-new-in-the-third-edition">
+<h2>What’s new in the third edition?<a class="headerlink" href="#whats-new-in-the-third-edition" title="Link to this heading">#</a></h2>
+<p>The third edition of <em>Think Complexity</em> is online only. The second edition is available in print, and its online version, with the notebooks that go with it, is at <a class="github reference external" href="https://github.com/AllenDowney/ThinkComplexity2">AllenDowney/ThinkComplexity2</a>.</p>
+<p>In this edition, the notebooks are the chapters: each one contains the text of the chapter along with the code that produces its results, so you can read the book online, or run it on Colab or on your computer. There are two versions of each notebook, one with solutions to the exercises and one with the solutions left out.</p>
+<p>The code has been updated to work with current versions of NumPy, SciPy, NetworkX, and Matplotlib, and it uses <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> to represent distributions, where the second edition uses <code class="docutils literal notranslate"><span class="pre">thinkstats2</span></code> and <code class="docutils literal notranslate"><span class="pre">thinkplot</span></code>. Where the text quotes results, like statistics and parameters estimated from simulations, I have checked them against the current code and updated them where they changed.</p>
+<p>The most important correction is in Chapter 12. In the second edition, the simulation of the evolution of cooperation had a bug that caused the fittest agents to be the most likely to die (reported by &#64;gwtaylor and confirmed by &#64;Captain-Blackstone). With the bug fixed, cooperation appears from time to time but doesn’t last, so the results and conclusions of the chapter are revised. Notes in the chapter explain how the second edition differs.</p>
+<p>I have also fixed smaller errors and many typos, most of them reported by readers on GitHub, including &#64;gwtaylor, &#64;alexalekseyenko, &#64;reflectionalist, &#64;mark-summerfield, &#64;ahmedhindi, and &#64;link2xt. Thanks to all of them!</p>
 </section>
 <section id="using-the-code">
 <h2>Using the code<a class="headerlink" href="#using-the-code" title="Link to this heading">#</a></h2>
@@ -536,6 +544,7 @@ $ conda activate ThinkComplexity
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-from-the-first-edition">Changes from the first edition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-new-in-the-third-edition">What’s new in the third edition?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-code">Using the code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributor-list">Contributor List</a></li>
 </ul>

@@ -964,7 +964,7 @@ Wall time: 1.04 s
 <span class="sd">    k: degree of each node</span>
 <span class="sd">    iters: number of times to run for each `p`</span>
 <span class="sd">    </span>
-<span class="sd">    returns:</span>
+<span class="sd">    returns: array with one row for each p and columns for L and C</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
@@ -978,8 +978,8 @@ Wall time: 1.04 s
 </div>
 </div>
 </div>
-<p>For each value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, we generate 10 random graphs and average the results. Since the return value from <code class="docutils literal notranslate"><span class="pre">run_one_graph</span></code> is a pair, <code class="docutils literal notranslate"><span class="pre">t</span></code> is a list of pairs. When we convert it to an array, we get one row for each iteration and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>. Calling <code class="docutils literal notranslate"><span class="pre">mean</span></code> with the option <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> computes the mean of each column; the result is an array with one row and two columns.</p>
-<p>When the loop exits, <code class="docutils literal notranslate"><span class="pre">means</span></code> is a list of pairs, which we convert to a NumPy array with one row for each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>For each value of <code class="docutils literal notranslate"><span class="pre">p</span></code>, we generate 10 random graphs and average the results. Since the return value from <code class="docutils literal notranslate"><span class="pre">run_one_graph</span></code> is a pair, <code class="docutils literal notranslate"><span class="pre">t</span></code> is a list of pairs. When we convert it to an array, we get one row for each iteration and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>. Calling <code class="docutils literal notranslate"><span class="pre">mean</span></code> with the option <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> computes the mean of each column; the result is an array with two elements, the means of <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>When the loop exits, <code class="docutils literal notranslate"><span class="pre">res</span></code> is a list of pairs, which we convert to a NumPy array with one row for each value of <code class="docutils literal notranslate"><span class="pre">p</span></code> and columns for <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 <p>Here are the raw results.  Warning: this takes a few minutes to run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1529,7 +1529,7 @@ Wall time: 1min 46s
 <span class="sd">    G: graph</span>
 <span class="sd">    source: node to start at</span>
 <span class="sd">    </span>
-<span class="sd">    returns: make from node to path length</span>
+<span class="sd">    returns: map from node to path length</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>
@@ -1653,7 +1653,7 @@ Wall time: 1min 46s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plain_bfs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fast BFS node generator&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fast BFS that returns a set of reachable nodes.&quot;&quot;&quot;</span>
     <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">nextlevel</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">}</span>
     <span class="k">while</span> <span class="n">nextlevel</span><span class="p">:</span>

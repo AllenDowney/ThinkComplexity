@@ -460,7 +460,7 @@ document.write(`
 <section id="what-is-a-graph">
 <h2><span class="section-number">2.1. </span>What is a graph?<a class="headerlink" href="#what-is-a-graph" title="Link to this heading">#</a></h2>
 <p>To most people a “graph” is a visual representation of data, like a bar chart or a plot of stock prices over time. That’s not what this chapter is about.</p>
-<p>In this chapter, a <strong>graph</strong> is a representation of a system that contains discrete, interconnected elements. The elements are represented by <strong>nodes</strong> — also called <strong>vertices</strong> – and the interconnections are represented by <strong>edges</strong>.</p>
+<p>In this chapter, a <strong>graph</strong> is a representation of a system that contains discrete, interconnected elements. The elements are represented by <strong>nodes</strong> — also called <strong>vertices</strong> — and the interconnections are represented by <strong>edges</strong>.</p>
 <p>For example, you could represent a road map with a node for each city and an edge for each road between cities. Or you could represent a social network using a node for each person, with an edge between two people if they are friends.</p>
 <p>In some graphs, edges have attributes like length, cost, or weight. For example, in a road map, the length of an edge might represent distance between cities or travel time. In a social network there might be different kinds of edges to represent different kinds of relationships: friends, business associates, etc.</p>
 <p>Edges may be <strong>directed</strong> or <strong>undirected</strong>, depending on whether the relationships they represent are asymmetric or symmetric. In a road map, you might represent a one-way street with a directed edge and a two-way street with an undirected edge. In some social networks, like Facebook, friendship is symmetric: if <span class="math notranslate nohighlight">\(A\)</span> is friends with <span class="math notranslate nohighlight">\(B\)</span> then <span class="math notranslate nohighlight">\(B\)</span> is friends with <span class="math notranslate nohighlight">\(A\)</span>. But on Twitter, for example, the “follows” relationship is not symmetric; if <span class="math notranslate nohighlight">\(A\)</span> follows <span class="math notranslate nohighlight">\(B\)</span>, that doesn’t imply that <span class="math notranslate nohighlight">\(B\)</span> follows <span class="math notranslate nohighlight">\(A\)</span>. So you might use undirected edges to represent a Facebook network and directed edges for Twitter.</p>
@@ -716,7 +716,7 @@ document.write(`
 <p>A graph is <strong>connected</strong> if there is a path from every node to every other node (see <a class="reference external" href="https://thinkcomplex.com/conn">https://thinkcomplex.com/conn</a>).</p>
 <p>For many applications involving graphs, it is useful to check whether a graph is connected. Fortunately, there is a simple algorithm that does it.</p>
 <p>You can start at any node and check whether you can reach all other nodes. If you can reach a node, <span class="math notranslate nohighlight">\(v\)</span>, you can reach any of the <strong>neighbors</strong> of <span class="math notranslate nohighlight">\(v\)</span>, which are the nodes connected to <span class="math notranslate nohighlight">\(v\)</span> by an edge.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Graph</span></code> class provides a method called <code class="docutils literal notranslate"><span class="pre">neighbors</span></code> that returns a list of neighbors for a given node. For example, in the complete graph we generated in the previous section:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Graph</span></code> class provides a method called <code class="docutils literal notranslate"><span class="pre">neighbors</span></code> that returns an iterator over the neighbors of a given node. For example, in the complete graph we generated in the previous section:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">complete</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -729,7 +729,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Suppose we start at node <span class="math notranslate nohighlight">\(s\)</span>. We can mark <span class="math notranslate nohighlight">\(s\)</span> as “seen” and mark its neighbors. Then we mark the neighbor’s neighbors, and their neighbors, and so on, until we can’t reach any more nodes. If all nodes are seen, the graph is connected.</p>
+<p>Suppose we start at node <span class="math notranslate nohighlight">\(s\)</span>. We can mark <span class="math notranslate nohighlight">\(s\)</span> as “seen” and mark its neighbors. Then we mark the neighbors’ neighbors, and their neighbors, and so on, until we can’t reach any more nodes. If all nodes are seen, the graph is connected.</p>
 <p>Here’s what that looks like in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,7 +746,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> and a starting node, <code class="docutils literal notranslate"> <span class="pre">start</span></code>, and returns the set of nodes that can be reached from <code class="docutils literal notranslate"> <span class="pre">start</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> and a starting node, <code class="docutils literal notranslate"><span class="pre">start</span></code>, and returns the set of nodes that can be reached from <code class="docutils literal notranslate"><span class="pre">start</span></code>.</p>
 <p>Initially the set, <code class="docutils literal notranslate"><span class="pre">seen</span></code>, is empty, and we create a list called <code class="docutils literal notranslate"><span class="pre">stack</span></code> that keeps track of nodes we have discovered but not yet processed. Initially the stack contains a single node, <code class="docutils literal notranslate"><span class="pre">start</span></code>.</p>
 <p>Now, each time through the loop, we:</p>
 <ol class="arabic simple">
@@ -782,7 +782,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">is_connected</span></code> chooses a starting node by making a node iterator and choosing the first element. Then it uses <code class="docutils literal notranslate"><span class="pre">reachable</span></code> to get the set of nodes that can be reached from <code class="docutils literal notranslate"><span class="pre">start</span></code>. If the size of this set is the same as the size of the graph, that means we can reach all nodes, which means the graph is connected.</p>
+<p><code class="docutils literal notranslate"><span class="pre">is_connected</span></code> chooses a starting node by making a node iterator and choosing the first element. Then it uses <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> to get the set of nodes that can be reached from <code class="docutils literal notranslate"><span class="pre">start</span></code>. If the size of this set is the same as the size of the graph, that means we can reach all nodes, which means the graph is connected.</p>
 <p>A complete graph is, not surprisingly, connected:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -822,7 +822,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>This is the first example we’re seen that uses NumPy. Following convention, I import <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as <code class="docutils literal notranslate"><span class="pre">np</span></code>. NumPy provides a module named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which provides a method named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which returns a number between 0 and 1, uniformly distributed.</p>
+<p>This is the first example we’ve seen that uses NumPy. Following convention, I import <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as <code class="docutils literal notranslate"><span class="pre">np</span></code>. NumPy provides a module named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which provides a method named <code class="docutils literal notranslate"><span class="pre">random</span></code>, which returns a number between 0 and 1, uniformly distributed.</p>
 <p>So <code class="docutils literal notranslate"><span class="pre">flip</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> with the given probability, <code class="docutils literal notranslate"><span class="pre">p</span></code>, and <code class="docutils literal notranslate"><span class="pre">False</span></code> with the complementary probability, <code class="docutils literal notranslate"><span class="pre">1-p</span></code>.</p>
 <p>Finally, <code class="docutils literal notranslate"><span class="pre">make_random_graph</span></code> generates and returns the ER graph <span class="math notranslate nohighlight">\(G(n, p)\)</span>:</p>
 <div class="cell docutils container">
@@ -1116,7 +1116,7 @@ document.write(`
 <h2><span class="section-number">2.9. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Exercise:</strong> In the “Analysis of graph algorithms” section we analyzed the performance of <code class="docutils literal notranslate"><span class="pre">reachable_nodes</span></code> and classified it in <span class="math notranslate nohighlight">\(O(n + m)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes and <span class="math notranslate nohighlight">\(m\)</span> is the number of edges.  Continuing the analysis, what is the order of growth for <code class="docutils literal notranslate"><span class="pre">is_connected</span></code>?</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def is_connected(G):
-    start = list(G)[0]
+    start = next(iter(G))
     reachable = reachable_nodes(G, start)
     return len(reachable) == len(G)
 </pre></div>

@@ -567,7 +567,7 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the attributes.</span>
 
 <span class="sd">        n: number of rows</span>
-<span class="sd">        params: tuple of (Da, Db, f, k)</span>
+<span class="sd">        params: tuple of (ra, rb, f, k)</span>
 <span class="sd">        &quot;&quot;&quot;</span>        
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">array1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -787,7 +787,7 @@ document.write(`
 <p>The state of the CA is stored in <code class="docutils literal notranslate"><span class="pre">array</span></code>, which is initialized using <code class="docutils literal notranslate"><span class="pre">np.random.choice</span></code> to choose 1 (porous) with probability <code class="docutils literal notranslate"><span class="pre">q</span></code>, and 0 (non-porous) with probability <code class="docutils literal notranslate"><span class="pre">1-q</span></code>.</p>
 <p>The state of the top row is set to 5, which represents a wet cell. Using 5, rather than the more obvious 2, makes it possible to use <code class="docutils literal notranslate"><span class="pre">correlate2d</span></code> to check whether any porous cell has a wet neighbor.</p>
 <p>The kernel defines a 4-cell “von Neumann” neighborhood; unlike the Moore neighborhood we saw in Chapter 6, it does not include the diagonals.</p>
-<p>This kernel adds up the states of the neighbors. If any of them are wet, the result will exceed 5. Otherwise the maximum result is 4 (if all neighbors happen to be porous).</p>
+<p>This kernel adds up the states of the neighbors. If any of them are wet, the result will be at least 5. Otherwise the maximum result is 4 (if all neighbors happen to be porous).</p>
 <p>We can use this logic to write a simple, fast <code class="docutils literal notranslate"><span class="pre">step</span></code> function, which identifies porous cells, where <code class="docutils literal notranslate"><span class="pre">a==1</span></code>, that have at least one wet neighbor, where <code class="docutils literal notranslate"><span class="pre">c&gt;=5</span></code>, and sets their state to 5, which indicates that they are wet.</p>
 <p>The following figure shows the first few steps of a percolation model with <code class="docutils literal notranslate"><span class="pre">n=10</span></code> and <code class="docutils literal notranslate"><span class="pre">q=0.7</span></code>. Non-porous cells are white, porous cells are lightly shaded, and wet cells are dark.</p>
 <div class="cell docutils container">
@@ -1112,7 +1112,7 @@ Wall time: 44.8 s
 </div>
 </div>
 </div>
-<p>The following function plots the results, comparing the rate of cell growth to <code class="docutils literal notranslate"><span class="pre">size</span></code> and <code class="docutils literal notranslate"><span class="pre">size**2</span></code>. And it uses <code class="docutils literal notranslate"><span class="pre">linregress</span></code> to estimate the slope of the line on a log-log scale.</p>
+<p>The following function plots the results, comparing the rate of cell growth to <code class="docutils literal notranslate"><span class="pre">steps</span></code> and <code class="docutils literal notranslate"><span class="pre">steps2</span></code>. And it uses <code class="docutils literal notranslate"><span class="pre">linregress</span></code> to estimate the slope of the line on a log-log scale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
@@ -1409,7 +1409,7 @@ Saving figure to file figs/chap07-9
 </div>
 </div>
 </div>
-<p>Here’s a modified version of <code class="docutils literal notranslate"><span class="pre">count_cells</span></code> that uses <code class="docutils literal notranslate"><span class="pre">Wrap1D</span></code></p>
+<p>Here’s a modified version of <code class="docutils literal notranslate"><span class="pre">count_cells</span></code> that uses <code class="docutils literal notranslate"><span class="pre">Wrap1D</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_cells</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>

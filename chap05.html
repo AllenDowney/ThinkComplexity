@@ -555,7 +555,7 @@ document.write(`
 </div>
 </div>
 <p>The first row shows the state of the system during the first time step; it starts with one cell “on” and the rest “off”. The second row shows the state of the system during the next time step, and so on.</p>
-<p>The triangular shape in the figure is typical of these CAs; is it a consequence of the shape of the neighborhood. In one time step, each cell influences the state of one neighbor in either direction. During the next time step, that influence can propagate one more cell in each direction. So each cell in the past has a “triangle of influence” that includes all of the cells that can be affected by it.</p>
+<p>The triangular shape in the figure is typical of these CAs; it is a consequence of the shape of the neighborhood. In one time step, each cell influences the state of one neighbor in either direction. During the next time step, that influence can propagate one more cell in each direction. So each cell in the past has a “triangle of influence” that includes all of the cells that can be affected by it.</p>
 </section>
 <section id="classifying-cas">
 <h2><span class="section-number">5.3. </span>Classifying CAs<a class="headerlink" href="#classifying-cas" title="Link to this heading">#</a></h2>
@@ -563,7 +563,7 @@ document.write(`
 <p>Since each cell is either on or off, we can specify the state of a cell with a single bit. In a neighborhood with three cells, there are 8 possible configurations, so there are 8 entries in the rule tables. And since each entry contains a single bit, we can specify a table using 8 bits. With 8 bits, we can specify 256 different rules.</p>
 <p>One of Wolfram’s first experiments with CAs was to test all 256 possibilities and classify them.</p>
 <p>Examining the results visually, he proposed that the behavior of CAs can be grouped into four classes. Class 1 contains the simplest (and least interesting) CAs, the ones that evolve from almost any starting condition to the same uniform pattern. As a trivial example, Rule 0 always generates an empty pattern after one time step.</p>
-<p>Rule 50 is an example of Class 2. It generates a simple pattern with nested structure, that is, a pattern that contains many smaller versions of itself. Rule 18 makes the nested structure is even clearer; the following figure shows what it looks like after 64 steps.</p>
+<p>Rule 50 is an example of Class 2. It generates a simple pattern with nested structure, that is, a pattern that contains many smaller versions of itself. Rule 18 makes the nested structure even clearer; the following figure shows what it looks like after 64 steps.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_ca</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
@@ -681,7 +681,7 @@ document.write(`
 <p>A Turing machine is not a practical design for a computer, but it models common computer architectures. For a given program running on a real computer, it is possible (at least in principle) to construct a Turing machine that performs an equivalent computation.</p>
 <p>The Turing machine is useful because it is possible to characterize the set of functions that can be computed by a Turing machine, which is what Turing did. Functions in this set are called “Turing computable”.</p>
 <p>To say that a Turing machine can compute any Turing-computable function is a tautology: it is true by definition. But Turing-computability is more interesting than that.</p>
-<p>It turns out that just about every reasonable model of computation anyone has come up with is “Turing complete”; that is, it can compute exactly the same set of functions as the Turing machine. Some of these models, like lamdba calculus, are very different from a Turing machine, so their equivalence is surprising.</p>
+<p>It turns out that just about every reasonable model of computation anyone has come up with is “Turing complete”; that is, it can compute exactly the same set of functions as the Turing machine. Some of these models, like lambda calculus, are very different from a Turing machine, so their equivalence is surprising.</p>
 <p>This observation led to the Church-Turing Thesis, which is the claim that these definitions of computability capture something essential that is independent of any particular model of computation.</p>
 <p>The Rule 110 CA is yet another model of computation, and remarkable for its simplicity. That it, too, turns out to be Turing complete lends support to the Church-Turing Thesis.</p>
 <p>In <em>A New Kind of Science</em>, Wolfram states a variation of this thesis, which he calls the “principle of computational equivalence” (see <a class="reference external" href="https://thinkcomplex.com/equiv">https://thinkcomplex.com/equiv</a>):</p>
@@ -765,7 +765,7 @@ document.write(`
 <img alt="_images/9fe9be6db1577ece29804ba4481d0a7f81b6aadf0e880c60a4769146837fc3f7.png" src="_images/9fe9be6db1577ece29804ba4481d0a7f81b6aadf0e880c60a4769146837fc3f7.png" />
 </div>
 </div>
-<p>To compute the state of the CA during time step <code class="docutils literal notranslate"><span class="pre">i</span></code>, we have to add up consecutive elements of <code class="docutils literal notranslate"><span class="pre">array</span></code> and compute the parity of the sum. We can due that using a slice operator to select the elements and the modulus operator to compute parity:</p>
+<p>To compute the state of the CA during time step <code class="docutils literal notranslate"><span class="pre">i</span></code>, we have to add up consecutive elements of <code class="docutils literal notranslate"><span class="pre">array</span></code> and compute the parity of the sum. We can do that using a slice operator to select the elements and the modulus operator to compute parity:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
@@ -773,7 +773,7 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">row</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">elts</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">elts</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
 </pre></div>
@@ -1006,7 +1006,7 @@ document.write(`
 </section>
 <section id="ca-tables">
 <h2><span class="section-number">5.12. </span>CA tables<a class="headerlink" href="#ca-tables" title="Link to this heading">#</a></h2>
-<p>The function we have so far works if the CA is “totalitic”, which means that the rules only depend on the sum of the neighbors. But most rules also depend on which neighbors are on and off. For example, <code class="docutils literal notranslate"><span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">001</span></code> have the same sum, but for many CAs, they would yield different results.</p>
+<p>The function we have so far works if the CA is “totalistic”, which means that the rules only depend on the sum of the neighbors. But most rules also depend on which neighbors are on and off. For example, <code class="docutils literal notranslate"><span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">001</span></code> have the same sum, but for many CAs, they would yield different results.</p>
 <p>We can make <code class="docutils literal notranslate"><span class="pre">step2</span></code> more general using a window with elements <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>, which interprets the neighborhood as a binary number. For example, the neighborhood <code class="docutils literal notranslate"><span class="pre">100</span></code> yields 4; <code class="docutils literal notranslate"><span class="pre">010</span></code> yields 2, and <code class="docutils literal notranslate"><span class="pre">001</span></code> yields 1. Then we can take these results and look them up in the rule table.</p>
 <p>Here’s the function that computes the table:</p>
 <div class="cell docutils container">
@@ -1103,7 +1103,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cell1D</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a 1-D a cellular automaton&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a 1-D cellular automaton&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the CA.</span>

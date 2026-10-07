@@ -641,7 +641,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Similarly, <code class="docutils literal notranslate"><span class="pre">empty_locs</span></code> is a list that contains the coordinates of the empty cells.</p>
+<p><code class="docutils literal notranslate"><span class="pre">empty_locs</span></code> is a list that contains the coordinates of the empty cells.</p>
 <p>Now we get to the core of the simulation. We loop through the unhappy agents and move them. <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of a random empty cell; <code class="docutils literal notranslate"><span class="pre">dest</span></code> is a tuple containing the coordinates of the empty cell.</p>
 <p>In order to move an agent, we copy its value (1 or 2) from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">dest</span></code>, and then set the value of <code class="docutils literal notranslate"><span class="pre">source</span></code> to 0 (since it is now empty).</p>
 <p>Finally, we replace the entry in <code class="docutils literal notranslate"><span class="pre">empty_locs</span></code> with <code class="docutils literal notranslate"><span class="pre">source</span></code>, so the cell that just became empty can be chosen by the next agent.</p>
@@ -667,10 +667,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5051671732522796)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.4801075268817203)
 </pre></div>
 </div>
-<img alt="_images/1cd4e47ca6bcdf988dec33d7981510a77dbad04d207767a165dfcea132e42952.png" src="_images/1cd4e47ca6bcdf988dec33d7981510a77dbad04d207767a165dfcea132e42952.png" />
+<img alt="_images/85559845b6ce3ba1e73aaff18df4e0f93eef7d6fe67f57e8d1ecb35cdb47d014.png" src="_images/85559845b6ce3ba1e73aaff18df4e0f93eef7d6fe67f57e8d1ecb35cdb47d014.png" />
 </div>
 </div>
 </section>
@@ -685,7 +685,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b5d85ab0d15f2a21a964f97a4a885f426304587118cceb956645a7efe0d18adc.png" src="_images/b5d85ab0d15f2a21a964f97a4a885f426304587118cceb956645a7efe0d18adc.png" />
+<img alt="_images/07e366aca13eefef450118cb88ec8b4f9a9e2c8279d3ed5cff6959e023d04e29.png" src="_images/07e366aca13eefef450118cb88ec8b4f9a9e2c8279d3ed5cff6959e023d04e29.png" />
 </div>
 </div>
 <p>The following figure shows the initial configuration (left), the state of the simulation after 2 steps (middle), and the state after 10 steps (right).</p>
@@ -704,7 +704,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving figure to file figs/chap09-1
 </pre></div>
 </div>
-<img alt="_images/dd433e951ae93df1909ebb49bfa535a5028c729f6985358d79cd33126af821dc.png" src="_images/dd433e951ae93df1909ebb49bfa535a5028c729f6985358d79cd33126af821dc.png" />
+<img alt="_images/3bb60b89c795a7c341376d8328e0d243e182a86e1295546fbf02e50fa2048ea1.png" src="_images/3bb60b89c795a7c341376d8328e0d243e182a86e1295546fbf02e50fa2048ea1.png" />
 </div>
 </div>
 <p>Clusters form almost immediately and grow quickly, until most agents live in highly-segregated neighborhoods.</p>
@@ -716,12 +716,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7437258936815724)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.7462857513474592)
 </pre></div>
 </div>
 </div>
 </div>
-<p>About 74%!</p>
+<p>About 75%!</p>
 <p>Remember that when <code class="docutils literal notranslate"><span class="pre">p=0.3</span></code> the agents would be happy if 3 of 8 neighbors were their own color, but they end up living in neighborhoods where 6 or 7 of their neighbors are their own color, typically.</p>
 <p>The following figure shows how the degree of segregation increases and where it levels off for several values of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <div class="cell docutils container">
@@ -1056,7 +1056,7 @@ Saving figure to file figs/chap09-2
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">make_visible_locs</span></code> takes the range of an agents vision and returns an array where each row is the coordinate of a visible cell.</p>
+<p><code class="docutils literal notranslate"><span class="pre">make_visible_locs</span></code> takes the range of an agent’s vision and returns an array where each row is the coordinate of a visible cell.</p>
 <p>The cells are at increasing distances.  The cells at each distance are shuffled.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1275,7 +1275,7 @@ Saving figure to file figs/chap09-2
 <p>In its current form, Sugarscape models a simple ecology, and could be used to explore the relationship between the parameters of the model, like the growth rate and the attributes of the agents, and the carrying capacity of the system (the number of agents that survive in steady state). And it models a form of natural selection, where agents with higher “fitness” are more likely to survive.</p>
 <p>The model also demonstrates a kind of wealth inequality, with some agents accumulating sugar faster than others. But it would be hard to say anything specific about the distribution of wealth because it is not “stationary”; that is, the distribution changes over time and does not reach a steady state.</p>
 <p>However, if we give the agents finite lifespans, the model produces a stationary distribution of wealth. Then we can run experiments to see what effect the parameters and rules have on this distribution.</p>
-<p>In this version of the model, agents have an age that gets incremented each time step, and a random lifespan chosen from a uniform distribution between 60 to 100. If an agent’s age exceeds its lifespan, it dies.</p>
+<p>In this version of the model, agents have an age that gets incremented each time step, and a random lifespan chosen from a uniform distribution between 60 and 100. If an agent’s age exceeds its lifespan, it dies.</p>
 <p>When an agent dies, from starvation or old age, it is replaced by a new agent with random attributes, so the number of agents is constant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1421,7 +1421,7 @@ Saving figure to file figs/chap09-2
 <h2><span class="section-number">9.8. </span>Emergence<a class="headerlink" href="#emergence" title="Link to this heading">#</a></h2>
 <p>The examples in this chapter demonstrate one of the most important ideas in complexity science: emergence. An <strong>emergent property</strong> is a characteristic of a system that results from the interaction of its components, not from their properties.</p>
 <p>To clarify what emergence is, it helps to consider what it isn’t. For example, a brick wall is hard because bricks and mortar are hard, so that’s not an emergent property. As another example, some rigid structures are built from flexible components, so that seems like a kind of emergence. But it is at best a weak kind, because structural properties follow from well understood laws of mechanics.</p>
-<p>In contrast, the segregation we see in Schelling’s model is an emergent property because it is not caused by racist agents. Even when the agents are only mildly xenophobic, the outcome of the system is substantially different from the intention of the agent’s decisions.</p>
+<p>In contrast, the segregation we see in Schelling’s model is an emergent property because it is not caused by racist agents. Even when the agents are only mildly xenophobic, the outcome of the system is substantially different from the intention of the agents’ decisions.</p>
 <p>The distribution of wealth in Sugarscape might be an emergent property, but it is a weak example because we could reasonably predict it based on the distributions of vision, metabolism, and lifespan. The wave behavior we saw in the last example might be a stronger example, since the wave displays a capability — diagonal movement — that the agents do not have.</p>
 <p>Emergent properties are surprising: it is hard to predict the behavior of the system even if we know all the rules. That difficulty is not an accident; in fact, it may be the defining characteristic of emergence.</p>
 <p>As Wolfram discusses in <em>A New Kind of Science</em>, conventional science is based on the axiom that if you know the rules that govern a system, you can predict its behavior. What we call “laws” are often computational shortcuts that allow us to predict the outcome of a system without building or observing it.</p>
@@ -1453,7 +1453,6 @@ chooses the one with the highest fraction of similar neighbors.
 How does the degree of segregation depend on <code class="docutils literal notranslate"><span class="pre">k</span></code>?</p>
 <p>You should be able to implement this model by inheriting from
 <code class="docutils literal notranslate"><span class="pre">Schelling</span></code> and overriding <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
-<p>And a test of the <code class="docutils literal notranslate"><span class="pre">step</span></code> method</p>
 <p><strong>Exercise:</strong> In the first version of Sugarscape, we never add agents, so once the population falls, it never recovers.  In the second version, we only replace agents when they die, so the population is constant.  Now let’s see what happens if we add some “population pressure”.</p>
 <p>Write a version of Sugarscape that adds a new agent at the end of every step.  Add code to compute the average vision and the average metabolism of the agents at the end of each step.  Run the model for a few hundred steps and plot the population over time, as well as the average vision and average metabolism.</p>
 <p>You should be able to implement this model by inheriting from

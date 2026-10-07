@@ -394,7 +394,7 @@ document.write(`
 <p>In this final chapter, I take on two questions, one from biology and one from philosophy:</p>
 <ul class="simple">
 <li><p>In biology, the “problem of altruism” is the apparent conflict between natural selection, which suggests that animals live in a state of constant competition, and altruism, which is the tendency of many animals to help other animals, even to their own detriment. See <a class="reference external" href="https://thinkcomplex.com/altruism">https://thinkcomplex.com/altruism</a>.</p></li>
-<li><p>In moral philosophy, the question of human nature asks whether humans are fundamentally good, or evil, or blank states shaped by their environment. See <a class="reference external" href="https://thinkcomplex.com/nature">https://thinkcomplex.com/nature</a>.</p></li>
+<li><p>In moral philosophy, the question of human nature asks whether humans are fundamentally good, or evil, or blank slates shaped by their environment. See <a class="reference external" href="https://thinkcomplex.com/nature">https://thinkcomplex.com/nature</a>.</p></li>
 </ul>
 <p>The tools I use to address these questions are agent-based simulation (again) and game theory, which is a set of abstract models meant to describe ways agents interact. Specifically, the game we will consider is the Prisoner’s Dilemma.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/ThinkComplexity/blob/v3/soln/chap12.ipynb">Click here to run this notebook on Colab</a>.</p>
@@ -481,7 +481,7 @@ document.write(`
 <p>He invited participants to submit strategies in the form of computer programs, then played the programs against each other and kept score. Specifically, they played the iterated version of PD, in which the agents play multiple rounds against the same opponent, so their decisions can be based on history.</p>
 <p>In Axelrod’s tournaments, a simple strategy that did surprisingly well was called “tit for tat”, or TFT. TFT always cooperates during the first round of an iterated match; after that, it copies whatever the opponent did during the previous round. If the opponent keeps cooperating, TFT keeps cooperating. If the opponent defects at any point, TFT defects in the next round. But if the opponent goes back to cooperating, so does TFT.</p>
 <p>For more information about these tournaments, and an explanation of why TFT does so well, see this video: <a class="reference external" href="https://thinkcomplex.com/pdvid2">https://thinkcomplex.com/pdvid2</a>.</p>
-<p>Looking at the strategies that did well in these tournaments, Alexrod identified the characteristics they tended to share:</p>
+<p>Looking at the strategies that did well in these tournaments, Axelrod identified the characteristics they tended to share:</p>
 <ul class="simple">
 <li><p>Nice: The strategies that do well cooperate during the first round, and generally cooperate as often as they defect in subsequent rounds.</p></li>
 <li><p>Retaliating: Strategies that cooperate all the time did not do as well as strategies that retaliate if the opponent defects.</p></li>
@@ -654,7 +654,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">copy</span></code> method has some probability of generating a mutation (in this example, <code class="docutils literal notranslate"><span class="pre">values</span></code> is initially a string; after mutation, it’s a NumPy array of letters).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">copy</span></code> method has some probability of generating a mutation (in this example, <code class="docutils literal notranslate"><span class="pre">values</span></code> is initially a string; after mutation, it’s a list of letters).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
@@ -1007,7 +1007,7 @@ CCDCDCD 1.9166666666666667
 </div>
 </div>
 </div>
-<p>A <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> object contains a <code class="docutils literal notranslate"><span class="pre">Tournament</span></code> object, a sequence of agents, and a sequence of <code class="docutils literal notranslate"><span class="pre">Instrument</span></code> objects (as in Chapter 11).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">PDSimulation</span></code> object contains a <code class="docutils literal notranslate"><span class="pre">Tournament</span></code> object, a sequence of agents, and a sequence of <code class="docutils literal notranslate"><span class="pre">Instrument</span></code> objects (as in Chapter 11).</p>
 <p>Here’s the <code class="docutils literal notranslate"><span class="pre">step</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1029,7 +1029,7 @@ CCDCDCD 1.9166666666666667
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the generalize logistic function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the generalized logistic function.</span>
 <span class="sd">    </span>
 <span class="sd">    A: controls the lower bound</span>
 <span class="sd">    B: controls the steepness of the transition </span>
@@ -1165,7 +1165,7 @@ CCDCDCD 1.9166666666666667
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Retaliating</span></code> compares the number of elements in all genomes where an agent defects after the opponent defects (elements 2, 4, and 6) with the number of places where an agents defects after the opponent cooperates.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Retaliating</span></code> compares the number of elements in all genomes where an agent defects after the opponent defects (elements 2, 4, and 6) with the number of places where an agent defects after the opponent cooperates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Retaliating</span><span class="p">(</span><span class="n">Instrument</span><span class="p">):</span>
@@ -1490,7 +1490,7 @@ Name: count, dtype: int64
 <li><p>Populations of defectors are vulnerable to invasion by nicer strategies.</p></li>
 <li><p>Populations that are too nice are vulnerable to invasion by defectors.</p></li>
 <li><p>As a result, the average level of niceness oscillates, but it is generally low, and the average level of fitness is about halfway between a dystopia of defection and a utopia of cooperation.</p></li>
-<li><p>TFT, which was a successful strategy in Alexrod’s tournaments, does not seem to be a specially optimal strategy in an evolving population. In fact, there is probably no stable optimal strategy.</p></li>
+<li><p>TFT, which was a successful strategy in Axelrod’s tournaments, does not seem to be an especially good strategy in an evolving population. In fact, there is probably no stable optimal strategy.</p></li>
 <li><p>Some degree of retaliation may be adaptive, but it might not be necessary for all agents to retaliate. If there is enough retaliation in the population as a whole, that might be enough to prevent invasion by defectors. (And that introduces a whole new topic in game theory, the free-rider problem; see <a class="reference external" href="https://thinkcomplex.com/rider">https://thinkcomplex.com/rider</a>.)</p></li>
 </ul>
 <p>Obviously, the agents in these simulations are simple, and the Prisoner’s Dilemma is a highly abstract model of a limited range of social interactions. In this model, cooperation appears from time to time, but it doesn’t last: when the population is nice, defectors invade, and most of the time, most agents defect.</p>
@@ -1503,8 +1503,8 @@ Name: count, dtype: int64
 <li><p>Vary the initial conditions: instead of starting with all defectors, see what happens if you start with all cooperators, all TFT, or random agents.</p></li>
 <li><p>In <code class="docutils literal notranslate"><span class="pre">Tournament.melee</span></code>, I shuffle the agents at the beginning of each time step, so each agent plays against two randomly-chosen agents. What happens if you don’t shuffle? In that case, each agent plays against the same neighbors repeatedly. That might make it easier for a minority strategy to invade a majority, by taking advantage of locality.</p></li>
 <li><p>Since each agent only plays against two other agents, the outcome of each round is highly variable: an agent that would do well against most other agents might get unlucky during any given round, or the other way around. What happens if you increase the number of opponents each agent plays against during each round? Or what if an agent’s fitness at the end of each step is the average of its current score and its fitness at the end of the previous round?</p></li>
-<li><p>The function I chose for <code class="docutils literal notranslate"><span class="pre">prob_survival</span></code> varies from 0.7 to 0.9, so the least fit agent, with <code class="docutils literal notranslate"><span class="pre">p=0.7</span></code>, lives for 3.33 time steps on average, and the most fit agent lives for 10 time steps. What happens if you make the degree of differential survival more or less “aggressive”?</p></li>
-<li><p>I chose <code class="docutils literal notranslate"><span class="pre">num_rounds=6</span></code> so that each element of the genome has roughly the same impact on the outcome of a match. But that is substantially shorter than what Alexrod used in his tournaments. What happens if you increase <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code>? Note: if you explore the effect of this parameter, you might want to modify <code class="docutils literal notranslate"><span class="pre">Niceness</span></code> to measure the niceness of the last 4 elements of the genome, which will be under more selective pressure as <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code> increases.</p></li>
+<li><p>The function I chose for <code class="docutils literal notranslate"><span class="pre">prob_survive</span></code> varies from 0.7 to 0.9, so the least fit agent, with <code class="docutils literal notranslate"><span class="pre">p=0.7</span></code>, lives for 3.33 time steps on average, and the most fit agent lives for 10 time steps. What happens if you make the degree of differential survival more or less “aggressive”?</p></li>
+<li><p>I chose <code class="docutils literal notranslate"><span class="pre">num_rounds=6</span></code> so that each element of the genome has roughly the same impact on the outcome of a match. But that is substantially shorter than what Axelrod used in his tournaments. What happens if you increase <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code>? Note: if you explore the effect of this parameter, you might want to modify <code class="docutils literal notranslate"><span class="pre">Niceness</span></code> to measure the niceness of the last 4 elements of the genome, which will be under more selective pressure as <code class="docutils literal notranslate"><span class="pre">num_rounds</span></code> increases.</p></li>
 <li><p>My implementation has differential survival but not differential reproduction. What happens if you add differential reproduction?</p></li>
 </ol>
 <p><strong>Exercise:</strong> In my simulations, the population never converges to a state where a majority share the same, presumably optimal, genotype. There are two possible explanations for this outcome: one is that there is no optimal strategy, because whenever the population is dominated by a majority genotype, that condition creates an opportunity for a minority to invade; the other possibility is that the mutation rate is high enough to maintain a diversity of genotypes.</p>

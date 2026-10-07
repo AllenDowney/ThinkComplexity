@@ -450,7 +450,7 @@ document.write(`
 </div>
 <section id="social-network-data">
 <h2><span class="section-number">4.1. </span>Social network data<a class="headerlink" href="#social-network-data" title="Link to this heading">#</a></h2>
-<p>Watts-Strogatz graphs are intended to model networks in the natural and social sciences. In their original paper, Watts and Strogatz looked at the network of film actors (connected if they have appeared in a movie together); the electrical power grid in the western United States; and the network of neurons in the brain of the roundworm <em>C. elegans</em>. They found that all of these networks had the high connectivity and low path lengths characteristic of small world graphs.</p>
+<p>Watts-Strogatz graphs are intended to model networks in the natural and social sciences. In their original paper, Watts and Strogatz looked at the network of film actors (connected if they have appeared in a movie together); the electrical power grid in the western United States; and the network of neurons in the brain of the roundworm <em>C. elegans</em>. They found that all of these networks had the high clustering and low path lengths characteristic of small world graphs.</p>
 <p>In this section we’ll perform the same analysis with a different dataset, a set of Facebook users and their friends. If you are not familiar with Facebook, users who are connected to each other are called “friends”, regardless of the nature of their relationship in the real world.</p>
 <p>I’ll use data from the Stanford Network Analysis Project (SNAP), which shares large datasets from online social networks and other sources. Specifically, I’ll use their Facebook data (from J. McAuley and J. Leskovec, “Learning to Discover Social Circles in Ego Networks”, NIPS, 2012), which includes 4039 users and 88,234 friend relationships among them. It is available from the SNAP website at <a class="reference external" href="https://thinkcomplex.com/snap">https://thinkcomplex.com/snap</a>.</p>
 <div class="cell docutils container">
@@ -714,7 +714,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The mean degree in model is 44, which is close to the mean degree in the dataset, 43.7.</p>
+<p>The mean degree in the model is 44, which is close to the mean degree in the dataset, 43.7.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">fb</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">ws</span><span class="p">))</span>
@@ -974,7 +974,7 @@ document.write(`
 <span class="sd">    </span>
 <span class="sd">    n: number of nodes</span>
 <span class="sd">    k: number of edges for each new node</span>
-<span class="sd">    seed: random seen</span>
+<span class="sd">    seed: random seed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -999,7 +999,7 @@ document.write(`
 </div>
 <p>The parameters are <code class="docutils literal notranslate"><span class="pre">n</span></code>, the number of nodes we want, and <code class="docutils literal notranslate"><span class="pre">k</span></code>, the number of edges each new node gets (which will turn out to be the average number of edges per node).</p>
 <p>We start with a graph that has <code class="docutils literal notranslate"><span class="pre">k</span></code> nodes and no edges. Then we initialize two variables:</p>
-<p><strong><code class="docutils literal notranslate"><span class="pre">targets</span></code>:</strong> The list of <code class="docutils literal notranslate"><span class="pre">k</span></code> nodes that will be connected to the next node. Initially <code class="docutils literal notranslate"><span class="pre">targets</span></code> contains the original <code class="docutils literal notranslate"><span class="pre">k</span></code> nodes; later it will contain a random subset of nodes.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">targets</span></code>:</strong> The set of <code class="docutils literal notranslate"><span class="pre">k</span></code> nodes that will be connected to the next node. Initially <code class="docutils literal notranslate"><span class="pre">targets</span></code> contains the original <code class="docutils literal notranslate"><span class="pre">k</span></code> nodes; later it will contain a random subset of nodes.</p>
 <p><strong><code class="docutils literal notranslate"><span class="pre">repeated_nodes</span></code>:</strong> A list of existing nodes where each node appears once for every edge it is connected to. When we select from <code class="docutils literal notranslate"><span class="pre">repeated_nodes</span></code>, the probability of selecting any node is proportional to the number of edges it has.</p>
 <p>Each time through the loop, we add edges from the source to each node in <code class="docutils literal notranslate"><span class="pre">targets</span></code>. Then we update <code class="docutils literal notranslate"><span class="pre">repeated_nodes</span></code> by adding each target once and the new node <code class="docutils literal notranslate"><span class="pre">k</span></code> times.</p>
 <p>Finally, we choose a subset of the nodes to be targets for the next iteration. Here’s the definition of <code class="docutils literal notranslate"><span class="pre">_random_subset</span></code>:</p>
@@ -1143,7 +1143,7 @@ document.write(`
 <img alt="_images/1939b9ef10ce30028b952a9c803502a166bd90144fdfc67969d9682f5a430e0a.png" src="_images/1939b9ef10ce30028b952a9c803502a166bd90144fdfc67969d9682f5a430e0a.png" />
 </div>
 </div>
-<p>The model is not perfect; in particular, it deviates from the data when <code class="docutils literal notranslate"><span class="pre">k</span></code> is less than 10. But the tail looks like a straight line, which suggests that this process generates degree distributions that follow a power law.</p>
+<p>The model is not perfect; in particular, it deviates from the data when the degree is less than 10. But the tail looks like a straight line, which suggests that this process generates degree distributions that follow a power law.</p>
 <p>So the BA model is better than the WS model at reproducing the degree distribution. But does it have the small world property?</p>
 <p>In this example, the average path length, <span class="math notranslate nohighlight">\(L\)</span>, is <span class="math notranslate nohighlight">\(2.5\)</span>, which is even more “small world” than the actual network, which has <span class="math notranslate nohighlight">\(L=3.7\)</span>. So that’s good, although maybe too good.</p>
 <div class="cell docutils container">
@@ -1392,7 +1392,7 @@ document.write(`
 <p>Is there data you could collect, or experiments you could perform, that would provide evidence in favor of one model over the other?</p>
 <p>Choosing among competing models is the topic of Thomas Kuhn’s essay, “Objectivity, Value Judgment, and Theory Choice”, which you can read at <a class="reference external" href="https://thinkcomplex.com/kuhn">https://thinkcomplex.com/kuhn</a>.</p>
 <p>What criteria does Kuhn propose for choosing among competing models? Do these criteria influence your opinion about the WS and BA models? Are there other criteria you think should be considered?</p>
-<p><strong>Exercise:</strong> Data files from the Barabasi and Albert paper are available from
+<p><strong>Exercise:</strong> Data files from the Barabási and Albert paper are available from
 <a class="reference external" href="https://web.archive.org/web/20150910025718/http://www3.nd.edu/~networks/resources.htm">this web page</a>.</p>
 <p>Their actor collaboration data is included in the repository for this book in a file named
 <code class="docutils literal notranslate"><span class="pre">actor.dat.gz</span></code>.  The following function reads the file and builds the graph.</p>

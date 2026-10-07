@@ -606,8 +606,8 @@ document.write(`
 </div>
 <p>Depending on the starting orientation, gliders can move along any of the four diagonals. There are other spaceships that move horizontally and vertically.</p>
 <p>People have spent embarrassing amounts of time finding and naming these patterns. If you search the web, you will find many collections.</p>
-<p><strong>Exercise:</strong> If you start GoL from a random configuration, it usually runs chaotically for a while and then settles into stable patterns that include blinkers, blocks, and beehives, ships, boats, and loaves.</p>
-<p>For a list of common “natually” occurring patterns, see Achim Flammenkamp, “<a class="reference external" href="http://wwwhomes.uni-bielefeld.de/achim/freq_top_life.html">Most seen natural occurring ash objects in Game of Life</a>”,</p>
+<p><strong>Exercise:</strong> If you start GoL from a random configuration, it usually runs chaotically for a while and then settles into stable patterns that include blinkers, blocks, beehives, ships, boats, and loaves.</p>
+<p>For a list of common “naturally” occurring patterns, see Achim Flammenkamp, “<a class="reference external" href="http://wwwhomes.uni-bielefeld.de/achim/freq_top_life.html">Most seen natural occurring ash objects in Game of Life</a>”.</p>
 <p>Start GoL in a random state and run it until it stabilizes (try 1000 steps).
 What stable patterns can you identify?</p>
 <p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code>.</p>
@@ -963,7 +963,7 @@ What stable patterns can you identify?</p>
 <p><strong>Exercise:</strong> If you generalize the Turing machine to two dimensions, or add a read-write head to a 2-D CA, the result is a cellular automaton called a Turmite. It is named after a termite because of the way the read-write head moves, but spelled wrong as an homage to Alan Turing.</p>
 <p>The most famous Turmite is Langton’s Ant, discovered by Chris Langton in 1986. See <a class="reference external" href="https://thinkcomplex.com/langton">https://thinkcomplex.com/langton</a>.</p>
 <p>The ant is a read-write head with four states, which you can think of as facing north, south, east or west. The cells have two states, black and white.</p>
-<p>The rules are simple. During each time step, the ant checks the color of the cell it is on. If black, the ant turns to the right, changes the cell to white, and moves forward one space. If the cell is white, the ant turns left, changes the cell to black, and moves forward.</p>
+<p>The rules are simple. During each time step, the ant checks the color of the cell it is on. If black, the ant turns to the left, changes the cell to white, and moves forward one space. If the cell is white, the ant turns right, changes the cell to black, and moves forward.</p>
 <p>Given a simple world, a simple set of rules, and only one moving part, you might expect to see simple behavior — but you should know better by now. Starting with all white cells, Langton’s ant moves in a seemingly random pattern for more than 10,000 steps before it enters a cycle with a period of 104 steps. After each cycle, the ant is translated diagonally, so it leaves a trail called the “highway”.</p>
 <p>Write an implementation of Langton’s Ant.</p>
 <div class="cell docutils container">
