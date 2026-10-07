@@ -340,7 +340,7 @@ Here's what it looks like after we initialize the first row.
 plot_ca(array)
 ```
 
-To compute the state of the CA during time step `i`, we have to add up consecutive elements of `array` and compute the parity of the sum. We can due that using a slice operator to select the elements and the modulus operator to compute parity:
+To compute the state of the CA during time step `i`, we have to add up consecutive elements of `array` and compute the parity of the sum. We can do that using a slice operator to select the elements and the modulus operator to compute parity:
 
 ```python
 def step(array, i):
@@ -348,7 +348,7 @@ def step(array, i):
     """
     rows, cols = array.shape
     row = array[i-1]
-    for j in range(1, cols):
+    for j in range(1, cols-1):
         elts = row[j-1:j+2]
         array[i, j] = sum(elts) % 2
 ```
