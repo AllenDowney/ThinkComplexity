@@ -122,7 +122,7 @@ savefig('figs/chap05-1')
 
 The first row shows the state of the system during the first time step; it starts with one cell "on" and the rest "off". The second row shows the state of the system during the next time step, and so on.
 
-The triangular shape in the figure is typical of these CAs; is it a consequence of the shape of the neighborhood. In one time step, each cell influences the state of one neighbor in either direction. During the next time step, that influence can propagate one more cell in each direction. So each cell in the past has a "triangle of influence" that includes all of the cells that can be affected by it.
+The triangular shape in the figure is typical of these CAs; it is a consequence of the shape of the neighborhood. In one time step, each cell influences the state of one neighbor in either direction. During the next time step, that influence can propagate one more cell in each direction. So each cell in the past has a "triangle of influence" that includes all of the cells that can be affected by it.
 
 ## Classifying CAs
 
@@ -134,7 +134,7 @@ One of Wolfram's first experiments with CAs was to test all 256 possibilities an
 
 Examining the results visually, he proposed that the behavior of CAs can be grouped into four classes. Class 1 contains the simplest (and least interesting) CAs, the ones that evolve from almost any starting condition to the same uniform pattern. As a trivial example, Rule 0 always generates an empty pattern after one time step.
 
-Rule 50 is an example of Class 2. It generates a simple pattern with nested structure, that is, a pattern that contains many smaller versions of itself. Rule 18 makes the nested structure is even clearer; the following figure shows what it looks like after 64 steps.
+Rule 50 is an example of Class 2. It generates a simple pattern with nested structure, that is, a pattern that contains many smaller versions of itself. Rule 18 makes the nested structure even clearer; the following figure shows what it looks like after 64 steps.
 
 ```python
 draw_ca(rule=18, n=64)
@@ -246,7 +246,7 @@ The Turing machine is useful because it is possible to characterize the set of f
 To say that a Turing machine can compute any Turing-computable function is a tautology: it is true by definition. But Turing-computability is more interesting than that.
 
 
-It turns out that just about every reasonable model of computation anyone has come up with is "Turing complete"; that is, it can compute exactly the same set of functions as the Turing machine. Some of these models, like lamdba calculus, are very different from a Turing machine, so their equivalence is surprising.
+It turns out that just about every reasonable model of computation anyone has come up with is "Turing complete"; that is, it can compute exactly the same set of functions as the Turing machine. Some of these models, like lambda calculus, are very different from a Turing machine, so their equivalence is surprising.
 
 This observation led to the Church-Turing Thesis, which is the claim that these definitions of computability capture something essential that is independent of any particular model of computation.
 
@@ -512,7 +512,7 @@ plot_ca(array)
 
 ## CA tables
 
-The function we have so far works if the CA is "totalitic", which means that the rules only depend on the sum of the neighbors. But most rules also depend on which neighbors are on and off. For example, `100` and `001` have the same sum, but for many CAs, they would yield different results.
+The function we have so far works if the CA is "totalistic", which means that the rules only depend on the sum of the neighbors. But most rules also depend on which neighbors are on and off. For example, `100` and `001` have the same sum, but for many CAs, they would yield different results.
 
 We can make `step2` more general using a window with elements `[4, 2, 1]`, which interprets the neighborhood as a binary number. For example, the neighborhood `100` yields 4; `010` yields 2, and `001` yields 1. Then we can take these results and look them up in the rule table.
 
@@ -582,7 +582,7 @@ The code in this section is encapsulated in the `Cell1D` class, defined in `Cell
 
 ```python
 class Cell1D:
-    """Represents a 1-D a cellular automaton"""
+    """Represents a 1-D cellular automaton"""
 
     def __init__(self, rule, n, m=None):
         """Initializes the CA.
@@ -836,7 +836,7 @@ class Turing(Cell1D):
         self.next += 1
         
     def draw(self, start=0, end=None):
-        """Draws the CA using pyplot.pcolor.
+        """Draws the CA using pyplot.imshow.
         
         start: index of the first column to be shown 
         end: index of the last column to be shown
@@ -868,7 +868,7 @@ table[1, 'C'] = 1, 'R', 'HALT'
 ```python
 # Solution
 
-# Make the Turning machine and run it
+# Make the Turing machine and run it
 
 n = 15
 m = 20

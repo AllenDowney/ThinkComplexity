@@ -39,7 +39,7 @@ def print_table(table):
 
 
 class Cell1D:
-    """Represents a 1-D a cellular automaton"""
+    """Represents a 1-D cellular automaton"""
 
     def __init__(self, rule, n, m=None):
         """Initializes the CA.
