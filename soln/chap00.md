@@ -1,0 +1,153 @@
+---
+jupyter:
+  jupytext:
+    split_at_heading: true
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.19.6
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+The second edition of *Think Complexity* is available from [Bookshop.org](https://bookshop.org/a/98697/9781492040200) and [Amazon](https://amzn.to/3wPN0SJ) (those are affiliate links). If you are enjoying the free, online version, consider [buying me a coffee](https://buymeacoffee.com/allendowney).
+
+# Preface
+
+Complexity science is an interdisciplinary field — at the intersection of mathematics, computer science and natural science — that focuses on **complex systems**, which are systems with many interacting components.
+
+One of the core tools of complexity science is discrete models, including networks and graphs, cellular automatons, and agent-based simulations. These tools are useful in the natural and social sciences, and sometimes in arts and humanities.
+
+For an overview of complexity science, see <https://thinkcomplex.com/complex>.
+
+Why should you learn about complexity science? Here are a few reasons:
+
+-   Complexity science is useful, especially for explaining why natural and social systems behave the way they do. Since Newton, math-based physics has focused on systems with small numbers of components and simple interactions. These models are effective for some applications, like celestial mechanics, and less useful for others, like economics. Complexity science provides a diverse and adaptable modeling toolkit.
+
+-   Many of the central results of complexity science are surprising; a recurring theme of this book is that simple models can produce complicated behavior, with the corollary that we can sometimes explain complicated behavior in the real world using simple models.
+
+-   As I explain in Chapter 1, complexity science is at the center of a slow shift in the practice of science and a change in what we consider science to be.
+
+-   Studying complexity science provides an opportunity to learn about diverse physical and social systems, to develop and apply programming skills, and to think about fundamental questions in the philosophy of science.
+
+By reading this book and working on the exercises you will have a chance to explore topics and ideas you might not encounter otherwise, practice programming in Python, and learn more about data structures and algorithms.
+
+Features of this book include:
+
+**Technical details:** Most books about complexity science are written for a popular audience. They leave out technical details, which is frustrating for people who can handle them. This book presents the code, the math, and the explanations you need to understand how the models work.
+
+**Further reading:** Throughout the book, I include pointers to further reading, including original papers (most of which are available electronically) and related articles from Wikipedia and other sources.
+
+**Jupyter notebooks:** Each chapter is a Jupyter notebook that contains the text, the code, and the results, along with additional examples and animations that let you see the models in action. You can read the chapters online, or run them on Colab or on your computer.
+
+**Exercises and solutions:** At the end of each chapter I suggest exercises you might want to work on, with solutions.
+
+For most of the links in this book I use URL redirection. This mechanism has the drawback of hiding the link destination, but it makes the URLs shorter and less obtrusive. Also, and more importantly, it allows me to update the links without updating the book. If you find a broken link, please let me know and I will change the redirection.
+
+## Who is this book for?
+
+The examples and supporting code for this book are in Python. You should know core Python and be familiar with its object-oriented features, specifically using and defining classes.
+
+If you are not already familiar with Python, you might want to start with *Think Python*, which is appropriate for people who have never programmed before. If you have programming experience in another language, there are many good Python books to choose from, as well as online resources.
+
+I use NumPy, SciPy, and NetworkX throughout the book. If you are familiar with these libraries already, that's great, but I will also explain them when they appear.
+
+I assume that the reader knows some mathematics: I use logarithms in several places, and vectors in one example. But that's about it.
+
+## Changes from the first edition
+
+For the second edition, I added two chapters, one on evolution, the other on the evolution of cooperation.
+
+In the first edition, each chapter presented background on a topic and suggested experiments the reader could run. For the second edition, I have done those experiments. Each chapter presents the implementation and results as a worked example, then suggests additional experiments for the reader.
+
+For the second edition, I replaced some of my own code with standard libraries like NumPy and NetworkX. The result is more concise and more efficient, and it gives readers a chance to learn these libraries.
+
+Also, the Jupyter notebooks are new.
+
+Finally, all supporting software has been updated to Python 3.
+
+## What's new in the third edition?
+
+The third edition of *Think Complexity* is online only. The second edition is available in print, and its online version, with the notebooks that go with it, is at <https://github.com/AllenDowney/ThinkComplexity2>.
+
+In this edition, the notebooks are the chapters: each one contains the text of the chapter along with the code that produces its results, so you can read the book online, or run it on Colab or on your computer. There are two versions of each notebook, one with solutions to the exercises and one with the solutions left out.
+
+The code has been updated to work with current versions of NumPy, SciPy, NetworkX, and Matplotlib, and it uses `empiricaldist` to represent distributions, where the second edition uses `thinkstats2` and `thinkplot`. Where the text quotes results, like statistics and parameters estimated from simulations, I have checked them against the current code and updated them where they changed.
+
+The most important correction is in Chapter 12. In the second edition, the simulation of the evolution of cooperation had a bug that caused the fittest agents to be the most likely to die (reported by @gwtaylor and confirmed by @Captain-Blackstone). With the bug fixed, cooperation appears from time to time but doesn't last, so the results and conclusions of the chapter are revised. Notes in the chapter explain how the second edition differs.
+
+I have also fixed smaller errors and many typos, most of them reported by readers on GitHub, including @gwtaylor, @alexalekseyenko, @reflectionalist, @mark-summerfield, @ahmedhindi, and @link2xt. Thanks to all of them!
+
+## Using the code
+
+All code used in this book is available from a Git repository on GitHub: <https://github.com/AllenDowney/ThinkComplexity>. If you are not familiar with Git, it is a version control system that allows you to keep track of the files that make up a project. A collection of files under Git's control is called a "repository". GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+
+The GitHub homepage for my repository provides several ways to work with the code:
+
+-   You can create a copy of my repository by pressing the Fork button in the upper right. If you don't already have a GitHub account, you'll need to create one. After forking, you'll have your own repository on GitHub that you can use to keep track of code you write while working on this book. Then you can clone the repo, which means that you copy the files to your computer.
+
+-   Or you can clone my repository without forking; that is, you can make a copy of my repo on your computer. You don't need a GitHub account to do this, but you won't be able to write your changes back to GitHub.
+
+-   If you don't want to use Git at all, you can download the files in a Zip file using the green button that says "Code".
+
+Each chapter of this book is a Jupyter notebook that contains the text, the code, and the results. If you have not used Jupyter before, you can read about it at <https://jupyter.org>. There are three ways you can work with the notebooks:
+
+**Run the notebooks on Colab:** Colab is a service that runs Jupyter notebooks in your browser, with nothing to install. At the top of each chapter there is a link that opens the notebook on Colab. You can run the code and modify it, but the virtual machine you run it in is temporary. If you leave it idle, the virtual machine disappears along with any changes you made, unless you save a copy in your Google Drive.
+
+**Run Jupyter on your computer:** Clone or download the repository, then install the packages the notebooks use. If you use Anaconda or Miniconda, you can create an environment with everything you need by running the following commands in a terminal, in the directory that contains the repository:
+
+    $ conda env create -f environment.yml
+    $ conda activate ThinkComplexity
+
+Or, if you use pip:
+
+    $ pip install -r requirements.txt
+
+Then `cd` into the directory that contains the notebooks — `soln` has the notebooks with solutions to the exercises, and `nb` has the same notebooks with the solutions left out — and start the Jupyter server:
+
+    $ jupyter notebook
+
+When you start the server, it should launch your default web browser or create a new tab in an open browser window. Then you can open and run the notebooks.
+
+**View notebooks on GitHub:** GitHub provides a view of the notebooks you can use to read the notebooks and see the results I generated, but you won't be able to modify or run the code.
+
+Good luck, and have fun!
+
+
+## Contributor List
+
+If you have a suggestion or correction, please send email to `downey@allendowney.com`. If I make a change based on your feedback, I will add you to the contributor list (unless you ask to be omitted).
+
+Let me know what version of the book you are working with, and what format. If you include at least part of the sentence the error appears in, that makes it easy for me to search. Page and section numbers are fine, too, but not quite as easy to work with. Thanks!
+
+-   John Harley, Jeff Stanton, Colden Rouleau and Keerthik Omanakuttan are Computational Modeling students who pointed out typos.
+
+-   Jose Oscar Mur-Miranda found several typos.
+
+-   Phillip Loh, Corey Dolphin, Noam Rubin and Julian Ceipek found typos and made helpful suggestions.
+
+-   Sebastian Schöner sent two pages of corrections!
+
+-   Philipp Marek sent a number of corrections.
+
+-   Jason Woodard co-taught Complexity Science with me at Olin College, introduced me to NK models, and made many helpful suggestions and corrections.
+
+-   Davi Post sent several corrections and suggestions.
+
+-   Graham Taylor sent a pull request on GitHub that fixed many typos.
+
+I would especially like to thank the technical reviewers, Vincent Knight and Eric Ma, who made many helpful suggestions, and the copy editor, Charles Roumeliotis, who caught many errors and inconsistencies.
+
+Other people who reported errors include Richard Hollands, Muhammad Najmi bin Ahmad Zabidi, Alex Hantman, and Jonathan Harford.
+
+
+[Think Complexity, 2nd Edition](https://greenteapress.com/wp/think-complexity-2e/)
+
+Copyright 2016 [Allen B. Downey](https://allendowney.com)
+
+Code license: [MIT License](https://mit-license.org/)
+
+Text license: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)
