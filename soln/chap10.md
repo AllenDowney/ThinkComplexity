@@ -293,8 +293,10 @@ np.random.seed(20)
 from utils import set_palette
 set_palette('Blues', 4, reverse=True)
 
+results = {}
 for eps in [0.0, 0.001, 0.01]:
     xs, ys = run_simulation(eps)
+    results[eps] = xs, ys
     plt.plot(xs, ys, label='eps=%g' % eps)
     
 decorate(xlabel='Number of cars',
@@ -312,7 +314,15 @@ But that's the best case scenario. With just a small amount of randomness, thing
 
 The figure also shows results with `eps=0.001` and `eps=0.01`, which correspond to errors in speed of 0.1% and 1%.
 
-With 0.1% errors, the capacity of the highway drops from 25 to 20 (by "capacity" I mean the maximum number of cars that can reach and sustain the speed limit). And with 1% errors, the capacity drops to 10. Ugh.
+By "capacity" I mean the maximum number of cars that can reach and sustain the speed limit. The following loop computes the capacity for each value of `eps`, counting an average speed above 39 as reaching the speed limit.
+
+```python
+for eps, (xs, ys) in results.items():
+    capacity = max(n for n, y in zip(xs, ys) if y > 39)
+    print(f'eps={eps:g}: capacity {capacity:.0f}')
+```
+
+With 0.1% errors, the capacity of the highway drops from 25 to 20. And with 1% errors, the capacity drops to 10. Ugh.
 
 As one of the exercises at the end of this chapter, you'll have a chance to design a better driver; that is, you will experiment with different strategies in `choose_acceleration` and see if you can find driver behaviors that improve average speed.
 
