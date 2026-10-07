@@ -856,12 +856,13 @@ class MeanDistance(Instrument):
     label = 'Mean distance'
         
     def update(self, sim):
-        N = sim.fit_land.N
-        i1, i2 = np.triu_indices(N)
+        # all pairs of distinct agents
+        n = len(sim.agents)
+        i1, i2 = np.triu_indices(n, k=1)
         agents = zip(sim.agents[i1], sim.agents[i2])
         
-        distances = [fit_land.distance(a1.loc, a2.loc)
-                     for a1, a2 in agents if a1 != a2]
+        distances = [sim.fit_land.distance(a1.loc, a2.loc)
+                     for a1, a2 in agents]
         
         mean = np.mean(distances)
         self.metrics.append(mean)
