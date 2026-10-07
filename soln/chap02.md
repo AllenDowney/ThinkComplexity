@@ -68,7 +68,7 @@ sns.set_palette(colors)
 
 To most people a "graph" is a visual representation of data, like a bar chart or a plot of stock prices over time. That's not what this chapter is about.
 
-In this chapter, a **graph** is a representation of a system that contains discrete, interconnected elements. The elements are represented by **nodes** — also called **vertices** – and the interconnections are represented by **edges**.
+In this chapter, a **graph** is a representation of a system that contains discrete, interconnected elements. The elements are represented by **nodes** — also called **vertices** — and the interconnections are represented by **edges**.
 
 For example, you could represent a road map with a node for each city and an edge for each road between cities. Or you could represent a social network using a node for each person, with an edge between two people if they are friends.
 
@@ -334,7 +334,7 @@ For many applications involving graphs, it is useful to check whether a graph is
 
 You can start at any node and check whether you can reach all other nodes. If you can reach a node, $v$, you can reach any of the **neighbors** of $v$, which are the nodes connected to $v$ by an edge.
 
-The `Graph` class provides a method called `neighbors` that returns a list of neighbors for a given node. For example, in the complete graph we generated in the previous section:
+The `Graph` class provides a method called `neighbors` that returns an iterator over the neighbors of a given node. For example, in the complete graph we generated in the previous section:
 
 ```python
 list(complete.neighbors(0))
@@ -391,7 +391,7 @@ def is_connected(G):
     return len(reachable) == len(G)
 ```
 
-`is_connected` chooses a starting node by making a node iterator and choosing the first element. Then it uses `reachable` to get the set of nodes that can be reached from `start`. If the size of this set is the same as the size of the graph, that means we can reach all nodes, which means the graph is connected.
+`is_connected` chooses a starting node by making a node iterator and choosing the first element. Then it uses `reachable_nodes` to get the set of nodes that can be reached from `start`. If the size of this set is the same as the size of the graph, that means we can reach all nodes, which means the graph is connected.
 
 A complete graph is, not surprisingly, connected:
 
@@ -667,7 +667,7 @@ If we know the relationship between $n$ and $m$, we can simplify this expression
 **Exercise:** In the "Analysis of graph algorithms" section we analyzed the performance of `reachable_nodes` and classified it in $O(n + m)$, where $n$ is the number of nodes and $m$ is the number of edges.  Continuing the analysis, what is the order of growth for `is_connected`?
 
     def is_connected(G):
-        start = list(G)[0]
+        start = next(iter(G))
         reachable = reachable_nodes(G, start)
         return len(reachable) == len(G)
 

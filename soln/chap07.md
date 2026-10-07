@@ -166,7 +166,7 @@ class ReactionDiffusion(Diffusion):
         """Initializes the attributes.
 
         n: number of rows
-        params: tuple of (Da, Db, f, k)
+        params: tuple of (ra, rb, f, k)
         """        
         self.params = params
         self.array1 = np.ones((n, n), dtype=float)
@@ -380,7 +380,7 @@ The state of the top row is set to 5, which represents a wet cell. Using 5, rath
 
 The kernel defines a 4-cell "von Neumann" neighborhood; unlike the Moore neighborhood we saw in Chapter 6, it does not include the diagonals.
 
-This kernel adds up the states of the neighbors. If any of them are wet, the result will exceed 5. Otherwise the maximum result is 4 (if all neighbors happen to be porous).
+This kernel adds up the states of the neighbors. If any of them are wet, the result will be at least 5. Otherwise the maximum result is 4 (if all neighbors happen to be porous).
 
 We can use this logic to write a simple, fast `step` function, which identifies porous cells, where `a==1`, that have at least one wet neighbor, where `c>=5`, and sets their state to 5, which indicates that they are wet.
 
@@ -602,7 +602,7 @@ def count_cells(rule, n=500):
     return res
 ```
 
-The following function plots the results, comparing the rate of cell growth to `size` and `size**2`. And it uses `linregress` to estimate the slope of the line on a log-log scale.
+The following function plots the results, comparing the rate of cell growth to `steps` and `steps2`. And it uses `linregress` to estimate the slope of the line on a log-log scale.
 
 ```python
 from scipy.stats import linregress

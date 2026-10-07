@@ -159,7 +159,7 @@ class Highway(Cell2D):
     def get_coords(self, drivers, r=1):
         """Gets the coordinates of the drivers.
         
-        Transforms from (row, col) to (x, y).
+        Transforms from location on the track to (x, y) on a circle.
         
         drivers: sequence of Driver
         r: radius of the circle
@@ -306,7 +306,7 @@ decorate(xlabel='Number of cars',
 savefig('figs/chap10-2')
 ```
 
-The top line shows results with `eps=0`, that is, with no random variation in speed. With 25 or fewer cars, the spacing between cars is greater than 40, which allows cars to reach and maintain the maximum speed, which is 40. With more than 25 cars, traffic jams form and the average speed drops quickly.
+The top line shows results with `eps=0`, that is, with no random variation in speed. With 25 or fewer cars, the spacing between cars is at least 40, which allows cars to reach and maintain the maximum speed, which is 40. With more than 25 cars, traffic jams form and the average speed drops quickly.
 
 This effect is a direct result of the physics of the simulation, so it should not be surprising. If the length of the road is 1000, the spacing between `n` cars is `1000/n`. And since cars can't move faster than the space in front of them, the highest average speed we expect is `1000/n` or 40, whichever is less.
 

@@ -61,7 +61,7 @@ np.random.seed(17)
 
 ## Social network data
 
-Watts-Strogatz graphs are intended to model networks in the natural and social sciences. In their original paper, Watts and Strogatz looked at the network of film actors (connected if they have appeared in a movie together); the electrical power grid in the western United States; and the network of neurons in the brain of the roundworm *C. elegans*. They found that all of these networks had the high connectivity and low path lengths characteristic of small world graphs.
+Watts-Strogatz graphs are intended to model networks in the natural and social sciences. In their original paper, Watts and Strogatz looked at the network of film actors (connected if they have appeared in a movie together); the electrical power grid in the western United States; and the network of neurons in the brain of the roundworm *C. elegans*. They found that all of these networks had the high clustering and low path lengths characteristic of small world graphs.
 
 In this section we'll perform the same analysis with a different dataset, a set of Facebook users and their friends. If you are not familiar with Facebook, users who are connected to each other are called "friends", regardless of the nature of their relationship in the real world.
 
@@ -439,7 +439,7 @@ The parameters are `n`, the number of nodes we want, and `k`, the number of edge
 
 We start with a graph that has `k` nodes and no edges. Then we initialize two variables:
 
-**`targets`:** The list of `k` nodes that will be connected to the next node. Initially `targets` contains the original `k` nodes; later it will contain a random subset of nodes.
+**`targets`:** The set of `k` nodes that will be connected to the next node. Initially `targets` contains the original `k` nodes; later it will contain a random subset of nodes.
 
 **`repeated_nodes`:** A list of existing nodes where each node appears once for every edge it is connected to. When we select from `repeated_nodes`, the probability of selecting any node is proportional to the number of edges it has.
 
@@ -540,7 +540,7 @@ decorate(xlabel='Degree',
 savefig('figs/chap04-3')
 ```
 
-The model is not perfect; in particular, it deviates from the data when `k` is less than 10. But the tail looks like a straight line, which suggests that this process generates degree distributions that follow a power law.
+The model is not perfect; in particular, it deviates from the data when the degree is less than 10. But the tail looks like a straight line, which suggests that this process generates degree distributions that follow a power law.
 
 So the BA model is better than the WS model at reproducing the degree distribution. But does it have the small world property?
 
@@ -835,7 +835,7 @@ decorate(xlabel='Degree', ylabel='CDF', xscale='log')
 ```python
 # Solution
 
-# and the CDF on a log-log scale
+# and the CCDF on a log-log scale
 
 (1-cdf).plot()
 decorate(xlabel='Degree', ylabel='CDF',

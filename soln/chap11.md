@@ -191,7 +191,7 @@ class Agent:
         """Create an agent at the given location.
         
         loc: array of N 0s and 1s
-        fit_land: reference to an fit_land
+        fit_land: reference to a FitnessLandscape
         """
         self.loc = loc
         self.fit_land = fit_land
@@ -309,7 +309,7 @@ The most important function in `Simulation` is `step`, which simulates one time 
 
 -   `choose_dead` decides which agents die during this time step, and returns an array that contains the indices of the dead agents.
 
--   `choose_replacements` decides which agents reproduce during this time step, invokes `copy` on each one, and returns an array of new `Agent` objects.
+-   `choose_replacements` decides which agents reproduce during this time step, invokes `copy` on each one, and returns a list of new `Agent` objects.
 
 In this version of the simulation, the number of new agents during each time step equals the number of dead agents, so the number of live agents is constant.
 

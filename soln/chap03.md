@@ -536,7 +536,7 @@ def run_experiment(ps, n=1000, k=10, iters=10):
     k: degree of each node
     iters: number of times to run for each `p`
     
-    returns:
+    returns: array with one row for each p and columns for L and C
     """
     res = []
     for p in ps:
@@ -548,9 +548,9 @@ def run_experiment(ps, n=1000, k=10, iters=10):
     return np.array(res)
 ```
 
-For each value of `p`, we generate 10 random graphs and average the results. Since the return value from `run_one_graph` is a pair, `t` is a list of pairs. When we convert it to an array, we get one row for each iteration and columns for `L` and `C`. Calling `mean` with the option `axis=0` computes the mean of each column; the result is an array with one row and two columns.
+For each value of `p`, we generate 10 random graphs and average the results. Since the return value from `run_one_graph` is a pair, `t` is a list of pairs. When we convert it to an array, we get one row for each iteration and columns for `L` and `C`. Calling `mean` with the option `axis=0` computes the mean of each column; the result is an array with two elements, the means of `L` and `C`.
 
-When the loop exits, `means` is a list of pairs, which we convert to a NumPy array with one row for each value of `p` and columns for `L` and `C`.
+When the loop exits, `res` is a list of pairs, which we convert to a NumPy array with one row for each value of `p` and columns for `L` and `C`.
 
 Here are the raw results.  Warning: this takes a few minutes to run.
 
@@ -947,7 +947,7 @@ Here is a version I modified to return a set of nodes:
 
 ```python
 def plain_bfs(G, start):
-    """A fast BFS node generator"""
+    """A fast BFS that returns a set of reachable nodes."""
     seen = set()
     nextlevel = {start}
     while nextlevel:
