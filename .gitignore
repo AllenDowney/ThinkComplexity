@@ -72,3 +72,6 @@ jb/*.ipynb
 split/chap*.tex
 split/chap*.md
 split/chap*.ipynb
+
+# Clone of the O'Reilly Atlas source for the 2nd edition (separate repository)
+think-complexity-2e/
