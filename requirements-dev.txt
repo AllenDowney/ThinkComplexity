@@ -4,6 +4,7 @@ flake8
 nbformat
 nbmake
 pytest
+pytest-xdist
 jupyter-book<2
 ghp-import
 sphinx-sitemap

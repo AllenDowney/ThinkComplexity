@@ -7,6 +7,7 @@ Copyright 2016 Allen Downey
 MIT License: http://opensource.org/licenses/MIT
 """
 
+import os
 from time import sleep
 
 import numpy as np
@@ -68,12 +69,18 @@ class Cell2D:
         inline = "inline" in plt.get_backend()
         plt.ion()
         plt.figure()
+        # in CI (GitHub Actions sets CI=true) nobody watches the animation,
+        # so skip drawing the intermediate frames; the steps still run, so
+        # the final state is the same
+        draw_frames = not os.environ.get("CI")
         try:
             for _ in range(frames - 1):
-                self.draw()
-                plt.pause(interval)
+                if draw_frames:
+                    self.draw()
+                    plt.pause(interval)
                 step()
-                clear_output(wait=True)
+                if draw_frames:
+                    clear_output(wait=True)
             self.draw()
             plt.show()
         except KeyboardInterrupt:

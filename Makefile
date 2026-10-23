@@ -41,4 +41,7 @@ check-shared:
 # stop at the first cell that calls a function the reader is meant to write.
 # One pytest run; nbmake runs each notebook in its own directory.
 tests: check-shared
-	pytest --nbmake --durations=10 soln/*.ipynb
+	# chap04 and quiz02 both download this file; put it in place first so
+	# parallel workers don't race to download it
+	cp data/facebook_combined.txt.gz soln/
+	pytest --nbmake -n auto --durations=10 soln/*.ipynb
