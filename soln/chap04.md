@@ -68,7 +68,7 @@ In this section we'll perform the same analysis with a different dataset, a set 
 I'll use data from the Stanford Network Analysis Project (SNAP), which shares large datasets from online social networks and other sources. Specifically, I'll use their Facebook data (from J. McAuley and J. Leskovec, "Learning to Discover Social Circles in Ego Networks", NIPS, 2012), which includes 4039 users and 88,234 friend relationships among them. It is available from the SNAP website at <https://thinkcomplex.com/snap>.
 
 ```python
-download('https://snap.stanford.edu/data/facebook_combined.txt.gz')
+download('https://github.com/AllenDowney/ThinkComplexity/raw/v3/data/facebook_combined.txt.gz')
 ```
 
 The data file contains one line per edge, with users identified by integers from 0 to 4038. Here's the code that reads the file:

@@ -58,7 +58,7 @@ Let's see if we can find a graph model that does a better job matching the clust
 Here's the Facebook data from Chapter 4 again.
 
 ```python
-download('https://snap.stanford.edu/data/facebook_combined.txt.gz')
+download('https://github.com/AllenDowney/ThinkComplexity/raw/v3/data/facebook_combined.txt.gz')
 ```
 
 ```python
