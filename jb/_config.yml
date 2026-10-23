@@ -15,6 +15,7 @@ execute:
 repository:
   url: https://github.com/AllenDowney/ThinkComplexity/tree/v3
 html:
+  baseurl: https://allendowney.github.io/ThinkComplexity/
   use_repository_button: true
 
   extra_footer: |
@@ -29,6 +30,7 @@ html:
         Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
       </a>.
     </div>
+    <script>new Image().src="https://greenteapress.com/gh.gif?u="+encodeURIComponent(location.href)+"&r="+encodeURIComponent(document.referrer)</script>
 
 parse:
   # myst_extended_syntax: true  # instead enable individual features below
@@ -48,8 +50,25 @@ parse:
     - substitution
     - tasklist
 
+# Build only the pages in _toc.yml: build.sh copies every notebook in soln/,
+# including drafts and quiz solutions that shouldn't be published
+only_build_toc_files: true
+
 sphinx:
+  # Sitemap and link previews (GreenTeaPress plans/seo.md); page descriptions are in
+  # descriptions.yml (notebooks) and the front matter of index.md
+  extra_extensions:
+    - sphinx_sitemap
+    - sphinxext.opengraph
   config:
+    html_baseurl: https://allendowney.github.io/ThinkComplexity/
+    sitemap_url_scheme: "{link}"
+    sitemap_excludes: [genindex.html, search.html]
+    ogp_site_url: https://allendowney.github.io/ThinkComplexity/
+    ogp_site_name: Think Complexity
+    ogp_image: https://greenteapress.com/wp/wp-content/uploads/2018/09/think_complexity_2e.jpg
+    ogp_image_alt: Cover of Think Complexity by Allen B. Downey
+    ogp_enable_meta_description: false
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     mathjax_config:
       tex2jax:

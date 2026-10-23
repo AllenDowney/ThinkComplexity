@@ -1,0 +1,73 @@
+# Page descriptions for search results and link previews (GreenTeaPress plans/seo.md).
+# prep_notebooks.py writes each one into its notebook's metadata as
+# myst.html_meta.description and og:description. index.md carries its own in front
+# matter. About 120-155 characters, in the words a reader would search for.
+
+# Chapters
+chap00: >-
+  Preface to Think Complexity: what complexity science is, who the book is for, what's
+  new in this edition, and how to use the code.
+chap01: >-
+  What is complexity science? How it changes the criteria of science, the axes of
+  scientific models, complexity engineering, and complexity thinking.
+chap02: >-
+  Graphs in Python with NetworkX: random Erdős-Rényi graphs, connectivity, the
+  probability of connectivity, and analysis of graph algorithms.
+chap03: >-
+  Small world graphs in Python: Milgram's experiment, the Watts-Strogatz model,
+  clustering, shortest path lengths, and breadth-first search.
+chap04: >-
+  Scale-free networks in Python: social network data, degree distributions, heavy-tailed
+  distributions, and the Barabási-Albert model.
+chap05: >-
+  Cellular automatons in Python: Wolfram's experiment, classifying CAs, randomness,
+  determinism, spaceships, Rule 110, and universality.
+chap06: >-
+  Conway's Game of Life in Python: life patterns, Conway's conjecture, realism and
+  instrumentalism, and implementing Life with NumPy.
+chap07: >-
+  Physical modeling with cellular automatons in Python: diffusion, reaction-diffusion
+  (Turing patterns), percolation, phase change, and fractals.
+chap08: >-
+  Self-organized criticality in Python: the sand pile model, heavy-tailed distributions,
+  fractals, pink noise, and reductionism and holism.
+chap09: >-
+  Agent-based models in Python: Schelling's model of segregation, Sugarscape, wealth
+  inequality, migration, and emergence.
+chap10: >-
+  Herds, flocks, and traffic jams: agent-based models in continuous space, from simulated
+  highway traffic to the Boids flocking algorithm, in Python.
+chap11: >-
+  Simulating evolution by natural selection in Python: fitness landscapes, differential
+  survival, mutation, and speciation.
+chap12: >-
+  The evolution of cooperation: the Prisoner's Dilemma, tournaments, and an agent-based
+  simulation of altruism, in Python.
+
+# Quizzes
+quiz01: >-
+  Think Complexity quiz 1: extending the Erdős-Rényi experiment to directed graphs and
+  strong connectivity, with NetworkX.
+quiz02: >-
+  Think Complexity quiz 2: a "friends of friends" graph model that matches the
+  clustering, path length, and degree distribution of social networks.
+quiz03: >-
+  Think Complexity quiz 3: generalizing the Game of Life, counting the possible rule
+  tables of a two-dimensional cellular automaton.
+quiz04: >-
+  Think Complexity quiz 4: an agent-based model of how fireflies synchronize when they
+  can't all see each other.
+quiz05: >-
+  Think Complexity quiz 5: an agent-based model of how scientists' beliefs spread,
+  inspired by Jonathan Rauch's The Constitution of Knowledge.
+
+# Examples
+appA: >-
+  Analysis of algorithms in Python: estimating the order of growth of a function
+  empirically, by measuring run times over a range of problem sizes.
+mergesort: >-
+  Comparing sort algorithms empirically in Python: the order of growth of quicksort,
+  mergesort, and heapsort in NumPy, measured from run times.
+fft: >-
+  The order of growth of the DFT and FFT in Python: a matrix implementation of the DFT
+  compared with NumPy's FFT, measured from run times.

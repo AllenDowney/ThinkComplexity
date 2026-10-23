@@ -1,4 +1,11 @@
-# Think Complexity
+---
+myst:
+  html_meta:
+    description: "Think Complexity, free online: complexity science in Python, from graphs and cellular automatons to agent-based models, as notebooks you can run on Colab."
+og:description: "Think Complexity, free online: complexity science in Python, from graphs and cellular automatons to agent-based models, as notebooks you can run on Colab."
+---
+
+# Think Complexity: Complexity Science and Computational Modeling
 
 *Think Complexity* is an introduction to complexity science
 using Python.  Complexity Science is an interdisciplinary
